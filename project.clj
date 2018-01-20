@@ -1,0 +1,26 @@
+(defproject herb "0.1.0-SNAPSHOT"
+  :description "FIXME: write description"
+  :url "http://example.com/FIXME"
+  :license {:name "Eclipse Public License"
+            :url "http://www.eclipse.org/legal/epl-v10.html"}
+
+  :plugins [[lein-cljsbuild "1.1.2"]
+            [lein-doo "0.1.7"]
+            [lein-codox "0.10.3"]]
+
+  :dependencies [[org.clojure/clojure "1.8.0"]
+                 [org.clojure/clojurescript "1.9.946"]
+                 [garden "1.3.3"]]
+
+  :cljsbuild {:builds [{:id "test"
+                        :source-paths ["src" "test"]
+                        :compiler {:output-to "target/cljs/test/test.js"
+                                   :output-dir "target/cljs/test"
+                                   :optimizations :none
+                                   :pretty-print true
+                                   :source-map true
+                                   :main herb.runner}}
+                       {:id "prod"
+                        :source-paths ["src"]
+                        :compiler {:output-to "herb.js"
+                                   :optimizations :advanced}}]})
