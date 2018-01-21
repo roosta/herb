@@ -12,6 +12,8 @@
                  [org.clojure/clojurescript "1.9.946"]
                  [garden "1.3.3"]]
 
+  :source-paths ["src"]
+
   :cljsbuild {:builds [{:id "test"
                         :source-paths ["src" "test"]
                         :compiler {:output-to "target/cljs/test/test.js"

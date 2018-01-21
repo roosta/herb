@@ -14,12 +14,11 @@
   [env]
   (boolean (:ns env)))
 
-(def hello "world")
-
 (defmacro defstyle
   [id style]
   (let [css (symbol "garden.core" "css")
+        namespace* (name (ns-name *ns*))
         inject-style-fn (symbol "cljs-css-modules.runtime" "inject-style!")]
-    `(.log js/console ~id)
+    `(.log js/console ~(str namespace* "/" id))
     )
   )

@@ -6,7 +6,7 @@
 
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.clojure/clojurescript "1.9.946"]
-                 [garden "1.3.3"] 
+                 [garden "1.3.3"]
                  [reagent "0.8.0-alpha2"]]
 
   :plugins [[lein-cljsbuild "1.1.7"]
@@ -21,7 +21,7 @@
 
   :resource-paths ["public"]
 
-  :source-paths ["../src"]
+  :source-paths ["src" "../src"]
 
   :figwheel {:http-server-root "."
              :nrepl-port 7002
