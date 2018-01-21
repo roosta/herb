@@ -2,10 +2,12 @@
   #?(:clj
      (:require
        [garden.core :refer [css]]
+       [clojure.string :as str]
        [garden.stylesheet :refer [at-media at-keyframes]]))
   #?(:cljs
      (:require
        [garden.core :refer [css]]
+       [clojure.string :as str]
        [garden.stylesheet :refer [at-media at-keyframes]]
        [herb.runtime])))
 
@@ -14,11 +16,17 @@
   [env]
   (boolean (:ns env)))
 
-(defmacro defstyle
-  [id style]
+(defmacro with-style
+  [style]
   (let [css (symbol "garden.core" "css")
-        namespace* (name (ns-name *ns*))
-        inject-style-fn (symbol "cljs-css-modules.runtime" "inject-style!")]
-    `(.log js/console ~(str namespace* "/" id))
+        ns* (str/replace (name (ns-name *ns*)) #"\." "-")
+        classname (str ns* "-" style)
+        inject-style-fn (symbol "herb.runtime" "inject-style!")]
+    `(do
+       (~inject-style-fn ~classname (css [(str "." ~classname) ~style]))
+       ~classname)
+    ;; `(do (.log js/console ~classname)
+    ;;      "asd")
+
     )
   )

@@ -33,6 +33,7 @@
                         :compiler
                         {:main "demo.core"
                          :output-to "public/js/app.js"
+                         :preloads [devtools.preload]
                          :output-dir "public/js/out"
                          :asset-path   "js/out"
                          :source-map true
