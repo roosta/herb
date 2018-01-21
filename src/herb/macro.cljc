@@ -17,13 +17,13 @@
   (boolean (:ns env)))
 
 (defmacro with-style
-  [style]
+  [fn & args]
   (let [css (symbol "garden.core" "css")
         ns* (str/replace (name (ns-name *ns*)) #"\." "-")
-        classname (str ns* "-" style)
+        classname (str ns* "-" fn)
         inject-style-fn (symbol "herb.runtime" "inject-style!")]
     `(do
-       (~inject-style-fn ~classname (css [(str "." ~classname) ~style]))
+       (~inject-style-fn ~classname (css [(str "." ~classname) (~fn ~@args)]))
        ~classname)
     ;; `(do (.log js/console ~classname)
     ;;      "asd")
