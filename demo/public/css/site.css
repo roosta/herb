@@ -9,6 +9,13 @@ body {
   line-height: 1.5em;
 }
 
+.test-class-name {
+    color: red;
+}
+
+.red {
+    color:red;
+}
 h1, h2, h3 {
   color: #000;
 }

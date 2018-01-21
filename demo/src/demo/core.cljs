@@ -1,15 +1,13 @@
 (ns demo.core
     (:require
-      [reagent.core :as r]))
-
-;; -------------------------
-;; Views
+     [herb.macro :refer-macros [defstyle]]
+     [reagent.core :as r]))
 
 (defn home-page []
-  [:div [:h2 "Welcome to Reagent"]])
+  [:div [:h2 {:class "test-class-name"}
+         "Welcome to Reagent"]])
 
-;; -------------------------
-;; Initialize app
+(defstyle hello {})
 
 (defn mount-root []
   (r/render [home-page] (.getElementById js/document "app")))

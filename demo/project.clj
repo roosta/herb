@@ -6,7 +6,7 @@
 
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.clojure/clojurescript "1.9.946"]
-                 [garden "1.3.3"]
+                 [garden "1.3.3"] 
                  [reagent "0.8.0-alpha2"]]
 
   :plugins [[lein-cljsbuild "1.1.7"]
@@ -20,6 +20,8 @@
    [:cljsbuild :builds :app :compiler :output-to]]
 
   :resource-paths ["public"]
+
+  :source-paths ["../src"]
 
   :figwheel {:http-server-root "."
              :nrepl-port 7002
@@ -44,4 +46,5 @@
   :profiles {:dev {:dependencies [[binaryage/devtools "0.9.9"]
                                   [figwheel-sidecar "0.5.15-SNAPSHOT"]
                                   [org.clojure/tools.nrepl "0.2.13"]
-                                  [com.cemerick/piggieback "0.2.2"]]}})
+                                  [com.cemerick/piggieback "0.2.2"]]
+                   :source-paths ["script"]}})
