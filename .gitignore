@@ -13,3 +13,4 @@ dev/user.clj
 demo/public/js
 demo/figwheel_server.log
 demo/target
+.nrepl-port
