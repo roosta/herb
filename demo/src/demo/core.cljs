@@ -32,7 +32,6 @@
 (defn home-page []
   (let [state (r/atom "green")]
     (fn []
-      ; (d/log (css [:.something (s/hover) {:color "red"}]))
       [:div
        [:input {:class (with-style hover-focus)
                 :default-value "Hello world"}]
