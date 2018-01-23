@@ -3,11 +3,13 @@
      (:require
        [garden.core :refer [css]]
        [clojure.string :as str]
+       [garden.selectors :as s]
        [garden.stylesheet :refer [at-media at-keyframes]]))
   #?(:cljs
      (:require
        [garden.core :refer [css]]
        [clojure.string :as str]
+       [garden.selectors :as s]
        [garden.stylesheet :refer [at-media at-keyframes]]
        [herb.runtime])))
 
@@ -16,14 +18,24 @@
   [env]
   (boolean (:ns env)))
 
+(defn convert-modes
+  [modes]
+  (mapv #(-> [(keyword (str "&" %)) (% modes)])
+        (keys modes)))
+
 (defmacro with-style
-  [fn & args]
+  [style-fn & args]
   (let [css (symbol "garden.core" "css")
         ns* (str/replace (name (ns-name *ns*)) #"\." "-")
-        classname (str ns* "-" fn)
+        classname (str ns* "-" style-fn)
         inject-style-fn (symbol "herb.runtime" "inject-style!")]
-    `(do
-       (~inject-style-fn ~classname (css [(str "." ~classname) (~fn ~@args)]))
+    `(let [resolved# (~style-fn ~@args)
+           meta# (meta resolved#)
+           modes# (:mode meta#)
+           css# (css [(str "." ~classname) resolved#
+                      (convert-modes modes#)])]
+       (~inject-style-fn ~classname css#)
+       (.log js/console (convert-modes modes#))
        ~classname)
     ;; `(do (.log js/console ~classname)
     ;;      "asd")
