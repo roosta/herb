@@ -29,16 +29,18 @@
         ns# (str/replace (name (ns-name *ns*)) #"\." "_")
         classname (str ns# "_" style-fn)
         inject-style-fn (symbol "herb.runtime" "inject-style!")]
-    `(let [resolved# (~style-fn ~@args)
-           meta# (meta resolved#)
-           modes# (:mode meta#)
-           key# (:key meta#)
-           classname# (str ~classname (when key# (str "-" key#)))
-           css# (css [(str "." classname#) resolved#
-                      (convert-modes modes#)])]
-       (~inject-style-fn classname# css#)
-       ;; (.log js/console classname#)
-       classname#)
+    `(do
+       (assert (fn? ~style-fn) (str ~style-fn " is not a function. with-style only takes a function as its first argument"))
+       (let [resolved# (~style-fn ~@args)
+             meta# (meta resolved#)
+             modes# (:mode meta#)
+             key# (:key meta#)
+             classname# (str ~classname (when key# (str "-" key#)))
+             css# (css [(str "." classname#) resolved#
+                        (convert-modes modes#)])]
+         (~inject-style-fn classname# css#)
+         ;; (.log js/console classname#)
+         classname#))
     ;; `(do (.log js/console ~classname)
     ;;      "asd")
 
