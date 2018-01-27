@@ -26,17 +26,19 @@
 (defmacro with-style
   [style-fn & args]
   (let [css (symbol "garden.core" "css")
-        ns* (str/replace (name (ns-name *ns*)) #"\." "_")
-        classname (str ns* "_" style-fn)
+        ns# (str/replace (name (ns-name *ns*)) #"\." "_")
+        classname (str ns# "_" style-fn)
         inject-style-fn (symbol "herb.runtime" "inject-style!")]
     `(let [resolved# (~style-fn ~@args)
            meta# (meta resolved#)
            modes# (:mode meta#)
-           css# (css [(str "." ~classname) resolved#
+           key# (:key meta#)
+           classname# (str ~classname (when key# (str "-" key#)))
+           css# (css [(str "." classname#) resolved#
                       (convert-modes modes#)])]
-       (~inject-style-fn ~classname css#)
-       ; (.log js/console (convert-modes modes#))
-       ~classname)
+       (~inject-style-fn classname# css#)
+       ;; (.log js/console classname#)
+       classname#)
     ;; `(do (.log js/console ~classname)
     ;;      "asd")
 

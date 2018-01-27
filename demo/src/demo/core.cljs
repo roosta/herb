@@ -11,7 +11,7 @@
 
 (defn button [] )
 
-(defn background-color
+(defn state-hover
   [color]
   ^{:mode {:hover {:color "yellow"}}}
   {:background-color color})
@@ -29,6 +29,12 @@
   {:background-color "red"}
   )
 
+(defn cycle-color
+  [color]
+  ^{:key color}
+  {:background-color color}
+  )
+
 (defn home-page []
   (let [state (r/atom "green")]
     (fn []
@@ -36,10 +42,14 @@
        [:input {:class (with-style hover-focus)
                 :default-value "Hello world"}]
        [:div
-        [:h2 {:class (with-style background-color @state)}
+        [:h2 {:class (with-style state-hover @state)}
          "Welcome to Reagent"]
         [:button {:on-click #(reset! state (toggle-color @state))}
-         "Toggle"]]])))
+         "Toggle"]
+        (for [c ["yellow" "blue" "green" "purple"]]
+          ^{:key c}
+          [:div {:class (with-style cycle-color c)}
+           c])]])))
 
 (defn mount-root []
   (r/render [home-page] (.getElementById js/document "app")))
