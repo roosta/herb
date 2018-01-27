@@ -29,16 +29,20 @@
   {:background-color "red"}
   )
 
-(defn text-color
+(defn dynamic-text-color
   [color]
   (case color
     (or "blue" "purple") {:color "white"}
     {:color "black"}))
 
+(defn text-color
+  []
+  {:color "white"})
+
 (defn cycle-color
   [color]
   ^{:key color
-    :merge [text-color color]}
+    :merge [dynamic-text-color color]}
   {:background-color color}
   )
 
