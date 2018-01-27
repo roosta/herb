@@ -23,6 +23,11 @@
   (mapv #(-> [(keyword (str "&" %)) (% modes)])
         (keys modes)))
 
+;; cases
+;; DONE 1. single function
+;; DONE 2. single function with args
+;; TODO 3. multiple functions with args or without args
+;; {:merge [fn args]}
 (defmacro with-style
   [style-fn & args]
   (let [css (symbol "garden.core" "css")
@@ -30,14 +35,21 @@
         classname (str ns# "_" style-fn)
         inject-style-fn (symbol "herb.runtime" "inject-style!")]
     `(do
-       (assert (fn? ~style-fn) (str ~style-fn " is not a function. with-style only takes a function as its first argument"))
+       (assert (fn? ~style-fn) (str (pr-str ~style-fn) " is not a function. with-style only takes a function as its first argument"))
        (let [resolved# (~style-fn ~@args)
              meta# (meta resolved#)
              modes# (:mode meta#)
+             mergers# (:merge meta#)
+             ancestors# (cond
+                          (fn? mergers#) [(mergers#)]
+                          (vector? mergers#) (apply (first mergers#) (rest mergers#))
+                          (nil? mergers#) []
+                          :else (throw (js/Error. (str "Herb: merge vector does not conform to spec: " (pr-str mergers#)))))
              key# (:key meta#)
-             classname# (str ~classname (when key# (str "-" key#)))]
+             classname# (str ~classname (when key# (str "-" key#)))
+             out# (apply merge resolved# ancestors#)]
          (assert (map? resolved#) "with-style functions must return a map")
-         (let [css# (css [(str "." classname#) resolved#
+         (let [css# (css [(str "." classname#) out#
                           (convert-modes modes#)])]
            (~inject-style-fn classname# css#)
            classname#)))))
