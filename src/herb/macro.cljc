@@ -19,13 +19,14 @@
   (boolean (:ns env)))
 
 (defn convert-modes
+  "Takes a map of modes and returns a formatted vector fed into garden using
+  the :&:mode parent selector syntax"
   [modes]
   (mapv #(-> [(keyword (str "&" %)) (% modes)])
         (keys modes)))
 
-;; expected [{:background-color "black"} {:font-weight 500}]
-;; input [[dynamic-text-color color] [bold]]
 (defn extract-ancestors
+  "Extracts styles from vector provided in the :merge metadata."
   [mergers result]
   (if (empty? mergers)
     result
@@ -37,15 +38,8 @@
               style-args (rest input)]
           (recur
            (rest mergers)
-           (conj result (apply style-fn style-args))))
-        )
-      )))
+           (conj result (apply style-fn style-args))))))))
 
-;; CASES
-;; DONE 1. single function
-;; DONE 2. single function with args
-;; DONE 3. multiple functions with args or without args
-;; {:merge [fn args]}
 (defmacro with-style
   [style-fn & args]
   (let [css (symbol "garden.core" "css")
