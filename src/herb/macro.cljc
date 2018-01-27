@@ -25,7 +25,9 @@
   (mapv #(-> [(keyword (str "&" %)) (% modes)])
         (keys modes)))
 
-(defn- extract-styles
+(declare extract-ancestors)
+
+(defn extract-styles
   "Extracts styles from vector provided in the :merge metadata."
   [mergers result]
   (if (empty? mergers)
@@ -40,14 +42,14 @@
            (rest mergers)
            (conj result (apply style-fn style-args))))))))
 
-(defn- extract-ancestors
-  [mergers]
+(defn extract-ancestors
+  [merge-meta]
   (cond
-    (fn? mergers) [(mergers)]
-    (vector? mergers) (extract-styles mergers [])
-    (nil? mergers) []
-    :else (throw `(js/Error. ~(str "Herb: merge vector does not conform to spec: " (pr-str mergers)))))
-  )
+    (fn? merge-meta) [(merge-meta)]
+    (vector? merge-meta) (extract-styles merge-meta [])
+    (nil? merge-meta) []
+    ;; TODO fix js/error
+    :else (throw `(js/Error. ~(str "merge metadata does not conform to spec: " (pr-str merge-meta))))))
 
 (defmacro with-style
   [style-fn & args]
