@@ -3,18 +3,18 @@
    [herb.macro :refer-macros [with-style]]
    [garden.selectors :as s]
    [garden.core :refer [css]]
+   [garden.units :refer [px]]
    [reagent.debug :as d]
    [reagent.core :as r]))
 
 (def red {:color "red"})
 (def green {:color "green"})
 
-(defn button [] )
-
 (defn state-hover
   [color]
   ^{:mode {:hover {:color "yellow"}}}
-  {:background-color color})
+  {:margin-bottom 0
+   :background-color color})
 
 (defn toggle-color
   [color]
@@ -46,6 +46,10 @@
   {:background-color color}
   )
 
+(defn button
+  []
+  {:margin (px 10)})
+
 (defn home-page []
   (let [state (r/atom "green")]
     (fn []
@@ -55,7 +59,8 @@
        [:div
         [:h2 {:class (with-style state-hover @state)}
          "Welcome to Reagent"]
-        [:button {:on-click #(reset! state (toggle-color @state))}
+        [:button {:class (with-style button)
+                  :on-click #(reset! state (toggle-color @state))}
          "Toggle"]
         (for [c ["yellow" "blue" "green" "purple"]]
           ^{:key c}
