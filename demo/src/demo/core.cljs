@@ -29,9 +29,16 @@
   {:background-color "red"}
   )
 
+(defn text-color
+  [color]
+  (case color
+    (or "blue" "purple") {:color "white"}
+    {:color "black"}))
+
 (defn cycle-color
   [color]
-  ^{:key color}
+  ^{:key color
+    :merge [text-color color]}
   {:background-color color}
   )
 
