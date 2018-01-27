@@ -35,14 +35,9 @@
              meta# (meta resolved#)
              modes# (:mode meta#)
              key# (:key meta#)
-             classname# (str ~classname (when key# (str "-" key#)))
-             css# (css [(str "." classname#) resolved#
-                        (convert-modes modes#)])]
-         (~inject-style-fn classname# css#)
-         ;; (.log js/console classname#)
-         classname#))
-    ;; `(do (.log js/console ~classname)
-    ;;      "asd")
-
-    )
-  )
+             classname# (str ~classname (when key# (str "-" key#)))]
+         (assert (map? resolved#) "with-style functions must return a map")
+         (let [css# (css [(str "." classname#) resolved#
+                          (convert-modes modes#)])]
+           (~inject-style-fn classname# css#)
+           classname#)))))
