@@ -13,19 +13,19 @@
        [garden.stylesheet :refer [at-media at-keyframes]]
        [herb.runtime])))
 
-(defn cljs-env?
+(defn- cljs-env?
   "Take the &env from a macro, and tell whether we are expanding into cljs."
   [env]
   (boolean (:ns env)))
 
-(defn convert-modes
+(defn- convert-modes
   "Takes a map of modes and returns a formatted vector fed into garden using
   the :&:mode parent selector syntax"
   [modes]
   (mapv #(-> [(keyword (str "&" %)) (% modes)])
         (keys modes)))
 
-(defn extract-ancestors
+(defn- extract-styles
   "Extracts styles from vector provided in the :merge metadata."
   [mergers result]
   (if (empty? mergers)
@@ -40,6 +40,15 @@
            (rest mergers)
            (conj result (apply style-fn style-args))))))))
 
+(defn- extract-ancestors
+  [mergers]
+  (cond
+    (fn? mergers) [(mergers)]
+    (vector? mergers) (extract-styles mergers [])
+    (nil? mergers) []
+    :else (throw `(js/Error. ~(str "Herb: merge vector does not conform to spec: " (pr-str mergers)))))
+  )
+
 (defmacro with-style
   [style-fn & args]
   (let [css (symbol "garden.core" "css")
@@ -52,11 +61,7 @@
              meta# (meta resolved#)
              modes# (:mode meta#)
              mergers# (:merge meta#)
-             ancestors# (cond
-                          (fn? mergers#) [(mergers#)]
-                          (vector? mergers#) (extract-ancestors mergers# [])
-                          (nil? mergers#) []
-                          :else (throw (js/Error. (str "Herb: merge vector does not conform to spec: " (pr-str mergers#)))))
+             ancestors# (extract-ancestors mergers#)
              key# (:key meta#)
              classname# (str ~classname (when key# (str "-" key#)))
              out# (apply merge resolved# ancestors#)]
