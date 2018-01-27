@@ -35,14 +35,14 @@
     (or "blue" "purple") {:color "white"}
     {:color "black"}))
 
-(defn text-color
+(defn bold
   []
-  {:color "white"})
+  {:font-weight "bold"})
 
 (defn cycle-color
   [color]
   ^{:key color
-    :merge [dynamic-text-color color]}
+    :merge [[dynamic-text-color color] [bold]]}
   {:background-color color}
   )
 

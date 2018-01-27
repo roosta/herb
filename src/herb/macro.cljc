@@ -23,6 +23,19 @@
   (mapv #(-> [(keyword (str "&" %)) (% modes)])
         (keys modes)))
 
+;; expected [{:background-color "black"} {:font-weight 500}]
+;; input [[dynamic-text-color color] [bold]]
+(defn extract-ancestors
+  [mergers result]
+  (if (empty? mergers)
+    result
+    (let [input (first mergers)
+          style-fn (first input)
+          style-args (rest input)]
+      (recur
+       (rest mergers)
+       (conj result (apply style-fn style-args))))))
+
 ;; cases
 ;; DONE 1. single function
 ;; DONE 2. single function with args
@@ -42,7 +55,7 @@
              mergers# (:merge meta#)
              ancestors# (cond
                           (fn? mergers#) [(mergers#)]
-                          (vector? mergers#) (apply (first mergers#) (rest mergers#))
+                          (vector? mergers#) (extract-ancestors mergers# [])
                           (nil? mergers#) []
                           :else (throw (js/Error. (str "Herb: merge vector does not conform to spec: " (pr-str mergers#)))))
              key# (:key meta#)
