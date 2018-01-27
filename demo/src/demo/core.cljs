@@ -39,10 +39,14 @@
   []
   {:font-weight "bold"})
 
+(defn italic
+  []
+  {:font-style "italic"})
+
 (defn cycle-color
   [color]
   ^{:key color
-    :merge [[dynamic-text-color color] [bold]]}
+    :merge [[dynamic-text-color color] italic bold]}
   {:background-color color}
   )
 

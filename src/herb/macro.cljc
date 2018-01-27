@@ -29,17 +29,22 @@
   [mergers result]
   (if (empty? mergers)
     result
-    (let [input (first mergers)
-          style-fn (first input)
-          style-args (rest input)]
-      (recur
-       (rest mergers)
-       (conj result (apply style-fn style-args))))))
+    (let [input (first mergers)]
+      (if (fn? input)
+        (recur (rest mergers)
+               (conj result (input)))
+        (let [style-fn (first input)
+              style-args (rest input)]
+          (recur
+           (rest mergers)
+           (conj result (apply style-fn style-args))))
+        )
+      )))
 
-;; cases
+;; CASES
 ;; DONE 1. single function
 ;; DONE 2. single function with args
-;; TODO 3. multiple functions with args or without args
+;; DONE 3. multiple functions with args or without args
 ;; {:merge [fn args]}
 (defmacro with-style
   [style-fn & args]
