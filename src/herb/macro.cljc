@@ -61,7 +61,7 @@
   (if (empty? extend-meta)
     result
     (let [extracted (extract-extend-meta extend-meta)
-          new-meta (into [] (filter identity (map (comp :extend meta) extracted)))]
+          new-meta (into [] (filter identity (mapcat (comp :extend meta) extracted)))]
       (recur new-meta
              (apply conj result extracted)))))
 

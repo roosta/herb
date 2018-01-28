@@ -7,6 +7,8 @@
    [reagent.debug :as d]
    [reagent.core :as r]))
 
+(enable-console-print!)
+
 (def red {:color "red"})
 (def green {:color "green"})
 
@@ -41,12 +43,11 @@
 
 (defn italic
   []
-  ^{:extend margin}
   {:font-style "italic"})
 
 (defn bold
   []
-  ^{:extend italic}
+  ^{:extend [italic margin]}
   {:font-weight "bold"})
 
 (defn cycle-color
