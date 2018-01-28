@@ -50,6 +50,10 @@
     ;; TODO fix js/error
     :else (throw `(js/Error. ~(str "extend metadata does not conform to spec: " (pr-str extend-meta))))))
 
+(def process-styles (comp
+                     (map (comp :extend meta))
+                     (filter identity)))
+
 ;; 1. input: [[dynamic-text-color color] bold]
 ;; 2. extracted [{:color "black"} {:font-weight "bold"}]
 ;; 3. new meta: [fn italic]
@@ -58,12 +62,27 @@
   style for each until we have nothing left, then return a flat vector of the
   extend chain ready to be fed into garden"
   [extend-meta result]
-  (if (empty? extend-meta)
-    result
-    (let [extracted (extract-extend-meta extend-meta)
-          new-meta (into [] (filter identity (mapcat (comp :extend meta) extracted)))]
+  (cond
+
+    (fn? extend-meta)
+    (recur [extend-meta] result)
+
+    (and (vector? extend-meta) (not (empty? extend-meta)))
+    (let [styles (resolve-styles extend-meta [])
+          new-meta (->> (transduce process-styles conj styles)
+                        flatten
+                        (into []))]
+      ;; (println (pr-str (map (comp :extend meta) styles)))
+      ;; (println (pr-str asd))
       (recur new-meta
-             (apply conj result extracted)))))
+             (apply conj result styles)))
+    :else result)
+  #_(if (empty? extend-meta)
+      result
+      (let [extracted (extract-extend-meta extend-meta)
+            new-meta (into [] (filter identity (mapcat (comp :extend meta) extracted)))]
+        (recur new-meta
+               (apply conj result extracted)))))
 
 (defmacro with-style
   "Takes a function that returns a map and transform into CSS using garden, inject
@@ -85,5 +104,6 @@
          (assert (map? resolved#) "with-style functions must return a map")
          (let [css# (css [(str "." classname#) out#
                           (convert-modes modes#)])]
+           ;; (.log js/console  (parse-ancestors (:extend meta#) []))
            (~inject-style-fn classname# css#)
            classname#)))))
