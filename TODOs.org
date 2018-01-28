@@ -1,1 +1,2 @@
 * TODO Handle multiple inheritance
+* TODO Rename merge to extend

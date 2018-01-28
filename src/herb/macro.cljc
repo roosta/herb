@@ -25,8 +25,6 @@
   (mapv #(-> [(keyword (str "&" %)) (% modes)])
         (keys modes)))
 
-(declare extract-ancestors)
-
 (defn extract-styles
   "Extracts styles from vector provided in the :merge metadata."
   [mergers result]
@@ -46,10 +44,24 @@
   [merge-meta]
   (cond
     (fn? merge-meta) [(merge-meta)]
-    (vector? merge-meta) (extract-styles merge-meta [])
+    (vector? merge-meta) (if (= (count merge-meta) 1)
+                           [((first merge-meta))]
+                           (extract-styles merge-meta []))
     (nil? merge-meta) []
     ;; TODO fix js/error
     :else (throw `(js/Error. ~(str "merge metadata does not conform to spec: " (pr-str merge-meta))))))
+
+;; 1. input: [[dynamic-text-color color] bold]
+;; 2. extracted [{:color "black"} {:font-weight "bold"}]
+;; 3. new meta: [fn italic]
+(defn asd
+  [mergers result]
+  (if (empty? mergers)
+    result
+    (let [extracted (extract-ancestors mergers)
+          new-meta (into [] (filter identity (map (comp :merge meta) extracted)))]
+      (recur new-meta
+             (apply conj result extracted)))))
 
 (defmacro with-style
   [style-fn & args]
@@ -63,7 +75,7 @@
              meta# (meta resolved#)
              modes# (:mode meta#)
              mergers# (:merge meta#)
-             ancestors# (extract-ancestors mergers#)
+             ancestors# (asd mergers# [])
              key# (:key meta#)
              classname# (str ~classname (when key# (str "-" key#)))
              out# (apply merge resolved# ancestors#)]

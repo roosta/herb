@@ -35,18 +35,24 @@
     (or "blue" "purple") {:color "white"}
     {:color "black"}))
 
-(defn bold
+(defn margin
   []
-  {:font-weight "bold"})
+  {:margin "5px"})
 
 (defn italic
   []
+  ^{:merge margin}
   {:font-style "italic"})
+
+(defn bold
+  []
+  ^{:merge italic}
+  {:font-weight "bold"})
 
 (defn cycle-color
   [color]
   ^{:key color
-    :merge [[dynamic-text-color color] italic bold]}
+    :merge [[dynamic-text-color color] bold]}
   {:background-color color}
   )
 
