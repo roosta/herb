@@ -26,7 +26,7 @@
         (keys modes)))
 
 (defn extract-styles
-  "Extracts styles from vector provided in the :merge metadata."
+  "Extracts styles from vector provided in the :extend metadata."
   [mergers result]
   (if (empty? mergers)
     result
@@ -59,7 +59,7 @@
   (if (empty? mergers)
     result
     (let [extracted (extract-ancestors mergers)
-          new-meta (into [] (filter identity (map (comp :merge meta) extracted)))]
+          new-meta (into [] (filter identity (map (comp :extend meta) extracted)))]
       (recur new-meta
              (apply conj result extracted)))))
 
@@ -74,8 +74,7 @@
        (let [resolved# (~style-fn ~@args)
              meta# (meta resolved#)
              modes# (:mode meta#)
-             mergers# (:merge meta#)
-             ancestors# (asd mergers# [])
+             ancestors# (asd (:extend meta#) [])
              key# (:key meta#)
              classname# (str ~classname (when key# (str "-" key#)))
              out# (apply merge resolved# ancestors#)]

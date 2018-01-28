@@ -1,2 +1,4 @@
 * TODO Handle multiple inheritance
-* TODO Rename merge to extend
+* DONE Rename merge to extend
+  CLOSED: [2018-01-28 Sun 14:59]
+* TODO Check precedence for extended styles

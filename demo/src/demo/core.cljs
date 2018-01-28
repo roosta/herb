@@ -41,18 +41,18 @@
 
 (defn italic
   []
-  ^{:merge margin}
+  ^{:extend margin}
   {:font-style "italic"})
 
 (defn bold
   []
-  ^{:merge italic}
+  ^{:extend italic}
   {:font-weight "bold"})
 
 (defn cycle-color
   [color]
   ^{:key color
-    :merge [[dynamic-text-color color] bold]}
+    :extend [[dynamic-text-color color] bold]}
   {:background-color color}
   )
 
