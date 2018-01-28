@@ -80,9 +80,10 @@
              ancestors# (parse-ancestors (:extend meta#) [])
              key# (:key meta#)
              classname# (str ~classname (when key# (str "-" key#)))
-             out# (apply merge (into ancestors# resolved#))]
+             out# (apply merge {} (into ancestors# resolved#))]
          (assert (map? resolved#) "with-style functions must return a map")
          (let [css# (css [(str "." classname#) out#
                           (convert-modes modes#)])]
+           (.log js/console out#)
            (~inject-style-fn classname# css#)
            classname#)))))
