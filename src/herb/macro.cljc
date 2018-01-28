@@ -69,11 +69,12 @@
 
     (and (vector? extend-meta) (not (empty? extend-meta)))
     (let [styles (resolve-styles extend-meta [])
-          new-meta (->> (transduce process-styles conj styles)
-                        flatten
-                        (into []))]
+          new-meta (->>  styles
+                         (transduce process-styles conj)
+                         flatten
+                         (into []))]
       ;; (println (pr-str (map (comp :extend meta) styles)))
-      ;; (println (pr-str asd))
+      ;; (println (pr-str styles))
       (recur new-meta
              (apply conj result styles)))
     :else result)
@@ -100,10 +101,9 @@
              ancestors# (parse-ancestors (:extend meta#) [])
              key# (:key meta#)
              classname# (str ~classname (when key# (str "-" key#)))
-             out# (apply merge resolved# ancestors#)]
+             out# (apply merge (into ancestors# resolved#))]
          (assert (map? resolved#) "with-style functions must return a map")
          (let [css# (css [(str "." classname#) out#
                           (convert-modes modes#)])]
-           ;; (.log js/console  (parse-ancestors (:extend meta#) []))
            (~inject-style-fn classname# css#)
            classname#)))))

@@ -61,6 +61,20 @@
   []
   {:margin (px 10)})
 
+(defn blue-div
+  []
+  {:background-color "blue"})
+
+(defn red-div
+  []
+  ^{:extend blue-div}
+  {:background-color "red"})
+
+(defn cyan-div
+  []
+  ^{:extend red-div}
+  {:background-color "cyan"})
+
 (defn home-page []
   (let [state (r/atom "green")]
     (fn []
@@ -76,7 +90,11 @@
         (for [c ["yellow" "blue" "green" "purple"]]
           ^{:key c}
           [:div {:class (with-style cycle-color c)}
-           c])]])))
+           c])
+        [:br]
+        [:div {:class (with-style cyan-div)}
+         "inheritance test"]
+        ]])))
 
 (defn mount-root []
   (r/render [home-page] (.getElementById js/document "app")))
