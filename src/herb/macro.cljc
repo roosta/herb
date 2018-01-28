@@ -40,23 +40,10 @@
            (rest parsed-meta)
            (conj result (apply style-fn style-args))))))))
 
-(defn extract-extend-meta
-  "Parses extend metadata to return a vector of style maps"
-  [extend-meta]
-  (cond
-    (fn? extend-meta) [(extend-meta)]
-    (vector? extend-meta) (resolve-styles extend-meta [])
-    (nil? extend-meta) []
-    ;; TODO fix js/error
-    :else (throw `(js/Error. ~(str "extend metadata does not conform to spec: " (pr-str extend-meta))))))
-
 (def process-styles (comp
                      (map (comp :extend meta))
                      (filter identity)))
 
-;; 1. input: [[dynamic-text-color color] bold]
-;; 2. extracted [{:color "black"} {:font-weight "bold"}]
-;; 3. new meta: [fn italic]
 (defn parse-ancestors
   "Recursivly go through each extend function provided in extend meta and resolve
   style for each until we have nothing left, then return a flat vector of the
@@ -73,17 +60,9 @@
                          (transduce process-styles conj)
                          flatten
                          (into []))]
-      ;; (println (pr-str (map (comp :extend meta) styles)))
-      ;; (println (pr-str styles))
       (recur new-meta
              (apply conj result styles)))
-    :else result)
-  #_(if (empty? extend-meta)
-      result
-      (let [extracted (extract-extend-meta extend-meta)
-            new-meta (into [] (filter identity (mapcat (comp :extend meta) extracted)))]
-        (recur new-meta
-               (apply conj result extracted)))))
+    :else result))
 
 (defmacro with-style
   "Takes a function that returns a map and transform into CSS using garden, inject
