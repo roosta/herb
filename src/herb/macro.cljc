@@ -69,20 +69,21 @@
   into DOM and return classname"
   [style-fn & args]
   (let [css (symbol "garden.core" "css")
-        ns# (str/replace (name (ns-name *ns*)) #"\." "_")
-        classname (str ns# "_" style-fn)
         inject-style-fn (symbol "herb.runtime" "inject-style!")]
     `(do
        (assert (fn? ~style-fn) (str (pr-str ~style-fn) " is not a function. with-style only takes a function as its first argument"))
        (let [resolved# (~style-fn ~@args)
+             fn-name# (-> #'~style-fn meta :name str)
+             caller-ns# (str/replace (-> #'~style-fn meta :ns str) #"\." "_")
              meta# (meta resolved#)
              modes# (:mode meta#)
              ancestors# (parse-ancestors (:extend meta#) [])
              key# (:key meta#)
-             classname# (str ~classname (when key# (str "-" key#)))
+             classname# (str caller-ns# "_" fn-name# (when key# (str "-" key#)))
              out# (apply merge {} (into ancestors# resolved#))]
          (assert (map? resolved#) "with-style functions must return a map")
          (let [css# (css [(str "." classname#) out#
                           (convert-modes modes#)])]
+           (.log js/console (-> #'~style-fn meta :name str))
            (~inject-style-fn classname# css#)
            classname#)))))
