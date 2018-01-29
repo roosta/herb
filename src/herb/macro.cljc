@@ -84,6 +84,5 @@
          (assert (map? resolved#) "with-style functions must return a map")
          (let [css# (css [(str "." classname#) out#
                           (convert-modes modes#)])]
-           (.log js/console (-> #'~style-fn meta :name str))
            (~inject-style-fn classname# css#)
            classname#)))))
