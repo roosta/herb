@@ -74,15 +74,16 @@
        (assert (fn? ~style-fn) (str (pr-str ~style-fn) " is not a function. with-style only takes a function as its first argument"))
        (let [resolved# (~style-fn ~@args)
              fn-name# (-> #'~style-fn meta :name str)
-             caller-ns# (str/replace (-> #'~style-fn meta :ns str) #"\." "_")
+             caller-ns#  (-> #'~style-fn meta :ns str) ;(str/replace (-> #'~style-fn meta :ns str) #"\." "_")
+             fqn# (str caller-ns# "/" fn-name#)
              meta# (meta resolved#)
              modes# (:mode meta#)
              ancestors# (parse-ancestors (:extend meta#) [])
              key# (:key meta#)
-             classname# (str caller-ns# "_" fn-name# (when key# (str "-" key#)))
+             classname# (str (str/replace caller-ns# #"\." "_") "_" fn-name# (when key# (str "-" key#)))
              out# (apply merge {} (into ancestors# resolved#))]
          (assert (map? resolved#) "with-style functions must return a map")
          (let [garden-data# [(str "." classname#) out#
                              (convert-modes modes#)]]
-           (~inject-style-fn classname# garden-data#)
+           (~inject-style-fn classname# garden-data# fqn#)
            classname#)))))

@@ -2,7 +2,9 @@
 
 (ns herb.runtime
   (:require [garden.core :refer [css]]
-            [goog.dom :as dom]))
+            [goog.dom :as dom]
+            [clojure.string :as str]
+            [reagent.debug :as d]))
 
 (def injected-styles (atom {}))
 
@@ -12,18 +14,19 @@
                                             :element element})
     (set! (.-innerHTML element) css)))
 
-(defn create-style-element! [classname new]
+(defn create-style-element! [classname new fqn]
   (let [head (.-head js/document)
         element (.createElement js/document "style")]
     (assert (some? head)
             "An head element is required in the dom to inject the style.")
+    (.setAttribute element "data-ns" fqn)
     (.appendChild head element)
     (update-style! classname element new)))
 
-(defn inject-style! [classname new]
-  (if-let [injected (get @injected-styles classname)]
-    (let [current (:data injected)]
-      (when (not= current new)
-        (let [element (:element injected)]
-          (update-style! classname element new))))
-    (create-style-element! classname new)))
+(defn inject-style! [classname new fqn]
+    (if-let [injected (get @injected-styles classname)]
+      (let [current (:data injected)]
+        (when (not= current new)
+          (let [element (:element injected)]
+            (update-style! classname element new))))
+      (create-style-element! classname new fqn)))
