@@ -1,0 +1,67 @@
+Macro
+===========
+Full reload
+-----------
+{:id :herb.macro/inject-style-fn, :n-calls 500, :min "0ns", :max "4ms", :mad "554.4μs", :mean "660μs", :time% 72, :time "330ms"}
+{:id :herb.macro/out, :n-calls 500, :min "0ns", :max "1ms", :mad "105.73μs", :mean "56μs", :time% 6, :time "28ms"}
+{:id :herb.macro/fn-name, :n-calls 500, :min "0ns", :max "3ms", :mad "73.72μs", :mean "38μs", :time% 4, :time "19ms"}
+{:id :herb.macro/classname, :n-calls 500, :min "0ns", :max "1ms", :mad "46.85μs", :mean "24μs", :time% 3, :time "12ms"}
+{:id :herb.macro/caller-ns, :n-calls 500, :min "0ns", :max "1ms", :mad "35.35μs", :mean "18μs", :time% 2, :time "9ms"}
+{:id :herb.macro/fqn, :n-calls 500, :min "0ns", :max "1ms", :mad "15.87μs", :mean "8μs", :time% 1, :time "4ms"}
+{:id :herb.macro/resolve, :n-calls 500, :min "0ns", :max "1ms", :mad "11.93μs", :mean "6μs", :time% 1, :time "3ms"}
+{:id :herb.macro/modes, :n-calls 500, :min "0ns", :max "1ms", :mad "7.97μs", :mean "4μs", :time% 0, :time "2ms"}
+{:id :herb.macro/ancestors, :n-calls 500, :min "0ns", :max "1ms", :mad "3.99μs", :mean "2μs", :time% 0, :time "1ms"}
+{:id :herb.macro/meta, :n-calls 500, :min "0ns", :max "1ms", :mad "3.99μs", :mean "2μs", :time% 0, :time "1ms"}
+{:id :herb.macro/assert-fn, :n-calls 500, :min "0ns", :max "0ns", :mad "0ns", :mean "0ns", :time% 0, :time "0ns"}
+
+Clock Time: (100%) 456ms
+Accounted Time: (90%) 409ms
+
+;; refresh
+{:id :herb.macro/inject-style-fn, :n-calls 500, :min "0ns", :max "2ms", :mad "137.34μs", :mean "74μs", :time% 32, :time "37ms"}
+{:id :herb.macro/out, :n-calls 500, :min "0ns", :max "3ms", :mad "88.14μs", :mean "46μs", :time% 20, :time "23ms"}
+{:id :herb.macro/fn-name, :n-calls 500, :min "0ns", :max "1ms", :mad "43.03μs", :mean "22μs", :time% 10, :time "11ms"}
+{:id :herb.macro/caller-ns, :n-calls 500, :min "0ns", :max "1ms", :mad "23.71μs", :mean "12μs", :time% 5, :time "6ms"}
+{:id :herb.macro/resolve, :n-calls 500, :min "0ns", :max "2ms", :mad "19.84μs", :mean "10μs", :time% 4, :time "5ms"}
+{:id :herb.macro/classname, :n-calls 500, :min "0ns", :max "1ms", :mad "15.87μs", :mean "8μs", :time% 3, :time "4ms"}
+{:id :herb.macro/ancestors, :n-calls 500, :min "0ns", :max "1ms", :mad "7.97μs", :mean "4μs", :time% 2, :time "2ms"}
+{:id :herb.macro/assert-fn, :n-calls 500, :min "0ns", :max "0ns", :mad "0ns", :mean "0ns", :time% 0, :time "0ns"}
+{:id :herb.macro/modes, :n-calls 500, :min "0ns", :max "0ns", :mad "0ns", :mean "0ns", :time% 0, :time "0ns"}
+{:id :herb.macro/fqn, :n-calls 500, :min "0ns", :max "0ns", :mad "0ns", :mean "0ns", :time% 0, :time "0ns"}
+{:id :herb.macro/meta, :n-calls 500, :min "0ns", :max "0ns", :mad "0ns", :mean "0ns", :time% 0, :time "0ns"}
+
+Clock Time: (100%) 115ms
+Accounted Time: (77%) 88ms
+
+;; RUNTIME
+;; =======
+;; full reload
+;; ------------
+{:id :herb.runtime/create-css, :n-calls 500, :min "0ns", :max "8ms", :mad "612.36μs", :mean "630μs", :time% 58, :time "315ms"}
+{:id :herb.runtime/set-inner-html, :n-calls 500, :min "0ns", :max "1ms", :mad "119.81μs", :mean "64μs", :time% 6, :time "32ms"}
+{:id :herb.runtime/append-child, :n-calls 500, :min "0ns", :max "1ms", :mad "50.65μs", :mean "26μs", :time% 2, :time "13ms"}
+{:id :herb.runtime/get-injected, :n-calls 500, :min "0ns", :max "1ms", :mad "35.35μs", :mean "18μs", :time% 2, :time "9ms"}
+{:id :herb.runtime/swap-styles, :n-calls 500, :min "0ns", :max "1ms", :mad "35.35μs", :mean "18μs", :time% 2, :time "9ms"}
+{:id :herb.runtime/create-style-element, :n-calls 500, :min "0ns", :max "1ms", :mad "19.8μs", :mean "10μs", :time% 1, :time "5ms"}
+{:id :herb.runtime/set-data-attribute, :n-calls 500, :min "0ns", :max "1ms", :mad "7.97μs", :mean "4μs", :time% 0, :time "2ms"}
+
+Clock Time: (100%) 539ms
+
+Refresh
+-------------
+{:id :herb.runtime/create-css, :n-calls 500, :min "0ns", :max "3ms", :mad "534.94μs", :mean "458μs", :time% 55, :time "229ms"}
+{:id :herb.runtime/append-child, :n-calls 500, :min "0ns", :max "1ms", :mad "112.8μs", :mean "60μs", :time% 7, :time "30ms"}
+{:id :herb.runtime/set-inner-html, :n-calls 500, :min "0ns", :max "1ms", :mad "112.8μs", :mean "60μs", :time% 7, :time "30ms"}
+{:id :herb.runtime/swap-styles, :n-calls 500, :min "0ns", :max "1ms", :mad "35.35μs", :mean "18μs", :time% 2, :time "9ms"}
+{:id :herb.runtime/get-injected, :n-calls 500, :min "0ns", :max "1ms", :mad "23.71μs", :mean "12μs", :time% 1, :time "6ms"}
+{:id :herb.runtime/create-style-element, :n-calls 500, :min "0ns", :max "1ms", :mad "3.99μs", :mean "2μs", :time% 0, :time "1ms"}
+{:id :herb.runtime/set-data-attribute, :n-calls 500, :min "0ns", :max "1ms", :mad "3.99μs", :mean "2μs", :time% 0, :time "1ms"}
+
+Clock Time: (100%) 413ms
+Accounted Time: (74%) 306ms
+
+{:id :herb.runtime/compare-data, :n-calls 500, :min "0ns", :max "2ms", :mad "131.04μs", :mean "70μs", :time% 36, :time "35ms"}
+{:id :herb.runtime/get-injected, :n-calls 500, :min "0ns", :max "1ms", :mad "7.97μs", :mean "4μs", :time% 2, :time "2ms"}
+
+Clock Time: (100%) 96ms
+Accounted Time: (39%) 37ms
