@@ -82,6 +82,5 @@
          (assert (map? resolved#) "with-style functions must return a map")
          (let [garden-data# [(str "." classname#) out#
                              (convert-modes modes#)]]
-           (.log js/console ancestors#)
            (~inject-style-fn classname# garden-data# fqn#)
            classname#)))))

@@ -110,7 +110,7 @@
 (defn home-page []
   (let [state (r/atom "green")]
     (fn []
-      (profile
+      #_(profile
        {}
        (doseq [n (range 500)]
          (p ::with-style (with-style profile-comp n)))
