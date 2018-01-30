@@ -8,8 +8,8 @@
             [lein-doo "0.1.8"]
             [lein-codox "0.10.3"]]
 
-  :dependencies [[org.clojure/clojure "1.9.0"]
-                 [org.clojure/clojurescript "1.9.946"]
+  :dependencies [[org.clojure/clojure "1.8.0"]
+                 [org.clojure/clojurescript "1.9.473"]
                  [garden "1.3.3"]]
 
   :source-paths ["src"]
