@@ -3,6 +3,8 @@
    [herb.macro :refer-macros [with-style]]
    [garden.selectors :as s]
    [garden.core :refer [css]]
+   ;; [taoensso.tufte :as tufte :refer-macros (defnp p profiled profile)]
+   [garden.core :refer [css]]
    [garden.units :refer [px]]
    [reagent.debug :as d]
    [reagent.core :as r]))
@@ -75,9 +77,42 @@
   ^{:extend red-div}
   {:background-color "cyan"})
 
+(defn keyed
+  [k]
+  (let [styles {:paper {:background-color "grey"
+                        :width (px 50)
+                        :height (px 50)
+                        :border-radius (px 5)}
+                :sheet {:background-color "white"
+                        :width (px 50)
+                        :height (px 50)
+                        :box-shadow "0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)"}}]
+    (with-meta
+      (k styles)
+      {:key (name k)})))
+
+(defn profile
+  [n]
+  ^{:key n}
+  {:width (px 100)
+   :height (px 100)
+   :background-color "magenta"
+   :border-radius "5px"})
+
 (defn home-page []
   (let [state (r/atom "green")]
     (fn []
+      #_(time (doseq [n (range 500)]
+                (with-style profile n)))
+
+      #_(time (doseq [n (range 500)]
+                (.appendChild (.-head js/document)
+                              (.createElement js/document (str "style")))))
+      #_(time (doseq [n (range 500)]
+                (css [:.classname {:width (px 100)
+                                   :height (px 100)
+                                   :background-color "magenta"
+                                   :border-radius "5px"}])))
       [:div
        [:input {:class (with-style hover-focus)
                 :default-value "Hello world"}]
@@ -93,8 +128,9 @@
            c])
         [:br]
         [:div {:class (with-style cyan-div)}
-         "inheritance test"]
-        ]])))
+         "inheritance test"]]
+       [:div {:class (with-style keyed :paper)}]
+       [:div {:class (with-style keyed :sheet)}]])))
 
 (defn mount-root []
   (r/render [home-page] (.getElementById js/document "app")))

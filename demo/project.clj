@@ -6,6 +6,7 @@
 
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.clojure/clojurescript "1.9.946"]
+                 [com.taoensso/tufte "1.1.2"]
                  [garden "1.3.3"]
                  [reagent "0.8.0-alpha2"]]
 
