@@ -1,7 +1,9 @@
-* TODO Handle multiple inheritance
+* DONE Handle multiple inheritance
+  CLOSED: [2018-01-30 Tue 13:00]
 * DONE Rename merge to extend
   CLOSED: [2018-01-28 Sun 14:59]
-* TODO Check precedence for extended styles
+* DONE Check precedence for extended styles
+  CLOSED: [2018-01-30 Tue 13:00]
 * TODO Document keys and that they need to conform to valid chars
   Possibly transform key to valid chars
 * TODO Unmount with react components
@@ -10,3 +12,5 @@
 * TODO Fix component error that appears sometimes 'host node null'
      Uncaught TypeError: Cannot read property 'getHostNode' of null
 * TODO Add sanitizing of keyword
+* TODO Check style for equality prior to sending it to ~css~
+* TODO Add global init
