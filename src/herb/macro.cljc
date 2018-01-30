@@ -82,7 +82,7 @@
              classname# (str caller-ns# "_" fn-name# (when key# (str "-" key#)))
              out# (apply merge {} (into ancestors# resolved#))]
          (assert (map? resolved#) "with-style functions must return a map")
-         (let [css# (css [(str "." classname#) out#
-                          (convert-modes modes#)])]
-           (~inject-style-fn classname# css#)
+         (let [garden-data# [(str "." classname#) out#
+                             (convert-modes modes#)]]
+           (~inject-style-fn classname# garden-data#)
            classname#)))))
