@@ -57,7 +57,7 @@
     (and (vector? extend-meta) (not (empty? extend-meta)))
     (let [styles (resolve-styles extend-meta [])
           new-meta (->>  styles
-                         (transduce process-styles conj)
+                         (eduction process-styles)
                          flatten
                          (into []))]
       (recur new-meta
