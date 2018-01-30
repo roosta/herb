@@ -56,10 +56,7 @@
 
     (and (vector? extend-meta) (not (empty? extend-meta)))
     (let [styles (resolve-styles extend-meta [])
-          new-meta (->>  styles
-                         (eduction process-styles)
-                         flatten
-                         (into []))]
+          new-meta (into [] process-styles styles)]
       (recur new-meta
              (apply conj result styles)))
     :else result))
@@ -74,7 +71,7 @@
        (assert (fn? ~style-fn) (str (pr-str ~style-fn) " is not a function. with-style only takes a function as its first argument"))
        (let [resolved# (~style-fn ~@args)
              fn-name# (-> #'~style-fn meta :name str)
-             caller-ns#  (-> #'~style-fn meta :ns str) ;(str/replace (-> #'~style-fn meta :ns str) #"\." "_")
+             caller-ns# (-> #'~style-fn meta :ns str) ;(str/replace (-> #'~style-fn meta :ns str) #"\." "_")
              fqn# (str caller-ns# "/" fn-name#)
              meta# (meta resolved#)
              modes# (:mode meta#)
@@ -85,5 +82,6 @@
          (assert (map? resolved#) "with-style functions must return a map")
          (let [garden-data# [(str "." classname#) out#
                              (convert-modes modes#)]]
+           (.log js/console ancestors#)
            (~inject-style-fn classname# garden-data# fqn#)
            classname#)))))
