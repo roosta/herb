@@ -19,7 +19,7 @@
         element (.createElement js/document "style")]
     (assert (some? head)
             "An head element is required in the dom to inject the style.")
-    (.setAttribute element "data-ns" fqn)
+    (.setAttribute element "data-herb" fqn)
     (.appendChild head element)
     (update-style! classname element new)))
 
