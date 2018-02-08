@@ -76,7 +76,9 @@
              meta# (meta resolved#)
              modes# (:mode meta#)
              ancestors# (parse-ancestors (:extend meta#) [])
-             key# (:key meta#)
+             key# (if (keyword? (:key meta#))
+                    (name (:key meta#))
+                    (:key meta#))
              classname# (str (str/replace caller-ns# #"\." "_") "_" fn-name# (when key# (str "-" key#)))
              out# (apply merge {} (into ancestors# resolved#))]
          (assert (map? resolved#) "with-style functions must return a map")
