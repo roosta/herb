@@ -17,3 +17,4 @@
 * DONE Check style for equality prior to sending it to ~css~
   CLOSED: [2018-01-30 Tue 19:19]
 * TODO Add global init
+* TODO What happens with anon functions?
