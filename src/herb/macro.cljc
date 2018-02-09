@@ -44,6 +44,13 @@
                      (map (comp :extend meta))
                      (filter identity)))
 
+(defn convert-media
+  [media]
+  (mapv (fn [[query style]]
+          (at-media query
+                    [:& style]))
+       (partition 2 media)))
+
 (defn parse-ancestors
   "Recursivly go through each extend function provided in extend meta and resolve
   style for each until we have nothing left, then return a flat vector of the
@@ -61,6 +68,7 @@
              (apply conj result styles)))
     :else result))
 
+
 (defmacro with-style
   "Takes a function that returns a map and transform into CSS using garden, inject
   into DOM and return classname"
@@ -75,6 +83,7 @@
              fqn# (str caller-ns# "/" fn-name#)
              meta# (meta resolved#)
              modes# (:mode meta#)
+             media# (:media meta#)
              ancestors# (parse-ancestors (:extend meta#) [])
              key# (if (keyword? (:key meta#))
                     (name (:key meta#))
@@ -83,6 +92,8 @@
              out# (apply merge {} (into ancestors# resolved#))]
          (assert (map? resolved#) "with-style functions must return a map")
          (let [garden-data# [(str "." classname#) out#
-                             (convert-modes modes#)]]
+                             (convert-modes modes#)
+                             (convert-media media#)]]
            (~inject-style-fn classname# garden-data# fqn#)
+           (.log js/console (convert-media media#))
            classname#)))))

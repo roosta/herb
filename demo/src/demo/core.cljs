@@ -3,6 +3,7 @@
    [herb.macro :refer-macros [with-style]]
    [garden.selectors :as s]
    [garden.core :refer [css]]
+   [garden.stylesheet :refer [at-media]]
    [taoensso.tufte :as tufte :refer-macros [defnp p profiled profile]]
    [garden.core :refer [css]]
    [garden.units :refer [px]]
@@ -46,6 +47,7 @@
 
 (defn italic
   []
+  ^{:mode {:hover {:font-style "normal"}}}
   {:font-style "italic"})
 
 (defn bold
@@ -57,7 +59,8 @@
   [color]
   ^{:key color
     :extend [[dynamic-text-color color] bold]}
-  {:background-color color}
+  {:text-align "center"
+   :background-color color}
   )
 
 (defn button
@@ -70,13 +73,20 @@
 
 (defn red-div
   []
-  ^{:extend blue-div}
   {:background-color "red"})
 
 (defn cyan-div
   []
   ^{:extend red-div}
   {:background-color "cyan"})
+
+(defn media-query-test
+  []
+  ^{:media [{:screen true} {:background-color "green"}
+            {:max-width "1920px"} {:color "yellow"}]}
+  {:background "magenta"
+   :text-align "center"
+   :color "white"})
 
 (defn keyed
   [k]
@@ -123,7 +133,14 @@
          (p ::garden (css [:.classname {:width (px 100)
                                         :height (px 100)
                                         :background-color "magenta"
-                                        :border-radius "5px"}]))))
+                                        :border-radius "5px"}])))
+
+       (doseq [_ (range 500)]
+         (p ::at-media (at-media {:max-width "256px"} [:.classname {:width (px 100)
+                                                                    :height (px 100)
+                                                                    :background-color "magenta"
+                                                                    :border-radius "5px"}])))
+       )
       [:div
        [:input {:class (with-style hover-focus)
                 :default-value "Hello world"}]
@@ -141,7 +158,11 @@
         [:div {:class (with-style cyan-div)}
          "inheritance test"]]
        [:div {:class (with-style keyed :paper)}]
-       [:div {:class (with-style keyed :sheet)}]])))
+
+       [:div {:class (with-style keyed :sheet)}]
+
+       [:div {:class (with-style media-query-test)}
+        "Media query test"]])))
 
 (defn mount-root []
   (r/render [home-page] (.getElementById js/document "app")))
