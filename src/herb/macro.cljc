@@ -25,6 +25,13 @@
   (mapv #(-> [(keyword (str "&" %)) (% modes)])
         (keys modes)))
 
+(defn convert-media
+  [media]
+  (mapv (fn [[query style]]
+          (at-media query
+                    [:& style]))
+        (partition 2 media)))
+
 (defn resolve-styles
   "Calls each function provided in extend-meta to resolve style maps for each"
   [parsed-meta result]
@@ -43,13 +50,6 @@
 (def process-styles (comp
                      (map (comp :extend meta))
                      (filter identity)))
-
-(defn convert-media
-  [media]
-  (mapv (fn [[query style]]
-          (at-media query
-                    [:& style]))
-       (partition 2 media)))
 
 (defn parse-ancestors
   "Recursivly go through each extend function provided in extend meta and resolve
