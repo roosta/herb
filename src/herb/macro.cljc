@@ -32,6 +32,20 @@
                     [:& style]))
         (partition 2 media)))
 
+
+
+(def process-mode-meta (comp
+                        (map (comp :mode meta))
+                        (filter identity)))
+
+(defn resolve-modes
+  [new-meta result]
+  (if (empty? new-meta)
+    result
+    (let [input (first new-meta)]
+      (recur (rest new-meta)
+             (conj result (convert-modes input))))))
+
 (defn resolve-styles
   "Calls each function provided in extend-meta to resolve style maps for each"
   [parsed-meta result]
@@ -47,9 +61,9 @@
            (rest parsed-meta)
            (conj result (apply style-fn style-args))))))))
 
-(def process-styles (comp
-                     (map (comp :extend meta))
-                     (filter identity)))
+(def process-extend-meta (comp
+                          (map (comp :extend meta))
+                          (filter identity)))
 
 (defn parse-ancestors
   "Recursivly go through each extend function provided in extend meta and resolve
@@ -63,7 +77,7 @@
 
     (and (vector? extend-meta) (not (empty? extend-meta)))
     (let [styles (resolve-styles extend-meta [])
-          new-meta (into [] process-styles styles)]
+          new-meta (into [] process-extend-meta styles)]
       (recur new-meta
              (apply conj result styles)))
     :else result))
