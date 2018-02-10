@@ -85,6 +85,9 @@
                         (filter identity)))
 
 (defn extract-modes
+  "Takes a group of ancestors and the root style fn meta. Pull out each mode meta
+  obj and merge to prevent duplicates, finally convert to garden acceptable
+  input and return"
   [ancestors# root-meta]
   (let [extracted-modes (into [] process-mode-meta ancestors#)
         merged-modes (apply merge {} (conj extracted-modes (:mode root-meta)))
