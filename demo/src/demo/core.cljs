@@ -86,18 +86,23 @@
 
 (defn red-div
   []
-  ^{:extend blue-div}
+  ^{:extend blue-div
+    :media [{:screen true} {:color "white"}]}
   {:color "white"
    :background-color "red"})
 
 (defn cyan-div
   []
-  ^{:extend red-div}
+  ^{:extend red-div
+    :media [{:screen true} {:color "black"
+                            :background-color "purple"}]}
   {:background-color "cyan"})
 
 (defn media-query-test
   []
-  ^{:media [{:screen true} {:background-color "green"}
+  ^{:extend cyan-div
+    :media [{:screen true} {:color "white"
+                            :background-color "green"}
             {:max-width "800px"} {:background-color "yellow"}]}
   {:background "magenta"
    :text-align "center"
