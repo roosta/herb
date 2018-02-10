@@ -71,9 +71,8 @@
     (let [styles (resolve-styles extend-meta [])
           new-meta (into [] (process-meta-xform :extend) styles)]
       (recur new-meta
-             (apply conj result styles)))
+             (into styles result)))
     :else result))
-
 
 (defmacro with-style
   "Takes a function that returns a map and transform into CSS using garden, inject
@@ -101,5 +100,5 @@
                              (into (mapv convert-modes (into [] (process-meta-xform :mode) ancestors#)) modes#)
                              (into (mapv convert-media (into [] (process-meta-xform :media) ancestors#)) media#)]]
            (~inject-style-fn classname# garden-data# fqn#)
-           ;; (.log js/console (into modes# (mapv convert-modes (into [] (process-meta-xform :mode) ancestors#))))
+           (.log js/console ancestors#)
            classname#)))))

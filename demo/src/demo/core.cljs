@@ -75,11 +75,14 @@
 
 (defn blue-div
   []
-  {:background-color "blue"})
+  {:color "black"
+   :background-color "blue"})
 
 (defn red-div
   []
-  {:background-color "red"})
+  ^{:extend blue-div}
+  {:color "white"
+   :background-color "red"})
 
 (defn cyan-div
   []
