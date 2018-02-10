@@ -57,7 +57,7 @@
    (map (comp meta-type meta))
    (filter identity)))
 
-(defn parse-ancestors
+(defn walk-ancestors
   "Recursivly go through each extend function provided in extend meta and resolve
   style for each until we have nothing left, then return a flat vector of the
   extend chain ready to be fed into garden"
@@ -89,7 +89,7 @@
              meta# (meta resolved#)
              modes# (convert-modes (:mode meta#))
              media# (convert-media (:media meta#))
-             ancestors# (parse-ancestors (:extend meta#) [])
+             ancestors# (walk-ancestors (:extend meta#) [])
              key# (if (keyword? (:key meta#))
                     (name (:key meta#))
                     (:key meta#))
@@ -97,8 +97,8 @@
          (assert (map? resolved#) "with-style functions must return a map")
          (let [garden-data# [(str "." classname#)
                              (apply merge {} (into ancestors# resolved#))
-                             (into (mapv convert-modes (into [] (process-meta-xform :mode) ancestors#)) modes#)
-                             (into (mapv convert-media (into [] (process-meta-xform :media) ancestors#)) media#)]]
+                             (conj (mapv convert-modes (into [] (process-meta-xform :mode) ancestors#)) modes#)
+                             (conj (mapv convert-media (into [] (process-meta-xform :media) ancestors#)) media#)]]
            (~inject-style-fn classname# garden-data# fqn#)
            (.log js/console ancestors#)
            classname#)))))
