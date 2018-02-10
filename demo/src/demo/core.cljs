@@ -28,9 +28,15 @@
     "red" "green"
     "green" "red"))
 
+(defn asd
+  []
+  ^{:mode {:hover {:background-color "black"}}}
+  {:color "red"})
+
 (defn extend-mode-meta
   []
-  ^{:mode {:hover {:background-color "green"}}}
+  ^{:extend asd
+    :mode {:hover {:background-color "green"}}}
   {:color "purple"})
 
 (defn hover-focus
