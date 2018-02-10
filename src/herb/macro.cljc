@@ -74,6 +74,19 @@
              (into styles result)))
     :else result))
 
+(defn extract-modes
+  [ancestors# root-meta]
+  (let [extracted-modes (into [] (process-meta-xform :mode) ancestors#)
+        converted-modes (mapv convert-modes (conj extracted-modes (:mode root-meta)))]
+    converted-modes))
+
+(defn extract-media
+  [ancestors# root-meta]
+  (let [extracted-media (into [] (process-meta-xform :media) ancestors#)
+        converted-media (mapv convert-media (conj extracted-media (:media root-meta)))]
+    converted-media)
+  )
+
 (defmacro with-style
   "Takes a function that returns a map and transform into CSS using garden, inject
   into DOM and return classname"
@@ -87,8 +100,6 @@
              caller-ns# (-> #'~style-fn meta :ns str)
              fqn# (str caller-ns# "/" fn-name#)
              meta# (meta resolved#)
-             modes# (convert-modes (:mode meta#))
-             media# (convert-media (:media meta#))
              ancestors# (walk-ancestors (:extend meta#) [])
              key# (if (keyword? (:key meta#))
                     (name (:key meta#))
@@ -97,8 +108,8 @@
          (assert (map? resolved#) "with-style functions must return a map")
          (let [garden-data# [(str "." classname#)
                              (apply merge {} (into ancestors# resolved#))
-                             (conj (mapv convert-modes (into [] (process-meta-xform :mode) ancestors#)) modes#)
-                             (conj (mapv convert-media (into [] (process-meta-xform :media) ancestors#)) media#)]]
+                             (extract-modes ancestors# meta#)
+                             (extract-media ancestors# meta#)]]
            (~inject-style-fn classname# garden-data# fqn#)
-           (.log js/console ancestors#)
+           #_(.log js/console (conj (mapv convert-modes (into [] (process-meta-xform :mode) ancestors#)) modes#))
            classname#)))))
