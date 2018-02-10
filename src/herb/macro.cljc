@@ -22,7 +22,7 @@
   "Takes a map of modes and returns a formatted vector fed into garden using
   the :&:mode parent selector syntax"
   [modes]
-  (mapv #(-> [(keyword (str "&" %)) (% modes)])
+  (map #(-> [(keyword (str "&" %)) (% modes)])
         (keys modes)))
 
 (defn convert-media
@@ -30,7 +30,7 @@
   calls at-media for each query, and use garden's ancestor selector (:&) to
   target current classname."
   [media]
-  (mapv (fn [[query style]]
+  (map (fn [[query style]]
           (at-media query
                     [:& style]))
         (partition 2 media)))
@@ -87,13 +87,13 @@
 (defn extract-modes
   [ancestors# root-meta]
   (let [extracted-modes (into [] process-mode-meta ancestors#)
-        converted-modes (mapv convert-modes (conj extracted-modes (:mode root-meta)))]
+        converted-modes (map convert-modes (conj extracted-modes (:mode root-meta)))]
     converted-modes))
 
 (defn extract-media
   [ancestors# root-meta]
   (let [extracted-media (into [] process-media-meta ancestors#)
-        converted-media (mapv convert-media (conj extracted-media (:media root-meta)))]
+        converted-media (map convert-media (conj extracted-media (:media root-meta)))]
     converted-media))
 
 (defmacro with-style
@@ -120,5 +120,5 @@
                              (extract-modes ancestors# meta#)
                              (extract-media ancestors# meta#)]]
            (~inject-style-fn classname# garden-data# fqn#)
-           #_(.log js/console (conj (mapv convert-modes (into [] (process-meta-xform :mode) ancestors#)) modes#))
+           #_(.log js/console (conj (map convert-modes (into [] (process-meta-xform :mode) ancestors#)) modes#))
            classname#)))))
