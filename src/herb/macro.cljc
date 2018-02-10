@@ -87,7 +87,8 @@
 (defn extract-modes
   [ancestors# root-meta]
   (let [extracted-modes (into [] process-mode-meta ancestors#)
-        converted-modes (mapcat convert-modes (conj extracted-modes (:mode root-meta)))]
+        merged-modes (apply merge {} (conj extracted-modes (:mode root-meta)))
+        converted-modes (convert-modes merged-modes)]
     converted-modes))
 
 (defn extract-media
