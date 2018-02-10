@@ -32,12 +32,6 @@
                     [:& style]))
         (partition 2 media)))
 
-
-
-(def process-mode-meta (comp
-                        (map (comp :mode meta))
-                        (filter identity)))
-
 (defn resolve-modes
   [new-meta result]
   (if (empty? new-meta)
@@ -64,6 +58,15 @@
 (def process-extend-meta (comp
                           (map (comp :extend meta))
                           (filter identity)))
+
+(def process-mode-meta (comp
+                        (map (comp :mode meta))
+                        (filter identity)))
+
+(def process-media-meta (comp
+                        (map (comp :media meta))
+                        (filter identity)))
+
 
 (defn parse-ancestors
   "Recursivly go through each extend function provided in extend meta and resolve
@@ -93,21 +96,22 @@
        (assert (fn? ~style-fn) (str (pr-str ~style-fn) " is not a function. with-style only takes a function as its first argument"))
        (let [resolved# (~style-fn ~@args)
              fn-name# (-> #'~style-fn meta :name str)
-             caller-ns# (-> #'~style-fn meta :ns str) ;(str/replace (-> #'~style-fn meta :ns str) #"\." "_")
+             caller-ns# (-> #'~style-fn meta :ns str)
              fqn# (str caller-ns# "/" fn-name#)
              meta# (meta resolved#)
-             modes# (:mode meta#)
-             media# (:media meta#)
+             modes# (convert-modes (:mode meta#))
+             media# (convert-media (:media meta#))
              ancestors# (parse-ancestors (:extend meta#) [])
              key# (if (keyword? (:key meta#))
                     (name (:key meta#))
                     (:key meta#))
-             classname# (str (str/replace caller-ns# #"\." "_") "_" fn-name# (when key# (str "-" key#)))
-             out# (apply merge {} (into ancestors# resolved#))]
+             classname# (str (str/replace caller-ns# #"\." "_") "_" fn-name# (when key# (str "-" key#)))]
          (assert (map? resolved#) "with-style functions must return a map")
-         (let [garden-data# [(str "." classname#) out#
-                             (convert-modes modes#)
-                             (convert-media media#)]]
+         (let [garden-data# [(str "." classname#)
+                             (apply merge {} (into ancestors# resolved#))
+                             (into modes# (mapv convert-modes (into [] process-mode-meta ancestors#)))
+                             (into media# (mapv convert-media (into [] process-media-meta ancestors#)))
+                             ]]
            (~inject-style-fn classname# garden-data# fqn#)
-           (.log js/console (convert-media media#))
+           ;; (.log js/console ancestors#)
            classname#)))))

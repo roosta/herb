@@ -28,9 +28,15 @@
     "red" "green"
     "green" "red"))
 
+(defn extend-mode-meta
+  []
+  ^{:mode {:hover {:color "green"}}}
+  {:color "purple"})
+
 (defn hover-focus
   []
-  ^{:mode {:hover {:background-color "green"}
+  ^{:extend extend-mode-meta
+    :mode {:hover {:background-color "blue"}
            :focus {:background-color "yellow"}}}
   {:background-color "red"}
   )
@@ -98,7 +104,8 @@
                  :height (px 50)
                  :border-radius (px 5)}
                 :sheet
-                ^{:mode {:hover {:border-radius (px 5)}}}
+                ^{:mode {:active {:color "white"}
+                         :hover {:border-radius (px 5)}}}
                 {:background-color "white"
                  :width (px 50)
                  :margin (px 10)
