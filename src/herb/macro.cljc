@@ -74,18 +74,27 @@
              (into styles result)))
     :else result))
 
+(def process-mode-meta (comp
+                        (map (comp :mode meta))
+                        (filter identity)))
+
+
+
+(def process-media-meta (comp
+                        (map (comp :media meta))
+                        (filter identity)))
+
 (defn extract-modes
   [ancestors# root-meta]
-  (let [extracted-modes (into [] (process-meta-xform :mode) ancestors#)
+  (let [extracted-modes (into [] process-mode-meta ancestors#)
         converted-modes (mapv convert-modes (conj extracted-modes (:mode root-meta)))]
     converted-modes))
 
 (defn extract-media
   [ancestors# root-meta]
-  (let [extracted-media (into [] (process-meta-xform :media) ancestors#)
+  (let [extracted-media (into [] process-media-meta ancestors#)
         converted-media (mapv convert-media (conj extracted-media (:media root-meta)))]
-    converted-media)
-  )
+    converted-media))
 
 (defmacro with-style
   "Takes a function that returns a map and transform into CSS using garden, inject
