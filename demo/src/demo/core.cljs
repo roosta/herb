@@ -98,7 +98,7 @@
 (defn media-query-test
   []
   ^{:media [{:screen true} {:background-color "green"}
-            {:max-width "1920px"} {:color "yellow"}]}
+            {:max-width "800px"} {:background-color "yellow"}]}
   {:background "magenta"
    :text-align "center"
    :color "white"})
