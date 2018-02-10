@@ -30,7 +30,7 @@
 
 (defn extend-mode-meta
   []
-  ^{:mode {:hover {:color "green"}}}
+  ^{:mode {:hover {:background-color "green"}}}
   {:color "purple"})
 
 (defn hover-focus

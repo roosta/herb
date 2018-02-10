@@ -98,7 +98,8 @@
          (assert (map? resolved#) "with-style functions must return a map")
          (let [garden-data# [(str "." classname#)
                              (apply merge {} (into ancestors# resolved#))
-                             (into modes# (mapv convert-modes (into [] (process-meta-xform :mode) ancestors#)))
-                             (into media# (mapv convert-media (into [] (process-meta-xform :media) ancestors#)))]]
+                             (into (mapv convert-modes (into [] (process-meta-xform :mode) ancestors#)) modes#)
+                             (into (mapv convert-media (into [] (process-meta-xform :media) ancestors#)) media#)]]
            (~inject-style-fn classname# garden-data# fqn#)
+           ;; (.log js/console (into modes# (mapv convert-modes (into [] (process-meta-xform :mode) ancestors#))))
            classname#)))))
