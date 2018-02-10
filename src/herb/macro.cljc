@@ -26,19 +26,14 @@
         (keys modes)))
 
 (defn convert-media
+  "Takes a vector of media queries i.e [{:screen true} {:color \"green\"}] and
+  calls at-media for each query, and use garden's ancestor selector (:&) to
+  target current classname."
   [media]
   (mapv (fn [[query style]]
           (at-media query
                     [:& style]))
         (partition 2 media)))
-
-(defn resolve-modes
-  [new-meta result]
-  (if (empty? new-meta)
-    result
-    (let [input (first new-meta)]
-      (recur (rest new-meta)
-             (conj result (convert-modes input))))))
 
 (defn resolve-styles
   "Calls each function provided in extend-meta to resolve style maps for each"
@@ -55,18 +50,12 @@
            (rest parsed-meta)
            (conj result (apply style-fn style-args))))))))
 
-(def process-extend-meta (comp
-                          (map (comp :extend meta))
-                          (filter identity)))
-
-(def process-mode-meta (comp
-                        (map (comp :mode meta))
-                        (filter identity)))
-
-(def process-media-meta (comp
-                        (map (comp :media meta))
-                        (filter identity)))
-
+(defn process-meta-xform
+  "Return a transducer that pulls out a given meta type from a sequence"
+  [meta-type]
+  (comp
+   (map (comp meta-type meta))
+   (filter identity)))
 
 (defn parse-ancestors
   "Recursivly go through each extend function provided in extend meta and resolve
@@ -80,7 +69,7 @@
 
     (and (vector? extend-meta) (not (empty? extend-meta)))
     (let [styles (resolve-styles extend-meta [])
-          new-meta (into [] process-extend-meta styles)]
+          new-meta (into [] (process-meta-xform :extend) styles)]
       (recur new-meta
              (apply conj result styles)))
     :else result))
@@ -109,9 +98,7 @@
          (assert (map? resolved#) "with-style functions must return a map")
          (let [garden-data# [(str "." classname#)
                              (apply merge {} (into ancestors# resolved#))
-                             (into modes# (mapv convert-modes (into [] process-mode-meta ancestors#)))
-                             (into media# (mapv convert-media (into [] process-media-meta ancestors#)))
-                             ]]
+                             (into modes# (mapv convert-modes (into [] (process-meta-xform :mode) ancestors#)))
+                             (into media# (mapv convert-media (into [] (process-meta-xform :media) ancestors#)))]]
            (~inject-style-fn classname# garden-data# fqn#)
-           ;; (.log js/console ancestors#)
            classname#)))))
