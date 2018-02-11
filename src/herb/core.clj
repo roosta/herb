@@ -13,7 +13,6 @@
     `(do
        (assert (fn? ~style-fn) (str (pr-str ~style-fn) " is not a function. with-style only takes a function as its first argument"))
        (let [resolved# (~style-fn ~@args)
-             fqn# (str ~caller-ns "/" ~fn-name)
              meta# (meta resolved#)
              ancestors# (herb.core/walk-ancestors (:extend meta#) [])
              key# (if (keyword? (:key meta#))
@@ -22,6 +21,7 @@
              fn-name# (if-let [f# ~fn-name]
                         f#
                         (str "anonymous-" (hash (str resolved# meta#))))
+             fqn# (str ~caller-ns "/" fn-name#)
              classname# (str (clojure.string/replace ~caller-ns #"\." "_") "_" fn-name# (when key# (str "-" key#)))]
          (assert (map? resolved#) "with-style functions must return a map")
          (let [garden-data# [(str "." classname#)
