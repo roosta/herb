@@ -1,4 +1,3 @@
-;; https://github.com/matthieu-beteille/cljs-css-modules/blob/master/src/cljs_css_modules/runtime.cljs
 (ns herb.runtime
   (:require [garden.core :refer [css]]
             [goog.dom :as dom]
@@ -31,8 +30,8 @@
 (defn inject-style!
   "Main interface to runtime. Takes a classname, new garden style data structure
   and a fully qualified name. Check if classname exist in DOM already, and if it
-  does compare `new` with `current` to make sure garden is not called to create the
-  same style string again"
+  does, compare `new` with `current` to make sure garden is not called to create
+  the same style string again"
   [classname new fqn]
   (if-let [injected (get @injected-styles classname)]
     (let [current (:data injected)]
