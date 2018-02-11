@@ -77,7 +77,8 @@
 
 (defn button
   []
-  {:margin (px 10)})
+  {:border "2px solid red"
+   :margin (px 10)})
 
 (defn blue-div
   []
@@ -162,7 +163,21 @@
                                                                     :background-color "magenta"
                                                                     :border-radius "5px"}])))
        )
+
       [:div
+
+       [:div
+        [:div {:class (with-style (fn []
+                                    ^{:extend button}
+                                    {:background-color "black"
+                                     :color "white"}))}
+         "Anon function with meta"]
+        [:div {:class (with-style (fn [color]
+                                    {:background-color color
+                                     :color "white"})
+                        "black")}
+         "Anon function without meta"]]
+
        [:input {:class (with-style hover-focus)
                 :default-value "Hello world"}]
        [:div
