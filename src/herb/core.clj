@@ -6,7 +6,7 @@
   [style-fn & args]
   (let [fn-name (if (instance? clojure.lang.Named style-fn)
                   `(-> #'~style-fn meta :name str)
-                  "anonymous")
+                  nil)
         caller-ns (if (instance? clojure.lang.Named style-fn)
                     `(-> #'~style-fn meta :ns str)
                     (name (ns-name *ns*)))]
@@ -19,7 +19,10 @@
              key# (if (keyword? (:key meta#))
                     (name (:key meta#))
                     (:key meta#))
-             classname# (str (clojure.string/replace ~caller-ns #"\." "_") "_" ~fn-name (when key# (str "-" key#)))]
+             fn-name# (if-let [f# ~fn-name]
+                        f#
+                        (str "anonymous-" (hash (str resolved# meta#))))
+             classname# (str (clojure.string/replace ~caller-ns #"\." "_") "_" fn-name# (when key# (str "-" key#)))]
          (assert (map? resolved#) "with-style functions must return a map")
          (let [garden-data# [(str "." classname#)
                                (apply merge {} (into ancestors# resolved#))
