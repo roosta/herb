@@ -1,24 +1,21 @@
 # Change Log
-All notable changes to this project will be documented in this file. This change log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
+All notable changes to this project will be documented in this file. This change
+log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
 ## [Unreleased]
 ### Changed
-- Add a new arity to `make-widget-async` to provide a different widget shape.
 
-## [0.1.1] - 2018-01-20
+## [v0.3.0] - 2018-02-11
+### Breaking change
+Macro NS has changed so, to require macro all requires of herb need to change
+from `herb.macro` to `herb.core`
+
+### Added
+- Support media queries
 ### Changed
-- Documentation on how to make the widgets.
-
-### Removed
-- `make-widget-sync` - we're all async, all the time.
+- Move macro ns to core.clj, move rest into core.cljs
 
 ### Fixed
-- Fixed widget maker to keep working when daylight savings switches over.
+- Fixed issues with inheritance precedence
 
-## 0.1.0 - 2018-01-20
-### Added
-- Files from the new template.
-- Widget maker public API - `make-widget-sync`.
-
-[Unreleased]: https://github.com/your-name/herb/compare/0.1.1...HEAD
-[0.1.1]: https://github.com/your-name/herb/compare/0.1.0...0.1.1
+[v0.3.0]: https://github.com/roosta/herb/compare/v0.2.0...v0.3.0
