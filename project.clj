@@ -1,6 +1,6 @@
 (defproject herb "0.3.0-SNAPSHOT"
-  :description "FIXME: write description"
-  :url "http://example.com/FIXME"
+  :description "Clojurescript styling library that tries to mix functional programming with CSS"
+  :url "https://github.com/roosta/herb"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
