@@ -1,24 +1,13 @@
-(ns herb.macro
-  #?(:clj
-     (:require
-       [garden.core :refer [css]]
-       [clojure.string :as str]
-       [garden.selectors :as s]
-       [garden.stylesheet :refer [at-media at-keyframes]]))
-  #?(:cljs
-     (:require
-       [garden.core :refer [css]]
-       [clojure.string :as str]
-       [garden.selectors :as s]
-       [garden.stylesheet :refer [at-media at-keyframes]]
-       [herb.runtime])))
+(ns herb.core
+  (:require
+   [garden.core :refer [css]]
+   [clojure.string :as str]
+   [garden.selectors :as s]
+   [garden.stylesheet :refer [at-media at-keyframes]]
+   [herb.runtime])
+  (:require-macros [herb.core :refer [with-style]]))
 
-(defn- cljs-env?
-  "Take the &env from a macro, and tell whether we are expanding into cljs."
-  [env]
-  (boolean (:ns env)))
-
-(defn- convert-modes
+(defn convert-modes
   "Takes a map of modes and returns a formatted vector fed into garden using
   the :&:mode parent selector syntax"
   [modes]
@@ -85,29 +74,3 @@
         merged (apply merge {} (conj extracted (meta-type root-meta)))
         converted (convert-fn merged)]
     converted))
-
-(defmacro with-style
-  "Takes a function that returns a map and transform into CSS using garden, inject
-  into DOM and return classname"
-  [style-fn & args]
-  (let [css (symbol "garden.core" "css")
-        inject-style-fn (symbol "herb.runtime" "inject-style!")]
-    `(do
-       (assert (fn? ~style-fn) (str (pr-str ~style-fn) " is not a function. with-style only takes a function as its first argument"))
-       (let [resolved# (~style-fn ~@args)
-             fn-name# (-> #'~style-fn meta :name str)
-             caller-ns# (-> #'~style-fn meta :ns str)
-             fqn# (str caller-ns# "/" fn-name#)
-             meta# (meta resolved#)
-             ancestors# (walk-ancestors (:extend meta#) [])
-             key# (if (keyword? (:key meta#))
-                    (name (:key meta#))
-                    (:key meta#))
-             classname# (str (str/replace caller-ns# #"\." "_") "_" fn-name# (when key# (str "-" key#)))]
-         (assert (map? resolved#) "with-style functions must return a map")
-         (let [garden-data# [(str "." classname#)
-                             (apply merge {} (into ancestors# resolved#))
-                             (extract-meta ancestors# meta# :mode)
-                             (extract-meta ancestors# meta# :media)]]
-           (~inject-style-fn classname# garden-data# fqn#)
-           classname#)))))

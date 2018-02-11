@@ -1,6 +1,6 @@
 (ns demo.core
   (:require
-   [herb.macro :refer-macros [with-style]]
+   [herb.core :refer-macros [with-style]]
    [garden.selectors :as s]
    [garden.core :refer [css]]
    [garden.stylesheet :refer [at-media]]
