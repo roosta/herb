@@ -73,35 +73,18 @@
              (into styles result)))
     :else result))
 
-(def process-mode-meta (comp
-                        (map (comp :mode meta))
-                        (filter identity)))
-
-
-
-(def process-media-meta (comp
-                        (map (comp :media meta))
-                        (filter identity)))
-
-(defn extract-modes
-  "Takes a group of ancestors and the root style fn meta. Pull out each mode meta
-  obj and merge to prevent duplicates, finally convert to garden acceptable
-  input and return"
-  [ancestors# root-meta]
-  (let [extracted-modes (into [] process-mode-meta ancestors#)
-        merged-modes (apply merge {} (conj extracted-modes (:mode root-meta)))
-        converted-modes (convert-modes merged-modes)]
-    converted-modes))
-
-(defn extract-media
-  [ancestors# root-meta]
-  (let [extracted-media (into [] process-media-meta ancestors#)
-        merged-media (apply merge {} (conj extracted-media (:media root-meta)))
-        converted-media  (convert-media merged-media)]
-    ;; (println converted-media)
-    (println "MERGED:---> " merged-media)
-    ;; (println "EXTRACTED:---> " extracted-media)
-    converted-media))
+(defn extract-meta
+  "Takes a group of ancestors and the root style fn meta and meta type. Pull out
+  each meta obj and merge to prevent duplicates, finally convert to garden
+  acceptable input and return"
+  [ancestors# root-meta meta-type]
+  (let [convert-fn (case meta-type
+                     :media convert-media
+                     :mode convert-modes)
+        extracted (into [] (process-meta-xform meta-type) ancestors#)
+        merged (apply merge {} (conj extracted (meta-type root-meta)))
+        converted (convert-fn merged)]
+    converted))
 
 (defmacro with-style
   "Takes a function that returns a map and transform into CSS using garden, inject
@@ -124,8 +107,7 @@
          (assert (map? resolved#) "with-style functions must return a map")
          (let [garden-data# [(str "." classname#)
                              (apply merge {} (into ancestors# resolved#))
-                             (extract-modes ancestors# meta#)
-                             (extract-media ancestors# meta#)]]
+                             (extract-meta ancestors# meta# :mode)
+                             (extract-meta ancestors# meta# :media)]]
            (~inject-style-fn classname# garden-data# fqn#)
-           #_(.log js/console (conj (map convert-modes (into [] (process-meta-xform :mode) ancestors#)) modes#))
            classname#)))))
