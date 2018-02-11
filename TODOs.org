@@ -1,28 +1,20 @@
 #+SEQ_TODO: NEXT(t) TODO(t) WAITING(w) | DONE(d) PARTIAL(p) CANCELLED(c)
-* DONE Handle multiple inheritance :ARCHIVE:
-  CLOSED: [2018-01-30 Tue 13:00]
-* DONE Rename merge to extend :ARCHIVE:
-  CLOSED: [2018-01-28 Sun 14:59]
-* DONE Check precedence for extended styles :ARCHIVE:
-  CLOSED: [2018-01-30 Tue 13:00]
 * TODO Document keys and that they need to conform to valid chars
   Possibly transform key to valid chars
-* CANCELLED Unmount with react components :ARCHIVE:
-  CLOSED: [2018-01-30 Tue 19:20]
-* DONE Improve keys so that in a function that returns multiple styles based on some logic attach key only to return :ARCHIVE:
-  CLOSED: [2018-01-30 Tue 19:19]
 * TODO Fix component error that appears sometimes 'host node null'
      Uncaught TypeError: Cannot read property 'getHostNode' of null
 * TODO Add sanitizing of keyword
-* DONE Check style for equality prior to sending it to ~css~ :ARCHIVE:
-  CLOSED: [2018-01-30 Tue 19:19]
 * TODO Add global init
   Possibly create instances?
 * TODO What happens with anon functions?
   I reckon we can add an anonymous classname kina like this ~anonymous-1238chjsakjdh~
 * DONE Add recursive modes
   CLOSED: [2018-02-10 Sat 17:07]
-* TODO Refactor
-* TODO Fix precedence of ancestors.
+* DONE Refactor
+  CLOSED: [2018-02-11 Sun 16:17]
+* DONE Fix precedence of ancestors.
+  CLOSED: [2018-02-11 Sun 16:17]
   It currently works with root style taking precedence over ancestors but
   inheritance in ancestors itself does not work
+* TESTS
+** TODO Test for inheritance, make sure the chain is respected for modes and media

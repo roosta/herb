@@ -1,0 +1,74 @@
+#    -*- mode: org -*-
+
+
+Archived entries from file /home/roosta/src/herb/TODOs.org
+
+
+* DONE Check style for equality prior to sending it to ~css~ :ARCHIVE:
+  CLOSED: [2018-01-30 Tue 19:19]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-02-11 Sun 16:16
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+Archived entries from file /home/roosta/src/herb/TODOs.org
+
+
+* DONE Improve keys so that in a function that returns multiple styles based on some logic attach key only to return :ARCHIVE:
+  CLOSED: [2018-01-30 Tue 19:19]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-02-11 Sun 16:16
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+Archived entries from file /home/roosta/src/herb/TODOs.org
+
+
+* CANCELLED Unmount with react components :ARCHIVE:
+  CLOSED: [2018-01-30 Tue 19:20]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-02-11 Sun 16:16
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: CANCELLED
+  :END:
+
+Archived entries from file /home/roosta/src/herb/TODOs.org
+
+
+* DONE Check precedence for extended styles :ARCHIVE:
+  CLOSED: [2018-01-30 Tue 13:00]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-02-11 Sun 16:17
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+Archived entries from file /home/roosta/src/herb/TODOs.org
+
+
+* DONE Rename merge to extend :ARCHIVE:
+  CLOSED: [2018-01-28 Sun 14:59]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-02-11 Sun 16:17
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+Archived entries from file /home/roosta/src/herb/TODOs.org
+
+
+* DONE Handle multiple inheritance :ARCHIVE:
+  CLOSED: [2018-01-30 Tue 13:00]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-02-11 Sun 16:17
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
