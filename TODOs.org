@@ -6,7 +6,8 @@
 * TODO Add sanitizing of keyword
 * TODO Add global init
   Possibly create instances?
-* TODO What happens with anon functions?
+* DONE What happens with anon functions?
+  CLOSED: [2018-02-11 Sun 20:27]
   What about hashing the result of the function and that serves as the unique
   classname? if the hash happens to be the same all the better
 
