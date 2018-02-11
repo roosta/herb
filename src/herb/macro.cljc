@@ -31,9 +31,8 @@
   target current classname."
   [media]
   (map (fn [[query style]]
-          (at-media query
-                    [:& style]))
-        (partition 2 media)))
+         (at-media query [:& style]))
+       media))
 
 (defn resolve-styles
   "Calls each function provided in extend-meta to resolve style maps for each"
@@ -97,7 +96,11 @@
 (defn extract-media
   [ancestors# root-meta]
   (let [extracted-media (into [] process-media-meta ancestors#)
-        converted-media (map convert-media (conj extracted-media (:media root-meta)))]
+        merged-media (apply merge {} (conj extracted-media (:media root-meta)))
+        converted-media  (convert-media merged-media)]
+    ;; (println converted-media)
+    (println "MERGED:---> " merged-media)
+    ;; (println "EXTRACTED:---> " extracted-media)
     converted-media))
 
 (defmacro with-style
