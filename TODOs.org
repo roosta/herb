@@ -7,7 +7,17 @@
 * TODO Add global init
   Possibly create instances?
 * TODO What happens with anon functions?
-  I reckon we can add an anonymous classname kina like this ~anonymous-1238chjsakjdh~
+  What about hashing the result of the function and that serves as the unique
+  classname? if the hash happens to be the same all the better
+
+  #+BEGIN_SRC clojurescript
+    fn-name# (if ~(instance? clojure.lang.Named style-fn)
+                   (-> #'~style-fn meta :name str)
+                   "asd")
+
+    (.log js/console ~(name (ns-name *ns*)))
+
+  #+END_SRC
 * DONE Add recursive modes
   CLOSED: [2018-02-10 Sat 17:07]
 * DONE Refactor
@@ -18,3 +28,21 @@
   inheritance in ancestors itself does not work
 * TESTS
 ** TODO Test for inheritance, make sure the chain is respected for modes and media
+* TODO Spec input
+* TODO Setup an init fn
+
+ [[file:~/lib/jss/src/renderers/DomRenderer.js::function%20findCommentNode(text:%20string):%20Node%20|%20null%20{][Source]]
+
+  #+BEGIN_SRC js
+    function findCommentNode(text: string): Node | null {
+      const head = getHead()
+      for (let i = 0; i < head.childNodes.length; i++) {
+        const node = head.childNodes[i]
+        if (node.nodeType === 8 && node.nodeValue.trim() === text) {
+          return node
+        }
+      }
+      return null
+    }
+
+  #+END_SRC
