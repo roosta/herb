@@ -163,6 +163,12 @@
                                                                     :border-radius "5px"}])))
        )
       [:div
+       [:div {:class (with-style (fn [] {:background-color "black"
+                                         :color "white"}))}
+        "Anon function test"]
+       [:div {:class (with-style button)}
+        "button"]]
+      #_[:div
        [:input {:class (with-style hover-focus)
                 :default-value "Hello world"}]
        [:div
