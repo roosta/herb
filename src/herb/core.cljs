@@ -25,17 +25,17 @@
 
 (defn resolve-styles
   "Calls each function provided in extend-meta to resolve style maps for each"
-  [parsed-meta result]
-  (if (empty? parsed-meta)
+  [extend-meta result]
+  (if (empty? extend-meta)
     result
-    (let [input (first parsed-meta)]
+    (let [input (first extend-meta)]
       (if (fn? input)
-        (recur (rest parsed-meta)
+        (recur (rest extend-meta)
                (conj result (input)))
         (let [style-fn (first input)
               style-args (rest input)]
           (recur
-           (rest parsed-meta)
+           (rest extend-meta)
            (conj result (apply style-fn style-args))))))))
 
 (defn process-meta-xform
