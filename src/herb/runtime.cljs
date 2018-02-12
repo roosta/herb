@@ -1,8 +1,7 @@
 (ns herb.runtime
   (:require [garden.core :refer [css]]
             [goog.dom :as dom]
-            [clojure.string :as str]
-            [reagent.debug :as d]))
+            [clojure.string :as str]))
 
 (def injected-styles (atom {}))
 
