@@ -139,66 +139,86 @@
    :background-color "magenta"
    :border-radius "5px"})
 
+(defn tmp-1
+  [color]
+  ^{:key color}
+  {:background-color color})
+
+(defn tmp-2
+  [color]
+  ^{:key color
+    :extend [[tmp-1 "green"]]}
+  {:color color})
+
+(defn tmp-3
+  []
+  ^{:extend [[tmp-2 "red"]]}
+  {:color "yellow"})
+
 (defn home-page []
   (let [state (r/atom "green")]
     (fn []
       #_(profile
-       {}
-       (doseq [n (range 500)]
-         (p ::with-style (with-style profile-comp n)))
+         {}
+         (doseq [n (range 500)]
+           (p ::with-style (with-style profile-comp n)))
 
-       (doseq [_ (range 500)]
-         (p ::manipulate-dom (.appendChild (.-head js/document)
-                                           (.createElement js/document (str "style")))))
+         (doseq [_ (range 500)]
+           (p ::manipulate-dom (.appendChild (.-head js/document)
+                                             (.createElement js/document (str "style")))))
 
-       (doseq [_ (range 500)]
-         (p ::garden (css [:.classname {:width (px 100)
-                                        :height (px 100)
-                                        :background-color "magenta"
-                                        :border-radius "5px"}])))
+         (doseq [_ (range 500)]
+           (p ::garden (css [:.classname {:width (px 100)
+                                          :height (px 100)
+                                          :background-color "magenta"
+                                          :border-radius "5px"}])))
 
-       (doseq [_ (range 500)]
-         (p ::at-media (at-media {:max-width "256px"} [:.classname {:width (px 100)
-                                                                    :height (px 100)
-                                                                    :background-color "magenta"
-                                                                    :border-radius "5px"}])))
-       )
+         (doseq [_ (range 500)]
+           (p ::at-media (at-media {:max-width "256px"} [:.classname {:width (px 100)
+                                                                      :height (px 100)
+                                                                      :background-color "magenta"
+                                                                      :border-radius "5px"}])))
+         )
 
       [:div
+       [:div {:class (with-style tmp-3)}
+        "hello"]
 
        [:div
-        [:div {:class (with-style (fn []
-                                    ^{:extend button}
-                                    {:background-color "black"
-                                     :color "white"}))}
-         "Anon function with meta"]
-        [:div {:class (with-style (fn [color]
-                                    {:background-color color
-                                     :color "white"})
-                        "black")}
-         "Anon function without meta"]]
 
-       [:input {:class (with-style hover-focus)
-                :default-value "Hello world"}]
-       [:div
-        [:h2 {:class (with-style state-hover @state)}
-         "Welcome to Reagent"]
-        [:button {:class (with-style button)
-                  :on-click #(reset! state (toggle-color @state))}
-         "Toggle"]
-        (for [c ["yellow" "blue" "green" "purple"]]
-          ^{:key c}
-          [:div {:class (with-style cycle-color c)}
-           c])
-        [:br]
-        [:div {:class (with-style cyan-div)}
-         "inheritance test"]]
-       [:div {:class (with-style keyed :paper)}]
+        [:div
+         [:div {:class (with-style (fn []
+                                     ^{:extend button}
+                                     {:background-color "black"
+                                      :color "white"}))}
+          "Anon function with meta"]
+         [:div {:class (with-style (fn [color]
+                                     {:background-color color
+                                      :color "white"})
+                         "black")}
+          "Anon function without meta"]]
 
-       [:div {:class (with-style keyed :sheet)}]
+        [:input {:class (with-style hover-focus)
+                 :default-value "Hello world"}]
+        [:div
+         [:h2 {:class (with-style state-hover @state)}
+          "Welcome to Reagent"]
+         [:button {:class (with-style button)
+                   :on-click #(reset! state (toggle-color @state))}
+          "Toggle"]
+         (for [c ["yellow" "blue" "green" "purple"]]
+           ^{:key c}
+           [:div {:class (with-style cycle-color c)}
+            c])
+         [:br]
+         [:div {:class (with-style cyan-div)}
+          "inheritance test"]]
+        [:div {:class (with-style keyed :paper)}]
 
-       [:div {:class (with-style media-query-test)}
-        "Media query test"]])))
+        [:div {:class (with-style keyed :sheet)}]
+
+        [:div {:class (with-style media-query-test)}
+         "Media query test"]]])))
 
 (defn mount-root []
   (r/render [home-page] (.getElementById js/document "app")))

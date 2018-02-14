@@ -29,14 +29,27 @@
   (if (empty? extend-meta)
     result
     (let [input (first extend-meta)]
-      (if (fn? input)
+      (cond
+
+        ;; herb supports passing only the name of an fn
+        (fn? input)
         (recur (rest extend-meta)
                (conj result (input)))
-        (let [style-fn (first input)
-              style-args (rest input)]
+
+        ;; if you want to pass fns with args the syntax is [[style-fn args]]
+        (vector? (first input))
+        (let [style-fn (first (first input))
+              style-args (rest (first input))]
           (recur
            (rest extend-meta)
-           (conj result (apply style-fn style-args))))))))
+           (conj result (apply style-fn style-args))))
+
+        ;; lastly if you want to pass multiple style fns with no arguments the syntax is [first-fn second-fn]
+        :else (let [style-fn (first input)
+                    style-args (rest input)]
+                (recur
+                 (rest extend-meta)
+                 (conj result (apply style-fn style-args))))))))
 
 (defn process-meta-xform
   "Return a transducer that pulls out a given meta type from a sequence"
@@ -49,18 +62,21 @@
   "Recursivly go through each extend function provided in extend meta and resolve
   style for each until we have nothing left, then return a flat vector of the
   extend chain ready to be fed into garden"
-  [extend-meta result]
+  [style-fns result]
   (cond
 
-    (fn? extend-meta)
-    (recur [extend-meta] result)
+    (fn? style-fns)
+    (recur [style-fns] result)
 
-    (and (vector? extend-meta) (not (empty? extend-meta)))
-    (let [styles (resolve-styles extend-meta [])
+    (and (vector? style-fns) (not (empty? style-fns)))
+    (let [styles (resolve-styles style-fns [])
           new-meta (into [] (process-meta-xform :extend) styles)]
+      (.log js/console new-meta)
       (recur new-meta
              (into styles result)))
     :else result))
+
+;; (apply merge {} (into ancestors# resolved#))
 
 (defn extract-meta
   "Takes a group of ancestors and the root style fn meta and meta type. Pull out
