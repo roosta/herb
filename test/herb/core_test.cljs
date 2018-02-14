@@ -27,3 +27,11 @@
       (testing "Resolve styles"
         (is (= (core/resolve-styles [button [box "green"]])
                expected))))))
+
+(deftest walk-ancestors
+  (letfn [(text [] {:font-size "24px"})
+          (box [color] ^{:extend text} {:background-color color})
+          (button [] ^{:extend [box "red"]} {:border-radius "5px"})]
+    (let [expected [{:font-size "24px"} {:background-color "red"} {:border-radius "5px"}]]
+      (testing "Walk ancestors"
+        (is (= (core/walk-ancestors button) expected))))))
