@@ -47,3 +47,6 @@
     }
 
   #+END_SRC
+* TODO Handle single fn with args
+* TODO Handle multiple keys
+ Just join all of them, just walk the resolved tree and join all the keys
