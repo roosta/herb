@@ -83,9 +83,9 @@
     :else result))
 
 (defn extract-meta
-  "Takes a group of ancestors and the root style fn meta and meta type. Pull out
-  each meta obj and merge to prevent duplicates, finally convert to garden
-  acceptable input and return"
+  "Takes a group of resolved styles and a meta type. Pull out each meta obj and
+  merge to prevent duplicates, finally convert to garden acceptable input and
+  return"
   [styles# meta-type]
   (let [convert-fn (case meta-type
                      :media convert-media
@@ -96,7 +96,7 @@
     converted))
 
 (defn garden-data
-  "Takes a classnames and a resolved styletree and returns garden-ready data
+  "Takes a classnames and a resolved style vector and returns garden-ready data
   structure"
   [classname styles]
   [(str "." classname)
