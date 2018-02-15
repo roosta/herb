@@ -47,11 +47,17 @@
   {:background-color "red"}
   )
 
+(defn font-weight
+  [weight]
+  {:font-weight weight})
+
 (defn dynamic-text-color
   [color]
-  (case color
-    (or "blue" "purple") {:color "white"}
-    {:color "black"}))
+  (with-meta
+    (case color
+      (or "blue" "purple") {:color "white"}
+      {:color "black"})
+    {:extend [[font-weight "bold"]]}))
 
 (defn margin
   []
