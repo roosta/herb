@@ -11,8 +11,10 @@
   "Takes a map of modes and returns a formatted vector fed into garden using
   the :&:mode parent selector syntax"
   [modes]
-  (map #(-> [(keyword (str "&" %)) (% modes)])
-        (keys modes)))
+  (map
+   (fn [kw]
+     [(keyword (str "&" kw)) (kw modes)])
+   (keys modes)))
 
 (defn convert-media
   "Takes a vector of media queries i.e [{:screen true} {:color \"green\"}] and
