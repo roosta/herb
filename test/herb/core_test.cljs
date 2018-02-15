@@ -19,19 +19,19 @@
     (testing "Converting modes"
       (is (= (core/convert-modes input) expected)))))
 
-(deftest resolve-styles
+(deftest resolve-style-fns
   (letfn [(button []
             {:border-radius "5px"})
           (box [color] {:background-color color})]
-    (let [expected [{:background-color "green"} {:border-radius "5px"}]]
+    (let [expected [{:border-radius "5px"} {:background-color "green"}]]
       (testing "Resolve styles"
-        (is (= (core/resolve-styles [button [box "green"]])
+        (is (= (core/resolve-style-fns [button [box "green"]] [])
                expected))))))
 
-(deftest walk-ancestors
+(deftest extract-styles
   (letfn [(text [] {:font-size "24px"})
           (box [color] ^{:extend text} {:background-color color})
-          (button [] ^{:extend [box "red"]} {:border-radius "5px"})]
+          (button [] ^{:extend [[box "red"]]} {:border-radius "5px"})]
     (let [expected [{:font-size "24px"} {:background-color "red"} {:border-radius "5px"}]]
-      (testing "Walk ancestors"
-        (is (= (core/walk-ancestors button) expected))))))
+      (testing "Extract styles"
+        (is (= (core/extract-styles button) expected))))))
