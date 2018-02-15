@@ -33,4 +33,52 @@
           (button [] ^{:extend [[box "red"]]} {:border-radius "5px"})]
     (let [expected [{:font-size "24px"} {:background-color "red"} {:border-radius "5px"}]]
       (testing "Extract styles"
-        (is (= (core/extract-styles button) expected))))))
+        (is (= (core/extract-styles button []) expected))))))
+
+(deftest extract-meta-mode
+  (let [styles [^{:mode {:hover {:color "red"}
+                         :focus {:color "blue"}}}
+                {:color "white"}
+
+                ^{:mode {:hover {:color "green"}}}
+                {:border "2px solid black"}]
+        actual (core/extract-meta styles :mode)
+        expected '([:&:hover {:color "green"}] [:&:focus {:color "blue"}])]
+    (testing "Extracting mode meta data"
+      (is (= actual expected)))))
+
+(deftest extract-meta-media
+  (let [styles [^{:media {{:screen true} {:color "magenta"}
+                          {:max-width "412px"} {:color "blue"}}}
+                {:color "white"}
+
+                ^{:media {{:screen true} {:color "purple"}}}
+                {:color "white"}]
+        expected (list (at-media {:screen true} [:& {:color "purple"}])
+                       (at-media {:max-width "412px"} [:& {:color "blue"}]))
+        actual (core/extract-meta styles :media)]
+    (testing "Extracting media meta data"
+      (is (= actual expected)))))
+
+(deftest garden-data
+  (let [classname "a_namespace_a-fn"
+        styles [(with-meta
+                  {:color "white"
+                   :background-color "green"}
+                  {:mode {:hover {:color "magenta"}}})
+                (with-meta
+                  {:color "black"
+                   :border-radius "5px"}
+                  {:media {{:screen true} {:background-color "yellow"}}})
+                {:background-color "red"
+                 :font-style "italic"}]
+        expected [".a_namespace_a-fn"
+                  {:color "black",
+                   :background-color "red",
+                   :border-radius "5px",
+                   :font-style "italic"}
+                  (list [:&:hover {:color "magenta"}])
+                  (list (at-media {:screen true} [:& {:background-color "yellow"}]))]
+        actual (core/garden-data classname styles)]
+    (testing "Garden data"
+      (is (= actual expected)))))
