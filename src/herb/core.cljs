@@ -94,3 +94,12 @@
         merged (apply merge {} extracted)
         converted (convert-fn merged)]
     converted))
+
+(defn garden-data
+  "Takes a classnames and a resolved styletree and returns garden-ready data
+  structure"
+  [classname styles]
+  [(str "." classname)
+   (apply merge {} styles)
+   (extract-meta styles :mode)
+   (extract-meta styles :media)])
