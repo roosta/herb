@@ -86,11 +86,11 @@
   "Takes a group of ancestors and the root style fn meta and meta type. Pull out
   each meta obj and merge to prevent duplicates, finally convert to garden
   acceptable input and return"
-  [ancestors# root-meta meta-type]
+  [styles# meta-type]
   (let [convert-fn (case meta-type
                      :media convert-media
                      :mode convert-modes)
-        extracted (into [] (process-meta-xform meta-type) ancestors#)
-        merged (apply merge {} (conj extracted (meta-type root-meta)))
+        extracted (into [] (process-meta-xform meta-type) styles#)
+        merged (apply merge {} extracted)
         converted (convert-fn merged)]
     converted))

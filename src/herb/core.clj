@@ -54,7 +54,7 @@
          #_(assert (map? resolved#) "with-style functions must return a map")
          (let [garden-data# [(str "." classname#)
                                (apply merge {} resolved-tree#)
-                               (herb.core/extract-meta resolved-tree# meta# :mode)
-                               (herb.core/extract-meta resolved-tree# meta# :media)]]
+                               (herb.core/extract-meta resolved-tree# :mode)
+                               (herb.core/extract-meta resolved-tree# :media)]]
              (herb.runtime/inject-style! classname# garden-data# fqn#)
              classname#)))))
