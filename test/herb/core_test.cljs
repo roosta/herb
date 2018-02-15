@@ -1,8 +1,14 @@
 (ns herb.core-test
   (:require [cljs.test :as t :refer-macros [deftest testing is]]
-            [garden.units :refer [px]]
             [garden.stylesheet :refer [at-media at-keyframes]]
             [herb.core :as core]))
+
+(deftest convert-modes
+  (let [input {:hover {:opacity 1}
+               :focus {:color "yellow"}}
+        expected (list [:&:hover {:opacity 1}] [:&:focus {:color "yellow"}])]
+    (testing "Converting modes"
+      (is (= (core/convert-modes input) expected)))))
 
 (deftest convert-media
   (let [input {{:screen true} {:color "white"}
@@ -11,13 +17,6 @@
                        (at-media {:min-width "100px"} [:& {:color "blue"}]))]
     (testing "Converting media queries"
       (is (= (core/convert-media input) expected)))))
-
-(deftest convert-modes
-  (let [input {:hover {:opacity 1}
-               :focus {:color "yellow"}}
-        expected (list [:&:hover {:opacity 1}] [:&:focus {:color "yellow"}])]
-    (testing "Converting modes"
-      (is (= (core/convert-modes input) expected)))))
 
 (deftest resolve-style-fns
   (letfn [(button []
