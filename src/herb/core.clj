@@ -13,7 +13,7 @@
         ]
     `(do
        (assert (fn? ~style-fn) (str (pr-str ~style-fn) " is not a function. with-style only takes a function as its first argument"))
-       (let [resolved-tree# (herb.core/walk-ancestors [[~style-fn ~@args]] [])
+       (let [resolved-tree# (herb.core/extract-styles [[~style-fn ~@args]] [])
              meta# (meta (last resolved-tree#))
              key# (if (keyword? (:key meta#))
                     (name (:key meta#))
@@ -24,10 +24,6 @@
              fqn# (str ~caller-ns "/" fn-name#)
              classname# (str (clojure.string/replace ~caller-ns #"\." "_") "_" fn-name# (when key# (str "-" key#)))
              ]
-         ;; (.log js/console "Extend-> "(:extend (meta (~style-fn ~@args))))
-         ;; (.log js/console "Ours-> " meta#)
-         ;; (.log js/console [~@args])
-         ;; (.log js/console "Ours-> " (into [] (herb.core/process-meta-xform :key) resolved-tree#))
          #_(assert (map? resolved#) "with-style functions must return a map")
          (let [garden-data# [(str "." classname#)
                                (apply merge {} resolved-tree#)

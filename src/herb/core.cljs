@@ -23,45 +23,52 @@
          (at-media query [:& style]))
        media))
 
-(defn resolve-styles
-  "Calls each function provided in extend-meta to resolve style maps for each"
-  [extend-meta result]
-  (if (empty? extend-meta)
+(defn resolve-style-fns
+  "Calls each function provided in a collection of style-fns. Input can take
+  multiple forms depending on how it got called from the consumer side either
+  using the macro directly or via extend meta data"
+  [style-fns result]
+  (if (empty? style-fns)
     result
-    (let [input (first extend-meta)]
+    (let [input (first style-fns)]
       (cond
 
-        ;; herb supports passing only the name of an fn
+        ;; first branch is the extending a fn using only a symbol
+        ;; i.e ^{:extend some-style-fn}
         (fn? input)
-        (recur (rest extend-meta)
-               (conj result (input)))
+        (do
+          (recur (rest style-fns)
+               (conj result (input))))
 
-        ;; if you want to pass fns with args the syntax is [[style-fn args]]
+        ;; this branch handles when a single fn with args is set as extend fns
+        ;; i.e ^{:extend [[style-fn args]]}
         (vector? (first input))
         (let [style-fn (first (first input))
               style-args (rest (first input))]
           (recur
-           (rest extend-meta)
+           (rest style-fns)
            (conj result (apply style-fn style-args))))
 
-        ;; lastly if you want to pass multiple style fns with no arguments the syntax is [first-fn second-fn]
+        ;; Final branch handles the with-style macro syntax
+        ;; i.e (with-style some-fn)
         :else (let [style-fn (first input)
                     style-args (rest input)]
                 (recur
-                 (rest extend-meta)
+                 (rest style-fns)
                  (conj result (apply style-fn style-args))))))))
 
 (defn process-meta-xform
-  "Return a transducer that pulls out a given meta type from a sequence"
+  "Return a transducer that pulls out a given meta type from a sequence and filter
+  out nil values"
   [meta-type]
   (comp
    (map (comp meta-type meta))
    (filter identity)))
 
-(defn walk-ancestors
-  "Recursivly go through each extend function provided in extend meta and resolve
-  style for each until we have nothing left, then return a flat vector of the
-  extend chain ready to be fed into garden"
+(defn extract-styles
+  "Walk the entire style tree, resolving each ancestor via the :extend meta data
+  The end result of this function is a vector of resolved styles in the form:
+  [{:color \"green\"} {:font-weight \"bold\"}]"
   [style-fns result]
   (cond
 
@@ -69,14 +76,11 @@
     (recur [style-fns] result)
 
     (and (vector? style-fns) (not (empty? style-fns)))
-    (let [styles (resolve-styles style-fns [])
+    (let [styles (resolve-style-fns style-fns [])
           new-meta (into [] (process-meta-xform :extend) styles)]
-      (.log js/console new-meta)
       (recur new-meta
              (into styles result)))
     :else result))
-
-;; (apply merge {} (into ancestors# resolved#))
 
 (defn extract-meta
   "Takes a group of ancestors and the root style fn meta and meta type. Pull out
