@@ -32,7 +32,7 @@
    {:extend [[style-fn arg1 arg2]]}`"
   [style-fn & args]
   (let [fn-name (if (instance? clojure.lang.Named style-fn)
-                  `(-> #'~style-fn meta :name str)
+                  `(-> #'~style-fn meta :name str) ; `'~style-fn
                   nil)
         caller-ns (if (instance? clojure.lang.Named style-fn)
                     `(-> #'~style-fn meta :ns str)
