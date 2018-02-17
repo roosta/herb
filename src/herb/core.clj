@@ -42,18 +42,10 @@
        (let [resolved-styles# (herb.core/extract-styles [[~style-fn ~@args]] [])
              prepared-styles# (herb.core/prepare-styles resolved-styles#)
              meta# (meta (last resolved-styles#))
-             key# (if (keyword? (:key meta#))
-                    (name (:key meta#))
-                    (:key meta#))
-             fn-name# (if-let [f# ~fn-name]
-                        f#
-                        (str "anonymous-" (hash prepared-styles#)))
+             key# (herb.core/sanitize (:key meta#))
+             fn-name# (if ~fn-name ~fn-name (str "anonymous-" (hash prepared-styles#)))
              fqn# (str ~caller-ns "/" fn-name#)
-             classname# (str
-                         (clojure.string/replace ~caller-ns #"\." "_")
-                         "_"
-                         fn-name#
-                         (when key# (str "-" key#)))
+             classname# (str (herb.core/sanitize ~caller-ns) "_" fn-name# key#)
              garden-data# (herb.core/garden-data classname# prepared-styles#)]
          (herb.runtime/inject-style! classname# garden-data# fqn#)
          classname#))))

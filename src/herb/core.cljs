@@ -110,3 +110,10 @@
   classname prepended"
   [classname styles]
   (into [(str "." classname)] styles))
+
+(defn sanitize
+  [k]
+  (when k
+    (cond
+      (keyword? k) (name keyword)
+      :else (str/replace k #"[^A-Za-z0-9-_]" "_"))))
