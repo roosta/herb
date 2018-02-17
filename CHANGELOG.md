@@ -4,6 +4,15 @@ log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [v0.3.3] - 2018-02-17
+### Added
+- Unit tests
+
+### Changed
+- Improve anonymous function classname hashing
+- Passed keys now replace all non legal characters with underscore, making it
+  more lenient.
+
 ## [v0.3.2] - 2018-02-15
 ### Changed
 - Refactor large portions of the codebase
@@ -30,7 +39,8 @@ from `herb.macro` to `herb.core`
 ### Fixed
 - Fixed issues with inheritance precedence
 
-[Unreleased]: https://github.com/roosta/herb/compare/v0.3.2...HEAD
+[Unreleased]: https://github.com/roosta/herb/compare/v0.3.3...HEAD
+[v0.3.3]: https://github.com/roosta/herb/compare/v0.3.2...v0.3.3
 [v0.3.2]: https://github.com/roosta/herb/compare/v0.3.1...v0.3.2
 [v0.3.1]: https://github.com/roosta/herb/compare/v0.3.0...v0.3.1
 [v0.3.0]: https://github.com/roosta/herb/compare/v0.2.0...v0.3.0

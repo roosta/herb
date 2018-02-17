@@ -72,3 +72,112 @@ Archived entries from file /home/roosta/src/herb/TODOs.org
   :ARCHIVE_CATEGORY: TODOs
   :ARCHIVE_TODO: DONE
   :END:
+
+* TODO Handle multiple keys
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-02-17 Sat 18:56
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: TODO
+  :END:
+ Just join all of them, just walk the resolved tree and join all the keys
+
+* DONE Handle single fn with args
+  CLOSED: [2018-02-17 Sat 18:57]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-02-17 Sat 18:57
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* TODO Setup an init fn
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-02-17 Sat 18:57
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: TODO
+  :END:
+
+ [[file:~/lib/jss/src/renderers/DomRenderer.js::function%20findCommentNode(text:%20string):%20Node%20|%20null%20{][Source]]
+
+  #+BEGIN_SRC js
+    function findCommentNode(text: string): Node | null {
+      const head = getHead()
+      for (let i = 0; i < head.childNodes.length; i++) {
+        const node = head.childNodes[i]
+        if (node.nodeType === 8 && node.nodeValue.trim() === text) {
+          return node
+        }
+      }
+      return null
+    }
+
+  #+END_SRC
+
+* TODO Fix component error that appears sometimes 'host node null'
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-02-17 Sat 20:18
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: TODO
+  :END:
+     Uncaught TypeError: Cannot read property 'getHostNode' of null
+
+* DONE Add sanitizing of keyword
+  CLOSED: [2018-02-17 Sat 20:18]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-02-17 Sat 20:18
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE What happens with anon functions?
+  CLOSED: [2018-02-11 Sun 20:27]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-02-17 Sat 20:18
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+  What about hashing the result of the function and that serves as the unique
+  classname? if the hash happens to be the same all the better
+
+  #+BEGIN_SRC clojurescript
+    fn-name# (if ~(instance? clojure.lang.Named style-fn)
+                   (-> #'~style-fn meta :name str)
+                   "asd")
+
+    (.log js/console ~(name (ns-name *ns*)))
+
+  #+END_SRC
+
+* DONE Add recursive modes
+  CLOSED: [2018-02-10 Sat 17:07]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-02-17 Sat 20:18
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE Refactor
+  CLOSED: [2018-02-11 Sun 16:17]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-02-17 Sat 20:18
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE Fix precedence of ancestors.
+  CLOSED: [2018-02-11 Sun 16:17]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-02-17 Sat 20:18
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+  It currently works with root style taking precedence over ancestors but
+  inheritance in ancestors itself does not work
