@@ -40,19 +40,20 @@
     `(do
        (assert (fn? ~style-fn) (str (pr-str ~style-fn) " is not a function. with-style only takes a function as its first argument"))
        (let [resolved-styles# (herb.core/extract-styles [[~style-fn ~@args]] [])
+             prepared-styles# (herb.core/prepare-styles resolved-styles#)
              meta# (meta (last resolved-styles#))
              key# (if (keyword? (:key meta#))
                     (name (:key meta#))
                     (:key meta#))
              fn-name# (if-let [f# ~fn-name]
                         f#
-                        (str "anonymous-" (hash resolved-styles#)))
+                        (str "anonymous-" (hash prepared-styles#)))
              fqn# (str ~caller-ns "/" fn-name#)
              classname# (str
                          (clojure.string/replace ~caller-ns #"\." "_")
                          "_"
                          fn-name#
                          (when key# (str "-" key#)))
-             garden-data# (herb.core/garden-data classname# resolved-styles#)]
+             garden-data# (herb.core/garden-data classname# prepared-styles#)]
          (herb.runtime/inject-style! classname# garden-data# fqn#)
          classname#))))

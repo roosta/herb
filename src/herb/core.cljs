@@ -97,11 +97,16 @@
         converted (convert-fn merged)]
     converted))
 
-(defn garden-data
-  "Takes a classnames and a resolved style vector and returns garden-ready data
-  structure"
-  [classname styles]
-  [(str "." classname)
-   (apply merge {} styles)
+(defn prepare-styles
+  "Takes a styles vector and applies merge to remove duplicate entries while
+  preserving inheritance precedence, while also extracting metadata"
+  [styles]
+  [(apply merge {} styles)
    (extract-meta styles :mode)
    (extract-meta styles :media)])
+
+(defn garden-data
+  "Takes a classnames and a resolved style vector and returns a vector with
+  classname prepended"
+  [classname styles]
+  (into [(str "." classname)] styles))
