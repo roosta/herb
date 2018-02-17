@@ -30,23 +30,5 @@
 * TESTS
 ** TODO Test for inheritance, make sure the chain is respected for modes and media
 * TODO Spec input
-* TODO Setup an init fn
-
- [[file:~/lib/jss/src/renderers/DomRenderer.js::function%20findCommentNode(text:%20string):%20Node%20|%20null%20{][Source]]
-
-  #+BEGIN_SRC js
-    function findCommentNode(text: string): Node | null {
-      const head = getHead()
-      for (let i = 0; i < head.childNodes.length; i++) {
-        const node = head.childNodes[i]
-        if (node.nodeType === 8 && node.nodeValue.trim() === text) {
-          return node
-        }
-      }
-      return null
-    }
-
-  #+END_SRC
-* TODO Handle single fn with args
-* TODO Handle multiple keys
- Just join all of them, just walk the resolved tree and join all the keys
+* TODO Fix single rule not causing line wrap
+* TODO Do new perf test
