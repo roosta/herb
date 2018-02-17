@@ -60,9 +60,8 @@
     (testing "Extracting media meta data"
       (is (= actual expected)))))
 
-(deftest garden-data
-  (let [classname "a_namespace_a-fn"
-        styles [(with-meta
+(deftest prepare-styles
+  (let [styles [(with-meta
                   {:color "white"
                    :background-color "green"}
                   {:mode {:hover {:color "magenta"}}})
@@ -72,13 +71,25 @@
                   {:media {{:screen true} {:background-color "yellow"}}})
                 {:background-color "red"
                  :font-style "italic"}]
-        expected [".a_namespace_a-fn"
-                  {:color "black",
-                   :background-color "red",
-                   :border-radius "5px",
+        expected [{:color "black"
+                   :background-color "red"
+                   :border-radius "5px"
                    :font-style "italic"}
                   (list [:&:hover {:color "magenta"}])
                   (list (at-media {:screen true} [:& {:background-color "yellow"}]))]
+        actual (core/prepare-styles styles)]
+    (testing "Prepare styles"
+      (is (= actual expected)))))
+
+(deftest garden-data
+  (let [classname "a_namespace_a-fn"
+        styles '({:color "black",
+                  :background-color "green",
+                  :border-radius "5px"})
+        expected [".a_namespace_a-fn"
+                  {:color "black",
+                   :background-color "green",
+                   :border-radius "5px"}]
         actual (core/garden-data classname styles)]
     (testing "Garden data"
       (is (= actual expected)))))
