@@ -1,34 +1,11 @@
 #+SEQ_TODO: NEXT(t) TODO(t) WAITING(w) | DONE(d) PARTIAL(p) CANCELLED(c)
 * TODO Document keys and that they need to conform to valid chars
   Possibly transform key to valid chars
-* TODO Fix component error that appears sometimes 'host node null'
-     Uncaught TypeError: Cannot read property 'getHostNode' of null
-* TODO Add sanitizing of keyword
 * TODO Add global init
   Possibly create instances?
-* DONE What happens with anon functions?
-  CLOSED: [2018-02-11 Sun 20:27]
-  What about hashing the result of the function and that serves as the unique
-  classname? if the hash happens to be the same all the better
-
-  #+BEGIN_SRC clojurescript
-    fn-name# (if ~(instance? clojure.lang.Named style-fn)
-                   (-> #'~style-fn meta :name str)
-                   "asd")
-
-    (.log js/console ~(name (ns-name *ns*)))
-
-  #+END_SRC
-* DONE Add recursive modes
-  CLOSED: [2018-02-10 Sat 17:07]
-* DONE Refactor
-  CLOSED: [2018-02-11 Sun 16:17]
-* DONE Fix precedence of ancestors.
-  CLOSED: [2018-02-11 Sun 16:17]
-  It currently works with root style taking precedence over ancestors but
-  inheritance in ancestors itself does not work
 * TESTS
-** TODO Test for inheritance, make sure the chain is respected for modes and media
+** DONE Test for inheritance, make sure the chain is respected for modes and media
+   CLOSED: [2018-02-17 Sat 20:18]
 * TODO Spec input
-* TODO Fix single rule not causing line wrap
+* TODO Fix single rule not causing newline
 * TODO Do new perf test
