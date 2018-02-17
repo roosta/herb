@@ -48,10 +48,11 @@
                         f#
                         (str "anonymous-" (hash resolved-styles#)))
              fqn# (str ~caller-ns "/" fn-name#)
-             classname# (str (clojure.string/replace ~caller-ns #"\." "_")
-                             "_"
-                             fn-name#
-                             (when key# (str "-" key#)))
+             classname# (str
+                         (clojure.string/replace ~caller-ns #"\." "_")
+                         "_"
+                         fn-name#
+                         (when key# (str "-" key#)))
              garden-data# (herb.core/garden-data classname# resolved-styles#)]
          (herb.runtime/inject-style! classname# garden-data# fqn#)
          classname#))))
