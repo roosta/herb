@@ -30,22 +30,22 @@
   `{:extend single-style-fn}
    {:extend [style-fn1 style-fn2]}
    {:extend [[style-fn arg1 arg2]]}`"
-  [style-fn & args]
-  (let [fn-name (if (instance? clojure.lang.Named style-fn)
-                  `(-> #'~style-fn meta :name str) ; `'~style-fn
+  [style & args]
+  (let [style-name (if (instance? clojure.lang.Named style)
+                  `(-> #'~style meta :name str) ; `'~style-fn
                   nil)
-        caller-ns (if (instance? clojure.lang.Named style-fn)
-                    `(-> #'~style-fn meta :ns str)
+        caller-ns (if (instance? clojure.lang.Named style)
+                    `(-> #'~style meta :ns str)
                     (name (ns-name *ns*)))]
     `(do
-       (assert (fn? ~style-fn) (str (pr-str ~style-fn) " is not a function. with-style only takes a function as its first argument"))
-       (let [resolved-styles# (herb.core/extract-styles [[~style-fn ~@args]] [])
+       (assert (fn? ~style) (str (pr-str ~style) " is not a function. with-style only takes a function as its first argument"))
+       (let [resolved-styles# (herb.core/extract-styles [[~style ~@args]] [])
              prepared-styles# (herb.core/prepare-styles resolved-styles#)
              meta# (meta (last resolved-styles#))
              key# (herb.core/sanitize (:key meta#))
-             fn-name# (if ~fn-name ~fn-name (str "anonymous-" (hash prepared-styles#)))
-             fqn# (str ~caller-ns "/" fn-name#)
-             classname# (str (herb.core/sanitize ~caller-ns) "_" fn-name# key#)
+             name# (if ~style-name ~style-name (str "anonymous-" (hash prepared-styles#)))
+             fqn# (str ~caller-ns "/" name#)
+             classname# (str (herb.core/sanitize ~caller-ns) "_" name# key#)
              garden-data# (herb.core/garden-data classname# prepared-styles#)]
          (herb.runtime/inject-style! classname# garden-data# fqn#)
          classname#))))
