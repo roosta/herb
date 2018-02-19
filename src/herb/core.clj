@@ -43,7 +43,7 @@
              prepared-styles# (herb.core/prepare-styles resolved-styles#)
              meta# (meta (last resolved-styles#))
              key# (herb.core/sanitize (:key meta#))
-             name# (if ~style-name ~style-name (str "anonymous-" (hash prepared-styles#)))
+             name# (or ~style-name (str "anonymous-" (hash prepared-styles#)))
              fqn# (str ~caller-ns "/" name#)
              classname# (str (herb.core/sanitize ~caller-ns) "_" name# key#)
              garden-data# (herb.core/garden-data classname# prepared-styles#)]
