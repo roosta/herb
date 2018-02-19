@@ -6,6 +6,7 @@
 * TESTS
 ** DONE Test for inheritance, make sure the chain is respected for modes and media
    CLOSED: [2018-02-17 Sat 20:18]
+** TODO Test that the classname contains a full namespace
 * TODO Spec input
 * TODO Fix single rule not causing newline
 * TODO Do new perf test
