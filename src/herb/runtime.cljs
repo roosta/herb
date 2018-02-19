@@ -16,13 +16,13 @@
 (defn create-style-element!
   "Create a style element in head if classname is not already present Attach a
   data attr with namespace and call update-style with new element"
-  [classname new fqn]
+  [classname new data-str]
   (let [head (.-head js/document)
         element (.createElement js/document "style")]
     (assert (some? head)
             "An head element is required in the dom to inject the style.")
     (.setAttribute element "type" "text/css")
-    (.setAttribute element "data-herb" fqn)
+    (.setAttribute element "data-herb" data-str)
     (.appendChild head element)
     (update-style! classname element new)))
 
@@ -31,10 +31,10 @@
   and a fully qualified name. Check if classname exist in DOM already, and if it
   does, compare `new` with `current` to make sure garden is not called to create
   the same style string again"
-  [classname new fqn]
+  [classname new data-str]
   (if-let [injected (get @injected-styles classname)]
     (let [current (:data injected)]
       (when (not= current new)
         (let [element (:element injected)]
           (update-style! classname element new))))
-    (create-style-element! classname new fqn)))
+    (create-style-element! classname new data-str)))

@@ -38,14 +38,14 @@
                     `(-> #'~style meta :ns str)
                     (name (ns-name *ns*)))]
     `(do
-       (assert (fn? ~style) (str (pr-str ~style) " is not a function. with-style only takes a function as its first argument"))
+       #_(assert (fn? ~style) (str (pr-str ~style) " is not a function. with-style only takes a function as its first argument"))
        (let [resolved-styles# (herb.core/extract-styles [[~style ~@args]] [])
              prepared-styles# (herb.core/prepare-styles resolved-styles#)
              meta# (meta (last resolved-styles#))
              key# (herb.core/sanitize (:key meta#))
              name# (or ~style-name (str "anonymous-" (hash prepared-styles#)))
-             fqn# (str ~caller-ns "/" name#)
+             data-str# (str ~caller-ns "/" name# "[" ~@args "]")
              classname# (str (herb.core/sanitize ~caller-ns) "_" name# (str "-" key#))
              garden-data# (herb.core/garden-data classname# prepared-styles#)]
-         (herb.runtime/inject-style! classname# garden-data# fqn#)
+         (herb.runtime/inject-style! classname# garden-data# data-str#)
          classname#))))
