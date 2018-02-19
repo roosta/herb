@@ -12,9 +12,9 @@
   the :&:mode parent selector syntax"
   [modes]
   (map
-   (fn [kw]
-     [(keyword (str "&" kw)) (kw modes)])
-   (keys modes)))
+   (fn [[kw mode]]
+     [(keyword (str "&" kw)) mode])
+   modes))
 
 (defn convert-media
   "Takes a vector of media queries i.e [{:screen true} {:color \"green\"}] and
