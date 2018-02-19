@@ -4,6 +4,10 @@ log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [v0.3.4] - 2018-02-19
+### Fixed
+- Fixes issue where an extra dash got added to the returned classname
+
 ## [v0.3.3] - 2018-02-17
 ### Added
 - Unit tests
@@ -39,7 +43,8 @@ from `herb.macro` to `herb.core`
 ### Fixed
 - Fixed issues with inheritance precedence
 
-[Unreleased]: https://github.com/roosta/herb/compare/v0.3.3...HEAD
+[Unreleased]: https://github.com/roosta/herb/compare/v0.3.4...HEAD
+[v0.3.4]: https://github.com/roosta/herb/compare/v0.3.3...v0.3.4
 [v0.3.3]: https://github.com/roosta/herb/compare/v0.3.2...v0.3.3
 [v0.3.2]: https://github.com/roosta/herb/compare/v0.3.1...v0.3.2
 [v0.3.1]: https://github.com/roosta/herb/compare/v0.3.0...v0.3.1
