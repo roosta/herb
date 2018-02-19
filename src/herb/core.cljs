@@ -40,12 +40,12 @@
         (fn? input)
         (do
           (recur (rest style-fns)
-               (conj result (input))))
+                 (conj result (input))))
 
         ;; this branch handles when a single fn with args is set as extend fns
         ;; i.e ^{:extend [[style-fn args]]}
         (vector? (first input))
-        (let [style-fn (first (first input))
+        (let [style-fn (ffirst input)
               style-args (rest (first input))]
           (recur
            (rest style-fns)
