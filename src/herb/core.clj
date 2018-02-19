@@ -45,7 +45,7 @@
              key# (herb.core/sanitize (:key meta#))
              name# (or ~style-name (str "anonymous-" (hash prepared-styles#)))
              fqn# (str ~caller-ns "/" name#)
-             classname# (str (herb.core/sanitize ~caller-ns) "_" name# key#)
+             classname# (str (herb.core/sanitize ~caller-ns) "_" name# (str "-" key#))
              garden-data# (herb.core/garden-data classname# prepared-styles#)]
          (herb.runtime/inject-style! classname# garden-data# fqn#)
          classname#))))
