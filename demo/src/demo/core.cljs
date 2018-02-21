@@ -57,7 +57,7 @@
     (case color
       (or "blue" "purple") {:color "white"}
       {:color "black"})
-    {:extend [[font-weight "bold"]]}))
+    {:extend [font-weight "bold"]}))
 
 (defn margin
   []
@@ -70,13 +70,13 @@
 
 (defn bold
   []
-  ^{:extend [italic margin]}
+  ^{:extend [[italic] [margin]]}
   {:font-weight "bold"})
 
 (defn cycle-color
   [color]
   ^{:key color
-    :extend [[dynamic-text-color color] bold]}
+    :extend [[dynamic-text-color color] [bold]]}
   {:text-align "center"
    :background-color color}
   )
@@ -153,13 +153,19 @@
 (defn tmp-2
   [color]
   ^{:key color
-    :extend [[tmp-1 "green"]]}
+    :extend [tmp-1 "green"]}
   {:color color})
 
 (defn tmp-3
   []
-  ^{:extend [[tmp-2 "red"]]}
+  ^{:extend [tmp-2 "red"]}
   {:color "yellow"})
+
+;; (def some-other-style {:background-color "black"})
+;; (def some-more-style {:border-radius "5px"})
+;; (def some-style
+;;   ^{:extend [some-other-style some-more-style]}
+;;   {:color "blue"})
 
 (defn home-page []
   (let [state (r/atom "green")]
@@ -224,7 +230,10 @@
         [:div {:class (with-style keyed :sheet)}]
 
         [:div {:class (with-style media-query-test)}
-         "Media query test"]]])))
+         "Media query test"]]
+       #_[:div {:class (with-style some-style)}
+        "Regular maps"]
+       ])))
 
 (defn mount-root []
   (r/render [home-page] (.getElementById js/document "app")))
