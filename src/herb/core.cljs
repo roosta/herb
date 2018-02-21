@@ -4,7 +4,8 @@
    [clojure.string :as str]
    [garden.selectors :as s]
    [garden.stylesheet :refer [at-media at-keyframes]]
-   [herb.runtime])
+   [herb.runtime]
+   [reagent.debug :as d])
   (:require-macros [herb.core :refer [with-style]]))
 
 (defn convert-modes
@@ -34,37 +35,24 @@
     result
     (let [input (first style-fns)]
       (cond
-
-        ;; first branch is the extending a fn using only a symbol
-        ;; i.e ^{:extend some-style-fn}
         (fn? input)
-        (do
-          (recur (rest style-fns)
-                 (conj result (input))))
+        (conj result (apply input (rest style-fns)))
 
-        ;; this branch handles when a single fn with args is set as extend fns
-        ;; i.e ^{:extend [[style-fn args]]}
-        (vector? (first input))
-        (let [style-fn (ffirst input)
-              style-args (rest (first input))]
+        (and (coll? input) (fn? (first input)))
+        (let [style-fn (first input)
+              style-args (rest input)]
           (recur
            (rest style-fns)
            (conj result (apply style-fn style-args))))
-
-        ;; Final branch handles the with-style macro syntax
-        ;; i.e (with-style some-fn)
-        :else (let [style-fn (first input)
-                    style-args (rest input)]
-                (recur
-                 (rest style-fns)
-                 (conj result (apply style-fn style-args))))))))
+        :else (recur input result)))))
 
 (defn process-meta-xform
   "Return a transducer that pulls out a given meta type from a sequence and filter
   out nil values"
   [meta-type]
   (comp
-   (map (comp meta-type meta))
+   (map meta)
+   (map meta-type)
    (filter identity)))
 
 (defn extract-styles
@@ -80,6 +68,7 @@
     (and (vector? style-fns) (not (empty? style-fns)))
     (let [styles (resolve-style-fns style-fns [])
           new-meta (into [] (process-meta-xform :extend) styles)]
+      (d/log new-meta)
       (recur new-meta
              (into styles result)))
     :else result))
