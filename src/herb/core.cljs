@@ -4,8 +4,7 @@
    [clojure.string :as str]
    [garden.selectors :as s]
    [garden.stylesheet :refer [at-media at-keyframes]]
-   [herb.runtime]
-   [reagent.debug :as d])
+   [herb.runtime])
   (:require-macros [herb.core :refer [with-style]]))
 
 (defn convert-modes
@@ -68,7 +67,6 @@
     (and (vector? style-fns) (not (empty? style-fns)))
     (let [styles (resolve-style-fns style-fns [])
           new-meta (into [] (process-meta-xform :extend) styles)]
-      (d/log new-meta)
       (recur new-meta
              (into styles result)))
     :else result))
