@@ -28,8 +28,8 @@
   inherit from an arbitrary number of other style functions. The syntax is as
   follows:
   `{:extend single-style-fn}
-   {:extend [style-fn1 style-fn2]}
-   {:extend [[style-fn arg1 arg2]]}`"
+   {:extend [style-fn arg1 arg2]}
+   {:extend [[style-fn1] [style-fn2 arg1]]}`"
   [style-fn & args]
   (let [style-name (if (instance? clojure.lang.Named style-fn)
                   `(-> #'~style-fn meta :name str) ; `'~style-fn
