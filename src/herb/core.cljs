@@ -43,7 +43,9 @@
           (recur
            (rest style-fns)
            (conj result (apply style-fn style-args))))
-        :else (recur input result)))))
+        :else (recur
+               (rest style-fns)
+               (into result (resolve-style-fns input [])))))))
 
 (defn process-meta-xform
   "Return a transducer that pulls out a given meta type from a sequence and filter
