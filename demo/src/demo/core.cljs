@@ -57,7 +57,7 @@
     (case color
       (or "blue" "purple") {:color "white"}
       {:color "black"})
-    {:extend [font-weight "bold"]}))
+    {:extend [[font-weight "bold"] [asd]]}))
 
 (defn margin
   []
