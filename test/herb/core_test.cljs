@@ -24,7 +24,7 @@
           (box [color] {:background-color color})]
     (let [expected [{:border-radius "5px"} {:background-color "green"}]]
       (testing "Resolve styles"
-        (is (= (core/resolve-style-fns [[button] [box "green"]] [])
+        (is (= (core/resolve-style-fns [[[button] [box "green"]]] [])
                expected))))))
 
 (deftest extract-styles
