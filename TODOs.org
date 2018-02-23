@@ -11,6 +11,8 @@
 * TODO Fix single rule not causing newline
 * TODO Do new perf test
 * TODO Check merge order of extensions in form [style1 style2]
+* TODO pass multiple functions to with-style
 * Deterministic
 * DEMO
 ** Add demo for selecting elements by class
+*
