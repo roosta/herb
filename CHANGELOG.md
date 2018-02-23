@@ -4,9 +4,29 @@ log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
 ## [Unreleased]
 
+## [v0.3.5] - 2018-02-23
+### Changed
+A change in the :extend metadata syntax:
+```clojure
+;; Passing single function
+^{:extend some-style-fn}
+
+;; Passing fn with args
+^{:extend [some-style-fn some-arg]}
+
+;; passing multiple functions
+^{:extend [[style-fn1 "green" 42] [style-fn]]}
+```
+
+### Fixed
+- Fixed issue where multiple levels of extended style fns would not work.
+
+### Fixed
+- Fixed
+
 ## [v0.3.4] - 2018-02-19
 ### Fixed
-- Fixes issue where an extra dash got added to the returned classname
+- Fixed issue where an extra dash got added to the returned classname
 
 ## [v0.3.3] - 2018-02-17
 ### Added
@@ -43,7 +63,8 @@ from `herb.macro` to `herb.core`
 ### Fixed
 - Fixed issues with inheritance precedence
 
-[Unreleased]: https://github.com/roosta/herb/compare/v0.3.4...HEAD
+[Unreleased]: https://github.com/roosta/herb/compare/v0.3.5...HEAD
+[v0.3.5]: https://github.com/roosta/herb/compare/v0.3.4...v0.3.5
 [v0.3.4]: https://github.com/roosta/herb/compare/v0.3.3...v0.3.4
 [v0.3.3]: https://github.com/roosta/herb/compare/v0.3.2...v0.3.3
 [v0.3.2]: https://github.com/roosta/herb/compare/v0.3.1...v0.3.2
