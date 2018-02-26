@@ -21,8 +21,13 @@
   {:margin-right "auto"
    :margin-left "auto"})
 
+(defn paper-style
+  []
+  )
+
 (defn paper
   []
+  [:div ]
   )
 
 (defn container
@@ -31,7 +36,7 @@
         (r/children (r/current-component))))
 
 (def global-style
-  (list [:body {:font-family ["Helvetica Neue" "Verdana" "Helvetica" "Arial" "sans-serif"]}]
+  (list [:body {:font-family ["Open sans" "sans-serif"]}]
         [:a {:text-decoration "none"
              :color "#09f"}]))
 
@@ -45,28 +50,29 @@
   (let [styles {:container {:display "inline-block"}
                 :heading
                 {:font-size  (px 112)
-                 :margin-bottom 0
+                 :margin [[0 0 (px -35) (px -10)]]
                  :color "#333"}
                 :box
-                {:height (px 80)
-                 :display "flex"
+                {:display "flex"
                  :justify-content "center"
                  :align-items "center"
                  :text-transform "uppercase"
                  :background "#333"
+                 :font-weight "bold"
                  :font-size (px 56)
-                 :color "white"}
-                }]
+                 :color "white"}}]
     (with-meta (component styles) {:key component})))
 
 (defn header
   []
   [:div {:class (with-style header-style :container)}
    [:h4 {:class (with-style header-style :heading)}
-    "Herb demo"]
+    "Herb"]
+   #_[:h4 {:class (with-style header-style :heading)}
+    "styling lib"]
    [:div {:class (with-style header-style :box)}
     [:div
-     "styling library"]]])
+     "styling library demo"]]])
 
 (defn home-page []
   (let [state (r/atom "green")]
