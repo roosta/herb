@@ -121,5 +121,5 @@
   [k]
   (when k
     (cond
-      (keyword? k) (name keyword)
+      (keyword? k) (name k)
       :else (str/replace (str k) #"[^A-Za-z0-9-_]" "_"))))
