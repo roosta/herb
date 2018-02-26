@@ -15,24 +15,27 @@
 
 (defn container-style
   []
-  ^{:media {{:screen :only :min-width (em 48)} {:width (rem 49)}
-            {:screen :only :min-width (em 64)} {:width (rem 65)}
-            {:screen :only :min-width (em 75)} {:width (rem 76)}}}
+  ^{:media {{:screen :only :min-width (em 32)} {:width (rem 33)}
+            {:screen :only :min-width (em 52)} {:width (rem 53)}}}
   {:margin-right "auto"
    :margin-left "auto"})
 
-(defn paper-style
-  []
-  )
-
-(defn paper
-  []
-  [:div ]
-  )
 
 (defn container
   []
   (into [:div {:class (with-style container-style)}]
+        (r/children (r/current-component))))
+
+(defn paper-style
+  []
+  {:background "#EFEEEA"
+   :flex-basis "100%"
+   :box-sizing "border-box"
+   :box-shadow [[0 (px 10) 0 0 "#333"]]})
+
+(defn paper
+  []
+  (into [:div {:class (with-style paper-style)}]
         (r/children (r/current-component))))
 
 (def global-style
@@ -43,24 +46,26 @@
 (defn flex-container
   []
   {:display "flex"
+   :flex-wrap "wrap"
    :justify-content "center"})
 
 (defn header-style
   [component]
-  (let [styles {:container {:display "inline-block"}
+  (let [styles {:container {:flex-basis "100%"
+                            :margin-bottom (px 10)}
                 :heading
                 {:font-size  (px 112)
-                 :margin [[0 0 (px -35) (px -10)]]
+                 :margin [[0 0 (px -35) (px -11)]]
                  :color "#333"}
                 :box
                 {:display "flex"
-                 :justify-content "center"
                  :align-items "center"
                  :text-transform "uppercase"
                  :background "#333"
                  :font-weight "bold"
                  :font-size (px 56)
-                 :color "white"}}]
+                 :color "#EFEEEA"}
+                :subheading {:margin-left (px -4)}}]
     (with-meta (component styles) {:key component})))
 
 (defn header
@@ -68,10 +73,8 @@
   [:div {:class (with-style header-style :container)}
    [:h4 {:class (with-style header-style :heading)}
     "Herb"]
-   #_[:h4 {:class (with-style header-style :heading)}
-    "styling lib"]
    [:div {:class (with-style header-style :box)}
-    [:div
+    [:div {:class (with-style header-style :subheading)}
      "styling library demo"]]])
 
 (defn home-page []
@@ -100,7 +103,8 @@
 
       [container
        [:div {:class (with-style flex-container)}
-        [header]]
+        [header]
+        [paper "hello"]]
        ]
       ;; TODO demo inheritance variants
       ;; TODO demo state
