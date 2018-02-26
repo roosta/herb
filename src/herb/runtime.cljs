@@ -1,6 +1,7 @@
 (ns herb.runtime
   (:require [garden.core :refer [css]]
             [goog.dom :as dom]
+            [goog.object :as gobj]
             [clojure.string :as str]))
 
 (def injected-styles (atom {}))
@@ -8,10 +9,10 @@
 (defn update-style!
   "Create css string and update DOM"
   [classname element new]
-  (let [css (css new)]
+  (let [css-str (css new)]
     (swap! injected-styles assoc classname {:data new
                                             :element element})
-    (set! (.-innerHTML element) css)))
+    (set! (.-innerHTML element) css-str)))
 
 (defn create-style-element!
   "Create a style element in head if classname is not already present Attach a
