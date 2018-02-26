@@ -7,6 +7,23 @@
    [herb.runtime])
   (:require-macros [herb.core :refer [with-style]]))
 
+(defn set-global-style!
+  "Take garden style vectors, and create or update the global style"
+  [& styles]
+  (let [element (.querySelector js/document "style[data-herb=\"global\"]")
+        head (.-head js/document)
+        css-str (css styles)]
+    (assert (some? head) "An head element is required in the dom to inject the style.")
+    (if element
+      (do
+        (.log js/console element)
+        (set! (.-innerHTML element) css-str))
+      (let [element (.createElement js/document "style")]
+        (set! (.-innerHTML element) css-str)
+        (.setAttribute element "type" "text/css")
+        (.setAttribute element "data-herb" "global")
+        (.appendChild head element)))))
+
 (defn convert-modes
   "Takes a map of modes and returns a formatted vector fed into garden using
   the :&:mode parent selector syntax"
