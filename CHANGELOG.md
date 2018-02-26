@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file. This change
 log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 
 ## [Unreleased]
+### Fixed
+- Issue with passing a keyword as a style key causing a crash
 
 ## [v0.3.5] - 2018-02-23
 ### Changed
