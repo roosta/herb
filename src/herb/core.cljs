@@ -112,8 +112,8 @@
 (defn garden-data
   "Takes a classnames and a resolved style vector and returns a vector with
   classname prepended"
-  [classname styles id?]
-  (into [(str (if id? "#" ".") classname)] styles))
+  [identifier styles id?]
+  (into [(str (if id? "#" ".") identifier)] styles))
 
 (defn sanitize
   [k]
@@ -137,13 +137,13 @@
              " is not a function. with-style only takes a function as its first argument"))
 
 (defn with-style!
-  [fn-name ns-name style-fn & args]
+  [opts fn-name ns-name style-fn & args]
   (let [resolved-styles (extract-styles (into [style-fn] args) [])
         prepared-styles (prepare-styles resolved-styles)
         meta-data (-> resolved-styles last meta)
         fname (or fn-name (str "anonymous-" (hash prepared-styles)))
         data-str (str ns-name "/" fname (when args (pr-str (into [] args))))
         identifier (compose-identifier ns-name fname (:key meta-data))
-        garden-data (garden-data identifier prepared-styles (:id meta-data))]
+        garden-data (garden-data identifier prepared-styles (:id? opts))]
     (runtime/inject-style! identifier garden-data data-str)
     identifier))

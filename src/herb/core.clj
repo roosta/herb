@@ -7,7 +7,8 @@
     nil))
 
 (defmacro with-style
-  "Takes a function that returns a map. Arguments can be passed along with
+  "===DEPRECATED====
+  Takes a function that returns a map. Arguments can be passed along with
   function as additional arguments to with-style i.e (with-style some-fn arg1 arg2)
 
   The style function is resolved and the map it returns is what is used
@@ -39,4 +40,16 @@
   [style-fn & args]
   (let [f (fn-name style-fn)
         n (name (ns-name *ns*))]
-    `(herb.core/with-style! ~f ~n ~style-fn ~@args)))
+    `(herb.core/with-style! nil ~f ~n ~style-fn ~@args)))
+
+(defmacro <id
+  [style-fn & args]
+  (let [f (fn-name style-fn)
+        n (name (ns-name *ns*))]
+    `(herb.core/with-style! {:id? true} ~f ~n ~style-fn ~@args)))
+
+(defmacro <class
+  [style-fn & args]
+  (let [f (fn-name style-fn)
+        n (name (ns-name *ns*))]
+    `(herb.core/with-style! {} ~f ~n ~style-fn ~@args)))
