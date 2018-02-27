@@ -1,5 +1,11 @@
 (ns herb.core)
 
+(defn fn-name
+  [style-fn]
+  (if (instance? clojure.lang.Named style-fn)
+    `(-> #'~style-fn meta :name str) ;`'~style-fn
+    nil))
+
 (defmacro with-style
   "Takes a function that returns a map. Arguments can be passed along with
   function as additional arguments to with-style i.e (with-style some-fn arg1 arg2)
@@ -31,27 +37,6 @@
    {:extend [style-fn arg1 arg2]}
    {:extend [[style-fn1] [style-fn2 arg1]]}`"
   [style-fn & args]
-  (let [fn-name (if (instance? clojure.lang.Named style-fn)
-                  `(-> #'~style-fn meta :name str) ; `'~style-fn
-                  nil)
-        caller-ns (if (instance? clojure.lang.Named style-fn)
-                    `(-> #'~style-fn meta :ns str)
-                    (name (ns-name *ns*)))]
-    `(do
-       (assert (fn? ~style-fn)
-               (str (pr-str ~style-fn)
-                    " is not a function. with-style only takes a function as its first argument"))
-       (let [resolved-styles# (herb.core/extract-styles [~style-fn ~@args] [])
-             prepared-styles# (herb.core/prepare-styles resolved-styles#)
-             meta# (meta (last resolved-styles#))
-             name# (or ~fn-name (str "anonymous-" (hash prepared-styles#)))
-             data-str# (str ~caller-ns "/" name# (str "[" ~@args "]"))
-             identifier# (herb.core/compose-identifier ~caller-ns name# (:key meta#))
-             garden-data# (herb.core/garden-data identifier# prepared-styles# (:id meta#))]
-         (herb.runtime/inject-style! identifier# garden-data# data-str#)
-         identifier#))))
-
-
-(defmacro .<
-  [style-fn & args]
-  `(with-style ~style-fn ~@args))
+  (let [f (fn-name style-fn)
+        n (name (ns-name *ns*))]
+    `(herb.core/with-style! ~f ~n ~style-fn ~@args)))

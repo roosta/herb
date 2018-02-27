@@ -4,7 +4,7 @@
    [clojure.string :as str]
    [garden.selectors :as s]
    [garden.stylesheet :refer [at-media at-keyframes]]
-   [herb.runtime])
+   [herb.runtime :as runtime])
   (:require-macros [herb.core :refer [with-style]]))
 
 (defn set-global-style!
@@ -15,9 +15,7 @@
         css-str (css styles)]
     (assert (some? head) "An head element is required in the dom to inject the style.")
     (if element
-      (do
-        (.log js/console element)
-        (set! (.-innerHTML element) css-str))
+      (set! (.-innerHTML element) css-str)
       (let [element (.createElement js/document "style")]
         (set! (.-innerHTML element) css-str)
         (.setAttribute element "type" "text/css")
@@ -133,3 +131,19 @@
        (sanitize fn-name)
        (when k
          (str "-" (sanitize k)))))
+
+#_(assert (fn? ~style-fn)
+        (str (pr-str ~style-fn)
+             " is not a function. with-style only takes a function as its first argument"))
+
+(defn with-style!
+  [fn-name ns-name style-fn & args]
+  (let [resolved-styles (extract-styles (into [style-fn] args) [])
+        prepared-styles (prepare-styles resolved-styles)
+        meta-data (-> resolved-styles last meta)
+        fname (or fn-name (str "anonymous-" (hash prepared-styles)))
+        data-str (str ns-name "/" fname (when args (pr-str (into [] args))))
+        identifier (compose-identifier ns-name fname (:key meta-data))
+        garden-data (garden-data identifier prepared-styles (:id meta-data))]
+    (runtime/inject-style! identifier garden-data data-str)
+    identifier))
