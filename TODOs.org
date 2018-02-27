@@ -17,3 +17,4 @@
 ** Add demo for selecting elements by class
 *
 * TODO What happens with named scoped function like in letfn?
+* TODO Add helper macro for defining component function
