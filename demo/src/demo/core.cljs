@@ -1,6 +1,6 @@
 (ns demo.core
   (:require
-   [herb.core :refer-macros [with-style] :as herb]
+   [herb.core :refer-macros [with-style .<] :as herb]
    [garden.selectors :as s]
    [garden.core :refer [css]]
    [garden.stylesheet :refer [at-media]]
@@ -28,7 +28,7 @@
 
 (defn paper-style
   []
-  {:background "#EFEEEA"
+  {:background "white"
    :flex-basis "100%"
    :box-sizing "border-box"
    :box-shadow [[0 (px 10) 0 0 "#333"]]})
@@ -39,7 +39,8 @@
         (r/children (r/current-component))))
 
 (def global-style
-  (list [:body {:font-family ["Open sans" "sans-serif"]}]
+  (list [:body {:background "#EFEFEF"
+                :font-family ["Open sans" "sans-serif"]}]
         [:a {:text-decoration "none"
              :color "#09f"}]))
 
@@ -64,7 +65,7 @@
                  :background "#333"
                  :font-weight "bold"
                  :font-size (px 56)
-                 :color "#EFEEEA"}
+                 :color "white"}
                 :subheading {:margin-left (px -4)}}]
     (with-meta (component styles) {:key component})))
 
