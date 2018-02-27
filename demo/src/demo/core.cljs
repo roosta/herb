@@ -1,6 +1,6 @@
 (ns demo.core
   (:require
-   [herb.core :refer-macros [with-style .<] :as herb]
+   [herb.core :refer-macros [<class <id] :as herb]
    [garden.selectors :as s]
    [garden.core :refer [css]]
    [garden.stylesheet :refer [at-media]]
@@ -23,7 +23,7 @@
 
 (defn container
   []
-  (into [:div {:class (with-style container-style)}]
+  (into [:div {:class (<class container-style)}]
         (r/children (r/current-component))))
 
 (defn paper-style
@@ -35,7 +35,7 @@
 
 (defn paper
   []
-  (into [:div {:class (with-style paper-style)}]
+  (into [:div {:class (<class paper-style)}]
         (r/children (r/current-component))))
 
 (def global-style
@@ -71,11 +71,11 @@
 
 (defn header
   []
-  [:div {:class (with-style header-style :container)}
-   [:h4 {:class (with-style header-style :heading)}
+  [:div {:class (<class header-style :container)}
+   [:h4 {:class (<class header-style :heading)}
     "Herb"]
-   [:div {:class (with-style header-style :box)}
-    [:div {:class (with-style header-style :subheading)}
+   [:div {:class (<class header-style :box)}
+    [:div {:class (<class header-style :subheading)}
      "styling library demo"]]])
 
 (defn home-page []
@@ -84,7 +84,7 @@
       #_(profile
          {}
          (doseq [n (range 500)]
-           (p ::with-style (with-style profile-comp n)))
+           (p ::<class (<class profile-comp n)))
 
          (doseq [_ (range 500)]
            (p ::manipulate-dom (.appendChild (.-head js/document)
@@ -103,7 +103,7 @@
                                                                       :border-radius "5px"}]))))
 
       [container
-       [:div {:class (with-style flex-container)}
+       [:div {:class (<class flex-container)}
         [header]
         [paper "hello"]]
        ]
