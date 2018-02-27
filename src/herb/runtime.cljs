@@ -8,16 +8,16 @@
 
 (defn update-style!
   "Create css string and update DOM"
-  [classname element new]
+  [identifier element new]
   (let [css-str (css new)]
-    (swap! injected-styles assoc classname {:data new
+    (swap! injected-styles assoc identifier {:data new
                                             :element element})
     (set! (.-innerHTML element) css-str)))
 
 (defn create-style-element!
-  "Create a style element in head if classname is not already present Attach a
+  "Create a style element in head if identifier is not already present Attach a
   data attr with namespace and call update-style with new element"
-  [classname new data-str]
+  [identifier new data-str]
   (let [head (.-head js/document)
         element (.createElement js/document "style")]
     (assert (some? head)
@@ -25,17 +25,17 @@
     (.setAttribute element "type" "text/css")
     (.setAttribute element "data-herb" data-str)
     (.appendChild head element)
-    (update-style! classname element new)))
+    (update-style! identifier element new)))
 
 (defn inject-style!
-  "Main interface to runtime. Takes a classname, new garden style data structure
-  and a fully qualified name. Check if classname exist in DOM already, and if it
+  "Main interface to runtime. Takes an identifier, new garden style data structure
+  and a fully qualified name. Check if identifier exist in DOM already, and if it
   does, compare `new` with `current` to make sure garden is not called to create
   the same style string again"
-  [classname new data-str]
-  (if-let [injected (get @injected-styles classname)]
+  [identifier new data-str]
+  (if-let [injected (get @injected-styles identifier)]
     (let [current (:data injected)]
       (when (not= current new)
         (let [element (:element injected)]
-          (update-style! classname element new))))
-    (create-style-element! classname new data-str)))
+          (update-style! identifier element new))))
+    (create-style-element! identifier new data-str)))

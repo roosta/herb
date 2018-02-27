@@ -114,8 +114,8 @@
 (defn garden-data
   "Takes a classnames and a resolved style vector and returns a vector with
   classname prepended"
-  [classname styles]
-  (into [(str "." classname)] styles))
+  [classname styles id?]
+  (into [(str (if id? "#" ".") classname)] styles))
 
 (defn sanitize
   [k]
@@ -123,3 +123,13 @@
     (cond
       (keyword? k) (name k)
       :else (str/replace (str k) #"[^A-Za-z0-9-_]" "_"))))
+
+(defn compose-identifier
+  "Takes a ns, fn-name and a key and return a string composed as a valid
+  identifier"
+  [caller-ns fn-name k]
+  (str (sanitize caller-ns)
+       "_"
+       (sanitize fn-name)
+       (when k
+         (str "-" (sanitize k)))))
