@@ -6,6 +6,9 @@ log follows the conventions of [keepachangelog.com](http://keepachangelog.com/).
 ### Fixed
 - Issue with passing a keyword as a style key causing a crash
 
+### Added
+- New meta data `:id` that returns an id instead of a classname
+
 ## [v0.3.5] - 2018-02-23
 ### Changed
 A change in the :extend metadata syntax:
@@ -22,9 +25,6 @@ A change in the :extend metadata syntax:
 
 ### Fixed
 - Fixed issue where multiple levels of extended style fns would not work.
-
-### Fixed
-- Fixed
 
 ## [v0.3.4] - 2018-02-19
 ### Fixed
