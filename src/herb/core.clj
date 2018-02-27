@@ -50,3 +50,8 @@
              garden-data# (herb.core/garden-data identifier# prepared-styles# (:id meta#))]
          (herb.runtime/inject-style! identifier# garden-data# data-str#)
          identifier#))))
+
+
+(defmacro .<
+  [style-fn & args]
+  `(with-style ~style-fn ~@args))
