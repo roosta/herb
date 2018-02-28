@@ -8,7 +8,7 @@
   (:require-macros [herb.core :refer [with-style]]))
 
 (defn set-global-style!
-  "Take garden style vectors, and create or update the global style"
+  "Takes Garden style vectors, and create or update the global style"
   [& styles]
   (let [element (.querySelector js/document "style[data-herb=\"global\"]")
         head (.-head js/document)
@@ -22,7 +22,7 @@
         (.setAttribute element "data-herb" "global")
         (.appendChild head element)))))
 
-(defn convert-modes
+(defn- convert-modes
   "Takes a map of modes and returns a formatted vector fed into garden using
   the :&:mode parent selector syntax"
   [modes]
@@ -31,7 +31,7 @@
      [(keyword (str "&" kw)) mode])
    modes))
 
-(defn convert-media
+(defn- convert-media
   "Takes a vector of media queries i.e [{:screen true} {:color \"green\"}] and
   calls at-media for each query, and use garden's ancestor selector (:&) to
   target current classname."
@@ -40,7 +40,7 @@
          (at-media query [:& style]))
        media))
 
-(defn resolve-style-fns
+(defn- resolve-style-fns
   "Calls each function provided in a collection of style-fns. Input can take
   multiple forms depending on how it got called from the consumer side either
   using the macro directly or via extend meta data"
@@ -62,7 +62,7 @@
                (rest style-fns)
                (into result (resolve-style-fns input [])))))))
 
-(defn process-meta-xform
+(defn- process-meta-xform
   "Return a transducer that pulls out a given meta type from a sequence and filter
   out nil values"
   [meta-type]
@@ -71,7 +71,7 @@
    (map meta-type)
    (filter identity)))
 
-(defn extract-styles
+(defn- extract-styles
   "Walk the entire style tree, resolving each ancestor via the :extend meta data
   The end result of this function is a vector of resolved styles in the form:
   [{:color \"green\"} {:font-weight \"bold\"}]"
@@ -88,7 +88,7 @@
              (into styles result)))
     :else result))
 
-(defn extract-meta
+(defn- extract-meta
   "Takes a group of resolved styles and a meta type. Pull out each meta obj and
   merge to prevent duplicates, finally convert to garden acceptable input and
   return"
@@ -101,7 +101,7 @@
         converted (convert-fn merged)]
     converted))
 
-(defn prepare-styles
+(defn- prepare-styles
   "Takes a styles vector and applies merge to remove duplicate entries while
   preserving inheritance precedence, while also extracting metadata"
   [styles]
@@ -109,20 +109,20 @@
    (extract-meta styles :mode)
    (extract-meta styles :media)])
 
-(defn garden-data
+(defn- garden-data
   "Takes a classnames and a resolved style vector and returns a vector with
   classname prepended"
   [identifier styles id?]
   (into [(str (if id? "#" ".") identifier)] styles))
 
-(defn sanitize
+(defn- sanitize
   [k]
   (when k
     (cond
       (keyword? k) (name k)
       :else (str/replace (str k) #"[^A-Za-z0-9-_]" "_"))))
 
-(defn compose-identifier
+(defn- compose-identifier
   "Takes a ns, fn-name and a key and return a string composed as a valid
   identifier"
   [caller-ns fn-name k]
@@ -137,6 +137,11 @@
              " is not a function. with-style only takes a function as its first argument"))
 
 (defn with-style!
+  "Entry point for macros. Takes an opt map as first argument, and currently only
+  supports `:id true` which appends an id identifier instead of a class to the DOM
+
+  Runs through each step in preparing the style functions, until passing of
+  control to runtime and returning the identifier"
   [opts fn-name ns-name style-fn & args]
   (let [resolved-styles (extract-styles (into [style-fn] args) [])
         prepared-styles (prepare-styles resolved-styles)
