@@ -9,6 +9,10 @@
 
 ### Changed
 - Introduce two new macros `<class` and `<id` and deprecate `with-style`
+- Changed identifier and data string to use input functions .-name field. This
+  allows for scoped functions.
+- Include ns in anonymous function identifiers and data string to make them
+  easier to debug
 
 ## [v0.3.5] - 2018-02-23
 ### Changed
