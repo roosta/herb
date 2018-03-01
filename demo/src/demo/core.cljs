@@ -1,6 +1,6 @@
 (ns demo.core
   (:require
-   [herb.core :refer-macros [<class <id <asd] :as herb]
+   [herb.core :refer-macros [<class <id] :as herb]
    [garden.selectors :as s]
    [garden.core :refer [css]]
    [garden.stylesheet :refer [at-media]]
@@ -103,9 +103,6 @@
                                                                       :border-radius "5px"}]))))
 
       [container
-       #_(letfn [(hello-there []
-                 {:background-color "red"})]
-         (.log js/console (<asd hello-there)))
        [:div {:class (<class flex-container)}
         [header]
         [paper "hello"]]
@@ -115,6 +112,7 @@
       ;; TODO demo media
       ;; TODO demo keys
       ;; TODO demo anon
+      ;; TODO demo nested
       )))
 
 (defn mount-root []
