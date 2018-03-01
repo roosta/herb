@@ -29,9 +29,9 @@
              :nrepl-middleware ["cemerick.piggieback/wrap-cljs-repl"]}
 
   :cljsbuild {:builds {:app
-                       {:source-paths ["src" "../src"]
+                       {:source-paths ["src" "../src" "env/dev"]
                         :compiler
-                        {:main "demo.core"
+                        {:main "demo.dev"
                          :output-to "public/js/app.js"
                          :preloads [devtools.preload]
                          :output-dir "public/js/out"
@@ -40,7 +40,14 @@
                          :optimizations :none
                          :pretty-print  true}
                         :figwheel
-                        {:on-jsload "demo.core/mount-root" }}}}
+                        {:on-jsload "demo.core/mount-root" }}
+                       :release
+                       {:source-paths ["src" "env/prod"]
+                        :compiler
+                        {:output-to "public/js/app.js"
+                         :output-dir "public/js/release"
+                         :optimizations :advanced
+                         :pretty-print false}}}}
 
   :aliases {"package" ["do" "clean" ["cljsbuild" "once" "release"]]}
 

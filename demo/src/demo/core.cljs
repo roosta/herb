@@ -1,6 +1,6 @@
 (ns demo.core
   (:require
-   [herb.core :refer-macros [<class <id] :as herb]
+   [herb.core :refer-macros [<class <id <asd] :as herb]
    [garden.selectors :as s]
    [garden.core :refer [css]]
    [garden.stylesheet :refer [at-media]]
@@ -103,6 +103,9 @@
                                                                       :border-radius "5px"}]))))
 
       [container
+       #_(letfn [(hello-there []
+                 {:background-color "red"})]
+         (.log js/console (<asd hello-there)))
        [:div {:class (<class flex-container)}
         [header]
         [paper "hello"]]
@@ -120,5 +123,3 @@
 (defn init! []
   (herb/set-global-style! global-style)
   (mount-root))
-
-(init!)
