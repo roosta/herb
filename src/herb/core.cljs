@@ -123,18 +123,16 @@
       :else (str/replace (str k) #"[^A-Za-z0-9-_]" "_"))))
 
 (defn- compose-identifier
-  "Takes a ns, fn-name and a key and return a string composed as a valid
-  identifier"
-  [caller-ns fn-name k]
-  (str (sanitize caller-ns)
-       "_"
-       (sanitize fn-name)
+  [n k]
+  (str (sanitize n)
        (when k
          (str "-" (sanitize k)))))
 
-#_(assert (fn? ~style-fn)
-        (str (pr-str ~style-fn)
-             " is not a function. with-style only takes a function as its first argument"))
+(defn- compose-data-string
+  [n args]
+  (str
+   (str/replace n #"\." "/")
+   (when args (pr-str (into [] args)))))
 
 (defn with-style!
   "Entry point for macros. Takes an opt map as first argument, and currently only
@@ -146,9 +144,12 @@
   (let [resolved-styles (extract-styles (into [style-fn] args) [])
         prepared-styles (prepare-styles resolved-styles)
         meta-data (-> resolved-styles last meta)
-        fname (or fn-name (str "anonymous-" (hash prepared-styles)))
-        data-str (str ns-name "/" fname (when args (pr-str (into [] args))))
-        identifier (compose-identifier ns-name fname (:key meta-data))
+        n (.-name style-fn)
+        name* (if (empty? n)
+                (str ns-name "/" "anonymous-" (hash prepared-styles))
+                (demunge n))
+        data-str (compose-data-string name* args)
+        identifier (compose-identifier name* (:key meta-data))
         garden-data (garden-data identifier prepared-styles (:id? opts))]
     (runtime/inject-style! identifier garden-data data-str)
     identifier))

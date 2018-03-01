@@ -1,10 +1,12 @@
 (ns herb.core)
 
-(defn fn-name
-  [style-fn]
-  (if (instance? clojure.lang.Named style-fn)
-    `(-> #'~style-fn meta :name str) ;`'~style-fn
-    nil))
+(comment
+  (defn fn-name
+    [style-fn]
+    `(.-name ~style-fn)
+    (if (instance? clojure.lang.Named style-fn)
+      `(-> #'~style-fn meta :name str) ;`'~style-fn
+      nil)))
 
 (defmacro with-style
   "**DEPRECATED** Takes a function that returns a map. Arguments can be passed
@@ -14,7 +16,7 @@
   Returns a unique identifier based the fully qualified name of the passed
   function"
   [style-fn & args]
-  (let [f (fn-name style-fn)
+  (let [f `'~style-fn
         n (name (ns-name *ns*))]
     `(herb.core/with-style! nil ~f ~n ~style-fn ~@args)))
 
@@ -25,7 +27,7 @@
 
   Returns a unique id based on the fully qualified name of the passed function "
   [style-fn & args]
-  (let [f (fn-name style-fn)
+  (let [f `'~style-fn
         n (name (ns-name *ns*))]
     `(herb.core/with-style! {:id? true} ~f ~n ~style-fn ~@args)))
 
@@ -37,6 +39,6 @@
   Returns a unique class based on the fully qualified name of the passed
   function "
   [style-fn & args]
-  (let [f (fn-name style-fn)
+  (let [f `'~style-fn
         n (name (ns-name *ns*))]
     `(herb.core/with-style! {} ~f ~n ~style-fn ~@args)))
