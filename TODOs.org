@@ -20,3 +20,5 @@
 ** Add demo for selecting elements by class
 * TODO What happens with named scoped function like in letfn?
 * TODO Add helper macro for defining component function
+* TODO Fix anon advanced build names 
+* TODO Fix data-herb args advanced build
