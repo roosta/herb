@@ -10,7 +10,7 @@
 (def dev? ^boolean js/goog.DEBUG)
 
 (defn set-global-style!
-  "Takes Garden style vectors, and create or update the global style"
+  "Takes a collection of Garden style vectors, and create or update the global style element"
   [& styles]
   (let [element (.querySelector js/document "style[data-herb=\"global\"]")
         head (.-head js/document)
@@ -25,8 +25,6 @@
         (.appendChild head element)))))
 
 (defn- convert-modes
-  "Takes a map of modes and returns a formatted vector fed into garden using
-  the :&:mode parent selector syntax"
   [modes]
   (map
    (fn [[kw mode]]
@@ -34,9 +32,6 @@
    modes))
 
 (defn- convert-media
-  "Takes a vector of media queries i.e [{:screen true} {:color \"green\"}] and
-  calls at-media for each query, and use garden's ancestor selector (:&) to
-  target current classname."
   [media]
   (map (fn [[query style]]
          (at-media query [:& style]))
@@ -45,7 +40,9 @@
 (defn- resolve-style-fns
   "Calls each function provided in a collection of style-fns. Input can take
   multiple forms depending on how it got called from the consumer side either
-  using the macro directly or via extend meta data"
+  using the macro directly or via extend meta data.
+  Takes a collection of `style-fns` and a collection `result` that is returned
+  with the resolved style maps."
   [style-fns result]
   (if (empty? style-fns)
     result
@@ -74,9 +71,10 @@
    (filter identity)))
 
 (defn- extract-styles
-  "Walk the entire style tree, resolving each ancestor via the :extend meta data
-  The end result of this function is a vector of resolved styles in the form:
-  [{:color \"green\"} {:font-weight \"bold\"}]"
+  "Extract all the `:extend` meta, ensuring what we walk the entire tree, passing
+  each extend vector of style-fns to `resolve-style-fns` for resolution.
+  Takes a collection of `style-fns` and a result collection that is returned
+  with the resolved styles"
   [style-fns result]
   (cond
 
@@ -104,12 +102,13 @@
     converted))
 
 (defn- prepare-styles
-  "Takes a styles vector and applies merge to remove duplicate entries while
-  preserving inheritance precedence, while also extracting metadata"
-  [styles]
-  [(apply merge {} styles)
-   (extract-meta styles :mode)
-   (extract-meta styles :media)])
+  "Prepare `resolved-styles` so they can be passed to `garden.core/css` Merge
+  the styles to remove duplicate entries and ensuring precedence. Extract all
+  meta and return a final vector of styles including meta."
+  [resolved-styles]
+  [(apply merge {} resolved-styles)
+   (extract-meta resolved-styles :mode)
+   (extract-meta resolved-styles :media)])
 
 (defn- garden-data
   "Takes a classnames and a resolved style vector and returns a vector with
@@ -118,11 +117,12 @@
   (into [(str (if id? "#" ".") identifier)] styles))
 
 (defn- sanitize
-  [k]
-  (when k
+  "Takes `input` and remove any non-valid characters"
+  [input]
+  (when input
     (cond
-      (keyword? k) (name k)
-      :else (str/replace (str k) #"[^A-Za-z0-9-_]" "_"))))
+      (keyword? input) (sanitize (name input))
+      :else (str/replace (str input) #"[^A-Za-z0-9-_]" "_"))))
 
 (defn- compose-identifier
   [n k]
@@ -139,7 +139,7 @@
 (defn with-style!
   "Entry point for macros.
   Takes an `opt` map as first argument, and currently only
-  supports `:id true` which appends an id identifier instead of a class to the DOM "
+  supports `:id true` which appends an id identifier instead of a class to the DOM"
   [opts fn-name ns-name style-fn & args]
   (let [resolved-styles (extract-styles (into [style-fn] args) [])
         prepared-styles (prepare-styles resolved-styles)
