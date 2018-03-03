@@ -46,6 +46,7 @@
                         :compiler
                         {:output-to "public/js/app.js"
                          :output-dir "public/js/release"
+                         :closure-defines {"goog.DEBUG" false}
                          :optimizations :advanced
                          :pretty-print false}}}}
 
