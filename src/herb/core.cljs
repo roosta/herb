@@ -148,7 +148,9 @@
         meta-data (-> resolved-styles last meta)
         n (.-name style-fn)
         name* (if (empty? n)
-                (str ns-name "/" "anonymous-" (hash prepared-styles))
+                (if dev?
+                  (str ns-name "/" "anonymous-" (hash prepared-styles))
+                  (str "A-" (hash prepare-styles)))
                 (demunge n))
         data-str (compose-data-string name* (:key meta-data))
         identifier (compose-identifier name* (:key meta-data))
