@@ -147,11 +147,12 @@
         prepared-styles (prepare-styles resolved-styles)
         meta-data (-> resolved-styles last meta)
         n (.-name style-fn)
-        name* (if (empty? n)
-                (if dev?
-                  (str ns-name "/" "anonymous-" (hash prepared-styles))
-                  (str "A-" (hash prepare-styles)))
-                (demunge n))
+        hash* (.abs js/Math (hash prepared-styles) -1)
+        name* (cond
+                (and (empty? n) (not dev?)) (str "A-" hash*)
+                (and dev? (empty? n)) (str ns-name "/" "anonymous-" hash*)
+                (and dev? (not (empty? n))) (demunge n)
+                :else n)
         data-str (compose-data-string name* (:key meta-data))
         identifier (compose-identifier name* (:key meta-data))
         garden-data (garden-data identifier prepared-styles (:id? opts))]
