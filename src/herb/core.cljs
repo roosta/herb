@@ -7,6 +7,8 @@
    [herb.runtime :as runtime])
   (:require-macros [herb.core :refer [with-style]]))
 
+(def dev? ^boolean js/goog.DEBUG)
+
 (defn set-global-style!
   "Takes Garden style vectors, and create or update the global style"
   [& styles]
@@ -129,10 +131,10 @@
          (str "-" (sanitize k)))))
 
 (defn- compose-data-string
-  [n args]
+  [n key]
   (str
    (str/replace n #"\." "/")
-   (when args (pr-str (into [] args)))))
+   (when (and dev? key) (str "[" key "]"))))
 
 (defn with-style!
   "Entry point for macros. Takes an opt map as first argument, and currently only
@@ -148,7 +150,7 @@
         name* (if (empty? n)
                 (str ns-name "/" "anonymous-" (hash prepared-styles))
                 (demunge n))
-        data-str (compose-data-string name* args)
+        data-str (compose-data-string name* (:key meta-data))
         identifier (compose-identifier name* (:key meta-data))
         garden-data (garden-data identifier prepared-styles (:id? opts))]
     (runtime/inject-style! identifier garden-data data-str)
