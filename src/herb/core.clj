@@ -37,7 +37,7 @@
   `(<class some-fn arg1 arg2)`.
 
   Returns a unique class based on the fully qualified name of the passed
-  function "
+  function"
   [style-fn & args]
   (let [f `'~style-fn
         n (name (ns-name *ns*))]
