@@ -1,24 +1,11 @@
 (ns demo.core
   (:require
    [herb.core :refer-macros [<class <id] :as herb]
-   [garden.selectors :as s]
    [demo.components.text :refer [text]]
-   [garden.core :refer [css]]
+   [demo.components.container :refer [container]]
    [garden.units :refer [rem em px]]
    [reagent.debug :as d]
    [reagent.core :as r]))
-
-(defn container-style
-  []
-  ^{:media {{:screen :only :min-width (em 32)} {:width (rem 33)}
-            {:screen :only :min-width (em 52)} {:width (rem 53)}}}
-  {:margin-right "auto"
-   :margin-left "auto"})
-
-(defn container
-  []
-  (into [:div {:class (<class container-style)}]
-        (r/children (r/current-component))))
 
 (def global-style
   (list [:body {:background "#EEEEEE"
