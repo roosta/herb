@@ -20,7 +20,6 @@
   {:margin-right "auto"
    :margin-left "auto"})
 
-
 (defn container
   []
   (into [:div {:class (<class container-style)}]
@@ -29,7 +28,8 @@
 (def global-style
   (list [:body {:background "#EEEEEE"
                 :box-sizing "border-box"
-                :font-family ["Open sans" "sans-serif"]}]
+                :font-size (px 14)
+                :font-family ["Lato" "Helvetica Neue" "Arial" "Helvetica" "sans-serif"]}]
         [:a {:text-decoration "none"
              :color "#09f"}]))
 
@@ -86,18 +86,20 @@
   (let [styles {:container {:flex-basis "100%"
                             :margin-bottom (px 10)}
                 :heading
-                {:font-size  (px 112)
-                 :margin [[0 0 (px -35) (px -11)]]
+                {:font-size  (rem 7)
+                 :font-weight 400
+                 :line-height (em 1.14286)
+                 :margin 0
+                 :text-align :center
                  :color "#333"}
-                :box
-                {:display "flex"
-                 :align-items "center"
-                 :text-transform "uppercase"
-                 :background "#333"
-                 :font-weight "bold"
-                 :font-size (px 56)
-                 :color "white"}
-                :subheading {:margin-left (px -4)}}]
+                :subheading
+                {:font-size (rem 1.5)
+                 :font-weight 400
+                 :line-height (em 1.16667)
+                 :text-align "center"
+                 :color "#333"
+                 }
+                }]
     (with-meta (component styles) {:key component})))
 
 (defn header
@@ -105,9 +107,23 @@
   [:div {:class (<class header-style :container)}
    [:h4 {:class (<class header-style :heading)}
     "Herb"]
-   [:div {:class (<class header-style :box)}
-    [:div {:class (<class header-style :subheading)}
-     "styling library demo"]]])
+   [:div {:class (<class header-style :subheading)}
+    "Clojurescript styling library demo"]])
+
+(defn introduction-style
+  [component]
+  (let [styles {:headline {:font-size (rem 1.5)
+                           :font-weight 400
+                           :margin 0}
+                :body {:font-size (rem 0.875)}}]
+    (with-meta (component styles) {:key component}))
+  )
+
+(defn introduction
+  []
+  [paper
+   [:h2 {:class (<class introduction-style :headline)}
+    "Introduction"]])
 
 (defn home-page []
   (let [state (r/atom "green")]
@@ -136,7 +152,7 @@
       [container
        [:div {:class (<class flex-container)}
         [header]
-        [paper "hello"]]
+        [introduction]]
        ]
       ;; TODO demo inheritance variants
       ;; TODO demo state
