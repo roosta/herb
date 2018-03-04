@@ -19,62 +19,47 @@
 (defn header-style
   [component]
   (let [styles {:container {:flex-basis "100%"
-                            :margin-bottom (px 10)}
-                :heading
-                {:font-size  (rem 7)
-                 :font-weight 400
-                 :line-height (em 1.14286)
-                 :margin 0
-                 :text-align :center
-                 :color "#333"}
-                :subheading
-                {:font-size (rem 1.5)
-                 :font-weight 400
-                 :line-height (em 1.16667)
-                 :text-align "center"
-                 :color "#333"
-                 }
-                }]
+                            :margin-bottom (px 10)}}]
     (with-meta (component styles) {:key component})))
 
 (defn header
   []
   [:div {:class (<class header-style :container)}
-   [:h4 {:class (<class header-style :heading)}
+   [text {:align :center
+          :variant :display}
     "Herb"]
-   [:div {:class (<class header-style :subheading)}
+   [text {:align :center
+          :variant :headline}
     "Clojurescript styling library demo"]])
 
 (defn introduction-style
   [component]
-  (let [styles {:headline {:font-size (rem 1.5)
-                           :font-weight 400
-                           :margin 0}
-                :body {:font-size (rem 0.875)}}]
-    (with-meta (component styles) {:key component}))
-  )
+  (let [styles {:title {:margin [[(px 12) 0 (px 12) 0]]}
+                :body {}}]
+    (with-meta (component styles) {:key component})))
 
 (defn introduction
   []
   [paper
-   [:h2 {:class (<class introduction-style :headline)}
-    "Introduction"]])
+   [text {:class (<class introduction-style :title)
+          :variant :title}
+    "Introduction"]
+   [text {:variant :body}
+    "Herb is a CSS styling library for " [:a {:href "https://clojurescript.org"}
+                                          "Clojurescript"]
+    " whos main focus is component level styling using functions. It's a bit like "
+    [:a {:href "https://github.com/css-modules/css-modules"}
+     "CSS modules"]
+    " but instead of generating classnames randomly, Herb levages the CLJS
+    compiler to ensure no name collisions by using the fully qualified name of
+    an input function as its selector."]])
 
 (defn home-page []
   (let [state (r/atom "green")]
     (fn []
       [container
-       [:div {:class (<class flex-container)}
-        [header]
-        [introduction]]
-       ]
-      ;; TODO demo inheritance variants
-      ;; TODO demo state
-      ;; TODO demo media
-      ;; TODO demo keys
-      ;; TODO demo anon
-      ;; TODO demo nested
-      )))
+       [header]
+       [introduction]])))
 
 (defn mount-root []
   (r/render [home-page] (.getElementById js/document "app")))
