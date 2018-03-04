@@ -181,3 +181,51 @@ Archived entries from file /home/roosta/src/herb/TODOs.org
   :END:
   It currently works with root style taking precedence over ancestors but
   inheritance in ancestors itself does not work
+
+* DONE What happens with named scoped function like in letfn?
+  CLOSED: [2018-03-04 Sun 18:18]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-03-04 Sun 18:19
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE Fix anon advanced build names 
+  CLOSED: [2018-03-04 Sun 18:18]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-03-04 Sun 18:19
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE Fix data-herb args advanced build
+  CLOSED: [2018-03-04 Sun 18:18]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-03-04 Sun 18:19
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* CANCELLED pass multiple functions to with-style
+  CLOSED: [2018-02-27 Tue 19:19]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-03-04 Sun 18:19
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: CANCELLED
+  :END:
+  No point as I see it. Only usecase I see it if you'd just want to combine two
+  style functions with no added changes
+
+* PARTIAL Document keys and that they need to conform to valid chars
+  CLOSED: [2018-03-04 Sun 18:19]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-03-04 Sun 18:19
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: PARTIAL
+  :END:
+  Possibly transform key to valid chars
