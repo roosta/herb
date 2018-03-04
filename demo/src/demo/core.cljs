@@ -2,16 +2,11 @@
   (:require
    [herb.core :refer-macros [<class <id] :as herb]
    [garden.selectors :as s]
-   [garden.core :refer [css]]
-   [garden.stylesheet :refer [at-media]]
-   [taoensso.tufte :as tufte :refer-macros [defnp p profiled profile]]
+   [demo.components.text :refer [text]]
    [garden.core :refer [css]]
    [garden.units :refer [rem em px]]
    [reagent.debug :as d]
    [reagent.core :as r]))
-
-(tufte/add-basic-println-handler! {})
-(enable-console-print!)
 
 (defn container-style
   []
@@ -128,27 +123,6 @@
 (defn home-page []
   (let [state (r/atom "green")]
     (fn []
-      #_(profile
-         {}
-         (doseq [n (range 500)]
-           (p ::<class (<class profile-comp n)))
-
-         (doseq [_ (range 500)]
-           (p ::manipulate-dom (.appendChild (.-head js/document)
-                                             (.createElement js/document (str "style")))))
-
-         (doseq [_ (range 500)]
-           (p ::garden (css [:.classname {:width (px 100)
-                                          :height (px 100)
-                                          :background-color "magenta"
-                                          :border-radius "5px"}])))
-
-         (doseq [_ (range 500)]
-           (p ::at-media (at-media {:max-width "256px"} [:.classname {:width (px 100)
-                                                                      :height (px 100)
-                                                                      :background-color "magenta"
-                                                                      :border-radius "5px"}]))))
-
       [container
        [:div {:class (<class flex-container)}
         [header]
