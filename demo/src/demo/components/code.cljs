@@ -4,12 +4,13 @@
             [reagent.core :as r]))
 
 (defn code
-  [c]
+  [{:keys [lang]} content]
   (let [el (r/atom nil)]
     (r/create-class
      {:component-did-mount #(.highlightBlock js/hljs @el)
       :reagent-render
       (fn []
-        [:pre {:ref #(reset! el %)}
+        [:pre {:class (name lang)
+               :ref #(reset! el %)}
          [:code
-          c]])})))
+          content]])})))
