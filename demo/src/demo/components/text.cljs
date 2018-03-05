@@ -20,6 +20,7 @@
   [variant]
   (let [v {:display {:font-size  (rem 7)
                      :font-weight 400
+                     :margin 0
                      :line-height (em 1.14286)
                      :letter-spacing (em -0.04)}
            :headline {:font-size (rem 1.5)
@@ -28,15 +29,18 @@
                       :text-align "center"}
            :title {:font-size (rem 1.3125)
                    :font-weight 500
+                   :margin 0
+                   :margin-bottom (em 0.35)
                    :line-height (em 1.16667)
                    :text-align "center"}
            :subheading {:font-size (rem 1)
                         :font-weight 400
                         :line-height (em 1.5)}
            :body {:font-size (rem 0.875)
+                  :margin-bottom (px 16)
                   :font-weight 400
                   :line-height (em 1.46429)}}]
-    (merge (variant v) {:margin 0})))
+     (variant v)))
 
 (defn aligns
   [align]
@@ -63,6 +67,6 @@
   (let [class* (<class text-style variant color align)]
     (into
      [(variant mappings) {:class (if class
-                                   (str class* " " class)
+                                   (str/join " " [class* class])
                                    class*)}]
      (r/children (r/current-component)))))

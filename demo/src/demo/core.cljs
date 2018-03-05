@@ -39,19 +39,17 @@
 
 (defn intro-style
   [component]
-  (let [styles {:title {:margin [[(px 12) 0 (px 12) 0]]}
-                :body {}
-                :p {:margin [[(px 12) 0 (px 12) 0]]}}]
+  (let [styles {:body {}
+                :p {}}]
     (with-meta (component styles) {:key component})))
 
 (defn intro
   []
   (let [e1 (macros/example-src "intro.cljs")]
     [paper
-     [text {:class (<class intro-style :title)
-            :variant :title}
+     [text {:variant :title}
       "Intro"]
-     [text {:class (<class intro-style :p)}
+     [text
       "Herb is a CSS styling library for " [:a {:href "https://clojurescript.org"}
                                             "Clojurescript"]
       " whos main focus is component level styling using functions. It's a bit like "
