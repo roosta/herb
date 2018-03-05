@@ -3,6 +3,7 @@
    [herb.core :refer-macros [<class <id] :as herb]
    [demo.components.text :refer [text]]
    [demo.components.container :refer [container]]
+   [demo.components.code :refer [code]]
    [demo.components.paper :refer [paper]]
    [garden.units :refer [rem em px]]
    [reagent.debug :as d]
@@ -44,7 +45,7 @@
    [text {:class (<class introduction-style :title)
           :variant :title}
     "Introduction"]
-   [text {:variant :body}
+   [text
     "Herb is a CSS styling library for " [:a {:href "https://clojurescript.org"}
                                           "Clojurescript"]
     " whos main focus is component level styling using functions. It's a bit like "
@@ -52,7 +53,14 @@
      "CSS modules"]
     " but instead of generating classnames randomly, Herb levages the CLJS
     compiler to ensure no name collisions by using the fully qualified name of
-    an input function as its selector."]])
+    an input function as its selector."]
+   [text {:variant :subheading}
+    "Lets start of with a basic example:"]
+   [code
+    (str
+     '(fn []
+        (println "hello")))]
+   ])
 
 (defn home-page []
   (let [state (r/atom "green")]
