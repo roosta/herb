@@ -19,3 +19,4 @@
 ** TODO demo nested
 ** TODO Add demo for selecting elements by class
 * MAYBE Add helper macro for defining component function
+* TODO ::after ::before
