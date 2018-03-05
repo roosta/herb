@@ -55,5 +55,4 @@
   :profiles {:dev {:dependencies [[binaryage/devtools "0.9.9"]
                                   [figwheel-sidecar "0.5.15-SNAPSHOT"]
                                   [org.clojure/tools.nrepl "0.2.13"]
-                                  [com.cemerick/piggieback "0.2.2"]]
-                   :source-paths ["script"]}})
+                                  [com.cemerick/piggieback "0.2.2"]]}})
