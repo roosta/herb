@@ -16,10 +16,13 @@
    [demo.macros :as macros]))
 
 (def global-style
-  (list [:body {:background "#EEEEEE"
+  (list [:body {:background "#eee"
                 :box-sizing "border-box"
                 :font-size (px 14)
                 :font-family ["Lato" "Helvetica Neue" "Arial" "Helvetica" "sans-serif"]}]
+        [:code {:background-color "#eee"
+                :border-radius "2px"
+                :padding (px 2)}]
         [:a {:text-decoration "none"
              :color "#09f"}]))
 

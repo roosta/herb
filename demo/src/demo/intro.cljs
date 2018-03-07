@@ -26,14 +26,9 @@
      [text {:variant :title}
       "Intro"]
      [text
-      "Herb is a CSS styling library for " [:a {:href "https://clojurescript.org"}
-                                            "Clojurescript"]
-      " whos main focus is component level styling using functions. It's a bit like "
-      [:a {:href "https://github.com/css-modules/css-modules"}
-       "CSS modules"]
-      " but instead of generating classnames randomly, Herb levages the CLJS
-      compiler to ensure no name collisions by using the fully qualified name of
-      an input function as its selector."]
+      "Herb is a CSS styling library for " [:a {:href "https://clojurescript.org"} "Clojurescript"]
+      ", built using "[:a {:href "https://github.com/noprompt/garden"} "Garden"]
+      ", whose main focus is on component level styling using functions."]
      [text
       "Lets start of with a basic example, I'm using "
       [:a {:href "https://github.com/reagent-project/reagent"}
@@ -45,7 +40,7 @@
       "Output:"]
      [intro/example]
      [text {:variant :subheading}
-      "Behind the scenes:"]
+      "Lets have a look at the DOM"]
      [text
       "A style element is appended to the DOM containing the input functions
       computed styles. Each function gets its own DOM element, and is updated
@@ -57,7 +52,6 @@
       qualified name. This way we avoid name collisions but keep a deterministic
       classname that can be targeted."]
      [text
-      "The " [:i "data-herb"] " attribute is currently only used for debugging
-      purposes, and makes it easier during development to find a specific style
-      element."]
-     ]))
+      "The " [:code "data-herb"] " attribute reflects the current namespace for
+     a given style, and only in development. It is munged on advanced compile,
+     same as the classnames."] ]))
