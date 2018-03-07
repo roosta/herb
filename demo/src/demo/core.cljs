@@ -1,11 +1,12 @@
 (ns demo.core
   (:require
    [herb.core :refer-macros [<class <id] :as herb]
-   ;; [demo.macros :refer-macros [example-src]]
    [demo.components.text :refer [text]]
    [demo.examples.intro :as intro]
    [demo.components.container :refer [container]]
    [demo.intro :refer [intro]]
+   [demo.css-garden :refer [css-garden]]
+   [demo.why-fns :refer [why-fns]]
    [demo.components.code :refer [code]]
    [demo.components.paper :refer [paper]]
    [garden.units :refer [rem em px]]
@@ -38,38 +39,14 @@
           :variant :headline}
     "Clojurescript styling library demo"]])
 
-(defn garden
-  []
-  (let [e1 (macros/example-src "intro.cljs")]
-    [paper
-     [text {:variant :title}
-      "Intro"]
-     [text
-      "Herb is a CSS styling library for " [:a {:href "https://clojurescript.org"} "Clojurescript"]
-      " whos main focus is component level styling using functions. It's a bit like "
-      [:a {:href "https://github.com/css-modules/css-modules"}
-       "CSS modules"]
-      " but instead of generating classnames randomly, Herb levages the CLJS
-    compiler to ensure no name collisions by using the fully qualified name of
-    an input function as its selector."]
-     [text
-      "Lets start of with a basic example, I'm using "
-      [:a {:href "https://github.com/reagent-project/reagent"}
-       "Reagent"]
-      " here but it's not a requirement for Herb"]
-     [code
-      e1]
-     [text {:variant :subheading}
-      "Output:"]
-     [intro/example]
-     ]))
-
 (defn app []
   (let [state (r/atom "green")]
     (fn []
       [container
        [header]
-       [intro]])))
+       [intro]
+       [why-fns]
+       [css-garden]])))
 
 (defn mount-root []
   (r/render [app] (.getElementById js/document "app")))
