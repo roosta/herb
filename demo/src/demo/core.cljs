@@ -20,6 +20,7 @@
                 :box-sizing "border-box"
                 :font-size (px 14)
                 :font-family ["Lato" "Helvetica Neue" "Arial" "Helvetica" "sans-serif"]}]
+        [:button {:border "none"}]
         [:code {:background-color "#eee"
                 :border-radius "2px"
                 :padding (px 2)}]

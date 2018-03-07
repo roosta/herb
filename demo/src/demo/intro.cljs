@@ -38,7 +38,7 @@
       intro-cljs]
      [text {:variant :subheading}
       "Output:"]
-     [intro/example]
+     [intro/example-component]
      [text {:variant :subheading}
       "Lets have a look at the DOM"]
      [text

@@ -9,8 +9,7 @@
    :height "50px"
    :width "100%"})
 
-;; This is our component
-(defn example
+(defn example-component
   []
   ;; using either <class or <id, the macros both take a function, and returns a
   ;; unique classname or id that we attach to our div here.
