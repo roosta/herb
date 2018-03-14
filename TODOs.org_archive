@@ -191,7 +191,7 @@ Archived entries from file /home/roosta/src/herb/TODOs.org
   :ARCHIVE_TODO: DONE
   :END:
 
-* DONE Fix anon advanced build names 
+* DONE Fix anon advanced build names
   CLOSED: [2018-03-04 Sun 18:18]
   :PROPERTIES:
   :ARCHIVE_TIME: 2018-03-04 Sun 18:19
@@ -229,3 +229,10 @@ Archived entries from file /home/roosta/src/herb/TODOs.org
   :ARCHIVE_TODO: PARTIAL
   :END:
   Possibly transform key to valid chars
+
+* Deterministic
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-03-07 Wed 20:36
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :END:
