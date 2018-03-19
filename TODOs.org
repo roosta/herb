@@ -5,6 +5,8 @@
 ** DONE Test for inheritance, make sure the chain is respected for modes and media
    CLOSED: [2018-02-17 Sat 20:18]
 ** TODO Test that the classname contains a full namespace
+** [[https://github.com/igrishaev/etaoin/blob/master/test/etaoin/api_test.clj][etaoin/api_test.clj at master · igrishaev/etaoin]]
+** [[https://github.com/igrishaev/etaoin][igrishaev/etaoin: Pure Clojure Webdriver protocol implementation]]
 * TODO Spec input
 * TODO Fix single rule not causing newline
 * TODO Do new perf test
@@ -20,3 +22,4 @@
 * MAYBE Add helper macro for defining component function
 * TODO ::after ::before
 * TODO Mention clojurescript version and requiring functions
+* TODO BUG: Passing boolean as a key
