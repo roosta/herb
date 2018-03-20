@@ -24,6 +24,12 @@
         (.setAttribute element "data-herb" "global")
         (.appendChild head element)))))
 
+(defn join-classes
+  [coll]
+  (->> coll
+      (filter identity)
+      (str/join " " coll)))
+
 (defn- convert-modes
   [modes]
   (map
