@@ -25,10 +25,10 @@
         (.appendChild head element)))))
 
 (defn join-classes
-  [coll]
-  (->> coll
+  [& classes]
+  (->> classes
       (filter identity)
-      (str/join " " coll)))
+      (str/join " " classes)))
 
 (defn- convert-modes
   [modes]
