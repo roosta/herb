@@ -28,7 +28,7 @@
   [& classes]
   (->> classes
       (filter identity)
-      (str/join " " classes)))
+      (str/join " ")))
 
 (defn- convert-modes
   [modes]
