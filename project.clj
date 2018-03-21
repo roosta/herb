@@ -11,7 +11,8 @@
                  [org.clojure/clojurescript "1.9.473"]
                  [garden "1.3.3"]]
 
-  :profiles {:dev {:dependencies [[etaoin "0.2.8-SNAPSHOT"]]
+  :profiles {:dev {:dependencies [[philoskim/debux "0.4.3"]
+                                  [etaoin "0.2.8-SNAPSHOT"]]
                    :plugins [[lein-doo "0.1.8"]]}}
 
   :source-paths ["src"]
