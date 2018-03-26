@@ -144,8 +144,8 @@
 
 (defn with-style!
   "Entry point for macros.
-  Takes an `opt` map as first argument, and currently only
-  supports `:id true` which appends an id identifier instead of a class to the DOM"
+  Takes an `opt` map as first argument, and currently only supports `:id true`
+  which appends an id identifier instead of a class to the DOM"
   [opts fn-name ns-name style-fn & args]
   (let [resolved-styles (extract-styles (into [style-fn] args) [])
         prepared-styles (prepare-styles resolved-styles)
