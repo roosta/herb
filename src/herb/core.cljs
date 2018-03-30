@@ -3,6 +3,7 @@
    [garden.core :refer [css]]
    [clojure.string :as str]
    [garden.selectors :as s]
+   [debux.cs.core :as d :refer-macros [clog clogn dbg dbgn break]]
    [garden.stylesheet :refer [at-media at-keyframes]]
    [herb.runtime :as runtime])
   (:require-macros [herb.core :refer [with-style]]))
@@ -137,10 +138,10 @@
          (str "-" (sanitize k)))))
 
 (defn- compose-data-string
-  [n key]
+  [n k]
   (str
    (str/replace n #"\." "/")
-   (when (and dev? key) (str "[" key "]"))))
+   (when (and dev? k) (str "[" k "]"))))
 
 (defn with-style!
   "Entry point for macros.
