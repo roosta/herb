@@ -2,6 +2,7 @@
   (:require [garden.core :refer [css]]
             [goog.dom :as dom]
             [goog.object :as gobj]
+            [debux.cs.core :as d :refer-macros [clog clogn dbg dbgn break]]
             [clojure.string :as str]))
 
 (def injected-styles (atom {}))
@@ -11,7 +12,7 @@
   [identifier element new]
   (let [css-str (css new)]
     (swap! injected-styles assoc identifier {:data new
-                                            :element element})
+                                             :element element})
     (set! (.-innerHTML element) css-str)))
 
 (defn create-style-element!
