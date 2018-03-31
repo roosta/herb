@@ -134,7 +134,7 @@
       (keyword? input) (sanitize (name input))
       :else (str/replace (str input) #"[^A-Za-z0-9-_]" "_"))))
 
-(defn- compose-identifier
+(defn- compose-classname
   [n k]
   (str (sanitize n)
        (when k
@@ -154,6 +154,7 @@
   (let [resolved-styles (extract-styles (into [style-fn] args) [])
         prepared-styles (prepare-styles resolved-styles)
         meta-data (-> resolved-styles last meta)
+        static (:static meta-data)
         n (.-name style-fn)
         hash* (.abs js/Math (hash prepared-styles) -1)
         name* (cond
@@ -161,8 +162,13 @@
                 (and dev? (empty? n)) (str ns-name "/" "anonymous-" hash*)
                 (and dev? (not (empty? n))) (demunge n)
                 :else n)
-        data-str (compose-data-string name* (:key meta-data))
-        identifier (compose-identifier name* (:key meta-data))
-        garden-data (garden-data identifier prepared-styles (:id? opts))]
-    (runtime/inject-style! identifier garden-data data-str)
-    identifier))
+        data-str (if static
+                   (compose-data-string name* nil)
+                   (compose-data-string name* (:key meta-data)))
+        classname (compose-classname name* (:key meta-data))
+        identifier (if static
+                     (sanitize name*)
+                     classname)
+        garden-data (garden-data classname prepared-styles (:id? opts))]
+    (runtime/inject-style! identifier garden-data data-str static)
+    classname))

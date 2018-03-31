@@ -33,10 +33,12 @@
   and a fully qualified name. Check if identifier exist in DOM already, and if it
   does, compare `new` with `current` to make sure garden is not called to create
   the same style string again"
-  [identifier new data-str]
+  [identifier new data-str static]
   (if-let [injected (get @injected-styles identifier)]
     (let [current (:data injected)]
       (when (not= current new)
         (let [element (:element injected)]
-          (update-style! identifier element new))))
+          (update-style! identifier element (if static
+                                              [current new]
+                                              new)))))
     (create-style-element! identifier new data-str)))
