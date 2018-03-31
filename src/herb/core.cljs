@@ -103,19 +103,22 @@
   (let [convert-fn (case meta-type
                      :media convert-media
                      :mode convert-modes)
-        extracted (into [] (process-meta-xform meta-type) styles)
-        merged (apply merge {} extracted)
-        converted (convert-fn merged)]
-    converted))
+        extracted (into [] (process-meta-xform meta-type) styles)]
+    (when (not (empty? extracted))
+      (let [merged (apply merge {} extracted)
+            converted (convert-fn merged)]
+        converted))))
 
 (defn- prepare-styles
   "Prepare `resolved-styles` so they can be passed to `garden.core/css` Merge
   the styles to remove duplicate entries and ensuring precedence. Extract all
   meta and return a final vector of styles including meta."
   [resolved-styles]
-  [(apply merge {} resolved-styles)
-   (extract-meta resolved-styles :mode)
-   (extract-meta resolved-styles :media)])
+  (filter
+   identity
+   [(apply merge {} resolved-styles)
+    (extract-meta resolved-styles :mode)
+    (extract-meta resolved-styles :media)]))
 
 (defn- garden-data
   "Takes a classnames and a resolved style vector and returns a vector with
