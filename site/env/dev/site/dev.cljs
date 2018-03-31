@@ -1,6 +1,6 @@
-(ns ^:figwheel-no-load demo.dev
+(ns ^:figwheel-no-load site.dev
   (:require
-    [demo.core :as core]
+    [site.core :as core]
     [devtools.core :as devtools]))
 
 

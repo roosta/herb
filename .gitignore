@@ -10,8 +10,8 @@ pom.xml.asc
 .hgignore
 .hg/
 dev/user.clj
-demo/public/js
-demo/figwheel_server.log
-demo/target
+site/public/js
+site/figwheel_server.log
+site/target
 .nrepl-port
-demo/.cljs_rhino_repl
+site/.cljs_rhino_repl

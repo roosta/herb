@@ -1,16 +1,16 @@
-(ns demo.intro
+(ns site.intro
   (:require
    [herb.core :refer-macros [<class <id] :as herb]
-   ;; [demo.macros :refer-macros [example-src]]
-   [demo.components.text :refer [text]]
-   [demo.examples.intro :as intro]
-   [demo.components.code :refer [code]]
-   [demo.components.paper :refer [paper]]
+   ;; [site.macros :refer-macros [example-src]]
+   [site.components.text :refer [text]]
+   [site.examples.intro :as intro]
+   [site.components.code :refer [code]]
+   [site.components.paper :refer [paper]]
    [garden.units :refer [rem em px]]
    [reagent.debug :as d]
    [reagent.core :as r])
   (:require-macros
-   [demo.macros :as macros]))
+   [site.macros :as macros]))
 
 (defn intro-style
   [component]

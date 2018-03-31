@@ -1,4 +1,4 @@
-(ns demo.perf
+(ns site.perf
   (:require [taoensso.tufte :as tufte :refer-macros [defnp p profiled profile]]
             [herb.core :refer [<class]]
             [garden.stylesheet :refer [at-media at-keyframes]]

@@ -1,16 +1,16 @@
-(ns demo.why-fns
+(ns site.why-fns
   (:require
    [herb.core :refer-macros [<class <id] :as herb]
-   ;; [demo.macros :refer-macros [example-src]]
-   [demo.components.text :refer [text]]
-   [demo.components.code :refer [code]]
-   [demo.examples.state-fn :as e1]
-   [demo.components.paper :refer [paper]]
+   ;; [site.macros :refer-macros [example-src]]
+   [site.components.text :refer [text]]
+   [site.components.code :refer [code]]
+   [site.examples.state-fn :as e1]
+   [site.components.paper :refer [paper]]
    [garden.units :refer [rem em px]]
    [reagent.debug :as d]
    [reagent.core :as r])
   (:require-macros
-   [demo.macros :as macros]))
+   [site.macros :as macros]))
 
 (defn why-fns
   []

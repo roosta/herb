@@ -1,19 +1,19 @@
-(ns demo.core
+(ns site.core
   (:require
    [herb.core :refer-macros [<class <id] :as herb]
-   [demo.components.text :refer [text]]
-   [demo.examples.intro :as intro]
-   [demo.components.container :refer [container]]
-   [demo.intro :refer [intro]]
-   [demo.css-garden :refer [css-garden]]
-   [demo.why-fns :refer [why-fns]]
-   [demo.components.code :refer [code]]
-   [demo.components.paper :refer [paper]]
+   [site.components.text :refer [text]]
+   [site.examples.intro :as intro]
+   [site.components.container :refer [container]]
+   [site.intro :refer [intro]]
+   [site.css-garden :refer [css-garden]]
+   [site.why-fns :refer [why-fns]]
+   [site.components.code :refer [code]]
+   [site.components.paper :refer [paper]]
    [garden.units :refer [rem em px]]
    [reagent.debug :as d]
    [reagent.core :as r])
   (:require-macros
-   [demo.macros :as macros]))
+   [site.macros :as macros]))
 
 (def global-style
   (list [:body {:background "#eee"
@@ -41,7 +41,7 @@
     "Herb"]
    [text {:align :center
           :variant :headline}
-    "Clojurescript styling library demo"]])
+    "Clojurescript styling library site"]])
 
 (defn app []
   (let [state (r/atom "green")]

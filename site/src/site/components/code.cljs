@@ -1,4 +1,4 @@
-(ns demo.components.code
+(ns site.components.code
   (:require [js.highlight]
             [goog.dom :as dom]
             [reagent.core :as r]))

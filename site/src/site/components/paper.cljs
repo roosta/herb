@@ -1,4 +1,4 @@
-(ns demo.components.paper
+(ns site.components.paper
   (:require [herb.core :refer [<class]]
             [garden.units :refer [rem em px]]
             [reagent.core :as r]))

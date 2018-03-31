@@ -1,4 +1,4 @@
-(ns demo.components.text
+(ns site.components.text
   (:require [garden.units :refer [rem em px]]
             [herb.core :refer [<class]]
             [clojure.string :as str]

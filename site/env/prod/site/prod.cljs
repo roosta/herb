@@ -1,6 +1,6 @@
-(ns demo.prod
+(ns site.prod
   (:require
-    [demo.core :as core]))
+    [site.core :as core]))
 
 ;;ignore println statements in prod
 (set! *print-fn* (fn [& _]))

@@ -18,7 +18,9 @@
   :clean-targets ^{:protect false}
   [:target-path
    [:cljsbuild :builds :app :compiler :output-dir]
-   [:cljsbuild :builds :app :compiler :output-to]]
+   [:cljsbuild :builds :app :compiler :output-to]
+   [:cljsbuild :builds :release :compiler :output-dir]
+   [:cljsbuild :builds :release :compiler :output-to] ]
 
   :resource-paths ["public"]
 
@@ -31,7 +33,7 @@
   :cljsbuild {:builds {:app
                        {:source-paths ["src" "../src" "env/dev"]
                         :compiler
-                        {:main "demo.dev"
+                        {:main "site.dev"
                          :output-to "public/js/app.js"
                          :output-dir "public/js/out"
                          :asset-path   "js/out"
@@ -39,7 +41,7 @@
                          :optimizations :none
                          :pretty-print  true}
                         :figwheel
-                        {:on-jsload "demo.core/mount-root" }}
+                        {:on-jsload "site.core/mount-root"}}
                        :release
                        {:source-paths ["src" "env/prod"]
                         :compiler
