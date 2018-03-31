@@ -1,18 +1,24 @@
 # Change Log
-
 ## [Unreleased]
+
+## [v0.4.0] - 2018-03-31
 ### Fixed
 - Issue with passing a keyword as a style key causing a crash
 
 ### Added
 - New meta data `:id` that returns an id instead of a classname
+- Add `set-global-style!` helper fn that assists setting styles to global elements like <a>, <body> and so forth
+- Add `join-classes` helper fn that takes multiple class names and joins them.
+- Setup `:advanced` build, using munged function names in-place of fully qualified names
 
 ### Changed
 - Introduce two new macros `<class` and `<id` and deprecate `with-style`
-- Changed identifier and data string to use input functions .-name field. This
-  allows for scoped functions.
-- Include ns in anonymous function identifiers and data string to make them
+- Changed identifier and data string to use input functions `.-name` field. This
+  allows for nested forms.
+- Include NS in anonymous function identifiers and data string to make them
   easier to debug
+- Args are no longer used as a data string identifier, key is used instead since
+  it would more likley conform to a readable identifier.
 
 ## [v0.3.5] - 2018-02-23
 ### Changed
@@ -70,7 +76,8 @@ from `herb.macro` to `herb.core`
 ### Fixed
 - Fixed issues with inheritance precedence
 
-[Unreleased]: https://github.com/roosta/herb/compare/v0.3.5...HEAD
+[Unreleased]: https://github.com/roosta/herb/compare/v0.4.0...HEAD
+[v0.4.0]: https://github.com/roosta/herb/compare/v0.3.5...v0.4.0
 [v0.3.5]: https://github.com/roosta/herb/compare/v0.3.4...v0.3.5
 [v0.3.4]: https://github.com/roosta/herb/compare/v0.3.3...v0.3.4
 [v0.3.3]: https://github.com/roosta/herb/compare/v0.3.2...v0.3.3
