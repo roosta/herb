@@ -25,3 +25,4 @@
 * TODO BUG: Passing boolean as a key
 * [[https://www.w3.org/wiki/Dynamic_style_-_manipulating_CSS_with_JavaScript][Dynamic style - manipulating CSS with JavaScript - W3C Wiki]]
 * TODO Optimize css on prod
+* TODO document group args
