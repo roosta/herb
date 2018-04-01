@@ -10,9 +10,10 @@
 (defn update-style!
   "Create css string and update DOM"
   [identifier element new]
-  (let [css-str (css new)]
-    (swap! injected-styles assoc identifier {:data new
-                                             :element element})
+  (let [css-str (css (map (fn [[class {:keys [style mode media]}]]
+                            [class style mode media])
+                          (:data new)))]
+    (swap! injected-styles assoc identifier new)
     (set! (.-innerHTML element) css-str)))
 
 (defn create-style-element!
@@ -26,7 +27,7 @@
     (.setAttribute element "type" "text/css")
     (.setAttribute element "data-herb" data-str)
     (.appendChild head element)
-    (update-style! identifier element new)))
+    (update-style! identifier element {:data (conj {} new) :element element})))
 
 (defn inject-style!
   "Main interface to runtime. Takes an identifier, new garden style data structure
@@ -35,9 +36,9 @@
   the same style string again"
   [identifier new data-str]
   (if-let [injected (get @injected-styles identifier)]
-    (let [current (:data injected)]
-      (.log js/console (not= current new))
-      (when (not= current new)
+    (let [data (:data injected)
+          target (get data (key new))]
+      (when (not= target (val new))
         (let [element (:element injected)]
-          (update-style! identifier element new))))
+          (update-style! identifier element (assoc injected :data (conj data new))))))
     (create-style-element! identifier new data-str)))

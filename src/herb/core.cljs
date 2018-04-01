@@ -103,25 +103,26 @@
   (let [convert-fn (case meta-type
                      :media convert-media
                      :mode convert-modes)
-        extracted (into [] (process-meta-xform meta-type) styles)
-        merged (apply merge {} extracted)
-        converted (convert-fn merged)]
-    converted))
+        extracted (into [] (process-meta-xform meta-type) styles)]
+    (when (not (empty? extracted))
+      (let [merged (apply merge {} extracted)
+            converted (convert-fn merged)]
+        converted))))
 
-(defn- prepare-styles
+(defn- prepare-data
   "Prepare `resolved-styles` so they can be passed to `garden.core/css` Merge
   the styles to remove duplicate entries and ensuring precedence. Extract all
   meta and return a final vector of styles including meta."
   [resolved-styles]
-  [(apply merge {} resolved-styles)
-   (extract-meta resolved-styles :mode)
-   (extract-meta resolved-styles :media)])
+   {:style (apply merge {} resolved-styles)
+    :mode  (extract-meta resolved-styles :mode)
+    :media (extract-meta resolved-styles :media)})
 
-(defn- garden-data
-  "Takes a classnames and a resolved style vector and returns a vector with
+(defn- attach-selector
+  "Takes an identifier and a resolved style map and returns a vector with
   classname prepended"
-  [identifier styles id?]
-  (into [(str (if id? "#" ".") identifier)] styles))
+  [selector styles id?]
+  [(str (if id? "#" ".") selector) styles])
 
 (defn- sanitize
   "Takes `input` and remove any non-valid characters"
@@ -131,7 +132,7 @@
       (keyword? input) (sanitize (name input))
       :else (str/replace (str input) #"[^A-Za-z0-9-_]" "_"))))
 
-(defn- compose-identifier
+(defn- compose-selector
   [n k]
   (str (sanitize n)
        (when k
@@ -149,17 +150,23 @@
   which appends an id identifier instead of a class to the DOM"
   [opts fn-name ns-name style-fn & args]
   (let [resolved-styles (extract-styles (into [style-fn] args) [])
-        prepared-styles (prepare-styles resolved-styles)
+        style-data (prepare-data resolved-styles)
         meta-data (-> resolved-styles last meta)
+        static (:static meta-data)
         n (.-name style-fn)
-        hash* (.abs js/Math (hash prepared-styles) -1)
+        hash* (.abs js/Math (hash style-data) -1)
         name* (cond
                 (and (empty? n) (not dev?)) (str "A-" hash*)
                 (and dev? (empty? n)) (str ns-name "/" "anonymous-" hash*)
                 (and dev? (not (empty? n))) (demunge n)
                 :else n)
-        data-str (compose-data-string name* (:key meta-data))
-        identifier (compose-identifier name* (:key meta-data))
-        garden-data (garden-data identifier prepared-styles (:id? opts))]
-    (runtime/inject-style! identifier garden-data data-str)
-    identifier))
+        data-str (if static
+                   (compose-data-string name* nil)
+                   (compose-data-string name* (:key meta-data)))
+        selector (compose-selector name* (:key meta-data))
+        identifier (if static
+                     (sanitize name*)
+                     selector)
+        style-data (attach-selector selector style-data (:id? opts))]
+    (runtime/inject-style! identifier style-data data-str)
+    selector))

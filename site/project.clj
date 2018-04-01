@@ -43,7 +43,7 @@
                         :figwheel
                         {:on-jsload "site.core/mount-root"}}
                        :release
-                       {:source-paths ["src" "env/prod"]
+                       {:source-paths ["src" "../src" "env/prod"]
                         :compiler
                         {:output-to "public/js/app.js"
                          :output-dir "public/js/release"
