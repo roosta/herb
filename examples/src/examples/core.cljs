@@ -161,7 +161,7 @@
   ^{:extend [tmp-2 "red"]}
   {:color "yellow"})
 
-(defn style-group
+(defn style-group-stateful
   [component color]
   (with-meta
     (component
@@ -172,6 +172,16 @@
     {:static true
      :key component}))
 
+(defn style-group-static
+  [component]
+  (with-meta
+    (component
+     {:text {:color "magenta"}
+      :box {:background-color "#eee"
+            :padding (px 12)}
+      :text-2 {:color "cyan"}})
+    {:static true
+     :key component}))
 ;; (def some-other-style {:background-color "black"})
 ;; (def some-more-style {:border-radius "5px"})
 ;; (def some-style
@@ -204,11 +214,18 @@
          )
 
       [:div
-       [:div {:class (<class style-group :box "#eee")}
-        [:span {:class (<class style-group :text @state)}
+       [:div {:class (<class style-group-stateful :box "#eee")}
+        [:span {:class (<class style-group-stateful :text @state)}
          "text 1"]
         [:br]
-        [:span {:class (<class style-group :text-2 "red")}
+        [:span {:class (<class style-group-stateful :text-2 "red")}
+         "text 2"]]
+
+       [:div {:class (<class style-group-static :box)}
+        [:span {:class (<class style-group-static :text)}
+         "text 1"]
+        [:br]
+        [:span {:class (<class style-group-static :text-2)}
          "text 2"]]
        [:div
 

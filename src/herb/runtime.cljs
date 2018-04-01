@@ -10,8 +10,8 @@
 (defn update-style!
   "Create css string and update DOM"
   [identifier element new]
-  (let [css-str (css (map (fn [[class style]]
-                            [class style])
+  (let [css-str (css (map (fn [[class {:keys [style mode media]}]]
+                            [class style mode media])
                           (:data new)))]
     (swap! injected-styles assoc identifier new)
     (set! (.-innerHTML element) css-str)))
@@ -38,7 +38,7 @@
   (if-let [injected (get @injected-styles identifier)]
     (let [data (:data injected)
           target (get data (key new))]
-      (when (or (not= target (val new)) (not (contains? data (key new))))
+      (when (not= target (val new))
         (let [element (:element injected)]
           (update-style! identifier element (assoc injected :data (conj data new))))))
     (create-style-element! identifier new data-str)))

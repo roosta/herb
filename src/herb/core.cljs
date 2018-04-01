@@ -114,17 +114,15 @@
   the styles to remove duplicate entries and ensuring precedence. Extract all
   meta and return a final vector of styles including meta."
   [resolved-styles]
-  (filter
-   identity
-   [(apply merge {} resolved-styles)
-    (extract-meta resolved-styles :mode)
-    (extract-meta resolved-styles :media)]))
+   {:style (apply merge {} resolved-styles)
+    :mode  (extract-meta resolved-styles :mode)
+    :media (extract-meta resolved-styles :media)})
 
 (defn- garden-data
   "Takes a classnames and a resolved style vector and returns a vector with
   classname prepended"
   [identifier styles id?]
-  (into [(str (if id? "#" ".") identifier)] styles))
+  [(str (if id? "#" ".") identifier) styles])
 
 (defn- sanitize
   "Takes `input` and remove any non-valid characters"
