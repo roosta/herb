@@ -153,13 +153,13 @@
         style-data (prepare-data resolved-styles)
         meta-data (-> resolved-styles last meta)
         static (:static meta-data)
-        n (.-name style-fn)
+        js-name (.-name style-fn)
         hash* (.abs js/Math (hash style-data) -1)
         name* (cond
-                (and (empty? n) (not dev?)) (str "A-" hash*)
-                (and dev? (empty? n)) (str ns-name "/" "anonymous-" hash*)
-                (and dev? (not (empty? n))) (demunge n)
-                :else n)
+                (and (empty? js-name) (not dev?)) (str "A-" hash*)
+                (and dev? (empty? js-name)) (str ns-name "/" "anonymous-" hash*)
+                (and dev? (not (empty? js-name))) (demunge js-name)
+                :else js-name)
         data-str (if static
                    (compose-data-string name* nil)
                    (compose-data-string name* (:key meta-data)))
