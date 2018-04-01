@@ -1,6 +1,6 @@
 (ns examples.core
   (:require
-   [herb.core :refer [with-style <class <id]]
+   [herb.core :refer [with-style <class <id defgroup]]
    [garden.selectors :as s]
    [garden.core :refer [css]]
    [garden.stylesheet :refer [at-media]]
@@ -188,6 +188,14 @@
 ;;   ^{:extend [some-other-style some-more-style]}
 ;;   {:color "blue"})
 
+(defgroup group-macro
+  {:text {:font-weight "bold"
+          :color "white"}
+   :box {:background-color "#333"
+         :padding (px 5)
+         :margin [["10px" 0 "10px" 0]]
+         :border-radius "5px"}})
+
 (defn home-page []
   (let [state (r/atom "green")]
     (fn []
@@ -210,23 +218,27 @@
            (p ::at-media (at-media {:max-width "256px"} [:.classname {:width (px 100)
                                                                       :height (px 100)
                                                                       :background-color "magenta"
-                                                                      :border-radius "5px"}])))
-         )
+                                                                      :border-radius "5px"}]))))
 
       [:div
        [:div {:class (<class style-group-stateful :box "#eee")}
         [:span {:class (<class style-group-stateful :text @state)}
-         "text 1"]
+         "group meta test with arguments"]
         [:br]
         [:span {:class (<class style-group-stateful :text-2 "red")}
-         "text 2"]]
+         "group meta test with arguments"]]
 
        [:div {:class (<class style-group-static :box)}
         [:span {:class (<class style-group-static :text)}
-         "text 1"]
+         "Group meta test without arguments"]
         [:br]
         [:span {:class (<class style-group-static :text-2)}
-         "text 2"]]
+         "Group meta test without arguments"]]
+
+       [:div {:class (<class group-macro :box)}
+        [:span {:class (<class group-macro :text)}
+         "Group macro test"]]
+
        [:div
 
         [:div {:class (with-style extend-3)}

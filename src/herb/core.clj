@@ -8,6 +8,27 @@
       `(-> #'~style-fn meta :name str) ;`'~style-fn
       nil)))
 
+(defmacro defgroup
+  "Define a style group, everything defined in a group is grouped in the same
+  style element, It takes a name and a map of styles in the form:
+  ```
+  (defgroup my-group
+    {:a-component {:color \"red\"}})
+  ```
+  To use a group, use one of `<class` or `<id` macro, where the first argument is
+  the key for whatever component stylesheet you want:
+  ```
+  [:div {:class (<class my-group :a-component)}]
+  ```"
+  [n c]
+  `(defn ~n [~'component & ~'args]
+     (if-let [style# (get ~c ~'component)]
+       (with-meta
+         style#
+         {:key ~'component
+          :group true})
+       (.error js/console "Herb error: failed to get component: " ~'component " in stylegroup: " '~n))))
+
 (defmacro with-style
   "**DEPRECATED** Takes a function that returns a map. Arguments can be passed
   along with function as additional arguments to with-style i.e
