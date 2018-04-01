@@ -1,6 +1,6 @@
 (ns examples.core
   (:require
-   [herb.core :refer-macros [with-style]]
+   [herb.core :refer [with-style <class <id]]
    [garden.selectors :as s]
    [garden.core :refer [css]]
    [garden.stylesheet :refer [at-media]]
@@ -161,6 +161,17 @@
   ^{:extend [tmp-2 "red"]}
   {:color "yellow"})
 
+(defn style-group
+  [component]
+  (with-meta
+    (component
+     {:text {:color "green"}
+      :box {:background-color "#eee"
+            :padding (px 12)}
+      :text-2 {:color "red"}})
+    {:static true
+     :key component}))
+
 ;; (def some-other-style {:background-color "black"})
 ;; (def some-more-style {:border-radius "5px"})
 ;; (def some-style
@@ -193,10 +204,16 @@
          )
 
       [:div
-       [:div {:class (with-style tmp-3)}
-        "hello"]
-
+       [:div {:class (<class style-group :box)}
+        [:span {:class (<class style-group :text)}
+         "text 1"]
+        [:br]
+        [:span {:class (<class style-group :text-2)}
+         "text 2"]]
        [:div
+
+        [:div {:class (with-style tmp-3)}
+         "hello"]
 
         [:div
          [:div {:class (with-style (fn []
