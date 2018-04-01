@@ -101,7 +101,7 @@
 (defn cyan-div
   []
   ^{:extend red-div
-    :media {{:screen true} {:color "black"
+    :media {{:screen true} {:color "white"
                             :background-color "purple"}}}
   {:background-color "cyan"})
 
@@ -169,7 +169,7 @@
       :box {:background-color color
             :padding (px 12)}
       :text-2 {:color color}})
-    {:static true
+    {:group true
      :key component}))
 
 (defn style-group-static
@@ -180,7 +180,7 @@
       :box {:background-color "#eee"
             :padding (px 12)}
       :text-2 {:color "cyan"}})
-    {:static true
+    {:group true
      :key component}))
 ;; (def some-other-style {:background-color "black"})
 ;; (def some-more-style {:border-radius "5px"})

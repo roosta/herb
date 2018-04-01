@@ -151,8 +151,7 @@
   [opts fn-name ns-name style-fn & args]
   (let [resolved-styles (extract-styles (into [style-fn] args) [])
         style-data (prepare-data resolved-styles)
-        meta-data (-> resolved-styles last meta)
-        static (:static meta-data)
+        {:keys [group key] :as meta-data} (-> resolved-styles last meta)
         js-name (.-name style-fn)
         hash* (.abs js/Math (hash style-data) -1)
         name* (cond
@@ -160,11 +159,11 @@
                 (and dev? (empty? js-name)) (str ns-name "/" "anonymous-" hash*)
                 (and dev? (not (empty? js-name))) (demunge js-name)
                 :else js-name)
-        data-str (if static
+        data-str (if group
                    (compose-data-string name* nil)
-                   (compose-data-string name* (:key meta-data)))
-        selector (compose-selector name* (:key meta-data))
-        identifier (if static
+                   (compose-data-string name* key))
+        selector (compose-selector name* key)
+        identifier (if group
                      (sanitize name*)
                      selector)
         style-data (attach-selector selector style-data (:id? opts))]
