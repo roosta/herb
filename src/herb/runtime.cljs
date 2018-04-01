@@ -5,7 +5,7 @@
             [debux.cs.core :as d :refer-macros [clog clogn dbg dbgn break]]
             [clojure.string :as str]))
 
-(def injected-styles (atom {}))
+(defonce injected-styles (atom {}))
 
 (defn update-style!
   "Create css string and update DOM"
@@ -36,6 +36,7 @@
   [identifier new data-str]
   (if-let [injected (get @injected-styles identifier)]
     (let [current (:data injected)]
+      (.log js/console (not= current new))
       (when (not= current new)
         (let [element (:element injected)]
           (update-style! identifier element new))))
