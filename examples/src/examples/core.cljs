@@ -162,13 +162,13 @@
   {:color "yellow"})
 
 (defn style-group
-  [component]
+  [component color]
   (with-meta
     (component
-     {:text {:color "green"}
-      :box {:background-color "#eee"
+     {:text {:color color}
+      :box {:background-color color
             :padding (px 12)}
-      :text-2 {:color "red"}})
+      :text-2 {:color color}})
     {:static true
      :key component}))
 
@@ -204,11 +204,11 @@
          )
 
       [:div
-       [:div {:class (<class style-group :box)}
-        [:span {:class (<class style-group :text)}
+       [:div {:class (<class style-group :box "#eee")}
+        [:span {:class (<class style-group :text @state)}
          "text 1"]
         [:br]
-        [:span {:class (<class style-group :text-2)}
+        [:span {:class (<class style-group :text-2 "red")}
          "text 2"]]
        [:div
 
