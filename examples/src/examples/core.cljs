@@ -145,20 +145,20 @@
    :background-color "magenta"
    :border-radius "5px"})
 
-(defn tmp-1
+(defn extend-1
   [color]
   ^{:key color}
   {:background-color color})
 
-(defn tmp-2
+(defn extend-2
   [color]
   ^{:key color
-    :extend [tmp-1 "green"]}
+    :extend [extend-1 "green"]}
   {:color color})
 
-(defn tmp-3
+(defn extend-3
   []
-  ^{:extend [tmp-2 "red"]}
+  ^{:extend [extend-2 "red"]}
   {:color "yellow"})
 
 (defn style-group-stateful
@@ -229,8 +229,8 @@
          "text 2"]]
        [:div
 
-        [:div {:class (with-style tmp-3)}
-         "hello"]
+        [:div {:class (with-style extend-3)}
+         "Extend test"]
 
         [:div
          [:div {:class (with-style (fn []
@@ -245,13 +245,13 @@
           "Anon function without meta"]]
 
         [:input {:class (with-style hover-focus)
-                 :default-value "Hello world"}]
+                 :default-value "test modes hover, active"}]
         [:div
          [:h2 {:class (with-style state-hover @state)}
-          "Welcome to Reagent"]
+          "Testing hover and state change via button"]
          [:button {:class (with-style button)
                    :on-click #(reset! state (toggle-color @state))}
-          "Toggle"]
+          "change color"]
          (for [c ["yellow" "blue" "green" "purple"]]
            ^{:key c}
            [:div {:class (with-style cycle-color c)}
