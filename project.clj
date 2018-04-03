@@ -20,12 +20,6 @@
   :cljsbuild {:builds [{:id "test"
                         :source-paths ["src" "test"]
                         :compiler {:output-to "target/cljs/test/test.js"
-                                   :output-dir "target/cljs/test"
-                                   :optimizations :none
+                                   :optimizations :whitespace
                                    :pretty-print true
-                                   :source-map true
-                                   :main herb.runner}}
-                       {:id "prod"
-                        :source-paths ["src"]
-                        :compiler {:output-to "herb.js"
-                                   :optimizations :advanced}}]})
+                                   :main herb.runner}}]})
