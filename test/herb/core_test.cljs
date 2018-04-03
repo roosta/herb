@@ -60,7 +60,7 @@
     (testing "Extracting media meta data"
       (is (= actual expected)))))
 
-(deftest prepare-styles
+(deftest prepare-data
   (let [styles [(with-meta
                   {:color "white"
                    :background-color "green"}
@@ -71,25 +71,31 @@
                   {:media {{:screen true} {:background-color "yellow"}}})
                 {:background-color "red"
                  :font-style "italic"}]
-        expected [{:color "black"
-                   :background-color "red"
-                   :border-radius "5px"
-                   :font-style "italic"}
-                  (list [:&:hover {:color "magenta"}])
-                  (list (at-media {:screen true} [:& {:background-color "yellow"}]))]
-        actual (core/prepare-styles styles)]
+        expected {:style {:color "black"
+                          :background-color "red"
+                          :border-radius "5px"
+                          :font-style "italic"}
+                  :mode (list [:&:hover {:color "magenta"}])
+                  :media (list (at-media {:screen true} [:& {:background-color "yellow"}]))}
+        actual (core/prepare-data styles)]
     (testing "Prepare styles"
       (is (= actual expected)))))
 
-(deftest garden-data
-  (let [classname "a_namespace_a-fn"
-        styles '({:color "black",
-                  :background-color "green",
-                  :border-radius "5px"})
-        expected [".a_namespace_a-fn"
-                  {:color "black",
-                   :background-color "green",
-                   :border-radius "5px"}]
-        actual (core/garden-data classname styles)]
+(deftest attach-selector
+  (let [selector "a_namespace_a-fn"
+        styles {:style {:color "black",
+                        :background-color "green",
+                        :border-radius "5px"}}
+        expected-id ["#a_namespace_a-fn"
+                     {:style {:color "black",
+                              :background-color "green",
+                              :border-radius "5px"}}]
+        expected-class [".a_namespace_a-fn"
+                        {:style {:color "black",
+                                 :background-color "green",
+                                 :border-radius "5px"}}]
+        actual-class (core/attach-selector selector styles false)
+        actual-id (core/attach-selector selector styles true)]
     (testing "Garden data"
-      (is (= actual expected)))))
+      (is (= actual-class expected-class))
+      (is (= actual-id expected-id)))))
