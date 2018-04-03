@@ -76,6 +76,7 @@
 (defn cycle-color
   [color]
   ^{:key color
+    :group true
     :extend [[dynamic-text-color color] [bold]]}
   {:text-align "center"
    :background-color color}

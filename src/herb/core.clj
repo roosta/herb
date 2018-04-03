@@ -23,10 +23,11 @@
   [n c]
   `(defn ~n [~'component & ~'args]
      (if-let [style# (get ~c ~'component)]
-       (with-meta
+       (vary-meta
          style#
-         {:key ~'component
-          :group true})
+         assoc
+         :key ~'component
+         :group true)
        (.error js/console "Herb error: failed to get component: " ~'component " in stylegroup: " '~n))))
 
 (defmacro with-style
