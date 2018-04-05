@@ -1,5 +1,6 @@
 #+SEQ_TODO: NEXT(t) TODO(t) WAITING(w) MAYBE(m) | DONE(d) PARTIAL(p) CANCELLED(c)
-* TODO Add global init
+* CANCELLED Add global init
+  CLOSED: [2018-04-05 Thu 12:35]
   Possibly create instances?
 * TESTS
 ** DONE Test for inheritance, make sure the chain is respected for modes and media
@@ -17,6 +18,8 @@
 ** TODO demo media
 ** TODO demo keys
 ** TODO demo anon
+** TODO demo group/defgroup
+*** Demo meta data in groups
 ** TODO demo nested
 ** TODO Add demo for selecting elements by class
 * MAYBE Add helper macro for defining component function
@@ -28,3 +31,5 @@
 * TODO document group args
 * TODO Change defgroup to stylegroup
 * TODO Test to see if you can deref ratoms directly in styles
+* TODO Rename mode to pseudo, allow for arbitrary forms
+* TODO Pass a fn to a helper function to return only classname for selection
