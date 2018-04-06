@@ -1,4 +1,5 @@
-(ns herb.core)
+(ns herb.core
+  (:require [herb.impl :as impl]))
 
 (comment
   (defn fn-name
@@ -7,6 +8,24 @@
     (if (instance? clojure.lang.Named style-fn)
       `(-> #'~style-fn meta :name str) ;`'~style-fn
       nil)))
+
+(comment
+  (defn set-global-style!
+    "Takes a collection of Garden style vectors, and create or update the global style element"
+    [& styles]
+    (let [element (.querySelector js/document "style[data-herb=\"global\"]")
+          head (.-head js/document)
+          css-str (css styles)]
+      (assert (some? head) "An head element is required in the dom to inject the style.")
+      (if element
+        (set! (.-innerHTML element) css-str)
+        (let [element (.createElement js/document "style")]
+          (set! (.-innerHTML element) css-str)
+          (.setAttribute element "type" "text/css")
+          (.setAttribute element "data-herb" "global")
+          (.appendChild head element))))))
+
+(def join-classes impl/join-classes)
 
 (defmacro defgroup
   "Define a style group, everything defined in a group is grouped in the same
@@ -28,7 +47,8 @@
          assoc
          :key ~'component
          :group true)
-       (.error js/console "Herb error: failed to get component: " ~'component " in stylegroup: " '~n))))
+       #?(:cljs (.error js/console "Herb error: failed to get component: " ~'component " in stylegroup: " '~n)
+          :clj (throw (str "Herb error: failed to get component: " ~'component " in stylegroup: " '~n))))))
 
 (defmacro with-style
   "**DEPRECATED** Takes a function that returns a map. Arguments can be passed
@@ -40,7 +60,7 @@
   [style-fn & args]
   (let [f `'~style-fn
         n (name (ns-name *ns*))]
-    `(herb.core/with-style! nil ~f ~n ~style-fn ~@args)))
+    `(herb.impl/with-style! nil ~f ~n ~style-fn ~@args)))
 
 (defmacro <id
   "Takes a function `style-fn` that returns a map. Arguments `args` can be passed
@@ -50,7 +70,7 @@
   [style-fn & args]
   (let [f `'~style-fn
         n (name (ns-name *ns*))]
-    `(herb.core/with-style! {:id? true} ~f ~n ~style-fn ~@args)))
+    `(herb.impl/with-style! {:id? true} ~f ~n ~style-fn ~@args)))
 
 (defmacro <class
   "Takes a function `style-fn` that returns a map. Arguments `args` can be passed
@@ -60,4 +80,4 @@
   [style-fn & args]
   (let [f `'~style-fn
         n (name (ns-name *ns*))]
-    `(herb.core/with-style! {} ~f ~n ~style-fn ~@args)))
+    `(herb.impl/with-style! {} ~f ~n ~style-fn ~@args)))

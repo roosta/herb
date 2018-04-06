@@ -1,29 +1,12 @@
-(ns herb.core
+(ns herb.impl
   (:require
-   [garden.core :refer [css]]
    [clojure.string :as str]
-   [garden.selectors :as s]
    [debux.cs.core :as d :refer-macros [clog clogn dbg dbgn break]]
-   [garden.stylesheet :refer [at-media at-keyframes]]
-   [herb.runtime :as runtime])
-  (:require-macros [herb.core :refer [with-style]]))
+   #?(:cljs [herb.runtime :as runtime])
+   [garden.stylesheet :refer [at-media at-keyframes]]))
 
-(def dev? ^boolean js/goog.DEBUG)
-
-(defn set-global-style!
-  "Takes a collection of Garden style vectors, and create or update the global style element"
-  [& styles]
-  (let [element (.querySelector js/document "style[data-herb=\"global\"]")
-        head (.-head js/document)
-        css-str (css styles)]
-    (assert (some? head) "An head element is required in the dom to inject the style.")
-    (if element
-      (set! (.-innerHTML element) css-str)
-      (let [element (.createElement js/document "style")]
-        (set! (.-innerHTML element) css-str)
-        (.setAttribute element "type" "text/css")
-        (.setAttribute element "data-herb" "global")
-        (.appendChild head element)))))
+#?(:cljs (def dev? ^boolean js/goog.DEBUG)
+   :clj (def dev? true))
 
 (defn join-classes
   [& classes]
@@ -31,20 +14,20 @@
       (filter identity)
       (str/join " ")))
 
-(defn- convert-modes
+(defn convert-modes
   [modes]
   (map
    (fn [[kw mode]]
      [(keyword (str "&" kw)) mode])
    modes))
 
-(defn- convert-media
+(defn convert-media
   [media]
   (map (fn [[query style]]
          (at-media query [:& style]))
        media))
 
-(defn- resolve-style-fns
+(defn resolve-style-fns
   "Calls each function provided in a collection of style-fns. Input can take
   multiple forms depending on how it got called from the consumer side either
   using the macro directly or via extend meta data.
@@ -68,7 +51,7 @@
                (rest style-fns)
                (into result (resolve-style-fns input [])))))))
 
-(defn- process-meta-xform
+(defn process-meta-xform
   "Return a transducer that pulls out a given meta type from a sequence and filter
   out nil values"
   [meta-type]
@@ -77,7 +60,7 @@
    (map meta-type)
    (filter identity)))
 
-(defn- extract-styles
+(defn extract-styles
   "Extract all the `:extend` meta, ensuring what we walk the entire tree, passing
   each extend vector of style-fns to `resolve-style-fns` for resolution.
   Takes a collection of `style-fns` and a result collection that is returned
@@ -95,7 +78,7 @@
              (into styles result)))
     :else result))
 
-(defn- extract-meta
+(defn extract-meta
   "Takes a group of resolved styles and a meta type. Pull out each meta obj and
   merge to prevent duplicates, finally convert to garden acceptable input and
   return"
@@ -109,7 +92,7 @@
             converted (convert-fn merged)]
         converted))))
 
-(defn- prepare-data
+(defn prepare-data
   "Prepare `resolved-styles` so they can be passed to `garden.core/css` Merge
   the styles to remove duplicate entries and ensuring precedence. Extract all
   meta and return a final vector of styles including meta."
@@ -118,13 +101,13 @@
     :mode  (extract-meta resolved-styles :mode)
     :media (extract-meta resolved-styles :media)})
 
-(defn- attach-selector
+(defn attach-selector
   "Takes an identifier and a resolved style map and returns a vector with
   classname prepended"
   [selector styles id?]
   [(str (if id? "#" ".") selector) styles])
 
-(defn- sanitize
+(defn sanitize
   "Takes `input` and remove any non-valid characters"
   [input]
   (when input
@@ -132,17 +115,27 @@
       (keyword? input) (sanitize (name input))
       :else (str/replace (str input) #"[^A-Za-z0-9-_]" "_"))))
 
-(defn- compose-selector
+(defn compose-selector
   [n k]
   (str (sanitize n)
        (when k
          (str "-" (sanitize k)))))
 
-(defn- compose-data-string
+(defn compose-data-string
   [n k]
   (str
    (str/replace n #"\." "/")
    (when (and dev? k) (str "[" k "]"))))
+
+(defn compose-name
+  [n ns-name hash*]
+  (let [n*
+        (cond
+          (and (empty? n) (not dev?)) (str "A-" hash*)
+          (and dev? (empty? n)) (str ns-name "/" "anonymous-" hash*)
+          :else n)]
+    #?(:cljs (demunge n*)
+       :clj n*)))
 
 (defn with-style!
   "Entry point for macros.
@@ -152,20 +145,18 @@
   (let [resolved-styles (extract-styles (into [style-fn] args) [])
         style-data (prepare-data resolved-styles)
         {:keys [group key] :as meta-data} (-> resolved-styles last meta)
-        js-name (.-name style-fn)
-        hash* (.abs js/Math (hash style-data) -1)
-        name* (cond
-                (and (empty? js-name) (not dev?)) (str "A-" hash*)
-                (and dev? (empty? js-name)) (str ns-name "/" "anonymous-" hash*)
-                (and dev? (not (empty? js-name))) (demunge js-name)
-                :else js-name)
+        hash* #?(:cljs (.abs js/Math (hash style-data))
+                 :clj (Math/abs (hash style-data)))
+        name* #?(:cljs (.-name style-fn)
+                 :clj (str ns-name "/" fn-name))
+        composed-name (compose-name name* ns-name hash*)
         data-str (if group
-                   (compose-data-string name* nil)
-                   (compose-data-string name* key))
-        selector (compose-selector name* key)
+                   (compose-data-string composed-name nil)
+                   (compose-data-string composed-name key))
+        selector (compose-selector composed-name key)
         identifier (if group
-                     (sanitize name*)
+                     (sanitize composed-name)
                      selector)
         style-data (attach-selector selector style-data (:id? opts))]
-    (runtime/inject-style! identifier style-data data-str)
-    selector))
+    #?(:cljs (runtime/inject-style! identifier style-data data-str))
+    #?(:cljs selector)))
