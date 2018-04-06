@@ -7,6 +7,8 @@
   :plugins [[lein-cljsbuild "1.1.7"]
             [lein-codox "0.10.3"]]
 
+  :source-paths ["src"]
+
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [org.clojure/clojurescript "1.9.473"]
                  [philoskim/debux-stubs "0.4.5"]
@@ -14,13 +16,4 @@
 
   :profiles {:dev {:dependencies [[philoskim/debux "0.4.5"]
                                   [etaoin "0.2.8-SNAPSHOT"]]
-                   :plugins [[lein-doo "0.1.8"]]}}
-
-  :source-paths ["src"]
-
-  :cljsbuild {:builds [{:id "test"
-                        :source-paths ["src" "test"]
-                        :compiler {:output-to "target/cljs/test/test.js"
-                                   :optimizations :whitespace
-                                   :pretty-print true
-                                   :main herb.runner}}]})
+                   :plugins [[lein-doo "0.1.8"]]}})
