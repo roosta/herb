@@ -1,6 +1,6 @@
 (ns examples.core
   (:require
-   [herb.core :refer [with-style <class <id defgroup]]
+   [herb.core :refer [with-style <class <id defgroup set-global-style!]]
    [garden.selectors :as s]
    [garden.core :refer [css]]
    [garden.stylesheet :refer [at-media]]
@@ -286,4 +286,5 @@
   (r/render [home-page] (.getElementById js/document "app")))
 
 (defn init! []
-  (mount-root))
+  (mount-root)
+  (set-global-style! (list [:body {:background-color "#eee"}])))

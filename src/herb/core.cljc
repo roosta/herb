@@ -1,31 +1,9 @@
 (ns herb.core
-  (:require [herb.impl :as impl]))
-
-(comment
-  (defn fn-name
-    [style-fn]
-    `(.-name ~style-fn)
-    (if (instance? clojure.lang.Named style-fn)
-      `(-> #'~style-fn meta :name str) ;`'~style-fn
-      nil)))
-
-(comment
-  (defn set-global-style!
-    "Takes a collection of Garden style vectors, and create or update the global style element"
-    [& styles]
-    (let [element (.querySelector js/document "style[data-herb=\"global\"]")
-          head (.-head js/document)
-          css-str (css styles)]
-      (assert (some? head) "An head element is required in the dom to inject the style.")
-      (if element
-        (set! (.-innerHTML element) css-str)
-        (let [element (.createElement js/document "style")]
-          (set! (.-innerHTML element) css-str)
-          (.setAttribute element "type" "text/css")
-          (.setAttribute element "data-herb" "global")
-          (.appendChild head element))))))
+  (:require [herb.impl :as impl]
+            #?(:cljs [herb.runtime :as runtime])))
 
 (def join-classes impl/join-classes)
+#?(:cljs (def set-global-style! runtime/set-global-style!))
 
 (defmacro defgroup
   "Define a style group, everything defined in a group is grouped in the same
@@ -81,3 +59,12 @@
   (let [f `'~style-fn
         n (name (ns-name *ns*))]
     `(herb.impl/with-style! {} ~f ~n ~style-fn ~@args)))
+
+
+(comment
+  (defn fn-name
+    [style-fn]
+    `(.-name ~style-fn)
+    (if (instance? clojure.lang.Named style-fn)
+      `(-> #'~style-fn meta :name str) ;`'~style-fn
+      nil)))
