@@ -1,14 +1,14 @@
-(ns herb.core-test
+(ns herb.unit-test
   (:require [clojure.test :as t :refer [deftest testing is]]
             [garden.stylesheet :refer [at-media at-keyframes]]
-            [herb.impl :as core]))
+            [herb.impl :as impl]))
 
 (deftest convert-modes
   (let [input {:hover {:opacity 1}
                :focus {:color "yellow"}}
         expected (list [:&:hover {:opacity 1}] [:&:focus {:color "yellow"}])]
     (testing "Converting modes"
-      (is (= (core/convert-modes input) expected)))))
+      (is (= (impl/convert-modes input) expected)))))
 
 (deftest convert-media
   (let [input {{:screen true} {:color "white"}
@@ -16,7 +16,7 @@
         expected (list (at-media {:screen true} [:& {:color "white"}])
                        (at-media {:min-width "100px"} [:& {:color "blue"}]))]
     (testing "Converting media queries"
-      (is (= (core/convert-media input) expected)))))
+      (is (= (impl/convert-media input) expected)))))
 
 (deftest resolve-style-fns
   (letfn [(button []
@@ -24,7 +24,7 @@
           (box [color] {:background-color color})]
     (let [expected [{:border-radius "5px"} {:background-color "green"}]]
       (testing "Resolve styles"
-        (is (= (core/resolve-style-fns [[[button] [box "green"]]] [])
+        (is (= (impl/resolve-style-fns [[[button] [box "green"]]] [])
                expected))))))
 
 (deftest extract-styles
@@ -33,7 +33,7 @@
           (button [] ^{:extend [[box "red"]]} {:border-radius "5px"})]
     (let [expected [{:font-size "24px"} {:background-color "red"} {:border-radius "5px"}]]
       (testing "Extract styles"
-        (is (= (core/extract-styles button []) expected))))))
+        (is (= (impl/extract-styles button []) expected))))))
 
 (deftest extract-meta-mode
   (let [styles [^{:mode {:hover {:color "red"}
@@ -42,7 +42,7 @@
 
                 ^{:mode {:hover {:color "green"}}}
                 {:border "2px solid black"}]
-        actual (core/extract-meta styles :mode)
+        actual (impl/extract-meta styles :mode)
         expected '([:&:hover {:color "green"}] [:&:focus {:color "blue"}])]
     (testing "Extracting mode meta data"
       (is (= actual expected)))))
@@ -56,7 +56,7 @@
                 {:color "white"}]
         expected (list (at-media {:screen true} [:& {:color "purple"}])
                        (at-media {:max-width "412px"} [:& {:color "blue"}]))
-        actual (core/extract-meta styles :media)]
+        actual (impl/extract-meta styles :media)]
     (testing "Extracting media meta data"
       (is (= actual expected)))))
 
@@ -77,7 +77,7 @@
                           :font-style "italic"}
                   :mode (list [:&:hover {:color "magenta"}])
                   :media (list (at-media {:screen true} [:& {:background-color "yellow"}]))}
-        actual (core/prepare-data styles)]
+        actual (impl/prepare-data styles)]
     (testing "Prepare styles"
       (is (= actual expected)))))
 
@@ -94,8 +94,8 @@
                         {:style {:color "black",
                                  :background-color "green",
                                  :border-radius "5px"}}]
-        actual-class (core/attach-selector selector styles false)
-        actual-id (core/attach-selector selector styles true)]
+        actual-class (impl/attach-selector selector styles false)
+        actual-id (impl/attach-selector selector styles true)]
     (testing "Garden data"
       (is (= actual-class expected-class))
       (is (= actual-id expected-id)))))
