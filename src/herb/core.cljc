@@ -1,9 +1,12 @@
 (ns herb.core
   (:require [herb.impl :as impl]
-            #?(:cljs [herb.runtime :as runtime])))
+            #?@(:cljs [[herb.runtime :as runtime]]
+                :clj  [[garden.core :as garden]
+                       [clojure.tools.analyzer.jvm :as ana.jvm]])))
 
 (def join-classes impl/join-classes)
-#?(:cljs (def set-global-style! runtime/set-global-style!))
+#?(:cljs (def set-global-style! runtime/set-global-style!)
+   :clj (def set-global-style! garden/css))
 
 (defmacro defgroup
   "Define a style group, everything defined in a group is grouped in the same

@@ -12,6 +12,7 @@
   :dependencies [[org.clojure/clojure "1.8.0" :scope "provided"]
                  [org.clojure/clojurescript "1.9.473" :scope "provided"]
                  [philoskim/debux-stubs "0.4.5"]
+                 [org.clojure/tools.analyzer "0.6.9"]
                  [garden "1.3.3"]]
 
   :profiles {:dev {:dependencies [[philoskim/debux "0.4.5"]
