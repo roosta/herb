@@ -6,7 +6,7 @@
    [garden.stylesheet :refer [at-media]]
    [taoensso.tufte :as tufte :refer-macros [defnp p profiled profile]]
    [garden.core :refer [css]]
-   [garden.units :refer [px]]
+   [garden.units :refer [px em]]
    [reagent.debug :as d]
    [reagent.core :as r]))
 
@@ -287,4 +287,12 @@
 
 (defn init! []
   (mount-root)
-  (set-global-style! (list [:body {:background-color "#eee"}])))
+  (set-global-style! (list [:body {:font-family ["Helvetica Neue" "Verdana" "Helvetica" "Arial" "sans-serif"]
+                                   :max-width (px 600)
+                                   :margin "0 auto"
+                                   :padding-top (px 72)
+                                   :-webkit-font-smoothing "antialiased"
+                                   :font-size (em 1.125)
+                                   :color "#333"
+                                   :line-height (em 1.5)
+}])))
