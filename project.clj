@@ -9,8 +9,8 @@
 
   :source-paths ["src"]
 
-  :dependencies [[org.clojure/clojure "1.8.0"]
-                 [org.clojure/clojurescript "1.9.473"]
+  :dependencies [[org.clojure/clojure "1.8.0" :scope "provided"]
+                 [org.clojure/clojurescript "1.9.473" :scope "provided"]
                  [philoskim/debux-stubs "0.4.5"]
                  [garden "1.3.3"]]
 
