@@ -2,8 +2,11 @@
   (:require
    [clojure.string :as str]
    [debux.cs.core :as d :refer-macros [clog clogn dbg dbgn break]]
-   #?(:cljs [herb.runtime :as runtime])
-   [garden.stylesheet :refer [at-media at-keyframes]]))
+   [garden.stylesheet :refer [at-media at-keyframes]]
+   #?@(:cljs [[herb.runtime :as runtime]
+              [cljs.compiler :as compiler]
+              [cljs.analyzer :as ana]]
+       :clj [[clojure.tools.analyzer.jvm :refer [analyze]]])))
 
 #?(:cljs (def dev? ^boolean js/goog.DEBUG)
    :clj (def dev? true))
@@ -124,18 +127,19 @@
 (defn compose-data-string
   [n k]
   (str
-   (str/replace n #"\." "/")
+   (str/replace n #"\$" "/")
    (when (and dev? k) (str "[" k "]"))))
 
 (defn compose-name
-  [n ns-name hash*]
-  (let [n*
-        (cond
-          (and (empty? n) (not dev?)) (str "A-" hash*)
-          (and dev? (empty? n)) (str ns-name "/" "anonymous-" hash*)
-          :else n)]
-    #?(:cljs (demunge n*)
-       :clj n*)))
+  [n ns-name hash]
+  (let [anon? #?(:clj (str/includes? n "fn__")
+                 :cljs (empty? n))
+        cname (cond
+                (and anon? (not dev?)) (str "A-" hash)
+                (and dev? anon?) (str ns-name "/" "anonymous-" hash)
+                :else n)]
+    #?(:cljs (demunge cname)
+       :clj cname)))
 
 (defn with-style!
   "Entry point for macros.
@@ -148,7 +152,9 @@
         hash* #?(:cljs (.abs js/Math (hash style-data))
                  :clj (Math/abs (hash style-data)))
         name* #?(:cljs (.-name style-fn)
-                 :clj (str ns-name "/" fn-name))
+                 :clj (-> (analyze style-fn)
+                          :tag
+                          (.getName)))
         composed-name (compose-name name* ns-name hash*)
         data-str (if group
                    (compose-data-string composed-name nil)
@@ -159,4 +165,5 @@
                      selector)
         style-data (attach-selector selector style-data (:id? opts))]
     #?(:cljs (runtime/inject-style! identifier style-data data-str))
-    #?(:cljs selector)))
+    #?(:cljs selector
+       :clj composed-name)))
