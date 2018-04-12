@@ -170,6 +170,6 @@
                      (sanitize composed-name)
                      selector)
         style-data (attach-selector selector style-data (:id? opts))]
-    #?(:cljs (runtime/inject-style! identifier style-data data-str))
-    #?(:cljs selector
-       :clj composed-name)))
+    #?@(:cljs [(runtime/inject-style! identifier style-data data-str)
+               selector]
+        :clj [composed-name])))
