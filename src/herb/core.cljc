@@ -79,6 +79,8 @@
          (ana.jvm/analyze button)))
      ))
 
+;; (.-name (:form (ana/analyze (ana/empty-env) impl/join-classes)))
+
 (comment
   (defn fn-name
     [style-fn]

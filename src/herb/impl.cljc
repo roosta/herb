@@ -135,8 +135,14 @@
   (let [anon? #?(:clj (str/includes? n "fn__")
                  :cljs (empty? n))
         cname (cond
-                (and anon? (not dev?)) (str "A-" hash)
-                (and dev? anon?) (str ns-name "/" "anonymous-" hash)
+                (and anon? (not dev?))
+                (str "A-" hash)
+
+                (and dev? anon?)
+                #?(:cljs
+                   (str ns-name "/" "anonymous-" hash)
+                   :clj
+                   (str/replace n #"fn__[0-9]*" (str "anonymous-" hash)))
                 :else n)]
     #?(:cljs (demunge cname)
        :clj cname)))
