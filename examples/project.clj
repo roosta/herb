@@ -26,7 +26,7 @@
 
   :resource-paths ["public"]
 
-  :source-paths ["src" "../src"]
+  :source-paths ["src/clj" "../src"]
 
   :figwheel {:http-server-root "."
              :nrepl-port 7002
@@ -35,7 +35,7 @@
              :css-dirs ["public/css"]}
 
   :cljsbuild {:builds {:app
-                       {:source-paths ["src" "../src" "env/dev/cljs"]
+                       {:source-paths ["src/cljs" "../src" "env/dev/cljs"]
                         :compiler
                         {:main "examples.dev"
                          :output-to "public/js/app.js"
@@ -47,7 +47,7 @@
                         :figwheel
                         {:on-jsload "examples.core/mount-root" }}
                        :release
-                       {:source-paths ["src" "../src" "env/prod/cljs"]
+                       {:source-paths ["src/cljs" "../src" "env/prod/cljs"]
                         :compiler
                         {:output-to "public/js/app.js"
                          :output-dir "public/js/release"
