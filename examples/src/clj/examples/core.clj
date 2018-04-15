@@ -1,5 +1,5 @@
 (ns examples.core
-  (:require [herb.core :refer [<class]]))
+  (:require [herb.core :refer [<class <style]]))
 
 (defn colors
   []

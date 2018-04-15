@@ -2,6 +2,9 @@
 * CANCELLED Add global init
   CLOSED: [2018-04-05 Thu 12:35]
   Possibly create instances?
+* Ideas
+** Use set in injected styles instead of map to ensure no duplicates
+** Use tree-seq when resolving styles
 * TESTS
 ** DONE Test for inheritance, make sure the chain is respected for modes and media
    CLOSED: [2018-02-17 Sat 20:18]
