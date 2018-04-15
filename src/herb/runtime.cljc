@@ -30,8 +30,8 @@
          (.setAttribute element "type" "text/css")
          (.setAttribute element "data-herb" data-str)
          (.appendChild head element)
-         (update-style identifier element {:data data :element element}))
-       :clj (update-style identifier {:data data}))))
+         (update-style identifier element {:data data :element element :data-string data-str}))
+       :clj (update-style identifier {:data data :data-string data-str}))))
 
 (defn inject-style
   "Main interface to runtime. Takes an identifier, new garden style data structure
@@ -39,10 +39,10 @@
   does, compare `new` with `current` to make sure garden is not called to create
   the same style string again"
   [identifier new data-str]
-  (if-let [injected (get @injected-styles identifier)]
+  (if-let [injected (get @injected-styles identifier)] ;
     (let [data (:data injected)
-          target (get data (key new))]
-      (when (not= target (val new))
+          target (get data (first new))]
+      (when (not= target (last new))
         (let [data (assoc injected :data (conj data new))]
           #?(:cljs (update-style identifier (:element injected) data)
              :clj  (update-style identifier data)))))
