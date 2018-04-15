@@ -39,18 +39,6 @@
        #?(:cljs (.error js/console "Herb error: failed to get component: " ~'component " in stylegroup: " '~n)
           :clj (throw (str "Herb error: failed to get component: " ~'component " in stylegroup: " '~n))))))
 
-(defmacro with-style
-  "**DEPRECATED** Takes a function that returns a map. Arguments can be passed
-  along with function as additional arguments to with-style i.e
-  `(with-style some-fn arg1 arg2)`.
-
-  Returns a unique identifier based the fully qualified name of the passed
-  function"
-  [style-fn & args]
-  (let [f `'~style-fn
-        n (name (ns-name *ns*))]
-    `(herb.impl/with-style! nil ~f ~n ~style-fn ~@args)))
-
 (defmacro <id
   "Takes a function `style-fn` that returns a map. Arguments `args` can be passed
   along with the function as additional arguments to <id i.e

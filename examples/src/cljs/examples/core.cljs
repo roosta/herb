@@ -1,8 +1,8 @@
 (ns examples.core
   (:require
    [herb.core
-    :refer-macros [with-style <class <id defgroup]
-    :refer [set-global-style!]]
+    :refer-macros [<class <id defgroup]
+    :refer [set-global-style]]
    [garden.selectors :as s]
    [garden.core :refer [css]]
    [garden.stylesheet :refer [at-media]]
@@ -244,41 +244,41 @@
 
        [:div
 
-        [:div {:class (with-style extend-3)}
+        [:div {:class (<class extend-3)}
          "Extend test"]
 
         [:div
-         [:div {:class (with-style (fn []
+         [:div {:class (<class (fn []
                                      ^{:extend button}
                                      {:background-color "black"
                                       :color "white"}))}
           "Anon function with meta"]
-         [:div {:class (with-style (fn [color]
+         [:div {:class (<class (fn [color]
                                      {:background-color color
                                       :color "white"})
                          "black")}
           "Anon function without meta"]]
 
-        [:input {:class (with-style hover-focus)
+        [:input {:class (<class hover-focus)
                  :default-value "test modes hover, active"}]
         [:div
-         [:h2 {:class (with-style state-hover @state)}
+         [:h2 {:class (<class state-hover @state)}
           "Testing hover and state change via button"]
-         [:button {:class (with-style button)
+         [:button {:class (<class button)
                    :on-click #(reset! state (toggle-color @state))}
           "change color"]
          (for [c ["yellow" "blue" "green" "purple"]]
            ^{:key c}
-           [:div {:class (with-style cycle-color c)}
+           [:div {:class (<class cycle-color c)}
             c])
          [:br]
-         [:div {:class (with-style cyan-div)}
+         [:div {:class (<class cyan-div)}
           "inheritance test"]]
-        [:div {:class (with-style keyed :paper)}]
+        [:div {:class (<class keyed :paper)}]
 
-        [:div {:class (with-style keyed :sheet)}]
+        [:div {:class (<class keyed :sheet)}]
 
-        [:div {:class (with-style media-query-test)}
+        [:div {:class (<class media-query-test)}
          "Media query test"]]
        #_[:div {:class (with-style some-style)}
         "Regular maps"]
