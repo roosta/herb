@@ -21,16 +21,17 @@
   "Create a style element in head if identifier is not already present Attach a
   data attr with namespace and call update-style with new element"
   [identifier new data-str]
-  #?(:cljs
-     (let [head (.-head js/document)
-           element (.createElement js/document "style")]
-       (assert (some? head)
-               "An head element is required in the dom to inject the style.")
-       (.setAttribute element "type" "text/css")
-       (.setAttribute element "data-herb" data-str)
-       (.appendChild head element)
-       (update-style identifier element {:data (conj {} new) :element element}))
-     :clj (update-style identifier {:data (conj {} new)})))
+  (let [data (conj {} new)]
+    #?(:cljs
+       (let [head (.-head js/document)
+             element (.createElement js/document "style")]
+         (assert (some? head)
+                 "An head element is required in the dom to inject the style.")
+         (.setAttribute element "type" "text/css")
+         (.setAttribute element "data-herb" data-str)
+         (.appendChild head element)
+         (update-style identifier element {:data data :element element}))
+       :clj (update-style identifier {:data data}))))
 
 (defn inject-style
   "Main interface to runtime. Takes an identifier, new garden style data structure
@@ -42,8 +43,9 @@
     (let [data (:data injected)
           target (get data (key new))]
       (when (not= target (val new))
-        (let [element (:element injected)]
-          (update-style identifier #?(:cljs element) (assoc injected :data (conj data new))))))
+        (let [data (assoc injected :data (conj data new))]
+          #?(:cljs (update-style identifier (:element injected) data)
+             :clj  (update-style identifier data)))))
     (create-style-element identifier new data-str)))
 
 (defn set-global-style
