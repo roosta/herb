@@ -14,7 +14,7 @@
   (let [css-str (css (map (fn [[class {:keys [style mode media]}]]
                             [class style mode media])
                           (:data new)))]
-    (swap! injected-styles assoc identifier new)
+    (swap! injected-styles assoc identifier (assoc new :css css-str))
     #?(:cljs (set! (.-innerHTML element) css-str))))
 
 (defn create-style-element

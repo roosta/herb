@@ -104,12 +104,6 @@
     :mode  (extract-meta resolved-styles :mode)
     :media (extract-meta resolved-styles :media)})
 
-(defn attach-selector
-  "Takes an identifier and a resolved style map and returns a vector with
-  classname prepended"
-  [selector styles id?]
-  [(str (if id? "#" ".") selector) styles])
-
 (defn sanitize
   "Takes `input` and remove any non-valid characters"
   [input]
@@ -151,7 +145,7 @@
   "Entry point for macros.
   Takes an `opt` map as first argument, and currently only supports `:id true`
   which appends an id identifier instead of a class to the DOM"
-  [opts fn-name ns-name style-fn & args]
+  [{:keys [id? style?]} fn-name ns-name style-fn & args]
   (let [resolved-styles (extract-styles (into [style-fn] args) [])
         style-data (prepare-data resolved-styles)
         {:keys [group key] :as meta-data} (-> resolved-styles last meta)
@@ -169,6 +163,9 @@
         identifier (if group
                      (sanitize composed-name)
                      selector)
-        style-data (attach-selector selector style-data (:id? opts))]
+        style-data [(str (if id? "#" ".") selector) style-data]]
     (runtime/inject-style identifier style-data data-str)
-    selector))
+    (if style?
+      (-> @runtime/injected-styles
+          (get identifier))
+      selector)))
