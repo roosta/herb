@@ -2,9 +2,9 @@
   (:require
    [clojure.string :as str]
    [debux.cs.core :as d :refer-macros [clog clogn dbg dbgn break]]
+   [herb.runtime :as runtime]
    [garden.stylesheet :refer [at-media at-keyframes]]
-   #?@(:cljs [[herb.runtime :as runtime]
-              [cljs.compiler :as compiler]
+   #?@(:cljs [[cljs.compiler :as compiler]
               [cljs.analyzer :as ana]]
        :clj [[clojure.tools.analyzer.jvm :refer [analyze]]])))
 
@@ -147,7 +147,7 @@
     #?(:cljs (demunge cname)
        :clj cname)))
 
-(defn with-style!
+(defn with-style
   "Entry point for macros.
   Takes an `opt` map as first argument, and currently only supports `:id true`
   which appends an id identifier instead of a class to the DOM"
@@ -170,6 +170,5 @@
                      (sanitize composed-name)
                      selector)
         style-data (attach-selector selector style-data (:id? opts))]
-    #?@(:cljs [(runtime/inject-style! identifier style-data data-str)
-               selector]
-        :clj [composed-name])))
+    (runtime/inject-style identifier style-data data-str)
+    selector))

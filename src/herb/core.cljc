@@ -1,20 +1,14 @@
 (ns herb.core
   (:require [herb.impl :as impl]
-            #?@(:cljs [[herb.runtime :as runtime]
-                       [cljs.compiler :as compiler]
-                       [cljs.analyzer :as ana]
-                       ]
+            [herb.runtime :as runtime]
+            #?@(:cljs [[cljs.compiler :as compiler]
+                       [cljs.analyzer :as ana]]
                 :clj  [[garden.core :as garden]
-                       [clojure.tools.analyzer :as ana]
-                       [clojure.tools.analyzer.jvm :as ana.jvm]
-                       [clojure.tools.analyzer.env :as env]
-                       [clojure.tools.analyzer.ast :as ast]
-                       ])))
+                       [clojure.tools.analyzer.jvm :as ana.jvm]])))
 
 ;; Aliases
 (def join-classes impl/join-classes)
-#?(:cljs (def set-global-style! runtime/set-global-style!)
-   :clj (def set-global-style! garden/css))
+(def set-global-style runtime/set-global-style)
 
 (defmacro defgroup
   "Define a style group, everything defined in a group is grouped in the same
@@ -47,7 +41,7 @@
   [style-fn & args]
   (let [f `'~style-fn
         n (name (ns-name *ns*))]
-    `(herb.impl/with-style! {:id? true} ~f ~n ~style-fn ~@args)))
+    `(herb.impl/with-style {:id? true} ~f ~n ~style-fn ~@args)))
 
 (defmacro <class
   "Takes a function `style-fn` that returns a map. Arguments `args` can be passed
@@ -57,7 +51,7 @@
   [style-fn & args]
   (let [f `'~style-fn
         n (name (ns-name *ns*))]
-    `(herb.impl/with-style! {} ~f ~n ~style-fn ~@args)))
+    `(herb.impl/with-style {} ~f ~n ~style-fn ~@args)))
 
 #?(:clj
    (defn asd

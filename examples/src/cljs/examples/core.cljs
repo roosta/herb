@@ -289,12 +289,13 @@
 
 (defn init! []
   (mount-root)
-  (set-global-style! (list [:body {:font-family ["Helvetica Neue" "Verdana" "Helvetica" "Arial" "sans-serif"]
-                                   :max-width (px 600)
-                                   :margin "0 auto"
-                                   :padding-top (px 72)
-                                   :-webkit-font-smoothing "antialiased"
-                                   :font-size (em 1.125)
-                                   :color "#333"
-                                   :line-height (em 1.5)
-}])))
+  (set-global-style (list [:body
+                           {:font-family ["Helvetica Neue" "Verdana" "Helvetica" "Arial" "sans-serif"]
+                            :max-width (px 600)
+                            :margin "0 auto"
+                            :padding-top (px 72)
+                            :-webkit-font-smoothing "antialiased"
+                            :font-size (em 1.125)
+                            :color "#333"
+                            :line-height (em 1.5)
+                            }])))
