@@ -1,10 +1,6 @@
 (ns herb.core
   (:require [herb.impl :as impl]
-            [herb.runtime :as runtime]
-            #?@(:cljs [[cljs.compiler :as compiler]
-                       [cljs.analyzer :as ana]]
-                :clj  [[garden.core :as garden]
-                       [clojure.tools.analyzer.jvm :as ana.jvm]])))
+            [herb.runtime :as runtime]))
 
 ;; Aliases
 (def join-classes impl/join-classes)
@@ -62,21 +58,3 @@
   (let [f `'~style-fn
         n (name (ns-name *ns*))]
     `(herb.impl/with-style! {} ~f ~n ~style-fn ~@args)))
-
-#?(:clj
-   (defn asd
-     []
-     (letfn [(button [] {:color "green"})]
-       (let [some-var (fn [] "hello")]
-         (ana.jvm/analyze button)))
-     ))
-
-;; (.-name (:form (ana/analyze (ana/empty-env) impl/join-classes)))
-
-(comment
-  (defn fn-name
-    [style-fn]
-    `(.-name ~style-fn)
-    (if (instance? clojure.lang.Named style-fn)
-      `(-> #'~style-fn meta :name str) ;`'~style-fn
-      nil)))
