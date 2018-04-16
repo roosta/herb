@@ -1,5 +1,9 @@
 (ns examples.core
-  (:require [herb.core :refer [<class <style]]))
+  (:require [herb.core :refer [<class <style defgroup]]))
+
+(defgroup group-test
+  {:group-1 {:color "red"}
+   :group-2 {:color "green"}})
 
 (defn colors
   []
