@@ -80,22 +80,3 @@
         actual (impl/prepare-data styles)]
     (testing "Prepare styles"
       (is (= actual expected)))))
-
-(deftest attach-selector
-  (let [selector "a_namespace_a-fn"
-        styles {:style {:color "black",
-                        :background-color "green",
-                        :border-radius "5px"}}
-        expected-id ["#a_namespace_a-fn"
-                     {:style {:color "black",
-                              :background-color "green",
-                              :border-radius "5px"}}]
-        expected-class [".a_namespace_a-fn"
-                        {:style {:color "black",
-                                 :background-color "green",
-                                 :border-radius "5px"}}]
-        actual-class (impl/attach-selector selector styles false)
-        actual-id (impl/attach-selector selector styles true)]
-    (testing "Garden data"
-      (is (= actual-class expected-class))
-      (is (= actual-id expected-id)))))
