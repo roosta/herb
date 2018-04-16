@@ -34,4 +34,3 @@
 * TODO Change defgroup to stylegroup
 * TODO Test to see if you can deref ratoms directly in styles
 * TODO Rename mode to pseudo, allow for arbitrary forms
-* TODO Pass a fn to a helper function to return only classname for selection
