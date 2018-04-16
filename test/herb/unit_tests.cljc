@@ -19,21 +19,21 @@
       (is (= (impl/convert-media input) expected)))))
 
 (deftest resolve-style-fns
-  (letfn [(button []
-            {:border-radius "5px"})
-          (box [color] {:background-color color})]
-    (let [expected [{:border-radius "5px"} {:background-color "green"}]]
+  (letfn [(fn-1 [] {:border-radius "5px"})
+          (fn-2 [color] {:background-color color})
+          (fn-3 [] {:background-color "red"})]
+    (let [expected [{:border-radius "5px"} {:background-color "green"} {:background-color "red"}]]
       (testing "Resolve styles"
-        (is (= (impl/resolve-style-fns [[[button] [box "green"]]] [])
+        (is (= (impl/resolve-style-fns [[[fn-1] [fn-2 "green"] [fn-3]]] [])
                expected))))))
 
 (deftest extract-styles
-  (letfn [(text [] {:font-size "24px"})
-          (box [color] ^{:extend text} {:background-color color})
-          (button [] ^{:extend [[box "red"]]} {:border-radius "5px"})]
+  (letfn [(parent [] {:font-size "24px"})
+          (extend-1 [color] ^{:extend parent} {:background-color color})
+          (extend-2 [] ^{:extend [[extend-1 "red"]]} {:border-radius "5px"})]
     (let [expected [{:font-size "24px"} {:background-color "red"} {:border-radius "5px"}]]
       (testing "Extract styles"
-        (is (= (impl/extract-styles button []) expected))))))
+        (is (= (impl/extract-styles extend-2 []) expected))))))
 
 (deftest extract-meta-mode
   (let [styles [^{:mode {:hover {:color "red"}
@@ -69,14 +69,16 @@
                   {:color "black"
                    :border-radius "5px"}
                   {:media {{:screen true} {:background-color "yellow"}}})
-                {:background-color "red"
-                 :font-style "italic"}]
+                (with-meta
+                  {:background-color "red"
+                   :font-style "italic"}
+                  {:media {{:screen true} {:background-color "blue"}}})]
         expected {:style {:color "black"
                           :background-color "red"
                           :border-radius "5px"
                           :font-style "italic"}
                   :mode (list [:&:hover {:color "magenta"}])
-                  :media (list (at-media {:screen true} [:& {:background-color "yellow"}]))}
+                  :media (list (at-media {:screen true} [:& {:background-color "blue"}]))}
         actual (impl/prepare-data styles)]
     (testing "Prepare styles"
       (is (= actual expected)))))
