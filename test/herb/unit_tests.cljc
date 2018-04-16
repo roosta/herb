@@ -1,4 +1,4 @@
-(ns herb.impl-test
+(ns herb.unit-tests
   (:require [clojure.test :as t :refer [deftest testing is]]
             [garden.stylesheet :refer [at-media at-keyframes]]
             [herb.impl :as impl]))
