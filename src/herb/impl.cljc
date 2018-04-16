@@ -141,7 +141,7 @@
     #?(:cljs (demunge cname)
        :clj cname)))
 
-(defn with-style
+(defn with-style!
   "Entry point for macros.
   Takes an `opt` map as first argument, and currently only supports `:id true`
   which appends an id identifier instead of a class to the DOM"
@@ -164,8 +164,9 @@
                      (sanitize composed-name)
                      selector)
         style-data [(str (if id? "#" ".") selector) style-data]]
-    (runtime/inject-style identifier style-data data-str)
+    (runtime/inject-style! identifier style-data data-str)
     (if style?
       (-> @runtime/injected-styles
-          (get identifier))
+          (get identifier)
+          :css)
       selector)))

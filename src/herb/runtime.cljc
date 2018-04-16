@@ -8,7 +8,7 @@
 
 (defonce injected-styles (atom {}))
 
-(defn update-style
+(defn update-style!
   "Create css string and update DOM"
   [identifier #?(:cljs element) new]
   (let [css-str (css (map (fn [[class {:keys [style mode media]}]]
@@ -17,7 +17,7 @@
     (swap! injected-styles assoc identifier (assoc new :css css-str))
     #?(:cljs (set! (.-innerHTML element) css-str))))
 
-(defn create-style-element
+(defn create-style!
   "Create a style element in head if identifier is not already present Attach a
   data attr with namespace and call update-style with new element"
   [identifier new data-str]
@@ -30,10 +30,10 @@
          (.setAttribute element "type" "text/css")
          (.setAttribute element "data-herb" data-str)
          (.appendChild head element)
-         (update-style identifier element {:data data :element element :data-string data-str}))
-       :clj (update-style identifier {:data data :data-string data-str}))))
+         (update-style! identifier element {:data data :element element :data-string data-str}))
+       :clj (update-style! identifier {:data data :data-string data-str}))))
 
-(defn inject-style
+(defn inject-style!
   "Main interface to runtime. Takes an identifier, new garden style data structure
   and a fully qualified name. Check if identifier exist in DOM already, and if it
   does, compare `new` with `current` to make sure garden is not called to create
@@ -44,11 +44,11 @@
           target (get data (first new))]
       (when (not= target (last new))
         (let [data (assoc injected :data (conj data new))]
-          #?(:cljs (update-style identifier (:element injected) data)
-             :clj  (update-style identifier data)))))
-    (create-style-element identifier new data-str)))
+          #?(:cljs (update-style! identifier (:element injected) data)
+             :clj  (update-style! identifier data)))))
+    (create-style! identifier new data-str)))
 
-(defn set-global-style
+(defn set-global-style!
   "CLJS: Takes a collection of Garden style vectors, and create or update the global style element
   CLJ: Returns garden.core/css on input"
   [& styles]

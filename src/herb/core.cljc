@@ -8,7 +8,7 @@
 
 ;; Aliases
 (def join-classes impl/join-classes)
-(def set-global-style runtime/set-global-style)
+(def set-global-style! runtime/set-global-style!)
 
 (defmacro defgroup
   "Define a style group, everything defined in a group is grouped in the same
@@ -41,7 +41,7 @@
   [style-fn & args]
   (let [f `'~style-fn
         n (name (ns-name *ns*))]
-    `(herb.impl/with-style {:style? true} ~f ~n ~style-fn ~@args)))
+    `(herb.impl/with-style! {:style? true} ~f ~n ~style-fn ~@args)))
 
 (defmacro <id
   "Takes a function `style-fn` that returns a map. Arguments `args` can be passed
@@ -51,7 +51,7 @@
   [style-fn & args]
   (let [f `'~style-fn
         n (name (ns-name *ns*))]
-    `(herb.impl/with-style {:id? true} ~f ~n ~style-fn ~@args)))
+    `(herb.impl/with-style! {:id? true} ~f ~n ~style-fn ~@args)))
 
 (defmacro <class
   "Takes a function `style-fn` that returns a map. Arguments `args` can be passed
@@ -61,7 +61,7 @@
   [style-fn & args]
   (let [f `'~style-fn
         n (name (ns-name *ns*))]
-    `(herb.impl/with-style {} ~f ~n ~style-fn ~@args)))
+    `(herb.impl/with-style! {} ~f ~n ~style-fn ~@args)))
 
 #?(:clj
    (defn asd
