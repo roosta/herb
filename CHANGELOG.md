@@ -1,5 +1,12 @@
 # Change Log
 ## [Unreleased]
+### Added
+- Clojure support
+
+### Changed
+- Change lib files to cljc
+- Use lein test for testing
+- Rename `:mode` to `:pseudo`
 
 ## [v0.4.0] - 2018-03-31
 ### Fixed

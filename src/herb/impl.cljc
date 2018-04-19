@@ -17,12 +17,12 @@
       (filter identity)
       (str/join " ")))
 
-(defn convert-modes
-  [modes]
+(defn convert-pseudo
+  [pseudos]
   (map
-   (fn [[kw mode]]
-     [(keyword (str "&" kw)) mode])
-   modes))
+   (fn [[kw p]]
+     [(keyword (str "&" kw)) p])
+   pseudos))
 
 (defn convert-media
   [media]
@@ -88,7 +88,7 @@
   [styles meta-type]
   (let [convert-fn (case meta-type
                      :media convert-media
-                     :mode convert-modes)
+                     :pseudo convert-pseudo)
         extracted (into [] (process-meta-xform meta-type) styles)]
     (when (not (empty? extracted))
       (let [merged (apply merge {} extracted)
@@ -101,7 +101,7 @@
   meta and return a final vector of styles including meta."
   [resolved-styles]
    {:style (apply merge {} resolved-styles)
-    :mode  (extract-meta resolved-styles :mode)
+    :pseudo  (extract-meta resolved-styles :pseudo)
     :media (extract-meta resolved-styles :media)})
 
 (defn sanitize

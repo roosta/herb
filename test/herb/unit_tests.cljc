@@ -3,12 +3,12 @@
             [garden.stylesheet :refer [at-media at-keyframes]]
             [herb.impl :as impl]))
 
-(deftest convert-modes
+(deftest convert-pseudo
   (let [input {:hover {:opacity 1}
                :focus {:color "yellow"}}
         expected (list [:&:hover {:opacity 1}] [:&:focus {:color "yellow"}])]
     (testing "Converting modes"
-      (is (= (impl/convert-modes input) expected)))))
+      (is (= (impl/convert-pseudo input) expected)))))
 
 (deftest convert-media
   (let [input {{:screen true} {:color "white"}
@@ -36,13 +36,13 @@
         (is (= (impl/extract-styles extend-2 []) expected))))))
 
 (deftest extract-meta-mode
-  (let [styles [^{:mode {:hover {:color "red"}
+  (let [styles [^{:pseudo {:hover {:color "red"}
                          :focus {:color "blue"}}}
                 {:color "white"}
 
-                ^{:mode {:hover {:color "green"}}}
+                ^{:pseudo {:hover {:color "green"}}}
                 {:border "2px solid black"}]
-        actual (impl/extract-meta styles :mode)
+        actual (impl/extract-meta styles :pseudo)
         expected '([:&:hover {:color "green"}] [:&:focus {:color "blue"}])]
     (testing "Extracting mode meta data"
       (is (= actual expected)))))
@@ -64,7 +64,7 @@
   (let [styles [(with-meta
                   {:color "white"
                    :background-color "green"}
-                  {:mode {:hover {:color "magenta"}}})
+                  {:pseudo {:hover {:color "magenta"}}})
                 (with-meta
                   {:color "black"
                    :border-radius "5px"}
@@ -77,7 +77,7 @@
                           :background-color "red"
                           :border-radius "5px"
                           :font-style "italic"}
-                  :mode (list [:&:hover {:color "magenta"}])
+                  :pseudo (list [:&:hover {:color "magenta"}])
                   :media (list (at-media {:screen true} [:& {:background-color "blue"}]))}
         actual (impl/prepare-data styles)]
     (testing "Prepare styles"

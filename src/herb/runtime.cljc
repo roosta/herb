@@ -11,8 +11,8 @@
 (defn update-style!
   "Create css string and update DOM"
   [identifier #?(:cljs element) new]
-  (let [css-str (css (map (fn [[class {:keys [style mode media]}]]
-                            [class style mode media])
+  (let [css-str (css (map (fn [[class {:keys [style pseudo media]}]]
+                            [class style pseudo media])
                           (:data new)))]
     (swap! injected-styles assoc identifier (assoc new :css css-str))
     #?(:cljs (set! (.-innerHTML element) css-str))))
