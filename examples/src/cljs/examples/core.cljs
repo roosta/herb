@@ -2,7 +2,7 @@
   (:require
    [herb.core
     :refer-macros [<class <id defgroup]
-    :refer [set-global-style!]]
+    :refer [global-style!]]
    [garden.selectors :as s]
    [garden.core :refer [css]]
    [garden.stylesheet :refer [at-media]]
@@ -289,7 +289,7 @@
 
 (defn init! []
   (mount-root)
-  (set-global-style! (list [:body
+  (global-style! (list [:body
                             {:font-family ["Helvetica Neue" "Verdana" "Helvetica" "Arial" "sans-serif"]
                              :max-width (px 600)
                              :margin "0 auto"

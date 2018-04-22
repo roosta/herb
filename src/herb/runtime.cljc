@@ -39,7 +39,7 @@
   does, compare `new` with `current` to make sure garden is not called to create
   the same style string again"
   [identifier new data-str]
-  (if-let [injected (get @injected-styles identifier)] ;
+  (if-let [injected (get @injected-styles identifier)]
     (let [data (:data injected)
           target (get data (first new))]
       (when (not= target (last new))
@@ -48,7 +48,7 @@
              :clj  (update-style! identifier data)))))
     (create-style! identifier new data-str)))
 
-(defn set-global-style!
+(defn global-style!
   "CLJS: Takes a collection of Garden style vectors, and create or update the global style element
   CLJ: Returns garden.core/css on input"
   [& styles]

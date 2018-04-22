@@ -4,7 +4,7 @@
 
 ;; Aliases
 (def join-classes impl/join-classes)
-(def set-global-style! runtime/set-global-style!)
+(def global-style! runtime/global-style!)
 
 (defmacro defgroup
   "Define a style group, everything defined in a group is grouped in the same

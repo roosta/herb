@@ -56,5 +56,5 @@
   (r/render [app] (.getElementById js/document "app")))
 
 (defn init! []
-  (herb/set-global-style! global-style)
+  (herb/global-style! global-style)
   (mount-root))
