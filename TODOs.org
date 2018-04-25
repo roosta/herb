@@ -1,8 +1,5 @@
 #+SEQ_TODO: NEXT(t) TODO(t) WAITING(w) MAYBE(m) | DONE(d) PARTIAL(p) CANCELLED(c)
-* CANCELLED Add global init
-  CLOSED: [2018-04-05 Thu 12:35]
-  Possibly create instances?
-* Ideas
+* IDEAS
 ** Use set in injected styles instead of map to ensure no duplicates
 ** Use tree-seq when resolving styles
 * TESTS
@@ -11,10 +8,9 @@
 ** TODO Test that the classname contains a full namespace
 ** [[https://github.com/igrishaev/etaoin/blob/master/test/etaoin/api_test.clj][etaoin/api_test.clj at master · igrishaev/etaoin]]
 ** [[https://github.com/igrishaev/etaoin][igrishaev/etaoin: Pure Clojure Webdriver protocol implementation]]
-* TODO Spec input
-* TODO Fix single rule not causing newline
-* TODO Do new perf test
-* TODO Check merge order of extensions in form [style1 style2]
+* DOCS
+** TODO refer vs refer-macros
+** TODO group args
 * DEMO
 ** TODO demo inheritance variants
 ** TODO demo state
@@ -25,12 +21,18 @@
 *** Demo meta data in groups
 ** TODO demo nested
 ** TODO Add demo for selecting elements by class
+* TODO Spec input
+* TODO Fix single rule not causing newline
+* TODO Do new perf test
+* TODO Check merge order of extensions in form [style1 style2]
 * MAYBE Add helper macro for defining component function
 * TODO ::after ::before
 * TODO Mention clojurescript version and requiring functions
 * [[https://www.w3.org/wiki/Dynamic_style_-_manipulating_CSS_with_JavaScript][Dynamic style - manipulating CSS with JavaScript - W3C Wiki]]
 * TODO Optimize css on prod
-* TODO document group args
 * TODO Change defgroup to stylegroup
 * TODO Test to see if you can deref ratoms directly in styles
 * TODO Rename mode to pseudo, allow for arbitrary forms
+* CANCELLED Add global init
+  CLOSED: [2018-04-05 Thu 12:35]
+  Possibly create instances?
