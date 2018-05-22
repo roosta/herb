@@ -20,7 +20,7 @@
 
 (defn state-hover
   [color]
-  ^{:mode {:hover {:color "yellow"}}}
+  ^{:pseudo {:hover {:color "yellow"}}}
   {:margin-bottom 0
    :background-color color})
 
@@ -32,19 +32,19 @@
 
 (defn asd
   []
-  ^{:mode {:hover {:background-color "black"}}}
+  ^{:pseudo {:hover {:background-color "black"}}}
   {:color "red"})
 
 (defn extend-mode-meta
   []
   ^{:extend asd
-    :mode {:hover {:background-color "green"}}}
+    :pseudo {:hover {:background-color "green"}}}
   {:color "purple"})
 
 (defn hover-focus
   []
   ^{:extend extend-mode-meta
-    :mode {:hover {:background-color "blue"}
+    :pseudo {:hover {:background-color "blue"}
            :focus {:background-color "yellow"}}}
   {:background-color "red"}
   )
@@ -67,7 +67,7 @@
 
 (defn italic
   []
-  ^{:mode {:hover {:font-style "normal"}}}
+  ^{:pseudo {:hover {:font-style "normal"}}}
   {:font-style "italic"})
 
 (defn bold
@@ -128,8 +128,8 @@
                  :height (px 50)
                  :border-radius (px 5)}
                 :sheet
-                ^{:mode {:active {:color "white"}
-                         :hover {:border-radius (px 5)}}}
+                ^{:pseudo {:active {:color "white"}
+                           :hover {:border-radius (px 5)}}}
                 {:background-color "white"
                  :width (px 50)
                  :margin (px 10)
