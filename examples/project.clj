@@ -31,7 +31,6 @@
   :figwheel {:http-server-root "."
              :nrepl-port 7002
              :server-port 3466
-             :nrepl-middleware ["cemerick.piggieback/wrap-cljs-repl"]
              :css-dirs ["public/css"]}
 
   :cljsbuild {:builds {:app
@@ -60,5 +59,4 @@
   :profiles {:dev {:dependencies [[binaryage/devtools "0.9.10"]
                                   [figwheel-sidecar "0.5.16"]
                                   [philoskim/debux "0.4.7"]
-                                  [org.clojure/tools.nrepl "0.2.13"]
-                                  [com.cemerick/piggieback "0.2.2"]]}})
+                                  [org.clojure/tools.nrepl "0.2.13"]]}})
