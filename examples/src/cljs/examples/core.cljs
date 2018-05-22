@@ -1,8 +1,6 @@
 (ns examples.core
   (:require
-   [herb.core
-    :refer-macros [<class <id defgroup]
-    :refer [global-style!]]
+   [herb.core :refer [<class <id defgroup global-style!]]
    [garden.selectors :as s]
    [garden.core :refer [css]]
    [garden.stylesheet :refer [at-media]]
