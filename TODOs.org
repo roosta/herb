@@ -36,3 +36,4 @@
 * CANCELLED Add global init
   CLOSED: [2018-04-05 Thu 12:35]
   Possibly create instances?
+* TODO Try wrapping macros in reader cond
