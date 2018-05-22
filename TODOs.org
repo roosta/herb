@@ -31,9 +31,12 @@
 * [[https://www.w3.org/wiki/Dynamic_style_-_manipulating_CSS_with_JavaScript][Dynamic style - manipulating CSS with JavaScript - W3C Wiki]]
 * TODO Optimize css on prod
 * TODO Change defgroup to stylegroup
-* TODO Test to see if you can deref ratoms directly in styles
-* TODO Rename mode to pseudo, allow for arbitrary forms
+* DONE Test to see if you can deref ratoms directly in styles
+  CLOSED: [2018-05-22 Tue 20:45]
+* DONE Rename mode to pseudo, allow for arbitrary forms
+  CLOSED: [2018-05-22 Tue 20:45]
 * CANCELLED Add global init
   CLOSED: [2018-04-05 Thu 12:35]
   Possibly create instances?
-* TODO Try wrapping macros in reader cond
+* DONE Try wrapping macros in reader cond
+  CLOSED: [2018-05-22 Tue 20:46]
