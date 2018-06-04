@@ -41,3 +41,4 @@
 * DONE Try wrapping macros in reader cond
   CLOSED: [2018-05-22 Tue 20:46]
 * TODO What happens when trying to extend a style group with no arguments?
+* TODO Use loop in recur functions herb
