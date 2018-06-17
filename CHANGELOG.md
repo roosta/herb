@@ -1,11 +1,15 @@
 # Change Log
 ## [Unreleased]
+
+## [0.5.0] - 2018-06-17
 ### Added
 - Clojure support
+- `<style` macro that returns realized styles instead of a classname
+- `defgroup` macro to wrap common pattern
 
 ### Changed
-- Change lib files to cljc
-- Use lein test for testing
+- Bussiness logic now in `cljc` to simplify testing, using lein test instead of a javascript runner
+- Rename `set-global-style!` to `global-style!`
 - Rename `:mode` to `:pseudo`
 
 ## [v0.4.0] - 2018-03-31
@@ -83,7 +87,8 @@ from `herb.macro` to `herb.core`
 ### Fixed
 - Fixed issues with inheritance precedence
 
-[Unreleased]: https://github.com/roosta/herb/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/roosta/herb/compare/v0.5.0...HEAD
+[v0.5.0]: https://github.com/roosta/herb/compare/v0.4.0...v0.5.0
 [v0.4.0]: https://github.com/roosta/herb/compare/v0.3.5...v0.4.0
 [v0.3.5]: https://github.com/roosta/herb/compare/v0.3.4...v0.3.5
 [v0.3.4]: https://github.com/roosta/herb/compare/v0.3.3...v0.3.4
