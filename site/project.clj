@@ -5,7 +5,7 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
   :dependencies [[org.clojure/clojure "1.9.0"]
-                 [org.clojure/clojurescript "1.10.238"]
+                 [org.clojure/clojurescript "1.10.312"]
                  [com.taoensso/tufte "2.0.1"]
                  [garden "1.3.5"]
                  [reagent "0.8.1"]]
@@ -55,6 +55,6 @@
 
   :profiles {:dev {:dependencies [[binaryage/devtools "0.9.10"]
                                   [figwheel-sidecar "0.5.16"]
-                                  [philoskim/debux "0.4.7"]
+                                  [philoskim/debux "0.4.8"]
                                   [org.clojure/tools.nrepl "0.2.13"]
                                   [com.cemerick/piggieback "0.2.2"]]}})
