@@ -1,7 +1,7 @@
 # Change Log
 ## [Unreleased]
 
-## [0.5.0] - 2018-06-17
+## [v0.5.0] - 2018-06-17
 ### Added
 - Clojure support
 - `<style` macro that returns realized styles instead of a classname
