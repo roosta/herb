@@ -43,3 +43,6 @@
 * TODO What happens when trying to extend a style group with no arguments?
 * TODO Use loop in recur functions herb
 * TODO Some way to target static classnames
+* TODO Look into using more complex classname chars
+  I know css supports a larger range of classname chars but I think passing
+  through hiccup or reagent they get sanitized
