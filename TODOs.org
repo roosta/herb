@@ -2,6 +2,8 @@
 * IDEAS
 ** Use set in injected styles instead of map to ensure no duplicates
 ** Use tree-seq when resolving styles
+** [[https://github.com/noprompt/garden/issues/24][Support for existing CSS resources · Issue #24 · noprompt/garden]]
+** [[https://www.w3.org/wiki/Dynamic_style_-_manipulating_CSS_with_JavaScript][Dynamic style - manipulating CSS with JavaScript - W3C Wiki]]
 * TESTS
 ** DONE Test for inheritance, make sure the chain is respected for modes and media
    CLOSED: [2018-02-17 Sat 20:18]
@@ -28,7 +30,6 @@
 * MAYBE Add helper macro for defining component function
 * TODO ::after ::before
 * TODO Mention clojurescript version and requiring functions
-* [[https://www.w3.org/wiki/Dynamic_style_-_manipulating_CSS_with_JavaScript][Dynamic style - manipulating CSS with JavaScript - W3C Wiki]]
 * TODO Optimize css on prod
 * TODO Change defgroup to stylegroup
 * DONE Test to see if you can deref ratoms directly in styles
