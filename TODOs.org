@@ -23,6 +23,40 @@
 *** Demo meta data in groups
 ** TODO demo nested
 ** TODO Add demo for selecting elements by class
+* &env macro
+  In order to evaluate things in context, you first need to garner the bindings
+  in the current context. Fortunately, Clojure macros provide an implicit
+  argument ~&env~ that’s a map of the local bindings available at macro-expansion
+  time. You can extract from ~&env~ the values associated with the bindings and
+  zip them up with their names into a map for the local context, as shown next.
+
+  #+BEGIN_SRC clojure
+    (defmacro local-context []
+      (let [symbols (keys &env)] ; Use the special &env
+        (zipmap (map (fn [sym] `(quote ~sym)) ; Zip up the local names with local values
+                     symbols)
+                symbols)))
+  #+END_SRC
+
+  One interesting point is the use of the ~&env~ symbol. This special symbol holds
+  the value of the bindings available to the macro in which it occurs. The
+  bindings are of a special type that is opaque to your direct inspection, but by
+  putting them into the return map you can build a Clojure data structure from
+  them for direct use and manipulation. Observe ~local-context~ in action:
+
+  #+BEGIN_SRC clojure
+    (local-context)
+    ;=> {}
+
+    (let [a 1, b 2, c 3]
+      (let [b 200]
+        (local-context)))
+    ;=> {a 1, b 200, c 3}
+  #+END_SRC
+
+  The ~local-context~ macro provides a map to the most immediate lexical bindings,
+  which is what you want.
+
 * TODO Spec input
 * TODO Fix single rule not causing newline
 * TODO Do new perf test
