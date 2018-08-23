@@ -16,6 +16,11 @@
                  [org.clojure/tools.analyzer "0.6.9"]
                  [garden "1.3.5"]]
 
+  :cljsbuild {:builds [{:id "prod"
+                        :source-paths ["src"]
+                        :compiler {:output-to "herb.js"
+                                   :optimizations :advanced}}]}
+
   :profiles {:dev {:dependencies [[philoskim/debux "0.4.8"]
                                   [etaoin "0.2.8"]]
                    :source-paths ["test"]}})
