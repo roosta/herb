@@ -78,3 +78,4 @@
 * TODO What happens when trying to extend a style group with no arguments?
 * TODO Use loop in recur functions herb
 * TODO Some way to target static classnames
+* TODO Remove data-herb when prod build
