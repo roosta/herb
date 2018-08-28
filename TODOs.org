@@ -79,3 +79,4 @@
 * TODO Use loop in recur functions herb
 * TODO Some way to target static classnames
 * TODO Remove data-herb when prod build
+* TODO Add note about setting debug flag to false on prod builds
