@@ -31,7 +31,7 @@
                                   [figwheel "0.5.16"]
                                   [etaoin "0.2.8"]]
                    :plugins [[lein-figwheel "0.5.16"]]
-                   :source-paths ["test"]}
+                   :source-paths ["test" "dev"]}
              :dev-cider {:dependencies [[cider/piggieback "0.3.9"]
                                         [figwheel-sidecar "0.5.16"]]
                          :figwheel {:nrepl-middleware [cider.piggieback/wrap-cljs-repl]}}
