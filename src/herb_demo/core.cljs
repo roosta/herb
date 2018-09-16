@@ -8,6 +8,7 @@
    [garden.stylesheet :refer [at-media]]
    [garden.core :refer [css]]
    [herb-demo.tests :refer [tests]]
+   [herb-demo.site :refer [site]]
    [garden.units :refer [px em]]
    [reagent.debug :as d]
    [reagent.core :as r]))
@@ -39,6 +40,9 @@
 
 (secretary/defroute "/tests" []
   (reset! page #'tests))
+
+(secretary/defroute "/site" []
+  (reset! page #'site))
 
 (defn appframe []
   [:div [@page]])
