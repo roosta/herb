@@ -24,7 +24,7 @@
     [:li [:a {:href "/site"}
            "Site"]]]])
 
-(def page (r/atom #'home-page))
+(defonce page (r/atom #'home-page))
 
 (secretary/defroute "/" []
   (reset! page #'home-page))

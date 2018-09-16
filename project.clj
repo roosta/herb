@@ -31,6 +31,9 @@
 
   :profiles {:dev {:dependencies [[philoskim/debux "0.4.8"]
                                   [binaryage/devtools "0.9.10"]
+                                  [compojure "1.6.1"]
+                                  [ring "1.6.3"]
+                                  [ring/ring-defaults "0.3.2"]
                                   [figwheel "0.5.16"]
                                   [etaoin "0.2.8"]]
                    :plugins [[lein-figwheel "0.5.16"]]
