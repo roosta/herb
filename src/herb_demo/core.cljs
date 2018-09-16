@@ -285,7 +285,7 @@
 (defn mount-root []
   (r/render [home-page] (.getElementById js/document "demo")))
 
-(defn ^:export main
+(defn init!
   []
   (mount-root)
   (global-style! (list [:body

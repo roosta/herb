@@ -39,9 +39,9 @@
                                    [reagent "0.8.1"]]}}
 
   :cljsbuild {:builds [{:id "demo"
-                        :source-paths ["src"]
+                        :source-paths ["src" "env/dev"]
                         :figwheel {:on-jsload "herb-demo.core/mount-root"}
-                        :compiler {:main "herb-demo.core"
+                        :compiler {:main "herb-demo.dev"
                                    :output-to "resources/public/js/demo.js"
                                    :preloads [devtools.preload]
                                    :external-config {:devtools/config {:features-to-install [:formatters :hints]}}
@@ -52,7 +52,7 @@
                                    :pretty-print  true}}
 
                        {:id "demo-release"
-                        :source-paths ["src"]
+                        :source-paths ["src" "env/release"]
                         :compiler {:output-to "resources/public/js/demo.js"
                                    :output-dir "resources/public/js/release"
                                    :closure-defines {"goog.DEBUG" false}

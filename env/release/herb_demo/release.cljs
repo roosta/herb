@@ -1,6 +1,6 @@
-(ns demo.release
+(ns herb-demo.release
   (:require
-    [examples.core :as core]))
+    [herb-demo.core :as core]))
 
 ;;ignore println statements in prod
 (set! *print-fn* (fn [& _]))
