@@ -195,6 +195,11 @@
          :margin [["10px" 0 "10px" 0]]
          :border-radius "5px"}})
 
+(defn container
+  []
+  {:max-width (px 600)
+   :margin "0 auto"})
+
 (defn examples []
   (let [state (r/atom "green")]
     (fn []
@@ -219,7 +224,7 @@
                                                                       :background-color "magenta"
                                                                       :border-radius "5px"}]))))
 
-      [:div
+      [:div {:class (<class container)}
        [:div {:class (<class style-group-stateful :box "#eee")}
         [:span {:class (<class style-group-stateful :text @state)}
          "group meta test with arguments"]
