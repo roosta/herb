@@ -1,5 +1,7 @@
 # Change Log
 ## [Unreleased]
+### Changed
+- Upgrade dependencies
 
 ## [v0.5.0] - 2018-06-17
 ### Added
