@@ -40,6 +40,7 @@
                          :figwheel {:nrepl-middleware [cider.piggieback/wrap-cljs-repl]}}
              :demo {:dependencies [[com.taoensso/tufte "2.0.1"]
                                    [secretary "1.2.3"]
+                                   [cljsjs/react-highlight "1.0.7-2"]
                                    [venantius/accountant "0.2.4"]
                                    [reagent "0.8.1"]]}}
 
