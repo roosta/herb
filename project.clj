@@ -52,7 +52,6 @@
                         :figwheel {:on-jsload "herb-demo.core/mount-root"}
                         :compiler {:main "herb-demo.dev"
                                    :output-to "resources/public/js/demo.js"
-                                   :preloads [devtools.preload]
                                    :external-config {:devtools/config {:features-to-install [:formatters :hints]}}
                                    :output-dir "resources/public/js/out"
                                    :asset-path   "js/out"
