@@ -17,7 +17,7 @@
    [:cljsbuild :builds :demo :compiler :output-to]]
 
   ;; Exclude the demo,site and compiled files from the output of either 'lein jar' or 'lein install'
-  :jar-exclusions [#"(?:^|\/)herb_demo\/" #"(?:^|\/)site\/" #"(?:^|\/)demo\/" #"(?:^|\/)js\/" #"html$"]
+  :jar-exclusions [#"(?:^|\/)herb_demo\/" #"(?:^|\/)site\/" #"(?:^|\/)demo\/" #"(?:^|\/)js\/" #"html$" #"server.clj"]
 
   :dependencies [[org.clojure/clojure "1.9.0" :scope "provided"]
                  [org.clojure/clojurescript "1.10.312" :scope "provided"]
@@ -25,6 +25,9 @@
                  [org.clojure/tools.analyzer.jvm "0.7.2"]
                  [org.clojure/tools.analyzer "0.6.9"]
                  [garden "1.3.5"]]
+
+  :figwheel {:css-dirs ["resources/public/css"]
+             :ring-handler server/app}
 
   :profiles {:dev {:dependencies [[philoskim/debux "0.4.8"]
                                   [binaryage/devtools "0.9.10"]
@@ -36,6 +39,8 @@
                                         [figwheel-sidecar "0.5.16"]]
                          :figwheel {:nrepl-middleware [cider.piggieback/wrap-cljs-repl]}}
              :demo {:dependencies [[com.taoensso/tufte "2.0.1"]
+                                   [secretary "1.2.3"]
+                                   [venantius/accountant "0.2.4"]
                                    [reagent "0.8.1"]]}}
 
   :cljsbuild {:builds [{:id "demo"
