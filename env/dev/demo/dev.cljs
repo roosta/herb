@@ -1,8 +1,7 @@
-(ns ^:figwheel-no-load examples.dev
+(ns ^:figwheel-no-load demo.dev
   (:require
-    [examples.core :as core]
+    [demo.core :as core]
     [devtools.core :as devtools]))
-
 
 (enable-console-print!)
 

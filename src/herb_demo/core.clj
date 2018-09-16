@@ -1,4 +1,4 @@
-(ns examples.core
+(ns herb-demo.core
   (:require [herb.core :refer [<class <style defgroup]]))
 
 (defgroup group-test

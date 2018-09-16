@@ -1,4 +1,4 @@
-(ns examples.prod
+(ns demo.release
   (:require
     [examples.core :as core]))
 

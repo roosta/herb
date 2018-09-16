@@ -16,3 +16,5 @@ site/target
 .nrepl-port
 site/.cljs_rhino_repl
 out
+resources/public/js
+*.log

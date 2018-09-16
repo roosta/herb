@@ -1,4 +1,4 @@
-(ns examples.core
+(ns herb-demo.core
   (:require
    [herb.core :include-macros true :refer [<class defgroup <id global-style!]]
    [garden.selectors :as s]
@@ -283,17 +283,18 @@
        ])))
 
 (defn mount-root []
-  (r/render [home-page] (.getElementById js/document "app")))
+  (r/render [home-page] (.getElementById js/document "demo")))
 
-(defn init! []
+(defn ^:export main
+  []
   (mount-root)
   (global-style! (list [:body
-                            {:font-family ["Helvetica Neue" "Verdana" "Helvetica" "Arial" "sans-serif"]
-                             :max-width (px 600)
-                             :margin "0 auto"
-                             :padding-top (px 72)
-                             :-webkit-font-smoothing "antialiased"
-                             :font-size (em 1.125)
-                             :color "#333"
-                             :line-height (em 1.5)
-                             }])))
+                        {:font-family ["Helvetica Neue" "Verdana" "Helvetica" "Arial" "sans-serif"]
+                         :max-width (px 600)
+                         :margin "0 auto"
+                         :padding-top (px 72)
+                         :-webkit-font-smoothing "antialiased"
+                         :font-size (em 1.125)
+                         :color "#333"
+                         :line-height (em 1.5)
+                         }])))
