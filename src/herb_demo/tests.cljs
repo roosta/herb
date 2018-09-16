@@ -1,4 +1,4 @@
-(ns herb-demo.examples
+(ns herb-demo.tests
   (:require
    [herb.core :include-macros true :refer [<class defgroup <id global-style!]]
    [garden.selectors :as s]
@@ -176,7 +176,7 @@
   (with-meta
     (component
      {:text {:color "magenta"}
-      :box {:background-color "#eee"
+      :box {:background "white"
             :padding (px 12)}
       :text-2 {:color "cyan"}})
     {:group true
@@ -200,7 +200,7 @@
   {:max-width (px 600)
    :margin "0 auto"})
 
-(defn examples []
+(defn tests []
   (let [state (r/atom "green")]
     (fn []
       #_(profile
@@ -225,7 +225,7 @@
                                                                       :border-radius "5px"}]))))
 
       [:div {:class (<class container)}
-       [:div {:class (<class style-group-stateful :box "#eee")}
+       [:div {:class (<class style-group-stateful :box "#ddd")}
         [:span {:class (<class style-group-stateful :text @state)}
          "group meta test with arguments"]
         [:br]

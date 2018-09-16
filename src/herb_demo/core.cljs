@@ -7,20 +7,28 @@
    [garden.core :refer [css]]
    [garden.stylesheet :refer [at-media]]
    [garden.core :refer [css]]
-   [herb-demo.examples :refer [examples]]
+   [herb-demo.tests :refer [tests]]
    [garden.units :refer [px em]]
    [reagent.debug :as d]
    [reagent.core :as r]))
 
 (def global-style
-  [:body {:margin 0
-          :font-family ["Helvetica Neue" "Verdana" "Helvetica" "Arial" "sans-serif"]}])
+  (list [:body {:background "#eee"
+                :box-sizing "border-box"
+                :font-size (px 14)
+                :font-family ["Lato" "Helvetica Neue" "Arial" "Helvetica" "sans-serif"]}]
+        [:button {:border "none"}]
+        [:code {:background-color "#eee"
+                :border-radius "2px"
+                :padding (px 2)}]
+        [:a {:text-decoration "none"
+             :color "#09f"}]))
 
 (defn home-page []
   [:div
    [:ul
-    [:li [:a {:href "/examples"}
-          "Examples"]]
+    [:li [:a {:href "/tests"}
+          "Tests"]]
     [:li [:a {:href "/site"}
            "Site"]]]])
 
@@ -29,8 +37,8 @@
 (secretary/defroute "/" []
   (reset! page #'home-page))
 
-(secretary/defroute "/examples" []
-  (reset! page #'examples))
+(secretary/defroute "/tests" []
+  (reset! page #'tests))
 
 (defn appframe []
   [:div [@page]])
