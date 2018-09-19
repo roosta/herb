@@ -13,7 +13,7 @@
    [reagent.debug :as d]
    [reagent.core :as r])
   (:require-macros
-   [site.macros :as macros]))
+   [herb-demo.macros :as macros]))
 
 (defn header-style
   [component]
