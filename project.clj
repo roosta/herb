@@ -17,7 +17,7 @@
    [:cljsbuild :builds :demo :compiler :output-to]]
 
   ;; Exclude the demo,site and compiled files from the output of either 'lein jar' or 'lein install'
-  :jar-exclusions [#"(?:^|\/)herb_demo\/" #"(?:^|\/)site\/" #"(?:^|\/)demo\/" #"(?:^|\/)js\/" #"html$" #"server.clj"]
+  :jar-exclusions [#"(?:^|\/)herb_demo\/" #"(?:^|\/)demo\/" #"(?:^|\/)js\/" #"html$" #"server.clj"]
 
   :dependencies [[org.clojure/clojure "1.9.0" :scope "provided"]
                  [org.clojure/clojurescript "1.10.312" :scope "provided"]
