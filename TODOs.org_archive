@@ -236,3 +236,50 @@ Archived entries from file /home/roosta/src/herb/TODOs.org
   :ARCHIVE_FILE: ~/src/herb/TODOs.org
   :ARCHIVE_CATEGORY: TODOs
   :END:
+
+* DONE Test to see if you can deref ratoms directly in styles
+  CLOSED: [2018-05-22 Tue 20:45]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-09-19 Wed 20:01
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE Rename mode to pseudo, allow for arbitrary forms
+  CLOSED: [2018-05-22 Tue 20:45]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-09-19 Wed 20:01
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* CANCELLED Add global init
+  CLOSED: [2018-04-05 Thu 12:35]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-09-19 Wed 20:01
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: CANCELLED
+  :END:
+  Possibly create instances?
+
+* DONE Try wrapping macros in reader cond
+  CLOSED: [2018-05-22 Tue 20:46]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-09-19 Wed 20:01
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* CANCELLED ::after ::before
+  CLOSED: [2018-09-19 Wed 19:59]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-09-19 Wed 20:01
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: CANCELLED
+  :END:
+  Already works with :pseudo parsing
