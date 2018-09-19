@@ -11,10 +11,7 @@
 
   :min-lein-version "2.5.0"
 
-  :clean-targets ^{:protect false}
-  [:target-path
-   [:cljsbuild :builds :demo :compiler :output-dir]
-   [:cljsbuild :builds :demo :compiler :output-to]]
+  :clean-targets ^{:protect false} ["resources/public/js" "target"]
 
   ;; Exclude the demo,site and compiled files from the output of either 'lein jar' or 'lein install'
   :jar-exclusions [#"(?:^|\/)herb_demo\/" #"(?:^|\/)demo\/" #"(?:^|\/)js\/" #"html$" #"server.clj"]
