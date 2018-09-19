@@ -3,7 +3,7 @@
    [herb.core :refer-macros [<class <id] :as herb]
    [herb-demo.components.text :refer [text]]
    [herb-demo.examples.intro :as intro]
-   [herb-demo.components.highlight :refer [Highlight]]
+   [herb-demo.components.code :refer [code]]
    [herb-demo.components.paper :refer [paper]]
    [garden.units :refer [rem em px]]
    [reagent.debug :as d]
@@ -33,7 +33,7 @@
       [:a {:href "https://github.com/reagent-project/reagent"}
        "Reagent"]
       " here but it's not a requirement for Herb"]
-     [Highlight {:class "clojure"}
+     [code {:lang :clojure}
       intro-cljs]
      [text {:variant :subheading}
       "Output:"]
@@ -44,7 +44,7 @@
       "A style element is appended to the DOM containing the input functions
       computed styles. Each function gets its own DOM element, and is updated
       only if necessary. Our example DOM might now look something like this:"]
-     [Highlight {:class "html"}
+     [code {:lang :html}
       intro-html]
      [text
       "The classname is a sanitized version of the input functions fully

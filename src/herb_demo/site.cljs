@@ -7,7 +7,6 @@
    [herb-demo.intro :refer [intro]]
    [herb-demo.css-garden :refer [css-garden]]
    [herb-demo.why-fns :refer [why-fns]]
-   [herb-demo.components.highlight :refer [Highlight]]
    [herb-demo.components.paper :refer [paper]]
    [garden.units :refer [rem em px]]
    [reagent.debug :as d]

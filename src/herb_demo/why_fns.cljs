@@ -2,7 +2,7 @@
   (:require
    [herb.core :refer-macros [<class <id] :as herb]
    [herb-demo.components.text :refer [text]]
-   [herb-demo.components.highlight :refer [Highlight]]
+   [herb-demo.components.code :refer [code]]
    [herb-demo.examples.state-fn :as e1]
    [herb-demo.components.paper :refer [paper]]
    [garden.units :refer [rem em px]]
@@ -26,7 +26,7 @@
      [text
       "The way Herb tackles this is by using functions as the style delivery
       method so to speak."]
-     [Highlight {:className "clojure"}
+     [code {:lang :clojure}
       e1]
      [text {:variant :subheading}
       "Output:"]

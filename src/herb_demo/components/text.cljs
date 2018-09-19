@@ -1,6 +1,6 @@
 (ns herb-demo.components.text
   (:require [garden.units :refer [rem em px]]
-            [herb.core :refer [<class]]
+            [herb.core :refer-macros [<class]]
             [clojure.string :as str]
             [reagent.core :as r]))
 
