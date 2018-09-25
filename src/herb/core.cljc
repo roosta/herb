@@ -33,8 +33,8 @@
 #?(:clj
    (defmacro <style
      "Takes a function `style-fn` that returns a map. Arguments `args` can be passed
-  along with the function as additional arguments to <id i.e
-  `(<id some-fn arg1 arg2)`.
+  along with the function as additional arguments to <style i.e
+  `(<style some-fn arg1 arg2)`.
   Returns a CSS string that is the result of calling passed function"
      [style-fn & args]
      (let [f `'~style-fn
