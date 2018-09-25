@@ -1,12 +1,13 @@
 (ns herb.impl
   (:require
    [clojure.string :as str]
-   [debux.cs.core :as d :refer-macros [clog clogn dbg dbgn break]]
    [herb.runtime :as runtime]
    [garden.stylesheet :refer [at-media at-keyframes]]
    #?@(:cljs [[cljs.compiler :as compiler]
+              [debux.cs.core :as d :refer-macros [clog clogn dbg dbgn break]]
               [cljs.analyzer :as ana]]
-       :clj [[clojure.tools.analyzer.jvm :refer [analyze]]])))
+       :clj [[clojure.tools.analyzer.jvm :refer [analyze]]
+             [debux.core :refer [dbg]]])))
 
 #?(:cljs (def dev? ^boolean js/goog.DEBUG)
    :clj (def dev? true))
@@ -121,8 +122,8 @@
 (defn compose-data-string
   [n k]
   (str
-   (str/replace n #"\$" "/")
-   (when (and dev? k) (str "[" k "]"))))
+   (str/replace n #"(/|\$)(?=[^/\-\$\-]*/)" ".")
+   (when k (str "[" k "]"))))
 
 (defn compose-name
   [n ns-name hash]
