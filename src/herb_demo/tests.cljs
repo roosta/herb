@@ -250,15 +250,21 @@
 
         [:div
          [:div {:class (<class (fn []
-                                     ^{:extend button}
-                                     {:background-color "black"
-                                      :color "white"}))}
+                                 ^{:extend button}
+                                 {:background-color "black"
+                                  :color "white"}))}
           "Anon function with meta"]
          [:div {:class (<class (fn [color]
-                                     {:background-color color
-                                      :color "white"})
-                         "black")}
+                                 {:background-color color
+                                  :color "white"})
+                               "black")}
           "Anon function without meta"]]
+
+        (letfn [(nested-fn [color]
+                  {:background-color color
+                   :color "white"})]
+          [:div {:class (<class nested-fn "black")}
+           "letfn block"])
 
         [:input {:class (<class hover-focus)
                  :default-value "test modes hover, active"}]
@@ -282,5 +288,5 @@
         [:div {:class (<class media-query-test)}
          "Media query test"]]
        #_[:div {:class (with-style some-style)}
-        "Regular maps"]
+          "Regular maps"]
        ])))
