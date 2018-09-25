@@ -61,13 +61,14 @@
 * TODO Fix single rule not causing newline
 * TODO Do new perf test
 * TODO Check merge order of extensions in form [style1 style2]
-* MAYBE Add helper macro for defining component function
+* DONE Add helper macro for defining component function
+  CLOSED: [2018-09-25 Tue 18:38]
 * CANCELLED ::after ::before
   CLOSED: [2018-09-19 Wed 19:59]
   Already works with :pseudo parsing
 * TODO Mention clojurescript version and requiring functions
 * TODO Optimize css on prod
-* TODO Change defgroup to stylegroup
+* MAYBE Change defgroup to stylegroup
 * DONE Test to see if you can deref ratoms directly in styles
   CLOSED: [2018-05-22 Tue 20:45]
 * DONE Rename mode to pseudo, allow for arbitrary forms
