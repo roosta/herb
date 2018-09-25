@@ -87,3 +87,6 @@
   I know css supports a larger range of classname chars but I think passing
   through hiccup or reagent they get sanitized
 * TODO @supports
+* DONE Mirror clojure namespaces in data-herb tag
+  CLOSED: [2018-09-25 Tue 20:36]
+* TODO Target static example
