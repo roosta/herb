@@ -6,12 +6,16 @@
             [garden.core :refer [css]]
             [clojure.string :as str]))
 
+#?(:cljs (def dev? ^boolean js/goog.DEBUG)
+   :clj (def dev? true))
+
 (defonce injected-styles (atom {}))
 
 (defn update-style!
   "Create css string and update DOM"
   [identifier #?(:cljs element) new]
-  (let [css-str (css (map (fn [[class {:keys [style pseudo media]}]]
+  (let [css-str (css {:pretty-print? dev?}
+                     (map (fn [[class {:keys [style pseudo media]}]]
                             [class style pseudo media])
                           (:data new)))]
     (swap! injected-styles assoc identifier (assoc new :css css-str))

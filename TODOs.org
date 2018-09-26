@@ -67,7 +67,8 @@
   CLOSED: [2018-09-19 Wed 19:59]
   Already works with :pseudo parsing
 * TODO Mention clojurescript version and requiring functions
-* TODO Optimize css on prod
+* DONE Optimize css on prod
+  CLOSED: [2018-09-26 Wed 20:10]
 * MAYBE Change defgroup to stylegroup
 * DONE Test to see if you can deref ratoms directly in styles
   CLOSED: [2018-05-22 Tue 20:45]
@@ -83,7 +84,8 @@
 * TODO Some way to target static classnames
   By using a regular style function, target a supplied class name that is used
   instead of default
-* TODO Remove data-herb when prod build
+* DONE Remove data-herb when prod build
+  CLOSED: [2018-09-26 Wed 20:09]
 * TODO Add note about setting debug flag to false on prod builds
 * TODO Look into using more complex classname chars
   I know css supports a larger range of classname chars but I think passing
