@@ -81,6 +81,8 @@
 * TODO What happens when trying to extend a style group with no arguments?
 * TODO Use loop in recur functions herb
 * TODO Some way to target static classnames
+  By using a regular style function, target a supplied class name that is used
+  instead of default
 * TODO Remove data-herb when prod build
 * TODO Add note about setting debug flag to false on prod builds
 * TODO Look into using more complex classname chars
