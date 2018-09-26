@@ -28,9 +28,11 @@
          (assert (some? head)
                  "An head element is required in the dom to inject the style.")
          (.setAttribute element "type" "text/css")
-         (.setAttribute element "data-herb" data-str)
+         (when data-str
+           (.setAttribute element "data-herb" data-str))
          (.appendChild head element)
-         (update-style! identifier element {:data data :element element :data-string data-str}))
+         (update-style! identifier element (cond-> {:data data :element element}
+                                             data-str (assoc :data-string data-str))))
        :clj (update-style! identifier {:data data :data-string data-str}))))
 
 (defn inject-style!

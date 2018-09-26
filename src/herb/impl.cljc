@@ -157,9 +157,9 @@
                           :tag
                           (.getName)))
         composed-name (compose-name name* ns-name hash*)
-        data-str (if group
-                   (compose-data-string composed-name nil)
-                   (compose-data-string composed-name key))
+        data-str (when dev? (if group
+                              (compose-data-string composed-name nil)
+                              (compose-data-string composed-name key)))
         selector (compose-selector composed-name key)
         identifier (if group
                      (sanitize composed-name)
