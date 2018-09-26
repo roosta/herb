@@ -1,4 +1,4 @@
-(ns herb-demo.intro
+(ns herb-demo.tutorials.intro
   (:require
    [herb.core :refer-macros [<class <id] :as herb]
    [herb-demo.components.text :refer [text]]

@@ -1,4 +1,4 @@
-(ns herb-demo.css-garden
+(ns herb-demo.tutorials.css-garden
   (:require
    [herb.core :refer-macros [<class <id] :as herb]
    [herb-demo.components.text :refer [text]]

@@ -1,18 +1,16 @@
 (ns herb-demo.tutorial
-  (:require
-   [herb.core :refer-macros [<class <id] :as herb]
-   [herb-demo.components.text :refer [text]]
-   [herb-demo.examples.intro :as intro]
-   [herb-demo.components.container :refer [container]]
-   [herb-demo.intro :refer [intro]]
-   [herb-demo.css-garden :refer [css-garden]]
-   [herb-demo.why-fns :refer [why-fns]]
-   [herb-demo.components.paper :refer [paper]]
-   [garden.units :refer [rem em px]]
-   [reagent.debug :as d]
-   [reagent.core :as r])
-  (:require-macros
-   [herb-demo.macros :as macros]))
+  (:require [garden.units :refer [em px rem]]
+            [herb-demo.components.container :refer [container]]
+            [herb-demo.components.paper :refer [paper]]
+            [herb-demo.components.text :refer [text]]
+            [herb-demo.examples.intro :as intro]
+            [herb-demo.tutorials.css-garden :refer [css-garden]]
+            [herb-demo.tutorials.intro :refer [intro]]
+            [herb-demo.tutorials.why-fns :refer [why-fns]]
+            [herb.core :as herb :refer-macros [<class <id]]
+            [reagent.core :as r]
+            [reagent.debug :as d])
+  (:require-macros [herb-demo.macros :as macros]))
 
 (defn header-style
   [component]
