@@ -2,7 +2,7 @@
   (:require [accountant.core :as accountant]
             [garden.units :refer [px]]
             [herb-demo.examples :as examples]
-            [herb-demo.tutorial :refer [tutorial]]
+            [herb-demo.tutorial :as tutorial]
             [herb.core :refer [global-style!] :include-macros true]
             [reagent.core :as r]
             [secretary.core :as secretary :include-macros true]))
@@ -36,7 +36,7 @@
   (reset! page #'examples/main))
 
 (secretary/defroute "/tutorial" []
-  (reset! page #'tutorial))
+  (reset! page #'tutorial/main))
 
 (defn appframe []
   [:div [@page]])
