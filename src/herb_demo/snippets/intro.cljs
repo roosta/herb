@@ -1,4 +1,4 @@
-(ns herb-demo.examples.intro
+(ns herb-demo.snippets.intro
   (:require
    [herb.core :refer [<class <id]]))
 

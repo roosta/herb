@@ -1,6 +1,6 @@
 ;; Herb is mostly just a thin wrapper around Garden, so we can require in
 ;; various garden namespaces, and use them in our style function
-(ns herb-demo.examples.state-fn
+(ns herb-demo.snippets.state-fn
   (:require
    [herb.core :refer-macros [<class <id]]
    [garden.units :refer [px]]

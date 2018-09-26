@@ -1,15 +1,13 @@
 (ns herb-demo.tutorials.intro
-  (:require
-   [herb.core :refer-macros [<class <id] :as herb]
-   [herb-demo.components.text :refer [text]]
-   [herb-demo.examples.intro :as intro]
-   [herb-demo.components.code :refer [code]]
-   [herb-demo.components.paper :refer [paper]]
-   [garden.units :refer [rem em px]]
-   [reagent.debug :as d]
-   [reagent.core :as r])
-  (:require-macros
-   [herb-demo.macros :as macros]))
+  (:require [garden.units :refer [em px rem]]
+            [herb-demo.components.code :refer [code]]
+            [herb-demo.components.paper :refer [paper]]
+            [herb-demo.components.text :refer [text]]
+            [herb-demo.snippets.intro :as intro]
+            [herb.core :as herb :refer-macros [<class <id]]
+            [reagent.core :as r]
+            [reagent.debug :as d])
+  (:require-macros [herb-demo.macros :as macros]))
 
 (defn intro-style
   [component]

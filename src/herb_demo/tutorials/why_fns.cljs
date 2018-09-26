@@ -3,7 +3,7 @@
    [herb.core :refer-macros [<class <id] :as herb]
    [herb-demo.components.text :refer [text]]
    [herb-demo.components.code :refer [code]]
-   [herb-demo.examples.state-fn :as e1]
+   [herb-demo.snippets.state-fn :as e1]
    [herb-demo.components.paper :refer [paper]]
    [garden.units :refer [rem em px]]
    [reagent.debug :as d]

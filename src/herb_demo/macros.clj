@@ -3,6 +3,6 @@
 
 (defmacro example-src [example]
   (let [g (->>
-           (str "src/herb_demo/examples/" example)
+           (str "src/herb_demo/snippets/" example)
            (slurp))]
     `~g))
