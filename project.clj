@@ -26,6 +26,8 @@
   :figwheel {:css-dirs ["resources/public/css"]
              :ring-handler server/app}
 
+  :aliases {"demo-release" ["with-profile" "+demo" "cljsbuild" "once" "demo-release"]}
+
   :profiles {:dev {:dependencies [[philoskim/debux "0.4.8"]
                                   [binaryage/devtools "0.9.10"]
                                   [compojure "1.6.1"]
