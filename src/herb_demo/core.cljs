@@ -2,7 +2,7 @@
   (:require [accountant.core :as accountant]
             [garden.units :refer [px]]
             [herb-demo.tests :refer [tests]]
-            [herb-demo.tutorial :refer [site]]
+            [herb-demo.tutorial :refer [tutorial]]
             [herb.core :refer [global-style!] :include-macros true]
             [reagent.core :as r]
             [secretary.core :as secretary :include-macros true]))
@@ -24,8 +24,8 @@
    [:ul
     [:li [:a {:href "/tests"}
           "Tests"]]
-    [:li [:a {:href "/site"}
-           "Site"]]]])
+    [:li [:a {:href "/tutorial"}
+           "Tutorial"]]]])
 
 (defonce page (r/atom #'home-page))
 
@@ -35,8 +35,8 @@
 (secretary/defroute "/tests" []
   (reset! page #'tests))
 
-(secretary/defroute "/site" []
-  (reset! page #'site))
+(secretary/defroute "/tutorial" []
+  (reset! page #'tutorial))
 
 (defn appframe []
   [:div [@page]])

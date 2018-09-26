@@ -30,7 +30,7 @@
           :variant :headline}
     "Clojurescript styling library site"]])
 
-(defn site []
+(defn tutorial []
   (let [state (r/atom "green")]
     (fn []
       [container
