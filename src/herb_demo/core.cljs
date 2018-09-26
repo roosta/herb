@@ -1,17 +1,19 @@
 (ns herb-demo.core
-  (:require
-   [herb.core :include-macros true :refer [<class defgroup <id global-style!]]
-   [garden.selectors :as s]
-   [secretary.core :as secretary :include-macros true]
-   [accountant.core :as accountant]
-   [garden.core :refer [css]]
-   [garden.stylesheet :refer [at-media]]
-   [garden.core :refer [css]]
-   [herb-demo.tests :refer [tests]]
-   [herb-demo.site :refer [site]]
-   [garden.units :refer [px em]]
-   [reagent.debug :as d]
-   [reagent.core :as r]))
+  (:require [accountant.core :as accountant]
+            [garden.core :refer [css]]
+            [garden.selectors :as s]
+            [garden.stylesheet :refer [at-media]]
+            [garden.units :refer [em px]]
+            [herb-demo.tests :refer [tests]]
+            [herb-demo.tutorial :refer [site]]
+            [herb.core
+             :refer
+             [<class <id defgroup global-style!]
+             :include-macros
+             true]
+            [reagent.core :as r]
+            [reagent.debug :as d]
+            [secretary.core :as secretary :include-macros true]))
 
 (def global-style
   (list [:body {:background "#eee"
