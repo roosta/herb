@@ -1,4 +1,4 @@
-(ns herb-demo.tests
+(ns herb-demo.examples
   (:require
    [herb.core :include-macros true :refer [<class defgroup <id global-style!]]
    [garden.selectors :as s]
@@ -200,7 +200,7 @@
   {:max-width (px 600)
    :margin "0 auto"})
 
-(defn tests []
+(defn main []
   (let [state (r/atom "green")]
     (fn []
       #_(profile

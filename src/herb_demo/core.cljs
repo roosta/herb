@@ -1,7 +1,7 @@
 (ns herb-demo.core
   (:require [accountant.core :as accountant]
             [garden.units :refer [px]]
-            [herb-demo.tests :refer [tests]]
+            [herb-demo.examples :as examples]
             [herb-demo.tutorial :refer [tutorial]]
             [herb.core :refer [global-style!] :include-macros true]
             [reagent.core :as r]
@@ -22,8 +22,8 @@
 (defn home-page []
   [:div
    [:ul
-    [:li [:a {:href "/tests"}
-          "Tests"]]
+    [:li [:a {:href "/examples"}
+          "Examples"]]
     [:li [:a {:href "/tutorial"}
            "Tutorial"]]]])
 
@@ -32,8 +32,8 @@
 (secretary/defroute "/" []
   (reset! page #'home-page))
 
-(secretary/defroute "/tests" []
-  (reset! page #'tests))
+(secretary/defroute "/examples" []
+  (reset! page #'examples/main))
 
 (secretary/defroute "/tutorial" []
   (reset! page #'tutorial))
