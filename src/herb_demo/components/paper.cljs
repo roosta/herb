@@ -1,5 +1,5 @@
 (ns herb-demo.components.paper
-  (:require [herb.core :refer [<class]]
+  (:require [herb.core :refer-macros [<class]]
             [garden.units :refer [rem em px]]
             [reagent.core :as r]))
 
