@@ -37,23 +37,25 @@
   using the macro directly or via extend meta data.
   Takes a collection of `style-fns` and a collection `result` that is returned
   with the resolved style maps."
-  [style-fns result]
-  (if (empty? style-fns)
-    result
-    (let [input (first style-fns)]
-      (cond
-        (fn? input)
-        (conj result (apply input (rest style-fns)))
+  [style-fns]
+  (loop [style-fns style-fns
+         result []]
+    (if (empty? style-fns)
+      result
+      (let [input (first style-fns)]
+        (cond
+          (fn? input)
+          (conj result (apply input (rest style-fns)))
 
-        (and (coll? input) (fn? (first input)))
-        (let [style-fn (first input)
-              style-args (rest input)]
-          (recur
-           (rest style-fns)
-           (conj result (apply style-fn style-args))))
-        :else (recur
-               (rest style-fns)
-               (into result (resolve-style-fns input [])))))))
+          (and (coll? input) (fn? (first input)))
+          (let [style-fn (first input)
+                style-args (rest input)]
+            (recur
+             (rest style-fns)
+             (conj result (apply style-fn style-args))))
+          :else (recur
+                 (rest style-fns)
+                 (into result (resolve-style-fns input))))))))
 
 (defn process-meta-xform
   "Return a transducer that pulls out a given meta type from a sequence and filter
@@ -76,7 +78,7 @@
     (recur [style-fns] result)
 
     (and (vector? style-fns) (not (empty? style-fns)))
-    (let [styles (resolve-style-fns style-fns [])
+    (let [styles (resolve-style-fns style-fns)
           new-meta (into [] (process-meta-xform :extend) styles)]
       (recur new-meta
              (into styles result)))

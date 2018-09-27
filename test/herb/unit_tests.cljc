@@ -24,7 +24,7 @@
           (fn-3 [] {:background-color "red"})]
     (let [expected [{:border-radius "5px"} {:background-color "green"} {:background-color "red"}]]
       (testing "Resolve styles"
-        (is (= (impl/resolve-style-fns [[[fn-1] [fn-2 "green"] [fn-3]]] [])
+        (is (= (impl/resolve-style-fns [[[fn-1] [fn-2 "green"] [fn-3]]])
                expected))))))
 
 (deftest extract-styles
