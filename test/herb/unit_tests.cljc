@@ -33,7 +33,7 @@
           (extend-2 [] ^{:extend [[extend-1 "red"]]} {:border-radius "5px"})]
     (let [expected [{:font-size "24px"} {:background-color "red"} {:border-radius "5px"}]]
       (testing "Extract styles"
-        (is (= (impl/extract-styles extend-2 []) expected))))))
+        (is (= (impl/extract-styles extend-2) expected))))))
 
 (deftest extract-meta-mode
   (let [styles [^{:pseudo {:hover {:color "red"}

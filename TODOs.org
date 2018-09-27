@@ -80,7 +80,8 @@
 * DONE Try wrapping macros in reader cond
   CLOSED: [2018-05-22 Tue 20:46]
 * TODO What happens when trying to extend a style group with no arguments?
-* TODO Use loop in recur functions herb
+* DONE Use loop in recur functions herb
+  CLOSED: [2018-09-27 Thu 19:33]
 * TODO Some way to target static classnames
   By using a regular style function, target a supplied class name that is used
   instead of default

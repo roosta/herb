@@ -71,18 +71,20 @@
   each extend vector of style-fns to `resolve-style-fns` for resolution.
   Takes a collection of `style-fns` and a result collection that is returned
   with the resolved styles"
-  [style-fns result]
-  (cond
+  [style-fns]
+  (loop [style-fns style-fns
+         result []]
+    (cond
 
-    (fn? style-fns)
-    (recur [style-fns] result)
+      (fn? style-fns)
+      (recur [style-fns] result)
 
-    (and (vector? style-fns) (not (empty? style-fns)))
-    (let [styles (resolve-style-fns style-fns)
-          new-meta (into [] (process-meta-xform :extend) styles)]
-      (recur new-meta
-             (into styles result)))
-    :else result))
+      (and (vector? style-fns) (not (empty? style-fns)))
+      (let [styles (resolve-style-fns style-fns)
+            new-meta (into [] (process-meta-xform :extend) styles)]
+        (recur new-meta
+               (into styles result)))
+      :else result)))
 
 (defn extract-meta
   "Takes a group of resolved styles and a meta type. Pull out each meta obj and
@@ -149,7 +151,7 @@
   Takes an `opt` map as first argument, and currently only supports `:id true`
   which appends an id identifier instead of a class to the DOM"
   [{:keys [id? style?]} fn-name ns-name style-fn & args]
-  (let [resolved-styles (extract-styles (into [style-fn] args) [])
+  (let [resolved-styles (extract-styles (into [style-fn] args))
         style-data (prepare-data resolved-styles)
         {:keys [group key] :as meta-data} (-> resolved-styles last meta)
         hash* #?(:cljs (.abs js/Math (hash style-data))
