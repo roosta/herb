@@ -1,6 +1,6 @@
 (ns herb.unit-tests
   (:require [clojure.test :as t :refer [deftest testing is]]
-            [garden.stylesheet :refer [at-media at-keyframes]]
+            [garden.stylesheet :refer [at-media at-keyframes at-supports]]
             [herb.impl :as impl]))
 
 (deftest convert-pseudo
@@ -72,11 +72,16 @@
                 (with-meta
                   {:background-color "red"
                    :font-style "italic"}
-                  {:media {{:screen true} {:background-color "blue"}}})]
-        expected {:style {:color "black"
-                          :background-color "red"
-                          :border-radius "5px"
-                          :font-style "italic"}
+                  {:media {{:screen true} {:background-color "blue"}}})
+                (with-meta
+                  {:font-weight "bold"}
+                  {:supports {{:display :grid} {:font-size "24px"}}})]
+        expected {:style {:color "black",
+                          :background-color "red",
+                          :border-radius "5px",
+                          :font-style "italic",
+                          :font-weight "bold"}
+                  :supports (list (at-supports {:display :grid} [:& {:font-size "24px"}]))
                   :pseudo (list [:&:hover {:color "magenta"}])
                   :media (list (at-media {:screen true} [:& {:background-color "blue"}]))}
         actual (impl/prepare-data styles)]
