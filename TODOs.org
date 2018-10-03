@@ -62,7 +62,8 @@
 * TODO Spec input
 * TODO Fix single rule not causing newline
 * TODO Do new perf test
-* TODO Check merge order of extensions in form [style1 style2]
+* CANCELLED Check merge order of extensions in form [style1 style2]
+  CLOSED: [2018-10-03 Wed 19:02]
 * DONE Add helper macro for defining component function
   CLOSED: [2018-09-25 Tue 18:38]
 * CANCELLED ::after ::before
@@ -81,7 +82,9 @@
   Possibly create instances?
 * DONE Try wrapping macros in reader cond
   CLOSED: [2018-05-22 Tue 20:46]
-* TODO What happens when trying to extend a style group with no arguments?
+* PARTIAL What happens when trying to extend a style group with no arguments?
+  CLOSED: [2018-10-03 Wed 19:09]
+  It thows the defgroup error with a blank for component. Consider improving error message
 * DONE Use loop in recur functions herb
   CLOSED: [2018-09-27 Thu 19:33]
 * TODO Some way to target static classnames
@@ -93,10 +96,12 @@
 * TODO Look into using more complex classname chars
   I know css supports a larger range of classname chars but I think passing
   through hiccup or reagent they get sanitized
-* TODO @supports
+* DONE @supports
+  CLOSED: [2018-10-03 Wed 20:00]
 * DONE Mirror clojure namespaces in data-herb tag
   CLOSED: [2018-09-25 Tue 20:36]
 * CANCELLED Target static example
   CLOSED: [2018-10-03 Wed 18:38]
 * TODO Test that clj logic is still sound
  Specifically that the compose-data-string still works with new regexp
+* TODO Keyframes
