@@ -1,6 +1,6 @@
 (ns herb-demo.examples
   (:require
-   [herb.core :include-macros true :refer [<class defgroup <id global-style!]]
+   [herb.core :include-macros true :refer [<class defgroup join-classes <id global-style!]]
    [garden.selectors :as s]
    [garden.core :refer [css]]
    [garden.stylesheet :refer [at-media]]
@@ -200,6 +200,10 @@
   {:max-width (px 600)
    :margin "0 auto"})
 
+(defn white-text
+  []
+  {:color "white"})
+
 (defn main []
   (let [state (r/atom "green")]
     (fn []
@@ -225,6 +229,10 @@
                                                                       :border-radius "5px"}]))))
 
       [:div {:class (<class container)}
+       [:div {:class [(<class group-macro :box) (<class white-text) "hello" nil]}
+        "Multiple classes"
+        ]
+
        [:div {:class (<class style-group-stateful :box "#ddd")}
         [:span {:class (<class style-group-stateful :text @state)}
          "group meta test with arguments"]
