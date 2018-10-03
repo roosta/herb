@@ -35,27 +35,27 @@
 (defn resolve-style-fns
   "Calls each function provided in a collection of style-fns. Input can take
   multiple forms depending on how it got called from the consumer side either
-  using the macro directly or via extend meta data.
-  Takes a collection of `style-fns` and a collection `result` that is returned
-  with the resolved style maps."
+  using the macro directly or via extend meta data. Takes a collection of
+  `style-fns` and a collection `result` that is returned with the resolved style
+  maps."
   [style-fns]
-  (loop [style-fns style-fns
+  (loop [sf style-fns
          result []]
-    (if (empty? style-fns)
+    (if (empty? sf)
       result
-      (let [input (first style-fns)]
+      (let [input (first sf)]
         (cond
           (fn? input)
-          (conj result (apply input (rest style-fns)))
+          (conj result (apply input (rest sf)))
 
           (and (coll? input) (fn? (first input)))
           (let [style-fn (first input)
                 style-args (rest input)]
             (recur
-             (rest style-fns)
+             (rest sf)
              (conj result (apply style-fn style-args))))
           :else (recur
-                 (rest style-fns)
+                 (rest sf)
                  (into result (resolve-style-fns input))))))))
 
 (defn process-meta-xform
@@ -73,15 +73,15 @@
   Takes a collection of `style-fns` and a result collection that is returned
   with the resolved styles"
   [style-fns]
-  (loop [style-fns style-fns
+  (loop [sf style-fns
          result []]
     (cond
 
-      (fn? style-fns)
-      (recur [style-fns] result)
+      (fn? sf)
+      (recur [sf] result)
 
-      (and (vector? style-fns) (not (empty? style-fns)))
-      (let [styles (resolve-style-fns style-fns)
+      (and (vector? sf) (not (empty? sf)))
+      (let [styles (resolve-style-fns sf)
             new-meta (into [] (process-meta-xform :extend) styles)]
         (recur new-meta
                (into styles result)))
