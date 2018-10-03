@@ -23,6 +23,8 @@
 *** Demo meta data in groups
 ** TODO demo nested
 ** TODO Add demo for selecting elements by class
+** TODO Demo global-style!
+** TODO demo using multiple classes using reagent and or join-classes fn
 * &env macro
   In order to evaluate things in context, you first need to garner the bindings
   in the current context. Fortunately, Clojure macros provide an implicit
@@ -94,6 +96,7 @@
 * TODO @supports
 * DONE Mirror clojure namespaces in data-herb tag
   CLOSED: [2018-09-25 Tue 20:36]
-* TODO Target static example
+* CANCELLED Target static example
+  CLOSED: [2018-10-03 Wed 18:38]
 * TODO Test that clj logic is still sound
  Specifically that the compose-data-string still works with new regexp
