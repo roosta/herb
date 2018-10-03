@@ -13,6 +13,7 @@
    :clj (def dev? true))
 
 (defn join-classes
+  "Joins multiple classes together, filtering out nils"
   [& classes]
   (->> classes
       (filter identity)
