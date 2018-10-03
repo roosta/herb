@@ -124,6 +124,8 @@
          (str "-" (sanitize k)))))
 
 (defn compose-data-string
+  "Creates a datastring by stripping away all but last of either slash or dollar
+  sign from input name, mirroring how a clojure fully qualified namespace looks"
   [n k]
   (str
    (str/replace n #"(/|\$)(?=[^/\-\$\-]*/)" ".")
