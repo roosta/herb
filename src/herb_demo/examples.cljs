@@ -200,6 +200,11 @@
   {:max-width (px 600)
    :margin "0 auto"})
 
+(defn extend-group
+  []
+  ^{:extend [[group-macro :box] [group-macro :text]]}
+  {:background-color "red"})
+
 (defn white-text
   []
   {:color "white"})
@@ -229,6 +234,8 @@
                                                                       :border-radius "5px"}]))))
 
       [:div {:class (<class container)}
+       [:div {:class (<class extend-group)}
+        "Extend a style group"]
        [:div {:class [(<class group-macro :box) (<class white-text) "hello" nil]}
         "Multiple classes"
         ]
