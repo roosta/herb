@@ -2,6 +2,13 @@
 ## [Unreleased]
 ### Changed
 - Upgrade dependencies
+- The herb data string is no longer used in production builds
+- Data-string now more resemble the fully qualified name of input function
+- Change project structure from multiple separate projects to a single project
+- Disable CSS pretty printing on production builds
+
+### Added
+- @supports queries
 
 ## [v0.5.0] - 2018-06-17
 ### Added
@@ -10,7 +17,7 @@
 - `defgroup` macro to wrap common pattern
 
 ### Changed
-- Bussiness logic now in `cljc` to simplify testing, using lein test instead of a javascript runner
+- Business logic now in `cljc` to simplify testing, using lein test instead of a javascript runner
 - Rename `set-global-style!` to `global-style!`
 - Rename `:mode` to `:pseudo`
 
