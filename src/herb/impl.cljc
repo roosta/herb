@@ -130,18 +130,21 @@
    (when k (str "[" k "]"))))
 
 (defn compose-name
-  [n ns-name hash]
+  [n ns-name style-data]
   (let [anon? #?(:clj (str/includes? n "fn__")
                  :cljs (empty? n))
+        hash* (when anon?
+                #?(:cljs (.abs js/Math (hash style-data))
+                   :clj (Math/abs (hash style-data))))
         cname (cond
                 (and anon? (not dev?))
-                (str "A-" hash)
+                (str "A-" hash*)
 
                 (and dev? anon?)
                 #?(:cljs
-                   (str ns-name "/" "anonymous-" hash)
+                   (str ns-name "/" "anonymous-" hash*)
                    :clj
-                   (str/replace n #"fn__[0-9]*" (str "anonymous-" hash)))
+                   (str/replace n #"fn__[0-9]*" (str "anonymous-" hash*)))
                 :else n)]
     #?(:cljs (demunge cname)
        :clj cname)))
@@ -153,14 +156,12 @@
   [{:keys [id? style?]} fn-name ns-name style-fn & args]
   (let [resolved-styles (extract-styles (into [style-fn] args))
         style-data (prepare-data resolved-styles)
-        {:keys [group key] :as meta-data} (-> resolved-styles last meta)
-        hash* #?(:cljs (.abs js/Math (hash style-data))
-                 :clj (Math/abs (hash style-data)))
+        {:keys [group key target] :as meta-data} (-> resolved-styles last meta)
         name* #?(:cljs (.-name style-fn)
                  :clj (-> (analyze style-fn)
                           :tag
                           (.getName)))
-        composed-name (compose-name name* ns-name hash*)
+        composed-name (compose-name name* ns-name style-data)
         data-str (when dev? (if group
                               (compose-data-string composed-name nil)
                               (compose-data-string composed-name key)))
