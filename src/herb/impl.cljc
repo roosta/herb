@@ -2,7 +2,7 @@
   (:require
    [clojure.string :as str]
    [herb.runtime :as runtime]
-   [garden.stylesheet :refer [at-media at-keyframes]]
+   [garden.stylesheet :refer [at-media at-keyframes at-supports]]
    #?@(:cljs [[cljs.compiler :as compiler]
               [debux.cs.core :as d :refer-macros [clog clogn dbg dbgn break]]
               [cljs.analyzer :as ana]]
@@ -31,6 +31,12 @@
   (map (fn [[query style]]
          (at-media query [:& style]))
        media))
+
+(defn convert-supports
+  [supports]
+  (map (fn [[query style]]
+         (at-supports query [:& style]))
+       supports))
 
 (defn resolve-style-fns
   "Calls each function provided in a collection of style-fns. Input can take
@@ -94,6 +100,7 @@
   [styles meta-type]
   (let [convert-fn (case meta-type
                      :media convert-media
+                     :supports convert-supports
                      :pseudo convert-pseudo)
         extracted (into [] (process-meta-xform meta-type) styles)]
     (when (not (empty? extracted))
@@ -108,6 +115,7 @@
   [resolved-styles]
    {:style (apply merge {} resolved-styles)
     :pseudo  (extract-meta resolved-styles :pseudo)
+    :supports (extract-meta resolved-styles :supports)
     :media (extract-meta resolved-styles :media)})
 
 (defn sanitize

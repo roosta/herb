@@ -195,6 +195,12 @@
          :margin [["10px" 0 "10px" 0]]
          :border-radius "5px"}})
 
+(defn supports-thing
+  []
+  ^{:supports {{:display :grid} {:font-size (px 20)}}}
+  {:font-size (px 12)}
+  )
+
 (defn container
   []
   {:max-width (px 600)
@@ -234,6 +240,8 @@
                                                                       :border-radius "5px"}]))))
 
       [:div {:class (<class container)}
+       [:div {:class (<class supports-thing)}
+        "wow"]
        [:div {:class (<class extend-group)}
         "Extend a style group"]
        [:div {:class [(<class group-macro :box) (<class white-text) "hello" nil]}

@@ -21,7 +21,7 @@
                  [philoskim/debux-stubs "0.4.8"]
                  [org.clojure/tools.analyzer.jvm "0.7.2"]
                  [org.clojure/tools.analyzer "0.6.9"]
-                 [garden "1.3.5"]]
+                 [garden "1.3.6"]]
 
   :figwheel {:css-dirs ["resources/public/css"]
              :ring-handler server/app}

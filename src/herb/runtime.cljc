@@ -15,8 +15,8 @@
   "Create css string and update DOM"
   [identifier #?(:cljs element) new]
   (let [css-str (css {:pretty-print? dev?}
-                     (map (fn [[class {:keys [style pseudo media]}]]
-                            [class style pseudo media])
+                     (map (fn [[class {:keys [style pseudo media supports]}]]
+                            [class style pseudo media supports])
                           (:data new)))]
     (swap! injected-styles assoc identifier (assoc new :css css-str))
     #?(:cljs (set! (.-innerHTML element) css-str))))
