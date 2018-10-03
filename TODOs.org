@@ -95,3 +95,5 @@
 * DONE Mirror clojure namespaces in data-herb tag
   CLOSED: [2018-09-25 Tue 20:36]
 * TODO Target static example
+* TODO Test that clj logic is still sound
+ Specifically that the compose-data-string still works with new regexp
