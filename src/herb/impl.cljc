@@ -129,7 +129,7 @@
    (str/replace n #"(/|\$)(?=[^/\-\$\-]*/)" ".")
    (when k (str "[" k "]"))))
 
-(defn compose-name
+(defn get-name
   [style-fn ns-name style-data]
   (let [name* #?(:cljs (.-name style-fn)
                  :clj (-> (analyze style-fn)
@@ -162,13 +162,13 @@
         style-data (prepare-data resolved-styles)
         {:keys [group key target] :as meta-data} (-> resolved-styles last meta)
 
-        composed-name (compose-name style-fn ns-name style-data)
+        name* (get-name style-fn ns-name style-data)
         data-str (when dev? (if group
-                              (compose-data-string composed-name nil)
-                              (compose-data-string composed-name key)))
-        selector (compose-selector composed-name key)
+                              (compose-data-string name* nil)
+                              (compose-data-string name* key)))
+        selector (compose-selector name* key)
         identifier (if group
-                     (sanitize composed-name)
+                     (sanitize name*)
                      selector)
         style-data [(str (if id? "#" ".") selector) style-data]]
     (runtime/inject-style! identifier style-data data-str)
