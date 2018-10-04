@@ -218,27 +218,6 @@
 (defn main []
   (let [state (r/atom "green")]
     (fn []
-      #_(profile
-         {}
-         (doseq [n (range 500)]
-           (p ::with-style (with-style profile-comp n)))
-
-         (doseq [_ (range 500)]
-           (p ::manipulate-dom (.appendChild (.-head js/document)
-                                             (.createElement js/document (str "style")))))
-
-         (doseq [_ (range 500)]
-           (p ::garden (css [:.classname {:width (px 100)
-                                          :height (px 100)
-                                          :background-color "magenta"
-                                          :border-radius "5px"}])))
-
-         (doseq [_ (range 500)]
-           (p ::at-media (at-media {:max-width "256px"} [:.classname {:width (px 100)
-                                                                      :height (px 100)
-                                                                      :background-color "magenta"
-                                                                      :border-radius "5px"}]))))
-
       [:div {:class (<class container)}
        [:div {:class (<class supports-thing)}
         "wow"]
