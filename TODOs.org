@@ -61,7 +61,8 @@
 
 * TODO Spec input
 * TODO Fix single rule not causing newline
-* TODO Do new perf test
+* DONE Do new perf test
+  CLOSED: [2018-10-04 Thu 20:31]
 * CANCELLED Check merge order of extensions in form [style1 style2]
   CLOSED: [2018-10-03 Wed 19:02]
 * DONE Add helper macro for defining component function
