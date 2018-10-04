@@ -40,7 +40,7 @@
                    :source-paths ["test" "dev"]}
              :dev-cider {:dependencies [[cider/piggieback "0.3.9"]]
                          :figwheel {:nrepl-middleware [cider.piggieback/wrap-cljs-repl]}}
-             :demo {:dependencies [[com.taoensso/tufte "2.0.1"]
+             :demo {:dependencies [[com.taoensso/tufte "1.2.0"]
                                    [secretary "1.2.3"]
                                    [cljsjs/highlight "9.12.0-2"]
                                    [venantius/accountant "0.2.4"]
