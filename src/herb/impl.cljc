@@ -103,7 +103,7 @@
                      :supports convert-supports
                      :pseudo convert-pseudo)
         extracted (into [] (process-meta-xform meta-type) styles)]
-    (when (not (empty? extracted))
+    (when (seq extracted)
       (let [merged (apply merge {} extracted)
             converted (convert-fn merged)]
         converted))))
