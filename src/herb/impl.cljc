@@ -38,6 +38,14 @@
          (at-supports query [:& style]))
        supports))
 
+(defn convert-vendors
+  [vendors]
+  (into []
+        (comp
+         (map name)
+         (distinct))
+        vendors))
+
 (defn resolve-style-fns
   "Calls each function provided in a collection of style-fns. Input can take
   multiple forms depending on how it got called from the consumer side either
@@ -101,12 +109,14 @@
   (let [convert-fn (case meta-type
                      :media convert-media
                      :supports convert-supports
+                     :vendors convert-vendors
                      :pseudo convert-pseudo)
         extracted (into [] (process-meta-xform meta-type) styles)]
     (when (seq extracted)
-      (let [merged (apply merge {} extracted)
-            converted (convert-fn merged)]
-        converted))))
+      (let [merged (case meta-type
+                     :vendors (apply concat extracted)
+                     (apply merge {} extracted))]
+        (convert-fn merged)))))
 
 (defn prepare-data
   "Prepare `resolved-styles` so they can be passed to `garden.core/css` Merge
@@ -115,6 +125,7 @@
   [resolved-styles]
    {:style (apply merge {} resolved-styles)
     :pseudo  (extract-meta resolved-styles :pseudo)
+    :vendors (extract-meta resolved-styles :vendors)
     :supports (extract-meta resolved-styles :supports)
     :media (extract-meta resolved-styles :media)})
 
