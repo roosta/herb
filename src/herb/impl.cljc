@@ -2,6 +2,7 @@
   (:require
    [clojure.string :as str]
    [herb.runtime :as runtime]
+   [clojure.set :as set]
    [garden.stylesheet :refer [at-media at-keyframes at-supports]]
    #?@(:cljs [[cljs.compiler :as compiler]
               [debux.cs.core :as d :refer-macros [clog clogn dbg dbgn break]]
@@ -109,11 +110,13 @@
   (let [convert-fn (case meta-type
                      :media convert-media
                      :supports convert-supports
+                     :auto-prefix identity
                      :vendors convert-vendors
                      :pseudo convert-pseudo)
         extracted (into [] (process-meta-xform meta-type) styles)]
     (when (seq extracted)
       (let [merged (case meta-type
+                     :auto-prefix (apply set/union extracted)
                      :vendors (apply concat extracted)
                      (apply merge {} extracted))]
         (convert-fn merged)))))
@@ -126,6 +129,7 @@
    {:style (apply merge {} resolved-styles)
     :pseudo  (extract-meta resolved-styles :pseudo)
     :vendors (extract-meta resolved-styles :vendors)
+    :auto-prefix (extract-meta resolved-styles :auto-prefix)
     :supports (extract-meta resolved-styles :supports)
     :media (extract-meta resolved-styles :media)})
 

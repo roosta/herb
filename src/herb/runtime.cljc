@@ -15,7 +15,9 @@
   "Create css string and update DOM"
   [identifier #?(:cljs element) new]
   (let [vendors (-> new :data last val :vendors)
+        auto-prefix (-> new :data last val :auto-prefix)
         css-str (css {:vendors vendors
+                      :auto-prefix auto-prefix
                       :pretty-print? dev?}
                      (map (fn [[class {:keys [style pseudo media supports]}]]
                             [class style pseudo media supports])
