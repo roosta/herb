@@ -106,3 +106,8 @@
 * TODO Test that clj logic is still sound
  Specifically that the compose-data-string still works with new regexp
 * TODO Keyframes
+* DONE Vendors
+  CLOSED: [2018-10-05 Fri 20:39]
+* TODO meta for entire group
+  like vendor prefixes and auto-prefix
+* TODO Check that all meta types are supported in a group
