@@ -181,11 +181,6 @@
       :text-2 {:color "cyan"}})
     {:group true
      :key component}))
-;; (def some-other-style {:background-color "black"})
-;; (def some-more-style {:border-radius "5px"})
-;; (def some-style
-;;   ^{:extend [some-other-style some-more-style]}
-;;   {:color "blue"})
 
 (defgroup group-macro
   {:text {:font-weight "bold"
