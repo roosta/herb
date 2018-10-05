@@ -210,12 +210,51 @@
   []
   {:color "white"})
 
+(defn inline-prefixes
+  []
+  {:-moz {:border-radius "3px"
+          :box-sizing "border-box"}
+   :background-color "black"
+   :color "white"})
+
+(defn shadow-prefix
+  []
+  ^{:vendors ["ms" "webkit"]
+    :auto-prefix #{:transition}}
+  {:transition "all 1s ease-out"
+   :font-size (px 24)})
+
+(defn vendor-prefixes
+  []
+  ^{:extend shadow-prefix
+    :vendors [:webkit]
+    :auto-prefix #{:border-radius}}
+  {:background-color "black"
+   :border-radius (px 3)
+   :color "white"})
+
+(defn transition
+  [c]
+  {:transition "all 1s ease-out"
+   :height (px 50)
+   :display "flex"
+   :align-items "center"
+   :justify-content "center"
+   :background-color c})
+
 (defn main []
   (let [state (r/atom "green")]
     (fn []
       [:div {:class (<class container)}
+       [:div {:class (<class vendor-prefixes)}
+        "Vendor prefixes"]
+       [:div {:class (<class transition @state)}
+        [:button {:on-click #(reset! state (toggle-color @state))}
+         "Change color"]]
+       [:div {:class (<class inline-prefixes)}
+        "inline vendor prefixes"]
        [:div {:class (<class supports-thing)}
-        "wow"]
+        "Testing supports queries"]
        [:div {:class (<class extend-group)}
         "Extend a style group"]
        [:div {:class [(<class group-macro :box) (<class white-text) "hello" nil]}
