@@ -75,3 +75,20 @@
            (.setAttribute element "data-herb" "global")
            (.appendChild head element))))
      :clj (css {:pretty-print? dev?} styles)))
+
+(defn inject-keyframes!
+  [sym obj]
+  #?(:cljs
+     (let [element (.querySelector js/document "style[data-herb=\"keyframes\"]")
+           head (.-head js/document)
+           css-str (css {:pretty-print? dev?} obj)]
+       (assert (some? head) "An head element is required in the dom to inject the style.")
+       (if element
+         (set! (.-innerHTML element) css-str)
+         (let [element (.createElement js/document "style")]
+           (set! (.-innerHTML element) css-str)
+           (.setAttribute element "type" "text/css")
+           (.setAttribute element "data-herb" "keyframes")
+           (.appendChild head element))))
+     :clj (css {:pretty-print? dev?} obj))
+  )

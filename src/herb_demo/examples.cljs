@@ -1,6 +1,9 @@
 (ns herb-demo.examples
+  ;; (:require-macros [garden.def :refer [defkeyframes]])
   (:require
-   [herb.core :include-macros true :refer [<class defgroup join-classes <id global-style!]]
+   [herb.core
+    :include-macros true
+    :refer [<class defgroup join-classes <id global-style! defkeyframes]]
    [garden.selectors :as s]
    [garden.core :refer [css]]
    [garden.stylesheet :refer [at-media]]
@@ -242,10 +245,24 @@
    :justify-content "center"
    :background-color c})
 
+(defkeyframes pulse-animation
+  [:from {:opacity 1}]
+  [:to {:opacity 0}])
+
+(defn pulse-component
+  []
+  {
+   :animation [[pulse-animation "2s" :infinite :alternate]]
+   :background-color "black"
+   :width (px 20)
+   :height (px 20)}
+  )
+
 (defn main []
   (let [state (r/atom "green")]
     (fn []
       [:div {:class (<class container)}
+       [:div {:class (<class pulse-component)}]
        [:div {:class (<class vendor-prefixes)}
         "Vendor prefixes"]
        [:div {:class (<class transition @state)}

@@ -1,10 +1,22 @@
 (ns herb.core
   (:require [herb.impl :as impl]
-            [herb.runtime :as runtime]))
+            [herb.runtime :as runtime])
+  #?(:clj
+     (:import garden.types.CSSAtRule)))
 
 ;; Aliases
 (def join-classes impl/join-classes)
 (def global-style! runtime/global-style!)
+
+#?(:clj
+   (defmacro defkeyframes
+     [sym & frames]
+     (let [value {:identifier `(str '~sym)
+                  :frames `(list ~@frames)}
+           obj `(CSSAtRule. :keyframes ~value)]
+       `(do
+          (runtime/inject-keyframes! (str '~sym) ~obj)
+          (def ~sym ~obj)))))
 
 #?(:clj
    (defmacro defgroup
