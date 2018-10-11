@@ -65,7 +65,7 @@
   #?(:cljs
      (let [element (.querySelector js/document "style[data-herb=\"global\"]")
            head (.-head js/document)
-           css-str (css styles)]
+           css-str (css {:pretty-print? dev?} styles)]
        (assert (some? head) "An head element is required in the dom to inject the style.")
        (if element
          (set! (.-innerHTML element) css-str)
@@ -74,4 +74,4 @@
            (.setAttribute element "type" "text/css")
            (.setAttribute element "data-herb" "global")
            (.appendChild head element))))
-     :clj (css styles)))
+     :clj (css {:pretty-print? dev?} styles)))
