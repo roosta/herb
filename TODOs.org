@@ -105,10 +105,13 @@
   CLOSED: [2018-10-03 Wed 18:38]
 * TODO Test that clj logic is still sound
  Specifically that the compose-data-string still works with new regexp
-* TODO Keyframes
+* DONE Keyframes
+  CLOSED: [2018-10-12 Fri 20:21]
 * DONE Vendors
   CLOSED: [2018-10-05 Fri 20:39]
 * TODO meta for entire group
   like vendor prefixes and auto-prefix
 * TODO Check that all meta types are supported in a group
 * TODO [[https://github.com/divs1210/xodarap][divs1210/xodarap: Fearless recursion in Clojure!]]
+* TODO Global vendor prefixes
+* TODO Defgroup in clj might need a simpler syntax when calling from <style
