@@ -84,14 +84,12 @@
 
 (defn inject-keyframes!
   [sym obj]
-  #?(:cljs
-     (let [injected (get @injected-keyframes sym)]
-       (when-not (= (:data injected) obj)
-         (swap! injected-keyframes assoc sym {:data obj :css (css {:pretty-print? dev?} obj)})
-         (let [element (or (.querySelector js/document "style[data-herb=\"keyframes\"]")
-                           (create-element! "keyframes"))
-               inner-html (.-innerHTML element)
-               css-str (css {:pretty-print? dev?} obj)]
-           (set! (.-innerHTML element) (str inner-html (when dev? "\n") css-str)))))
-     :clj (css {:pretty-print? dev?} obj))
-  )
+  (let [injected (get @injected-keyframes sym)]
+    (when-not (= (:data injected) obj)
+      (let [css-str (css {:pretty-print? dev?} obj)]
+        #?(:cljs
+           (let [element (or (.querySelector js/document "style[data-herb=\"keyframes\"]")
+                             (create-element! "keyframes"))
+                 inner-html (.-innerHTML element)]
+             (set! (.-innerHTML element) (str inner-html (when dev? "\n") css-str))))
+        (swap! injected-keyframes assoc sym {:data obj :css css-str})))))
