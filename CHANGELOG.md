@@ -8,7 +8,9 @@
 - Disable CSS pretty printing on production builds
 
 ### Added
-- @supports queries
+- @supports queries via `:supports` metadata
+- @keyframes support via `defkeyframes` macro and accompanying `<keyframes` macro
+- vendor prefixes via `:vendors` and `:auto-prefix` metadata
 
 ## [v0.5.0] - 2018-06-17
 ### Added
