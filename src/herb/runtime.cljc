@@ -28,6 +28,7 @@
 
 #?(:cljs
    (defn create-element!
+     "Create an element in the DOM with an optional data-herb attribute"
      [attr]
      (let [head (.-head js/document)]
        (assert (some? head) "An head element is required in the dom to inject the style.")
