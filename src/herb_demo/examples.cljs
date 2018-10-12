@@ -249,6 +249,10 @@
   [:from {:opacity 1}]
   [:to {:opacity 0}])
 
+(defkeyframes width-vary
+  [:from {:width "100%"}]
+  [:to {:width "50%"}])
+
 (defn pulse-component
   []
   {
@@ -258,11 +262,23 @@
    :height (px 20)}
   )
 
+(defn width-vary-component
+  []
+  {:animation [[width-vary "2s" "cubic-bezier(.77, 0, .175, 1)" :infinite :alternate]]
+   :background-color "red"
+   :height (px 20)})
+
+(defn row
+  []
+  {:display :flex})
+
 (defn main []
   (let [state (r/atom "green")]
     (fn []
       [:div {:class (<class container)}
-       [:div {:class (<class pulse-component)}]
+       [:div {:class (<class row)}
+        [:div {:class (<class pulse-component)}]
+        [:div {:class (<class width-vary-component)}]]
        [:div {:class (<class vendor-prefixes)}
         "Vendor prefixes"]
        [:div {:class (<class transition @state)}
