@@ -29,14 +29,14 @@
     "red" "green"
     "green" "red"))
 
-(defn asd
+(defn inheritance-meta
   []
   ^{:pseudo {:hover {:background-color "black"}}}
   {:color "red"})
 
 (defn extend-mode-meta
   []
-  ^{:extend asd
+  ^{:extend inheritance-meta
     :pseudo {:hover {:background-color "green"}}}
   {:color "purple"})
 
@@ -44,7 +44,7 @@
   []
   ^{:extend extend-mode-meta
     :pseudo {:hover {:background-color "blue"}
-           :focus {:background-color "yellow"}}}
+             :focus {:background-color "yellow"}}}
   {:background-color "red"}
   )
 
@@ -58,7 +58,7 @@
     (case color
       (or "blue" "purple") {:color "white"}
       {:color "black"})
-    {:extend [[font-weight "bold"] [asd]]}))
+    {:extend [[font-weight "bold"] [inheritance-meta]]}))
 
 (defn margin
   []
