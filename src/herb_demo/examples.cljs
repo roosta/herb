@@ -3,7 +3,7 @@
   (:require
    [herb.core
     :include-macros true
-    :refer [<class defgroup join-classes <id global-style! defkeyframes]]
+    :refer [<class defgroup join-classes <id defkeyframes]]
    [garden.selectors :as s]
    [garden.core :refer [css]]
    [garden.stylesheet :refer [at-media]]

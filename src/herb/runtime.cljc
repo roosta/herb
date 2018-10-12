@@ -11,6 +11,7 @@
 
 (defonce injected-styles (atom {}))
 (defonce injected-keyframes (atom {}))
+(defonce injected-global (atom {}))
 
 (defn update-style!
   "Create css string and update DOM"
@@ -66,34 +67,18 @@
         @injected-styles))
     (create-style identifier new data-str)))
 
-(defn global-style!
-  "CLJS: Takes a collection of Garden style vectors, and create or update the global style element
-  CLJ: Returns garden.core/css on input"
-  [& styles]
-  #?(:cljs
-     (let [element (.querySelector js/document "style[data-herb=\"global\"]")
-           head (.-head js/document)
-           css-str (css {:pretty-print? dev?} styles)]
-       (assert (some? head) "An head element is required in the dom to inject the style.")
-       (if element
-         (set! (.-innerHTML element) css-str)
-         (let [element (.createElement js/document "style")]
-           (set! (.-innerHTML element) css-str)
-           (.setAttribute element "type" "text/css")
-           (.setAttribute element "data-herb" "global")
-           (.appendChild head element))))
-     :clj (css {:pretty-print? dev?} styles)))
-
-(defn inject-keyframes!
-  "Injects keyframes into an atom and depending on runtime environment appends
-  @keyframes style to DOM"
-  [sym obj]
-  (let [injected (get @injected-keyframes sym)]
-    (when-not (= (:data injected) obj)
+(defn inject-obj!
+  "Inject collection of style objects in a common element, used by passing a
+  dispatch in the form of :keyframes or :global"
+  [sym dispatch & obj]
+  (let [state (case dispatch
+                :global injected-global
+                :keyframes injected-keyframes)]
+    (when-not (= (:data (get @state sym)) obj)
       (let [css-str (css {:pretty-print? dev?} obj)]
         #?(:cljs
-           (let [element (or (.querySelector js/document "style[data-herb=\"keyframes\"]")
-                             (create-element! "keyframes"))
+           (let [element (or (.querySelector js/document (str "style[data-herb=\"" (name dispatch) "\"]"))
+                             (create-element! (name dispatch)))
                  inner-html (.-innerHTML element)]
              (set! (.-innerHTML element) (str inner-html (when dev? "\n") css-str))))
-        (swap! injected-keyframes assoc sym {:data obj :css css-str})))))
+        (swap! state assoc sym {:data obj :css css-str})))))

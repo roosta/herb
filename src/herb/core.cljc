@@ -8,7 +8,6 @@
 
 ;; Aliases
 (def join-classes impl/join-classes)
-(def global-style! runtime/global-style!)
 
 #?(:clj
    (defmacro defkeyframes
@@ -29,7 +28,7 @@
                   :frames `(list ~@frames)}
            obj `(CSSAtRule. :keyframes ~value)]
        `(do
-          (runtime/inject-keyframes! (str '~sym) ~obj)
+          (runtime/inject-obj! (str '~sym) :keyframes ~obj)
           (def ~sym ~obj)))))
 
 (defmacro <keyframes
