@@ -38,7 +38,7 @@
          (.appendChild head element)
          element))))
 
-(defn create-style!
+(defn create-style
   "Create a style element in head if identifier is not already present Attach a
   data attr with namespace and call update-style with new element"
   [identifier new data-str]
@@ -58,11 +58,12 @@
   (if-let [injected (get @injected-styles identifier)]
     (let [data (:data injected)
           target (get data (first new))]
-      (when (not= target (last new))
+      (if (not= target (last new))
         (let [data (assoc injected :data (conj data new))]
           #?(:cljs (update-style! identifier (:element injected) data)
-             :clj  (update-style! identifier data)))))
-    (create-style! identifier new data-str)))
+             :clj  (update-style! identifier data)))
+        injected))
+    (create-style identifier new data-str)))
 
 (defn global-style!
   "CLJS: Takes a collection of Garden style vectors, and create or update the global style element

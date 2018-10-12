@@ -196,10 +196,10 @@
         identifier (if group
                      (sanitize name*)
                      selector)
-        style-data [(str (if id? "#" ".") selector) style-data]]
-    (runtime/inject-style! identifier style-data data-str)
+        style-data [(str (if id? "#" ".") selector) style-data]
+        result (runtime/inject-style! identifier style-data data-str)]
     (if style?
-      (-> @runtime/injected-styles
+      (-> result
           (get identifier)
           :css)
       selector)))
