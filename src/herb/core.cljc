@@ -34,6 +34,14 @@
           (runtime/inject-keyframes! (str '~sym) ~obj)
           (def ~sym ~obj)))))
 
+(defmacro <keyframes
+  "Returns a CSS string from defined keyframes using the defkeyframes macro.
+  Intended to be used from clojure"
+  [sym]
+  `(-> @runtime/injected-keyframes
+      (get (str '~sym))
+      :css))
+
 #?(:clj
    (defmacro defgroup
      "Define a style group, everything defined in a group is grouped in the same
