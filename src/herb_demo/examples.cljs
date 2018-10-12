@@ -262,6 +262,13 @@
    :height (px 20)}
   )
 
+(defn pulse-component-two
+  []
+  {:animation [[pulse-animation "2s" :infinite :alternate]]
+   :background-color "green"
+   :width (px 20)
+   :height (px 20)})
+
 (defn width-vary-component
   []
   {:animation [[width-vary "2s" "cubic-bezier(.77, 0, .175, 1)" :infinite :alternate]]
@@ -278,6 +285,7 @@
       [:div {:class (<class container)}
        [:div {:class (<class row)}
         [:div {:class (<class pulse-component)}]
+        [:div {:class (<class pulse-component-two)}]
         [:div {:class (<class width-vary-component)}]]
        [:div {:class (<class vendor-prefixes)}
         "Vendor prefixes"]
