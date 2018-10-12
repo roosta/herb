@@ -1,6 +1,10 @@
 (ns herb.core
   (:require [herb.impl :as impl]
-            [herb.runtime :as runtime])
+            [herb.runtime :as runtime]
+            #?@(:clj [[debux.core :refer [dbg]]]
+                :cljs [[debux.cs.core :as d :refer-macros [clog clogn dbg dbgn break]]])
+            )
+
   #?(:clj
      (:import garden.types.CSSAtRule)))
 
