@@ -10,6 +10,7 @@
    :clj (def dev? true))
 
 (defonce injected-styles (atom {}))
+(defonce injected-keyframes (atom {}))
 
 (defn update-style!
   "Create css string and update DOM"
@@ -76,19 +77,28 @@
            (.appendChild head element))))
      :clj (css {:pretty-print? dev?} styles)))
 
+#?(:cljs
+   (defn create-element!
+     [attr]
+     (let [head (.-head js/document)]
+       (assert (some? head) "An head element is required in the dom to inject the style.")
+       (let [element (.createElement js/document "style")]
+         (.setAttribute element "type" "text/css")
+         (.setAttribute element "data-herb" attr)
+         (.appendChild head element)
+         element))
+     ))
+
 (defn inject-keyframes!
   [sym obj]
   #?(:cljs
-     (let [element (.querySelector js/document "style[data-herb=\"keyframes\"]")
-           head (.-head js/document)
-           css-str (css {:pretty-print? dev?} obj)]
-       (assert (some? head) "An head element is required in the dom to inject the style.")
-       (if element
-         (set! (.-innerHTML element) css-str)
-         (let [element (.createElement js/document "style")]
-           (set! (.-innerHTML element) css-str)
-           (.setAttribute element "type" "text/css")
-           (.setAttribute element "data-herb" "keyframes")
-           (.appendChild head element))))
+     (let [injected (get @injected-keyframes sym)]
+       (when-not (= (:data injected) obj)
+         (swap! injected-keyframes assoc sym {:data obj :css (css {:pretty-print? dev?} obj)})
+         (let [element (or (.querySelector js/document "style[data-herb=\"keyframes\"]")
+                           (create-element! "keyframes"))
+               inner-html (.-innerHTML element)
+               css-str (css {:pretty-print? dev?} obj)]
+           (set! (.-innerHTML element) (str inner-html (when dev? "\n") css-str)))))
      :clj (css {:pretty-print? dev?} obj))
   )
