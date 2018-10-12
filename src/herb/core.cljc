@@ -30,9 +30,17 @@
        `(do
           (runtime/inject-obj! (str '~sym) :keyframes ~obj)
           (def ~sym ~obj)))))
+#?(:clj
+   (defmacro defglobal
+     [sym & styles]
+     (let [styles# `(list ~@styles)]
+       `(do
+          (runtime/inject-obj! (str '~sym) :global ~styles#)
+          (def ~sym ~styles#)))))
 
-(defmacro <keyframes
-  "Returns a CSS string from defined keyframes using the defkeyframes macro.
+#?(:clj
+   (defmacro <keyframes
+     "Returns a CSS string from defined keyframes using the defkeyframes macro.
   Intended to be used from clojure
   ```
   (defkeyframes pulse
@@ -50,10 +58,10 @@
     }
 }
   ```"
-  [sym]
-  `(-> @runtime/injected-keyframes
-      (get (str '~sym))
-      :css))
+     [sym]
+     `(-> @runtime/injected-keyframes
+          (get (str '~sym))
+          :css)))
 
 #?(:clj
    (defmacro defgroup
