@@ -23,8 +23,8 @@
                      (map (fn [[class {:keys [style pseudo media supports]}]]
                             [class style pseudo media supports])
                           (:data new)))]
-    (swap! injected-styles assoc identifier (assoc new :css css-str))
-    #?(:cljs (set! (.-innerHTML element) css-str))))
+    #?(:cljs (set! (.-innerHTML element) css-str))
+    (swap! injected-styles assoc identifier (assoc new :css css-str))))
 
 (defn create-style!
   "Create a style element in head if identifier is not already present Attach a
