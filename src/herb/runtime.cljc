@@ -26,20 +26,25 @@
     #?(:cljs (set! (.-innerHTML element) css-str))
     (swap! injected-styles assoc identifier (assoc new :css css-str))))
 
+#?(:cljs
+   (defn create-element!
+     [attr]
+     (let [head (.-head js/document)]
+       (assert (some? head) "An head element is required in the dom to inject the style.")
+       (let [element (.createElement js/document "style")]
+         (.setAttribute element "type" "text/css")
+         (when attr
+           (.setAttribute element "data-herb" attr))
+         (.appendChild head element)
+         element))))
+
 (defn create-style!
   "Create a style element in head if identifier is not already present Attach a
   data attr with namespace and call update-style with new element"
   [identifier new data-str]
   (let [data (conj {} new)]
     #?(:cljs
-       (let [head (.-head js/document)
-             element (.createElement js/document "style")]
-         (assert (some? head)
-                 "An head element is required in the dom to inject the style.")
-         (.setAttribute element "type" "text/css")
-         (when data-str
-           (.setAttribute element "data-herb" data-str))
-         (.appendChild head element)
+       (let [element (create-element! data-str)]
          (update-style! identifier element (cond-> {:data data :element element}
                                              data-str (assoc :data-string data-str))))
        :clj (update-style! identifier {:data data :data-string data-str}))))
@@ -76,18 +81,6 @@
            (.setAttribute element "data-herb" "global")
            (.appendChild head element))))
      :clj (css {:pretty-print? dev?} styles)))
-
-#?(:cljs
-   (defn create-element!
-     [attr]
-     (let [head (.-head js/document)]
-       (assert (some? head) "An head element is required in the dom to inject the style.")
-       (let [element (.createElement js/document "style")]
-         (.setAttribute element "type" "text/css")
-         (.setAttribute element "data-herb" attr)
-         (.appendChild head element)
-         element))
-     ))
 
 (defn inject-keyframes!
   [sym obj]
