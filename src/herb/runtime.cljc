@@ -62,7 +62,7 @@
         (let [data (assoc injected :data (conj data new))]
           #?(:cljs (update-style! identifier (:element injected) data)
              :clj  (update-style! identifier data)))
-        injected))
+        @injected-styles))
     (create-style identifier new data-str)))
 
 (defn global-style!
