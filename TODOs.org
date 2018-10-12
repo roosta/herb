@@ -115,3 +115,4 @@
 * TODO [[https://github.com/divs1210/xodarap][divs1210/xodarap: Fearless recursion in Clojure!]]
 * TODO Global vendor prefixes
 * TODO Defgroup in clj might need a simpler syntax when calling from <style
+* TODO Global and keyframes needs more than a symbol to identify it.
