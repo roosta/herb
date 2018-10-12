@@ -3,21 +3,21 @@
             [garden.units :refer [px]]
             [herb-demo.examples :as examples]
             [herb-demo.tutorial :as tutorial]
-            [herb.core :refer [global-style!] :include-macros true]
+            [herb.core :refer [defglobal] :include-macros true]
             [reagent.core :as r]
             [secretary.core :as secretary :include-macros true]))
 
-(def global-style
-  (list [:body {:background "#eee"
-                :box-sizing "border-box"
-                :font-size (px 14)
-                :font-family ["Lato" "Helvetica Neue" "Arial" "Helvetica" "sans-serif"]}]
-        [:button {:border "none"}]
-        [:code {:background-color "#eee"
-                :border-radius "2px"
-                :padding (px 2)}]
-        [:a {:text-decoration "none"
-             :color "#09f"}]))
+(defglobal global
+  [:body {:background "#eee"
+          :box-sizing "border-box"
+          :font-size (px 14)
+          :font-family ["Lato" "Helvetica Neue" "Arial" "Helvetica" "sans-serif"]}]
+  [:button {:border "none"}]
+  [:code {:background-color "#eee"
+          :border-radius "2px"
+          :padding (px 2)}]
+  [:a {:text-decoration "none"
+       :color "#09f"}])
 
 (defn home-page []
   [:div
@@ -46,7 +46,6 @@
 
 (defn init!
   []
-  (global-style! global-style)
   (accountant/configure-navigation!
    {:nav-handler
     (fn [path]
