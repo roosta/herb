@@ -84,6 +84,8 @@
      :clj (css {:pretty-print? dev?} styles)))
 
 (defn inject-keyframes!
+  "Injects keyframes into an atom and depending on runtime environment appends
+  @keyframes style to DOM"
   [sym obj]
   (let [injected (get @injected-keyframes sym)]
     (when-not (= (:data injected) obj)
