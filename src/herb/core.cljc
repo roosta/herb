@@ -14,6 +14,18 @@
 
 #?(:clj
    (defmacro defkeyframes
+     "Define a CSS @keyframes animation:
+  ```
+  (defkeyframes my-animation
+        [:from
+         {:background \"red\"}]
+
+        [:to
+         {:background \"yellow\"}])
+  ```
+  CLJS: the keyframes CSS gets injected into head under data-herb=\"keyframes\"
+  CLJ: Use `<keyframes` macro with the defined keyframes returns a CSS string
+       containing the animation"
      [sym & frames]
      (let [value {:identifier `(str '~sym)
                   :frames `(list ~@frames)}
