@@ -34,7 +34,23 @@
 
 (defmacro <keyframes
   "Returns a CSS string from defined keyframes using the defkeyframes macro.
-  Intended to be used from clojure"
+  Intended to be used from clojure
+  ```
+  (defkeyframes pulse
+    [:from {:opacity 1}]
+    [:to {:opacity 0}])
+
+  user=> (<keyframes pulse)
+  @keyframes anime {
+
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+}
+  ```"
   [sym]
   `(-> @runtime/injected-keyframes
       (get (str '~sym))
