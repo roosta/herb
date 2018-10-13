@@ -32,8 +32,20 @@
        `(do
           (runtime/inject-obj! (str ~n# "/" ~s#) :keyframes ~obj)
           (def ~sym ~obj)))))
+
 #?(:clj
    (defmacro defglobal
+     "Define global CSS:
+  ```
+  (defglobal some-global-style
+    [:body {:box-sizing \"border-box\"
+            :font-size (px 14)
+    [:button {:border \"none\"}])
+  ```
+  The CSS output of garden style vectors gets appended to head under
+  data-herb=\"global\"
+  "
+
      [sym & styles]
      (let [styles# `(list ~@styles)
            s# `'~sym
