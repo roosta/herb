@@ -1,5 +1,5 @@
 (ns herb.unit-tests
-  (:require [clojure.test :as t :refer [deftest testing is]]
+  (:require [clojure.test :as t :refer [deftest testing is are]]
             [garden.stylesheet :refer [at-media at-keyframes at-supports]]
             [herb.impl :as impl]))
 
@@ -25,6 +25,28 @@
                        (at-supports {:display :flex} [:& {:display :flex}]))]
     (testing "Converting support queries"
       (is (= (impl/convert-supports input) expected)))))
+
+(deftest convert-vendors
+  (let [input ["webkit" :webkit :ms "moz"]
+        expected ["webkit" "ms" "moz"]]
+    (testing "Converting vendors"
+      (is (= (impl/convert-vendors input) expected)))))
+
+(deftest process-meta-xform
+  (let [input [^{:pseudo {:hover {:color "green"}}
+                 :media {{:screen true} {:color "red"}}}
+               {:background "blue"}
+               ^{:vendors ["ms" :webkit]
+                 :auto-prefix #{:transition}
+                 :supports {{:display :grid} {:display :grid}}}
+               {:background "cyan"}]]
+    (testing "Process meta xform"
+      (are [x y] (= x y)
+        (into [] (impl/process-meta-xform :pseudo) input) [{:hover {:color "green"}}]
+        (into [] (impl/process-meta-xform :media) input) [{{:screen true} {:color "red"}}]
+        (into [] (impl/process-meta-xform :vendors) input) [["ms" :webkit]]
+        (into [] (impl/process-meta-xform :auto-prefix) input) [#{:transition}]
+        (into [] (impl/process-meta-xform :supports) input) [{{:display :grid} {:display :grid}}]))))
 
 (deftest resolve-style-fns
   (letfn [(fn-1 [] {:border-radius "5px"})
@@ -102,3 +124,12 @@
         actual (impl/prepare-data styles)]
     (testing "Prepare styles"
       (is (= actual expected)))))
+
+(deftest sanitize
+  (let [input "testing.various\\/chars,that*should@be#sanitized"
+        expected "testing_various__chars_that_should_be_sanitized"]
+    (testing "Sanitize"
+      (is (= (impl/sanitize "testing.various\\/chars,that*should@be#sanitized")
+             "testing_various__chars_that_should_be_sanitized"))
+      (is (= (impl/sanitize :a-long$keyword!)
+             "a-long_keyword_")))))
