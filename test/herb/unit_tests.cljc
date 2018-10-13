@@ -75,12 +75,19 @@
                   {:media {{:screen true} {:background-color "blue"}}})
                 (with-meta
                   {:font-weight "bold"}
-                  {:supports {{:display :grid} {:font-size "24px"}}})]
+                  {:supports {{:display :grid} {:font-size "24px"}}})
+                (with-meta
+                  {:transition "all 1s ease-out"}
+                  {:vendors ["ms" "webkit"]
+                   :auto-prefix #{:transition}})]
         expected {:style {:color "black",
                           :background-color "red",
                           :border-radius "5px",
                           :font-style "italic",
-                          :font-weight "bold"}
+                          :font-weight "bold"
+                          :transition "all 1s ease-out"}
+                  :vendors ["ms" "webkit"]
+                  :auto-prefix #{:transition}
                   :supports (list (at-supports {:display :grid} [:& {:font-size "24px"}]))
                   :pseudo (list [:&:hover {:color "magenta"}])
                   :media (list (at-media {:screen true} [:& {:background-color "blue"}]))}
