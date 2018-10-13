@@ -78,8 +78,7 @@
   CLOSED: [2018-05-22 Tue 20:45]
 * DONE Rename mode to pseudo, allow for arbitrary forms
   CLOSED: [2018-05-22 Tue 20:45]
-* CANCELLED Add global init
-  CLOSED: [2018-04-05 Thu 12:35]
+* TODO Add global init
   Possibly create instances?
 * DONE Try wrapping macros in reader cond
   CLOSED: [2018-05-22 Tue 20:46]
@@ -88,7 +87,8 @@
   It thows the defgroup error with a blank for component. Consider improving error message
 * DONE Use loop in recur functions herb
   CLOSED: [2018-09-27 Thu 19:33]
-* TODO Some way to target static classnames
+* CANCELLED Some way to target static classnames
+  CLOSED: [2018-10-13 Sat 19:13]
   By using a regular style function, target a supplied class name that is used
   instead of default
 * DONE Remove data-herb when prod build
@@ -103,7 +103,8 @@
   CLOSED: [2018-09-25 Tue 20:36]
 * CANCELLED Target static example
   CLOSED: [2018-10-03 Wed 18:38]
-* TODO Test that clj logic is still sound
+* PARTIAL Test that clj logic is still sound
+  CLOSED: [2018-10-13 Sat 19:09]
  Specifically that the compose-data-string still works with new regexp
 * DONE Keyframes
   CLOSED: [2018-10-12 Fri 20:21]
@@ -115,4 +116,5 @@
 * TODO [[https://github.com/divs1210/xodarap][divs1210/xodarap: Fearless recursion in Clojure!]]
 * TODO Global vendor prefixes
 * TODO Defgroup in clj might need a simpler syntax when calling from <style
-* TODO Global and keyframes needs more than a symbol to identify it.
+* DONE Global and keyframes needs more than a symbol to identify it.
+  CLOSED: [2018-10-13 Sat 19:09]
