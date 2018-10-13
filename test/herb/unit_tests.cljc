@@ -18,6 +18,14 @@
     (testing "Converting media queries"
       (is (= (impl/convert-media input) expected)))))
 
+(deftest convert-supports
+  (let [input {{:display :grid} {:display :grid}
+               {:display :flex } {:display :flex}}
+        expected (list (at-supports {:display :grid} [:& {:display :grid}])
+                       (at-supports {:display :flex} [:& {:display :flex}]))]
+    (testing "Converting support queries"
+      (is (= (impl/convert-supports input) expected)))))
+
 (deftest resolve-style-fns
   (letfn [(fn-1 [] {:border-radius "5px"})
           (fn-2 [color] {:background-color color})
