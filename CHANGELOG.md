@@ -1,5 +1,9 @@
 # Change Log
 ## [Unreleased]
+## [v0.6.0] - 2018-10-13
+### Breaking change
+- `global-style!` runtime function has been replaced by `defglobal` macro
+
 ### Changed
 - Upgrade dependencies
 - The herb data string is no longer used in production builds
@@ -11,6 +15,7 @@
 - @supports queries via `:supports` metadata
 - @keyframes support via `defkeyframes` macro and accompanying `<keyframes` macro
 - vendor prefixes via `:vendors` and `:auto-prefix` metadata
+- defglobal macro that when used appends garden style vectors to head as CSS
 
 ## [v0.5.0] - 2018-06-17
 ### Added
@@ -98,7 +103,8 @@ from `herb.macro` to `herb.core`
 ### Fixed
 - Fixed issues with inheritance precedence
 
-[Unreleased]: https://github.com/roosta/herb/compare/v0.5.0...HEAD
+[Unreleased]: https://github.com/roosta/herb/compare/v0.6.0...HEAD
+[v0.6.0]: https://github.com/roosta/herb/compare/v0.5.0...v0.6.0
 [v0.5.0]: https://github.com/roosta/herb/compare/v0.4.0...v0.5.0
 [v0.4.0]: https://github.com/roosta/herb/compare/v0.3.5...v0.4.0
 [v0.3.5]: https://github.com/roosta/herb/compare/v0.3.4...v0.3.5
