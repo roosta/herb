@@ -3,7 +3,7 @@
   (:require
    [herb.core
     :include-macros true
-    :refer [<class defgroup join-classes <id defkeyframes]]
+    :refer [<class defgroup join-classes <id defkeyframes defglobal]]
    [garden.selectors :as s]
    [garden.core :refer [css]]
    [garden.stylesheet :refer [at-media]]
@@ -16,6 +16,10 @@
 
 (def red {:color "red"})
 (def green {:color "green"})
+
+(defglobal global
+  [:.global {:color "magenta"
+             :font-size (px 24)}])
 
 (defn state-hover
   [color]
@@ -283,6 +287,7 @@
   (let [state (r/atom "green")]
     (fn []
       [:div {:class (<class container)}
+       [:div.global "global style"]
        [:div {:class (<class row)}
         [:div {:class (<class pulse-component)}]
         [:div {:class (<class pulse-component-two)}]
