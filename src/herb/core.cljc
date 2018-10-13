@@ -26,16 +26,20 @@
      [sym & frames]
      (let [value {:identifier `(str '~sym)
                   :frames `(list ~@frames)}
+           s# `'~sym
+           n# (name (ns-name *ns*))
            obj `(CSSAtRule. :keyframes ~value)]
        `(do
-          (runtime/inject-obj! (str '~sym) :keyframes ~obj)
+          (runtime/inject-obj! (str ~n# "/" ~s#) :keyframes ~obj)
           (def ~sym ~obj)))))
 #?(:clj
    (defmacro defglobal
      [sym & styles]
-     (let [styles# `(list ~@styles)]
+     (let [styles# `(list ~@styles)
+           s# `'~sym
+           n# (name (ns-name *ns*))]
        `(do
-          (runtime/inject-obj! (str '~sym) :global ~styles#)
+          (runtime/inject-obj! (str ~n# "/" ~s# ) :global ~styles#)
           (def ~sym ~styles#)))))
 
 #?(:clj
