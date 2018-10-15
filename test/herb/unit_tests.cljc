@@ -126,7 +126,7 @@
       (is (= actual expected)))))
 
 (deftest sanitize
-  (testing "Sanitize"
+  (testing "Sanitize names"
     (is (= (impl/sanitize "herb-demo/examples/main-/-nested-fn!")
            "herb-demo_examples_main-_-nested-fn_"))
     (is (= (impl/sanitize :some$keyword*!)
@@ -142,3 +142,34 @@
 
     (is (= (impl/compose-selector "herb-demo/examples/style-group-static" :keyword)
            "herb-demo_examples_style-group-static-keyword"))))
+
+(deftest compose-data-string
+  (testing "Composing data string"
+    (is (= (impl/compose-data-string "herb-demo/examples/width-vary-component" :keyed)
+           "herb-demo.examples/width-vary-component[:keyed]"))
+    (is (= (impl/compose-data-string "herb-demo/examples/pulse-component-two" nil)
+           "herb-demo.examples/pulse-component-two" ))
+    (is (= (impl/compose-data-string "herb-demo/examples/main-/-nested-fn" nil)
+           "herb-demo.examples/main-/-nested-fn"))))
+
+(defn test-fn-1
+  []
+  (letfn [(fn-binding [] {:some :map})]
+    (impl/get-name fn-binding "herb.unit-tests" {})))
+
+(defn test-fn-2
+  []
+  (impl/get-name test-fn-1 "herb.unit-tests" {}))
+
+(defn test-fn-3
+  []
+  (impl/get-name #({}) "herb.unit-tests" {}))
+
+(deftest get-name
+  (testing "getting function name"
+    (is (= (subs (test-fn-1) 0 36)
+           "herb.unit_tests$test_fn_1$fn_binding"))
+    (is (= (test-fn-2)
+           "herb.unit_tests$test_fn_1"))
+    (is (= (test-fn-3)
+           "herb.unit_tests$test_fn_3$anonymous-15128758"))))
