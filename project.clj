@@ -14,7 +14,7 @@
   :clean-targets ^{:protect false} ["resources/public/js" "target"]
 
   ;; Exclude the demo,site and compiled files from the output of either 'lein jar' or 'lein install'
-  :jar-exclusions [#"(?:^|\/)herb_demo\/" #"(?:^|\/)demo\/" #"(?:^|\/)js\/" #"html$" #"server.clj"]
+  :jar-exclusions [#"(?:^|\/)herb_demo\/" #"(?:^|\/)public\/" #"server.clj"]
 
   :dependencies [[org.clojure/clojure "1.9.0" :scope "provided"]
                  [org.clojure/clojurescript "1.10.339" :scope "provided"]
