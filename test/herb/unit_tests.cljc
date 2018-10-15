@@ -126,10 +126,8 @@
       (is (= actual expected)))))
 
 (deftest sanitize
-  (let [input "testing.various\\/chars,that*should@be#sanitized"
-        expected "testing_various__chars_that_should_be_sanitized"]
-    (testing "Sanitize"
-      (is (= (impl/sanitize "testing.various\\/chars,that*should@be#sanitized")
-             "testing_various__chars_that_should_be_sanitized"))
-      (is (= (impl/sanitize :a-long$keyword!)
-             "a-long_keyword_")))))
+  (testing "Sanitize"
+    (is (= (impl/sanitize "testing.various\\/chars,that*should@be#sanitized")
+           "testing_various__chars_that_should_be_sanitized"))
+    (is (= (impl/sanitize :a-long$keyword!)
+           "a-long_keyword_"))))
