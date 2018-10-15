@@ -127,7 +127,18 @@
 
 (deftest sanitize
   (testing "Sanitize"
-    (is (= (impl/sanitize "testing.various\\/chars,that*should@be#sanitized")
-           "testing_various__chars_that_should_be_sanitized"))
-    (is (= (impl/sanitize :a-long$keyword!)
-           "a-long_keyword_"))))
+    (is (= (impl/sanitize "herb-demo/examples/main-/-nested-fn!")
+           "herb-demo_examples_main-_-nested-fn_"))
+    (is (= (impl/sanitize :some$keyword*!)
+           "some_keyword__"))))
+
+(deftest compose-selector
+  (testing "Composing selector"
+    (is (= (impl/compose-selector "herb-demo.examples/anonymous-660680338" nil)
+           "herb-demo_examples_anonymous-660680338"))
+
+    (is (= (impl/compose-selector "herb-demo/examples/cycle-color" "purple")
+           "herb-demo_examples_cycle-color-purple"))
+
+    (is (= (impl/compose-selector "herb-demo/examples/style-group-static" :keyword)
+           "herb-demo_examples_style-group-static-keyword"))))
