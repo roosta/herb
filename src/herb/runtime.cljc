@@ -4,6 +4,7 @@
                        [debux.cs.core :as d :refer-macros [clog clogn dbg dbgn break]]
                        [goog.object :as gobj]])
             [garden.core :refer [css]]
+            [clojure.set :as set]
             [clojure.string :as str]))
 
 #?(:cljs (def dev? ^boolean js/goog.DEBUG)
@@ -12,12 +13,15 @@
 (defonce injected-styles (atom {}))
 (defonce injected-keyframes (atom {}))
 (defonce injected-global (atom {}))
+(defonce options (atom {}))
 
 (defn update-style!
   "Create css string and update DOM"
   [identifier #?(:cljs element) new]
-  (let [vendors (-> new :data last val :vendors)
-        auto-prefix (-> new :data last val :auto-prefix)
+  (let [vendors (distinct (cond-> (-> new :data last val :vendors)
+                            (seq (:vendors @options)) (concat (:vendors @options))) )
+        auto-prefix (cond-> (-> new :data last val :auto-prefix)
+                      (seq (:auto-prefix @options)) (set/union (:auto-prefix @options)))
         css-str (css {:vendors vendors
                       :auto-prefix auto-prefix
                       :pretty-print? dev?}

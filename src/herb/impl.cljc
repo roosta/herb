@@ -44,7 +44,8 @@
 
 (defn convert-vendors
   [vendors]
-  (into []
+  (mapv name vendors)
+  #_(into []
         (comp
          (map name)
          (distinct))

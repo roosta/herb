@@ -1,5 +1,6 @@
 (ns herb.core
   (:require [herb.impl :as impl]
+            [clojure.spec.alpha :as s]
             [herb.runtime :as runtime]
             #?@(:clj [[debux.core :refer [dbg]]]
                 :cljs [[debux.cs.core :as d :refer-macros [clog clogn dbg dbgn break]]]))
@@ -8,6 +9,16 @@
 
 ;; Aliases
 (def join-classes impl/join-classes)
+
+(s/def ::auto-prefix (s/nilable set?))
+(s/def ::vendors (s/nilable (s/coll-of (s/or :string string? :keyword keyword?) :kind vector?)))
+
+(defn init!
+  [{:keys [vendors auto-prefix]}]
+  {:pre [(s/valid? ::vendors vendors)
+         (s/valid? ::auto-prefix auto-prefix)]}
+  (reset! runtime/options {:vendors (impl/convert-vendors vendors)
+                           :auto-prefix auto-prefix}))
 
 #?(:clj
    (defmacro defkeyframes

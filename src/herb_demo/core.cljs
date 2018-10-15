@@ -3,7 +3,7 @@
             [garden.units :refer [px]]
             [herb-demo.examples :as examples]
             [herb-demo.tutorial :as tutorial]
-            [herb.core :refer [defglobal] :include-macros true]
+            [herb.core :as herb :refer [defglobal] :include-macros true]
             [reagent.core :as r]
             [secretary.core :as secretary :include-macros true]))
 
@@ -46,6 +46,8 @@
 
 (defn init!
   []
+  (herb/init! {:vendors ["ms" :webkit]
+               :auto-prefix #{:transition}})
   (accountant/configure-navigation!
    {:nav-handler
     (fn [path]
