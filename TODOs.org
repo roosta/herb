@@ -118,3 +118,9 @@
 * TODO Defgroup in clj might need a simpler syntax when calling from <style
 * DONE Global and keyframes needs more than a symbol to identify it.
   CLOSED: [2018-10-13 Sat 19:09]
+* TODO Arbitrary depth fns
+#+BEGIN_SRC clojure
+  (let [fn-1 (fn []
+               (let [fn-2 (fn [] {})]
+                 {}))])
+#+END_SRC
