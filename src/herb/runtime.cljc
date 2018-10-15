@@ -25,8 +25,8 @@
         css-str (css {:vendors vendors
                       :auto-prefix auto-prefix
                       :pretty-print? dev?}
-                     (map (fn [[class {:keys [style pseudo media supports]}]]
-                            [class style pseudo media supports])
+                     (map (fn [[classname {:keys [style pseudo media supports]}]]
+                            [classname style pseudo media supports])
                           (:data new)))]
     #?(:cljs (set! (.-innerHTML element) css-str))
     (swap! injected-styles assoc identifier (assoc new :css css-str))))
