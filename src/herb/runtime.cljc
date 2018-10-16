@@ -18,8 +18,8 @@
 (defn update-style!
   "Create css string and update DOM"
   [identifier #?(:cljs element) new]
-  (let [css-str (css {:vendors (:vendors @options)
-                      :auto-prefix (:auto-prefix @options)
+  (let [css-str (css {:vendors (seq (:vendors @options))
+                      :auto-prefix (seq (:auto-prefix @options))
                       :pretty-print? dev?}
                      (map (fn [[classname {:keys [style pseudo media supports prefix vendors]}]]
                             [classname (with-meta style {:prefix prefix :vendors vendors})
