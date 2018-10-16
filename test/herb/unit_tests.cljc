@@ -173,11 +173,11 @@
 (deftest get-name
   (testing "getting function name"
     (is (= (subs (test-fn-1) 0 36)
-           "herb.unit_tests$test_fn_1$fn_binding"))
+           "herb.unit-tests$test-fn-1$fn-binding"))
     (is (= (test-fn-2)
-           "herb.unit_tests$test_fn_1"))
+           "herb.unit-tests$test-fn-1"))
     (is (= (test-fn-3)
-           "herb.unit_tests$test_fn_3$anonymous-15128758"))))
+           "herb.unit-tests$test-fn-3$anonymous-15128758"))))
 
 (deftest with-style!
   (testing "with-style! entry point"
