@@ -169,7 +169,7 @@
                            :tag
                            (.getName))
                        #"_" "-"))
-        anon? #?(:clj (str/includes? name* "fn__")
+        anon? #?(:clj (str/includes? name* "fn--")
                  :cljs (empty? name*))
         hash* (when anon?
                 #?(:cljs (.abs js/Math (hash style-data))
@@ -182,7 +182,7 @@
                 #?(:cljs
                    (str ns-name "/" "anonymous-" hash*)
                    :clj
-                   (str/replace name* #"fn__[0-9]*" (str "anonymous-" hash*)))
+                   (str/replace name* #"fn--[0-9]*" (str "anonymous-" hash*)))
                 :else name*)]
     #?(:cljs (demunge cname)
        :clj cname)))
