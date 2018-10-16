@@ -110,17 +110,21 @@
   CLOSED: [2018-10-12 Fri 20:21]
 * DONE Vendors
   CLOSED: [2018-10-05 Fri 20:39]
-* TODO meta for entire group
+* CANCELLED meta for entire group
+  CLOSED: [2018-10-16 Tue 18:29]
   like vendor prefixes and auto-prefix
-* TODO Check that all meta types are supported in a group
+* DONE Check that all meta types are supported in a group
+  CLOSED: [2018-10-16 Tue 18:29]
 * TODO [[https://github.com/divs1210/xodarap][divs1210/xodarap: Fearless recursion in Clojure!]]
-* TODO Global vendor prefixes
+* DONE Global vendor prefixes
+  CLOSED: [2018-10-16 Tue 18:29]
 * TODO Defgroup in clj might need a simpler syntax when calling from <style
 * DONE Global and keyframes needs more than a symbol to identify it.
   CLOSED: [2018-10-13 Sat 19:09]
+* TODO error handling
 * TODO Arbitrary depth fns
-#+BEGIN_SRC clojure
-  (let [fn-1 (fn []
-               (let [fn-2 (fn [] {})]
-                 {}))])
-#+END_SRC
+  #+BEGIN_SRC clojure
+    (let [fn-1 (fn []
+                 (let [fn-2 (fn [] {})]
+                   {}))])
+  #+END_SRC
