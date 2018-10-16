@@ -250,20 +250,17 @@
      :auto-prefix #{:border-radius}}
    {:background "green"}})
 
-(defn asd
-  []
-  {:font-size (px 20)})
+(defgroup multiple-meta-group
+  {:component-1
+   ^{:pseudo {:hover {:border-radius "50%"}}}
+   {:width (px 60)
+    :transition "all 0.5s ease-in"
+    :height (px 60)
+    :background "black"}})
 
 (defn transition
   [c]
-  ^{:extend asd
-    :prefix true}
-  {:transition "all 1s ease-out"
-   :height (px 50)
-   :display "flex"
-   :align-items "center"
-   :justify-content "center"
-   :background-color c})
+  {:transition "all 1s ease-out"})
 
 (defkeyframes pulse-animation
   [:from {:opacity 1}]
@@ -304,6 +301,7 @@
     (fn []
       [:div {:class (<class container)}
        [:div.global "global style"]
+       [:div {:class (<class multiple-meta-group :component-1)}]
        [:div {:class (<class multiple-vendor-group :component-1)}
         "Component-1"]
        [:div {:class (<class multiple-vendor-group :component-2)}

@@ -44,7 +44,7 @@
                       :auto-prefix (seq auto-prefix)
                       :pretty-print? dev?}
                      (map (fn [[classname {:keys [style pseudo media supports prefix]}]]
-                            [classname style pseudo media supports])
+                            [classname (with-meta style {:prefix prefix}) pseudo media supports])
                           (:data new)))]
     #?(:cljs (set! (.-innerHTML element) css-str))
     (swap! injected-styles assoc identifier (assoc new :css css-str))))

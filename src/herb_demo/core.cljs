@@ -46,8 +46,7 @@
 
 (defn init!
   []
-  (herb/init! {:vendors ["ms" :webkit]
-               :auto-prefix #{:transition}})
+  (herb/init! {:vendors ["ms" :webkit]})
   (accountant/configure-navigation!
    {:nav-handler
     (fn [path]

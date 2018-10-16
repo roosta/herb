@@ -115,12 +115,14 @@
                      :media convert-media
                      :supports convert-supports
                      :auto-prefix identity
+                     :prefix identity
                      :vendors convert-vendors
                      :pseudo convert-pseudo)
         extracted (into [] (process-meta-xform meta-type) styles)]
     (when (seq extracted)
       (let [merged (case meta-type
                      :auto-prefix (apply set/union extracted)
+                     :prefix (last extracted)
                      :vendors (apply concat extracted)
                      (apply merge {} extracted))]
         (convert-fn merged)))))
@@ -134,6 +136,7 @@
     :pseudo  (extract-meta resolved-styles :pseudo)
     :vendors (extract-meta resolved-styles :vendors)
     :auto-prefix (extract-meta resolved-styles :auto-prefix)
+    :prefix (extract-meta resolved-styles :prefix)
     :supports (extract-meta resolved-styles :supports)
     :media (extract-meta resolved-styles :media)})
 
@@ -190,7 +193,7 @@
   [{:keys [id? style?]} fn-name ns-name style-fn & args]
   (let [resolved-styles (extract-styles (into [style-fn] args))
         style-data (prepare-data resolved-styles)
-        {:keys [group key target] :as meta-data} (-> resolved-styles last meta)
+        {:keys [group key prefix] :as meta-data} (-> resolved-styles last meta)
 
         name* (get-name style-fn ns-name style-data)
         data-str (when dev? (if group
