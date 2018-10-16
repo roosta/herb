@@ -1,6 +1,7 @@
 (ns herb.unit-tests
   (:require [clojure.test :as t :refer [deftest testing is are]]
             [garden.stylesheet :refer [at-media at-keyframes at-supports]]
+            [herb.runtime :as runtime]
             [herb.impl :as impl]))
 
 (deftest convert-pseudo
@@ -185,4 +186,16 @@
     (is (= (impl/with-style! {:style? true} "test-fn-1" "herb.unit-tests" test-fn-4)
            ".herb_unit-tests_test-fn-4 {
   background: red;
-}"))))
+}"))
+    (is (= @runtime/injected-styles
+           {"herb_unit-tests_test-fn-4"
+            {:data
+             {".herb_unit-tests_test-fn-4"
+              {:style {:background :red},
+               :pseudo nil,
+               :vendors nil,
+               :prefix nil,
+               :supports nil,
+               :media nil}},
+             :data-string "herb.unit-tests/test-fn-4",
+             :css ".herb_unit-tests_test-fn-4 {\n  background: red;\n}"}}))))
