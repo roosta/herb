@@ -114,14 +114,12 @@
   (let [convert-fn (case meta-type
                      :media convert-media
                      :supports convert-supports
-                     :auto-prefix identity
                      :prefix identity
                      :vendors convert-vendors
                      :pseudo convert-pseudo)
         extracted (into [] (process-meta-xform meta-type) styles)]
     (when (seq extracted)
       (let [merged (case meta-type
-                     :auto-prefix (apply set/union extracted)
                      :prefix (last extracted)
                      :vendors (apply concat extracted)
                      (apply merge {} extracted))]
@@ -135,7 +133,6 @@
    {:style (apply merge {} resolved-styles)
     :pseudo  (extract-meta resolved-styles :pseudo)
     :vendors (extract-meta resolved-styles :vendors)
-    :auto-prefix (extract-meta resolved-styles :auto-prefix)
     :prefix (extract-meta resolved-styles :prefix)
     :supports (extract-meta resolved-styles :supports)
     :media (extract-meta resolved-styles :media)})
