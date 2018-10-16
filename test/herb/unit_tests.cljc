@@ -28,7 +28,7 @@
 
 (deftest convert-vendors
   (let [input ["webkit" :webkit :ms "moz"]
-        expected ["webkit" "ms" "moz"]]
+        expected ["webkit" "webkit" "ms" "moz"]]
     (testing "Converting vendors"
       (is (= (impl/convert-vendors input) expected)))))
 
@@ -109,7 +109,7 @@
                 (with-meta
                   {:transition "all 1s ease-out"}
                   {:vendors ["ms" "webkit"]
-                   :auto-prefix #{:transition}})]
+                   :prefix true})]
         expected {:style {:color "black",
                           :background-color "red",
                           :border-radius "5px",
@@ -117,12 +117,12 @@
                           :font-weight "bold"
                           :transition "all 1s ease-out"}
                   :vendors ["ms" "webkit"]
-                  :auto-prefix #{:transition}
+                  :prefix true
                   :supports (list (at-supports {:display :grid} [:& {:font-size "24px"}]))
                   :pseudo (list [:&:hover {:color "magenta"}])
                   :media (list (at-media {:screen true} [:& {:background-color "blue"}]))}
         actual (impl/prepare-data styles)]
-    (testing "Prepare styles"
+    (testing "Prepare data"
       (is (= actual expected)))))
 
 (deftest sanitize
