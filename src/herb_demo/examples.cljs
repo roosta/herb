@@ -226,16 +226,12 @@
 
 (defn shadow-prefix
   []
-  ^{:vendors ["o" "webkit"]
-    :auto-prefix #{:transition}}
   {:transition "all 1s ease-out"
    :font-size (px 24)})
 
-(defn vendor-prefixes
+(defn test-global-prefixes
   []
-  ^{:extend shadow-prefix
-    :vendors [:webkit]
-    :auto-prefix #{:border-radius}}
+  ^{:extend shadow-prefix}
   {:background-color "black"
    :border-radius (px 3)
    :color "white"})
@@ -243,12 +239,12 @@
 (defgroup multiple-vendor-group
   {:component-1
    ^{:vendors ["webkit"]
-     :auto-prefix #{:transition}}
-   {:background "red"}
+     :prefix true}
+   {:transition "all 1s ease-in"}
    :component-2
    ^{:vendors ["ms"]
-     :auto-prefix #{:border-radius}}
-   {:background "green"}})
+     :prefix true}
+   {:border-radius "50%"}})
 
 (defgroup multiple-meta-group
   {:component-1
@@ -310,8 +306,6 @@
         [:div {:class (<class pulse-component)}]
         [:div {:class (<class pulse-component-two)}]
         [:div {:class (<class width-vary-component)}]]
-       [:div {:class (<class vendor-prefixes)}
-        "Vendor prefixes"]
        [:div {:class (<class transition @state)}
         [:button {:on-click #(reset! state (toggle-color @state))}
          "Change color"]]
