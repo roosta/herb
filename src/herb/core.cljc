@@ -10,7 +10,7 @@
 ;; Aliases
 (def join-classes impl/join-classes)
 
-(s/def ::auto-prefix (s/nilable set?))
+(s/def ::auto-prefix (s/nilable (s/coll-of keyword :kind set?)))
 (s/def ::vendors (s/nilable (s/coll-of (s/or :string string? :keyword keyword?) :kind vector?)))
 
 (defn init!
