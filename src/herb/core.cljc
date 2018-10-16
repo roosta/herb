@@ -10,15 +10,18 @@
 ;; Aliases
 (def join-classes impl/join-classes)
 
-(s/def ::auto-prefix (s/nilable (s/coll-of keyword :kind set?)))
-(s/def ::vendors (s/nilable (s/coll-of (s/or :string string? :keyword keyword?) :kind vector?)))
+(s/def ::auto-prefix (s/coll-of keyword? :kind set?))
+(s/def ::vendors (s/coll-of (s/or :string string? :keyword keyword?) :kind vector?))
+(s/def ::options (s/keys :opt-un [::vendors ::auto-prefix]))
 
 (defn init!
-  [{:keys [vendors auto-prefix]}]
-  {:pre [(s/valid? ::vendors vendors)
-         (s/valid? ::auto-prefix auto-prefix)]}
-  (reset! runtime/options {:vendors (impl/convert-vendors vendors)
-                           :auto-prefix auto-prefix}))
+  [options]
+  (let [parsed (s/conform ::options options)]
+    (if (= parsed ::s/invalid)
+      (throw (ex-info "Invalid input" (s/explain-data ::options options)))
+      (reset! runtime/options {:vendors (-> (mapv (fn [[k v]] v) (:vendors parsed))
+                                            (impl/convert-vendors))
+                               :auto-prefix (:auto-prefix options)}))))
 
 #?(:clj
    (defmacro defkeyframes
