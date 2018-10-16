@@ -156,7 +156,9 @@
   sign from input name, mirroring how a clojure fully qualified namespace looks"
   [n k]
   (str
-   (str/replace n #"(/|\$)(?=[^/\-\$\-]*/)" ".")
+   (-> n
+    (str/replace #"(/|\$)(?=[^/\-\$\-]*(/|\$))" ".")
+    (str/replace #"\$" "/"))
    (when k (str "[" k "]"))))
 
 (defn get-name
