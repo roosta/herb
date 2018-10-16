@@ -147,7 +147,7 @@
   (testing "Composing data string"
     (is (= (impl/compose-data-string "herb-demo/examples/width-vary-component" :keyed)
            "herb-demo.examples/width-vary-component[:keyed]"))
-    (is (= (impl/compose-data-string "herb-demo/examples/pulse-component-two" nil)
+    (is (= (impl/compose-data-string "herb-demo/examples$pulse-component-two" nil)
            "herb-demo.examples/pulse-component-two" ))
     (is (= (impl/compose-data-string "herb-demo/examples/main-/-nested-fn" nil)
            "herb-demo.examples/main-/-nested-fn"))))
