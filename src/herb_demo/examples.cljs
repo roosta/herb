@@ -226,7 +226,7 @@
 
 (defn shadow-prefix
   []
-  ^{:vendors ["ms" "webkit"]
+  ^{:vendors ["o" "webkit"]
     :auto-prefix #{:transition}}
   {:transition "all 1s ease-out"
    :font-size (px 24)})
@@ -240,8 +240,24 @@
    :border-radius (px 3)
    :color "white"})
 
+(defgroup multiple-vendor-group
+  {:component-1
+   ^{:vendors ["webkit"]
+     :auto-prefix #{:transition}}
+   {:background "red"}
+   :component-2
+   ^{:vendors ["ms"]
+     :auto-prefix #{:border-radius}}
+   {:background "green"}})
+
+(defn asd
+  []
+  {:font-size (px 20)})
+
 (defn transition
   [c]
+  ^{:extend asd
+    :prefix true}
   {:transition "all 1s ease-out"
    :height (px 50)
    :display "flex"
@@ -288,6 +304,10 @@
     (fn []
       [:div {:class (<class container)}
        [:div.global "global style"]
+       [:div {:class (<class multiple-vendor-group :component-1)}
+        "Component-1"]
+       [:div {:class (<class multiple-vendor-group :component-2)}
+        "Component-2"]
        [:div {:class (<class row)}
         [:div {:class (<class pulse-component)}]
         [:div {:class (<class pulse-component-two)}]

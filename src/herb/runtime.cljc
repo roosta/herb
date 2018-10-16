@@ -15,17 +15,35 @@
 (defonce injected-global (atom {}))
 (defonce options (atom {}))
 
+(defn merge-vendors
+  [new]
+  (let [i (->> (map (comp :vendors val) (:data new))
+               (filter identity))
+        opt (:vendors @options)]
+    (->> (cond->> i
+           (seq i) (apply concat)
+           (seq opt) (concat opt))
+         distinct
+         (into []))))
+
+(defn merge-auto-prefix
+  [new]
+  (let [i (->> (map (comp :auto-prefix val) (:data new))
+               (filter identity))
+        opt (:auto-prefix @options)]
+    (cond->> i
+      (seq i) (apply set/union)
+      (seq opt) (set/union opt))))
+
 (defn update-style!
   "Create css string and update DOM"
   [identifier #?(:cljs element) new]
-  (let [vendors (distinct (cond-> (-> new :data last val :vendors)
-                            (seq (:vendors @options)) (concat (:vendors @options))) )
-        auto-prefix (cond-> (-> new :data last val :auto-prefix)
-                      (seq (:auto-prefix @options)) (set/union (:auto-prefix @options)))
-        css-str (css {:vendors vendors
-                      :auto-prefix auto-prefix
+  (let [vendors (merge-vendors new)
+        auto-prefix (merge-auto-prefix new)
+        css-str (css {:vendors (seq vendors)
+                      :auto-prefix (seq auto-prefix)
                       :pretty-print? dev?}
-                     (map (fn [[classname {:keys [style pseudo media supports]}]]
+                     (map (fn [[classname {:keys [style pseudo media supports prefix]}]]
                             [classname style pseudo media supports])
                           (:data new)))]
     #?(:cljs (set! (.-innerHTML element) css-str))
