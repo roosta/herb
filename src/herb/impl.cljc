@@ -162,9 +162,11 @@
 (defn get-name
   [style-fn ns-name style-data]
   (let [name* #?(:cljs (.-name style-fn)
-                 :clj (-> (analyze style-fn)
-                          :tag
-                          (.getName)))
+                 :clj (str/replace
+                       (-> (analyze style-fn)
+                           :tag
+                           (.getName))
+                       #"_" "-"))
         anon? #?(:clj (str/includes? name* "fn__")
                  :cljs (empty? name*))
         hash* (when anon?
@@ -191,7 +193,6 @@
   (let [resolved-styles (extract-styles (into [style-fn] args))
         style-data (prepare-data resolved-styles)
         {:keys [group key prefix] :as meta-data} (-> resolved-styles last meta)
-
         name* (get-name style-fn ns-name style-data)
         data-str (when dev? (if group
                               (compose-data-string name* nil)
