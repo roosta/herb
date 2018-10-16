@@ -165,6 +165,10 @@
   []
   (impl/get-name #({}) "herb.unit-tests" {}))
 
+(defn test-fn-4
+  []
+  {:background :red})
+
 (deftest get-name
   (testing "getting function name"
     (is (= (subs (test-fn-1) 0 36)
@@ -173,3 +177,12 @@
            "herb.unit_tests$test_fn_1"))
     (is (= (test-fn-3)
            "herb.unit_tests$test_fn_3$anonymous-15128758"))))
+
+(deftest with-style!
+  (testing "with-style! entry point"
+    (is (= (impl/with-style! {} "test-fn-1" "herb.unit-tests" test-fn-4)
+           "herb_unit-tests_test-fn-4"))
+    (is (= (impl/with-style! {:style? true} "test-fn-1" "herb.unit-tests" test-fn-4)
+           ".herb_unit-tests_test-fn-4 {
+  background: red;
+}"))))
