@@ -292,11 +292,17 @@
   []
   {:display :flex})
 
+(defn simple
+  []
+  {:background-color "red"})
+
 (defn main []
   (let [state (r/atom "green")]
     (fn []
       [:div {:class (<class container)}
        [:div.global "global style"]
+       [:div {:class (join-classes (<class row) (<class simple))}
+        "multiple classes"]
        [:div {:class (<class multiple-meta-group :component-1)}]
        [:div {:class (<class multiple-vendor-group :component-1)}
         "Component-1"]
