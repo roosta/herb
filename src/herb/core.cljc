@@ -126,8 +126,7 @@
            assoc
            :key ~'component
            :group true)
-          #?(:cljs (.error js/console "Herb error: failed to get component: " ~'component " in stylegroup: " '~n)
-             :clj (throw (str "Herb error: failed to get component: " ~'component " in stylegroup: " '~n)))))))
+          (throw (str "Herb error: failed to get component: " ~'component " in stylegroup: " '~n))))))
 
 #?(:clj
    (defmacro <style
