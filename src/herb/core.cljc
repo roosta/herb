@@ -1,6 +1,7 @@
 (ns herb.core
   (:require [herb.impl :as impl]
             [clojure.spec.alpha :as s]
+            [clojure.string :as str]
             [herb.runtime :as runtime]
             #?@(:clj [[debux.core :refer [dbg]]]
                 :cljs [[debux.cs.core :as d :refer-macros [clog clogn dbg dbgn break]]]))
@@ -8,7 +9,6 @@
      (:import garden.types.CSSAtRule)))
 
 ;; Aliases
-(def join-classes impl/join-classes)
 
 (s/def ::auto-prefix (s/coll-of keyword? :kind set?))
 (s/def ::vendors (s/coll-of (s/or :string string? :keyword keyword?) :kind vector?))
@@ -22,6 +22,17 @@
       (reset! runtime/options {:vendors (-> (mapv (fn [[k v]] v) (:vendors parsed))
                                             (impl/convert-vendors))
                                :auto-prefix (:auto-prefix options)}))))
+
+
+(defn join-classes
+  "Joins multiple classes together, filtering out nils:
+  ```
+  (join-classes (<class fn-1) (<class fn-2))
+  ```"
+  [& classes]
+  (->> classes
+       (filter identity)
+       (str/join " ")))
 
 #?(:clj
    (defmacro defkeyframes
