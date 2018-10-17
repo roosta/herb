@@ -38,7 +38,7 @@
     (->> classes
          (filter identity)
          (str/join " "))
-    (throw (ex-info "join-classes takes only strings as arguments" (s/explain-data ::classes classes)))))
+    (throw (ex-info "join-classes takes one or more strings as arguments" (s/explain-data ::classes classes)))))
 
 #?(:clj
    (defmacro defkeyframes
