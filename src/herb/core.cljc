@@ -8,13 +8,14 @@
   #?(:clj
      (:import garden.types.CSSAtRule)))
 
-;; Aliases
-
 (s/def ::auto-prefix (s/coll-of keyword? :kind set?))
 (s/def ::vendors (s/coll-of (s/or :string string? :keyword keyword?) :kind vector?))
 (s/def ::options (s/keys :opt-un [::vendors ::auto-prefix]))
 
 (defn init!
+   "Initialize herb, takes a map of options:
+  :vendors - a vector of vendor prefixes, ie [:webkit :moz]
+  :auto-prefix - A set of CSS properties to auto prefix, ie #{:transition :border-radius} "
   [options]
   (let [parsed (s/conform ::options options)]
     (if (= parsed ::s/invalid)
