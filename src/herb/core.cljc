@@ -14,7 +14,7 @@
 (s/def ::style-fn (fn [[f a]]
                     (and (fn? f)
                          (map? (apply f a)))))
-(s/def ::classes (s/* string?))
+(s/def ::classes (s/+ string?))
 
 (defn init!
    "Initialize herb, takes a map of options:
