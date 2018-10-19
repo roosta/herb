@@ -16,6 +16,15 @@
                          (map? (apply f a)))))
 (s/def ::classes (s/+ string?))
 
+(s/def ::frame (fn [[k v]]
+                 (and (keyword? k)
+                      (map? v))))
+(s/def ::frames (s/+ ::frame))
+
+(s/fdef herb.core/defkeyframes
+  :args (s/cat :name symbol? :frames ::frames)
+  :ret any?)
+
 (defn init!
    "Initialize herb, takes a map of options:
   :vendors - a vector of vendor prefixes, ie [:webkit :moz]
