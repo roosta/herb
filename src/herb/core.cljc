@@ -15,12 +15,17 @@
                     (and (fn? f)
                          (map? (apply f a)))))
 (s/def ::classes (s/+ string?))
-
 (s/def ::frame (s/or :frame (s/cat :keyframe keyword? :style map?)))
+(s/def ::style (s/or :frame (s/cat :classname keyword? :style map?)))
 (s/def ::frames (s/+ ::frame))
+(s/def ::styles (s/+ ::style))
 
 (s/fdef herb.core/defkeyframes
   :args (s/cat :name symbol? :frames ::frames)
+  :ret any?)
+
+(s/fdef herb.core/defglobal
+  :args (s/cat :name symbol? :styles ::styles)
   :ret any?)
 
 (defn init!
