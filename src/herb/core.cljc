@@ -16,9 +16,7 @@
                          (map? (apply f a)))))
 (s/def ::classes (s/+ string?))
 
-(s/def ::frame (fn [[k v]]
-                 (and (keyword? k)
-                      (map? v))))
+(s/def ::frame (s/or :frame (s/cat :keyframe keyword? :style map?)))
 (s/def ::frames (s/+ ::frame))
 
 (s/fdef herb.core/defkeyframes
