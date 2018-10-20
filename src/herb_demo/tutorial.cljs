@@ -4,7 +4,7 @@
             [herb-demo.components.paper :refer [paper]]
             [herb-demo.components.text :refer [text]]
             [herb-demo.snippets.intro :as intro]
-            [herb-demo.tutorials.css-garden :refer [css-garden]]
+            [herb-demo.tutorials.key-concept :refer [key-concept]]
             [herb-demo.tutorials.intro :refer [intro]]
             [herb-demo.tutorials.why-fns :refer [why-fns]]
             [herb.core :as herb :refer-macros [<class <id]]
@@ -35,4 +35,4 @@
        [header]
        [intro]
        [why-fns]
-       [css-garden]])))
+       [key-concept]])))
