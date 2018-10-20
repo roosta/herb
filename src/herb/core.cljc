@@ -28,6 +28,10 @@
   :args (s/cat :name symbol? :styles ::styles)
   :ret any?)
 
+(s/fdef herb.core/<keyframes
+  :args (s/cat :keyframes symbol?)
+  :ret any?)
+
 (defn init!
    "Initialize herb, takes a map of options:
   :vendors - a vector of vendor prefixes, ie [:webkit :moz]
