@@ -26,9 +26,10 @@
       "Output:"]
      [keyfn/component]
      [text
-      "Take note of the use of meta data here, both " [:code "Reagent"] "
-     and " [:code "Herb"] " uses a key to identify each of the divs/styles that
-     gets created. " [:code "Herb"] " uses this meta data to tell the difference
+      "Take note of the use of meta data here, both " [:a
+     {:href "https://github.com/reagent-project/reagent"} "Reagent"] " and Herb
+     uses a key to identify each of the divs/styles that gets
+     created. " [:code "Herb"] " uses this meta data to tell the difference
      between each iteration, and creates a unique classname based on the key. We
      can take a look at a DOM aproximation to see the result: "]
      [code {:lang :html}
