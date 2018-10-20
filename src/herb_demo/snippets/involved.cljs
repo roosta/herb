@@ -13,7 +13,7 @@
 
 ;; Define a style that uses a color pair and creates a gradient from them.
 ;; Note the meta data ^{:key (str c1 "-" c2)}
-(defn example-style
+(defn style
   [[c1 c2]]
   ^{:key (str c1 "-" c2)}
   {:width (px 56)
@@ -25,9 +25,9 @@
   []
   {:display "flex"})
 
-(defn example-component
+(defn component
   []
   (let [colors (partition 2 1 ["#6c0e23" "#c42021" "#d58936" "#ef2d56"])]
     [:div {:class (<class flex-container)}
      (for [pair colors]
-       [:div {:class (<class example-style pair)}])]))
+       [:div {:class (<class style pair)}])]))
