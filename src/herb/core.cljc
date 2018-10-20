@@ -161,8 +161,10 @@
      (let [f `'~style-fn
            n (name (ns-name *ns*))]
        `(cond
-          (not (fn? ~style-fn)) (throw (str "herb error in ns \"" ~n "\" the first argument to <style needs to be a function."))
-          (not (map? (~style-fn ~@args))) (throw (str "herb error: style function \"" ~n "/" ~f "\" needs to return a map."))
+          (not (fn? ~style-fn))
+          (throw (ex-info (str "herb error in ns \"" ~n "\" the first argument to <style needs to be a function.")) {})
+          (not (map? (~style-fn ~@args)))
+          (throw (ex-info (str "herb error: style function \"" ~n "/" ~f "\" needs to return a map.") {}))
           :else (herb.impl/with-style! {:style? true} ~f ~n ~style-fn ~@args)))))
 
 #?(:clj
@@ -175,8 +177,10 @@
      (let [f `'~style-fn
            n (name (ns-name *ns*))]
        `(cond
-          (not (fn? ~style-fn)) (throw (str "herb error in ns \"" ~n "\" the first argument to <id needs to be a function."))
-          (not (map? (~style-fn ~@args))) (throw (str "herb error: style function \"" ~n "/" ~f "\" needs to return a map."))
+          (not (fn? ~style-fn))
+          (throw (ex-info (str "herb error in ns \"" ~n "\" the first argument to <id needs to be a function.") {}))
+          (not (map? (~style-fn ~@args)))
+          (throw (ex-info (str "herb error: style function \"" ~n "/" ~f "\" needs to return a map.") {}))
           :else (herb.impl/with-style! {:id? true} ~f ~n ~style-fn ~@args)))))
 
 #?(:clj
@@ -189,6 +193,8 @@
      (let [f `'~style-fn
            n (name (ns-name *ns*))]
        `(cond
-          (not (fn? ~style-fn)) (throw (str "herb error in ns \"" ~n "\" the first argument to <class needs to be a function."))
-          (not (map? (~style-fn ~@args))) (throw (str "herb error: style function \"" ~n "/" ~f "\" needs to return a map."))
+          (not (fn? ~style-fn))
+          (throw (ex-info (str "herb error in ns \"" ~n "\" the first argument to <class needs to be a function.") {}))
+          (not (map? (~style-fn ~@args)))
+          (throw (ex-info (str "herb error: style function \"" ~n "/" ~f "\" needs to return a map.") {}))
           :else (herb.impl/with-style! {} ~f ~n ~style-fn ~@args)))))
