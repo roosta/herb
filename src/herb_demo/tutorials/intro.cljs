@@ -24,7 +24,7 @@
       "Intro"]
      [text
       "Herb is a CSS styling library for " [:a {:href "https://clojurescript.org"} "Clojurescript"]
-      ", built using "[:a {:href "https://github.com/noprompt/garden"} "Garden"]
+      ", built using " [:a {:href "https://github.com/noprompt/garden"} "Garden"]
       ", whose main focus is on component level styling using functions."]
      [text
       "Lets start of with a basic example, I'm using "
