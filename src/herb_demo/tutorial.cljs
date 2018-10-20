@@ -26,7 +26,7 @@
     "Herb"]
    [text {:align :center
           :variant :headline}
-    "Clojurescript styling library site"]])
+    "Clojurescript styling using functions"]])
 
 (defn main []
   (let [state (r/atom "green")]
