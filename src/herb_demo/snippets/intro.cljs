@@ -1,6 +1,6 @@
 (ns herb-demo.snippets.intro
   (:require
-   [herb.core :refer [<class <id]]))
+   [herb.core :refer-macros [<class <id]]))
 
 ;; Define a function that returns a map containing styles.
 (defn example-style
