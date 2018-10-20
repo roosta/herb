@@ -197,6 +197,11 @@
          :margin [["10px" 0 "10px" 0]]
          :border-radius "5px"}})
 
+(defgroup group-with-args
+  {:text {:font-style "italic"
+          :color "white"}
+   :box {:background (first args)}})
+
 (defn supports-thing
   []
   ^{:supports {{:display :grid} {:font-size (px 20)}}}
@@ -300,6 +305,9 @@
   (let [state (r/atom "green")]
     (fn []
       [:div {:class (<class container)}
+       [:div {:class (<class group-with-args :box "black")}
+        [:span {:class (<class group-with-args :text)}
+         "Group that takes args"]]
        [:div.global "global style"]
        [:div {:class (join-classes (<class row) (<class simple))}
         "multiple classes"]
