@@ -115,12 +115,14 @@
     to {
       opacity: 0;
     }
-}
+  }
   ```"
      [sym]
-     `(-> @runtime/injected-keyframes
-          (get (str '~sym))
-          :css)))
+     (let [s# `'~sym
+           n# (name (ns-name *ns*))]
+       `(-> @runtime/injected-keyframes
+            (get (str ~n# "/" ~s#))
+            :css))))
 
 #?(:clj
    (defmacro defgroup
