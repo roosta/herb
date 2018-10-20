@@ -30,4 +30,7 @@
       e1]
      [text {:variant :subheading}
       "Output:"]
-     [e1/button]]))
+     [e1/button]
+     #_[text
+      "A new style element has been added to the DOM, and " [:code "herb"] "
+     ensures that only that element is updated when clicking the button."]]))
