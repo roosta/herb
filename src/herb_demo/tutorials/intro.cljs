@@ -30,7 +30,7 @@
       "Lets start of with a basic example, I'm using "
       [:a {:href "https://github.com/reagent-project/reagent"}
        "Reagent"]
-      " here but it's not a requirement for Herb"]
+      " here but it's not a requirement for Herb."]
      [code {:lang :clojure}
       intro-cljs]
      [text {:variant :subheading}
@@ -50,5 +50,5 @@
       classname that can be targeted."]
      [text
       "The " [:code "data-herb"] " attribute reflects the current namespace for
-     a given style, and only in development. It is munged on advanced compile,
-     same as the classnames."] ]))
+     a given style, and only in development. It is removed on advanced compile.
+     "] ]))
