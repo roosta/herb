@@ -1,5 +1,6 @@
 (ns herb.core
   (:require [herb.impl :as impl]
+            [herb.spec]
             [clojure.spec.alpha :as s]
             [clojure.string :as str]
             [herb.runtime :as runtime]
@@ -8,38 +9,14 @@
   #?(:clj
      (:import garden.types.CSSAtRule)))
 
-(s/def ::auto-prefix (s/coll-of keyword? :kind set?))
-(s/def ::vendors (s/coll-of (s/or :string string? :keyword keyword?) :kind vector?))
-(s/def ::options (s/keys :opt-un [::vendors ::auto-prefix]))
-(s/def ::style-fn (fn [[f a]]
-                    (and (fn? f)
-                         (map? (apply f a)))))
-(s/def ::classes (s/+ (s/or :s string? :n nil?)))
-(s/def ::frame (s/or :frame (s/cat :keyframe keyword? :style map?)))
-(s/def ::style (s/or :frame (s/cat :classname keyword? :style map?)))
-(s/def ::frames (s/+ ::frame))
-(s/def ::styles (s/+ ::style))
-
-(s/fdef herb.core/defkeyframes
-  :args (s/cat :name symbol? :frames ::frames)
-  :ret any?)
-
-(s/fdef herb.core/defglobal
-  :args (s/cat :name symbol? :styles ::styles)
-  :ret any?)
-
-(s/fdef herb.core/<keyframes
-  :args (s/cat :keyframes symbol?)
-  :ret any?)
-
 (defn init!
    "Initialize herb, takes a map of options:
   :vendors - a vector of vendor prefixes, ie [:webkit :moz]
   :auto-prefix - A set of CSS properties to auto prefix, ie #{:transition :border-radius} "
   [options]
-  (let [parsed (s/conform ::options options)]
+  (let [parsed (s/conform :herb.spec/options options)]
     (if (= parsed ::s/invalid)
-      (throw (ex-info "Invalid input" (s/explain-data ::options options)))
+      (throw (ex-info "Invalid input" (s/explain-data :herb.spec/options options)))
       (reset! runtime/options {:vendors (-> (mapv (fn [[k v]] v) (:vendors parsed))
                                             (impl/convert-vendors))
                                :auto-prefix (:auto-prefix options)}))))
@@ -50,11 +27,11 @@
   (join-classes (<class fn-1) (<class fn-2))
   ```"
   [& classes]
-  (if (s/valid? ::classes classes)
+  (if (s/valid? :herb.spec/classes classes)
     (->> classes
          (filter identity)
          (str/join " "))
-    (throw (ex-info "join-classes takes one or more strings as arguments" (s/explain-data ::classes classes)))))
+    (throw (ex-info "join-classes takes one or more strings as arguments" (s/explain-data :herb.spec/classes classes)))))
 
 #?(:clj
    (defmacro defkeyframes
