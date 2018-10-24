@@ -1,6 +1,7 @@
 (ns herb-demo.components.text
   (:require [garden.units :refer [rem em px]]
             [herb.core :refer-macros [<class]]
+            [debux.cs.core :as d :refer-macros [clog clogn dbg dbgn break]]
             [clojure.string :as str]
             [reagent.core :as r]))
 
@@ -59,14 +60,29 @@
        (colors color))
       {:key k})))
 
+(defn replace-code-ticks
+  [child]
+  (if (string? child)
+    (let [re #"`.*?`"
+          matches (re-seq re child)
+          text (str/split child #"`")]
+      (map (fn [t]
+             (if (seq (filter #(str/includes? % t) matches))
+               [:code t]
+               t))
+           text))
+    child))
+
 (defn text
   [{:keys [variant class color align]
     :or {variant :body
          color :black
          align :left}}]
-  (let [class* (<class text-style variant color align)]
+  (let [children (r/children (r/current-component))
+        class* (<class text-style variant color align)]
     (into
      [(variant mappings) {:class (if class
                                    (str/join " " [class* class])
                                    class*)}]
-     (r/children (r/current-component)))))
+     (mapv replace-code-ticks children)
+     )))
