@@ -1,7 +1,7 @@
 (ns herb.spec
   (:require [clojure.spec.alpha :as s]))
 
-(s/def ::auto-prefix (s/coll-of keyword? :kind set?))
+(s/def ::auto-prefix (s/coll-of (s/or :keyword keyword? :string string?) :kind set?))
 (s/def ::vendors (s/coll-of (s/or :string string? :keyword keyword?) :kind vector?))
 (s/def ::options (s/keys :opt-un [::vendors ::auto-prefix]))
 (s/def ::style-fn (fn [[f a]]
