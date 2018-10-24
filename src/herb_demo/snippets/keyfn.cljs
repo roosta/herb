@@ -21,5 +21,5 @@
   (let [colors ["red" "green" "blue"]]
     [:div {:class (<class flex-container)}
      (for [c colors]
-       ^{:key c}
-       [:div {:class (<class style c)}])]))
+       [:div {:key c
+              :class (<class style c)}])]))
