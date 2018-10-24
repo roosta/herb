@@ -14,7 +14,7 @@
 (s/def ::style-fn (fn [[f a]]
                     (and (fn? f)
                          (map? (apply f a)))))
-(s/def ::classes (s/+ string?))
+(s/def ::classes (s/+ (s/or :s string? :n nil?)))
 (s/def ::frame (s/or :frame (s/cat :keyframe keyword? :style map?)))
 (s/def ::style (s/or :frame (s/cat :classname keyword? :style map?)))
 (s/def ::frames (s/+ ::frame))
