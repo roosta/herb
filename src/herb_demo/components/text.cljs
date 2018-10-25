@@ -66,11 +66,13 @@
     (let [re #"`.*?`"
           matches (re-seq re child)
           text (str/split child #"`")]
-      (map (fn [t]
+      (map (fn [t i]
              (if (seq (filter #(str/includes? % t) matches))
+               ^{:key (hash (str t i))}
                [:code t]
                t))
-           text))
+           text
+           (range)))
     child))
 
 (defn text
