@@ -4,8 +4,8 @@
             [herb-demo.components.paper :refer [paper]]
             [herb-demo.components.text :refer [text]]
             [herb-demo.snippets.intro :as intro]
-            [herb-demo.tutorials.key-concept :refer [key-concept]]
             [herb-demo.tutorials.intro :refer [intro]]
+            [herb-demo.tutorials.key-meta :refer [key-meta]]
             [herb-demo.tutorials.why-fns :refer [why-fns]]
             [herb.core :as herb :refer-macros [<class <id]]
             [reagent.core :as r]
@@ -35,4 +35,4 @@
        [header]
        [intro]
        [why-fns]
-       [key-concept]])))
+       [key-meta]])))

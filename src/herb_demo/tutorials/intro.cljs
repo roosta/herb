@@ -51,4 +51,4 @@
      [text
       "The " [:code "data-herb"] " attribute reflects the current namespace for
      a given style, and only in development. It is removed on advanced compile.
-     "] ]))
+     "]]))
