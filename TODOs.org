@@ -130,3 +130,4 @@
   #+END_SRC
 * TODO ensure key works with lots of variation
 * TODO Fix namespaces like this: herb-demo.snippets/state-fn/button-style
+* TODO Fix defglobal spec when using multiple selectors ~[:html :body {:style "here}]
