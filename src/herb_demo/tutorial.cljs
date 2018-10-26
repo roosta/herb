@@ -6,6 +6,7 @@
             [herb-demo.snippets.intro :as intro]
             [herb-demo.tutorials.intro :refer [intro]]
             [herb-demo.tutorials.key-meta :refer [key-meta]]
+            [herb-demo.tutorials.extending :refer [extending]]
             [herb-demo.tutorials.group-meta :refer [group-meta]]
             [herb-demo.tutorials.why-fns :refer [why-fns]]
             [herb.core :as herb :refer-macros [<class <id]]
@@ -36,5 +37,6 @@
        [header]
        [intro]
        [why-fns]
+       [extending]
        [key-meta]
        [group-meta]])))
