@@ -8,14 +8,12 @@
   [k]
   (let [styles
         {:container {:display :flex}
-         :component-1
-         {:background-color :black
-          :width (px 50)
-          :height (px 50)}
-         :component-2
-         {:background-color :grey
-          :width (px 50)
-          :height (px 50)}}]
+         :component-1 {:background-color :black
+                       :width (px 50)
+                       :height (px 50)}
+         :component-2 {:background-color :grey
+                       :width (px 50)
+                       :height (px 50)}}]
     (vary-meta
      (k styles)
      assoc
