@@ -54,7 +54,7 @@
      [text
       "This example and the previous one are exactly the same, just wrapped in a
      sugary macro. Its also possible to pass arguments to a group, the macro
-     stores the all but the first arguments in a variable calls `args`:"]
+     stores all but the first arguments in a variable calls `args`:"]
      [code {:lang :clojure}
       e6]
      [text
