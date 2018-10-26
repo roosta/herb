@@ -6,6 +6,7 @@
             [herb-demo.components.text :refer [text]]
             [herb-demo.snippets.group :as group]
             [herb-demo.snippets.my-group :as my-group]
+            [herb-demo.snippets.my-group-args :as my-group-args]
             [herb-demo.snippets.group-pattern :as group-pattern]
             [herb.core :as herb :refer-macros [<class <id]]
             [reagent.core :as r]
@@ -17,7 +18,8 @@
         e2 (macros/example-src "group.html")
         e3 (macros/example-src "group_pattern.cljs")
         e4 (macros/example-src "group_pattern.html")
-        e5 (macros/example-src "my_group.cljs")]
+        e5 (macros/example-src "my_group.cljs")
+        e6 (macros/example-src "my_group_args.cljs")]
     [paper
      [text {:variant :title}
       "Group metadata"]
@@ -50,5 +52,12 @@
      [code {:lang :clojure}
       e5]
      [text
-      "This example and the previous one are exactly the same, just wrapped
-     in a sugary macro."]]))
+      "This example and the previous one are exactly the same, just wrapped in a
+     sugary macro. Its also possible to pass arguments to a group, the macro
+     stores the all but the first arguments in a variable calls `args`:"]
+     [code {:lang :clojure}
+      e6]
+     [text
+      "I would advice against passing args to a stylegroup though, because if you're
+      updating any single run of a stylegroup function the entire group has to
+      be re-rendered"]]))

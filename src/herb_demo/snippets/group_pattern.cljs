@@ -5,7 +5,7 @@
 ;; Here we pick out a component based on a passed key, and modify that styles
 ;; metadata to include :key and :group.
 (defn my-group
-  [k]
+  [k & args]
   (let [styles
         {:container {:display :flex}
          :component-1 {:background-color :black
@@ -14,6 +14,8 @@
          :component-2 {:background-color :grey
                        :width (px 50)
                        :height (px 50)}}]
+    ;; The advantage of using vary-meta here is that we preserve whatever other
+    ;; meta data is attached to the style map
     (vary-meta
      (k styles)
      assoc
