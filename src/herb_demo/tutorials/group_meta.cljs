@@ -58,6 +58,7 @@
      [code {:lang :clojure}
       e6]
      [text
-      "I would advice against passing args to a stylegroup though, because if you're
-      updating any single run of a stylegroup function the entire group has to
-      be re-rendered"]]))
+      "I would advice against passing args to a stylegroup though, because if
+      you're updating any single run of a stylegroup function the entire group
+      has to be re-rendered. Stylegroups are more useful when writing static CSS
+      that isn't changed during runtime."]]))
