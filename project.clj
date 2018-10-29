@@ -30,6 +30,7 @@
 
   :profiles {:dev {:dependencies [[philoskim/debux "0.5.1"]
                                   [binaryage/devtools "0.9.10"]
+                                  [org.clojure/test.check "0.10.0-alpha3"]
                                   [compojure "1.6.1"]
                                   [ring "1.7.0"]
                                   [ring/ring-defaults "0.3.2"]
