@@ -301,10 +301,21 @@
   []
   {:background-color "red"})
 
+(def data [{:color :red} {:color :green}])
+
+(defn data-str
+  [in]
+  ^{:key in}
+  {:background-color (:color in)})
+
 (defn main []
   (let [state (r/atom "green")]
     (fn []
       [:div {:class (<class container)}
+       (for [d data]
+         ^{:key d}
+         [:div {:class (<class data-str d)}
+          (:color d)])
        [:div {:class (<class group-with-args :box "black")}
         [:span {:class (<class group-with-args :text)}
          "Group that takes args"]]
