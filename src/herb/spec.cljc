@@ -1,6 +1,5 @@
 (ns herb.spec
-  (:require [clojure.spec.alpha :as s]
-            [clojure.test.check.generators]))
+  (:require [clojure.spec.alpha :as s]))
 
 (s/def ::auto-prefix (s/coll-of (s/or :keyword keyword? :string string?) :kind set?))
 (s/def ::vendors (s/coll-of (s/or :string string? :keyword keyword?) :kind vector?))
