@@ -42,7 +42,9 @@
              :dev-cider {:dependencies [[cider/piggieback "0.3.9"]]
                          :figwheel {:nrepl-middleware [cider.piggieback/wrap-cljs-repl]}}
              :demo {:dependencies [[com.taoensso/tufte "1.2.0"]
-                                   [secretary "1.2.3"]
+                                   [reagent-utils "0.3.1"]
+                                   [bidi "2.1.4"]
+                                   [pez/clerk "1.0.0"]
                                    [cljsjs/highlight "9.12.0-2"]
                                    [venantius/accountant "0.2.4"]
                                    [reagent "0.8.1"]]}}
