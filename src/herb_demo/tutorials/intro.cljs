@@ -19,9 +19,9 @@
   []
   (let [intro-cljs (macros/example-src "intro.cljs")
         intro-html (macros/example-src "intro.html")]
-    [paper
+    [paper {:id "intro"}
      [text {:variant :title}
-      "Intro"]
+      "Introduction"]
      [text
       "Herb is a CSS styling library for " [:a {:href "https://clojurescript.org"} "Clojurescript"]
       ", built using " [:a {:href "https://github.com/noprompt/garden"} "Garden"]
