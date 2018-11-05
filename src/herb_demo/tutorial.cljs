@@ -14,11 +14,9 @@
             [reagent.debug :as d])
   (:require-macros [herb-demo.macros :as macros]))
 
-(defn header-style
-  [component]
-  (let [styles {:container {:flex-basis "100%"
-                            :margin-bottom (px 10)}}]
-    (with-meta (component styles) {:key component})))
+(defgroup header-style
+  {:container {:flex-basis "100%"
+               :margin-bottom (px 10)}})
 
 (defn header
   []
@@ -31,13 +29,13 @@
     "Clojurescript styling using functions"]])
 
 (defgroup main-style
-  {:root {:display :flex}
-   :window {:height "100vh"
-            :width "100%"
-            :overflow-y "auto"}
-   :nav {:flex-basis "15%"
-         :overflow-y "auto"
-         :height "100vh"}})
+  (let [nav-width 256]
+    {:root {}
+     :content {:padding-left (px nav-width)}
+     :nav {:position "fixed"
+           :overflow-y "auto"
+           :width (px nav-width)
+           :height "100%"}}))
 
 (defn main []
   (let [state (r/atom "green")]
@@ -45,7 +43,7 @@
       [:div {:class (<class main-style :root)}
        [:div {:class (<class main-style :nav)}
         [nav]]
-       [:div {:class (<class main-style :window)}
+       [:div {:class (<class main-style :content)}
         [container
          [header]
          [intro]
