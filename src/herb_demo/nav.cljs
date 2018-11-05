@@ -4,11 +4,11 @@
             [herb.core :refer-macros [<class defgroup]]
             [reagent.core :as r]))
 
-(def items {:intro {:label "1. Introduction"}
-            :why-fns {:label "2. Why functions?"}
-            :extending {:label "3. Extending style functions"}
-            :key-meta {:label "4. The key matadata"}
-            :group-meta {:label "5. The group metadata"}})
+(def items {:intro {:label "Introduction"}
+            :why-fns {:label "Why functions?"}
+            :extending {:label "Extending style functions"}
+            :key-meta {:label "The key matadata"}
+            :group-meta {:label "The group metadata"}})
 
 (defgroup nav-style
   {:root {:background "#2e3138"
@@ -16,27 +16,20 @@
           :color "white"}
    :container {:padding (px 16)}
    :row {:padding-bottom (px 8)}
+   :a
+   ^{:pseudo {:hover {:color "#3BABFF"}}}
+   {:color "white"}
    })
 
-(defn a [active?]
-  (let [active-color "#3BABFF"]
-    ^{:key active?
-      :pseudo {:hover {:color active-color}}}
-    {:color (if active? active-color "white")})
-  )
-
 (defn nav []
-  (let [state (r/atom nil)]
-    (fn []
-      [:div {:class (<class nav-style :root)}
-       [:div {:class (<class nav-style :container)}
-        (doall
-         (for [[k v] items]
-           (let [active? (= @state k)]
-             (.log js/console active?)
-             ^{:key (:label v)}
-             [:div {:class (<class nav-style :row)}
-              [:a {:on-click #(reset! state k)
-                   :class (<class a active?)
-                   :href (str "#" (name k))}
-               (:label v)]])))]])))
+  [:div {:class (<class nav-style :root)}
+   [:div {:class (<class nav-style :container)}
+    (doall
+     (map (fn [[k v] index]
+              ^{:key (:label v)}
+              [:div {:class (<class nav-style :row)}
+               [:a {:class (<class nav-style :a)
+                    :href (str "#" (name k))}
+                [:span [:strong (str index ". ")] (:label v)]]])
+          items
+          (range)))]])
