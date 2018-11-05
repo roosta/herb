@@ -42,6 +42,7 @@
    :padding (px 24)})
 
 (defn paper
-  [{:keys [class]}]
-  (into [:div {:class (<class paper-style)}]
+  [{:keys [class id]}]
+  (into [:div {:id id
+               :class (<class paper-style)}]
         (r/children (r/current-component))))
