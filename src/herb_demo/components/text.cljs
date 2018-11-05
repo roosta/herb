@@ -76,14 +76,15 @@
     child))
 
 (defn text
-  [{:keys [variant class color align]
+  [{:keys [variant class color align id]
     :or {variant :body
          color :black
          align :left}}]
   (let [children (r/children (r/current-component))
         class* (<class text-style variant color align)]
     (into
-     [(variant mappings) {:class (if class
+     [(variant mappings) {:id id
+                          :class (if class
                                    (str/join " " [class* class])
                                    class*)}]
      (mapv replace-code-ticks children)

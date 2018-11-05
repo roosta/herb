@@ -8,28 +8,47 @@
             :why-fns {:label "Why functions?"}
             :extending {:label "Extending style functions"}
             :key-meta {:label "The key matadata"}
-            :group-meta {:label "The group metadata"}})
+            :group-meta {:label "The group metadata"
+                         :sub {:defgroup {:label "defgroup macro"}}}})
 
 (defgroup nav-style
   {:root {:background "#2e3138"
           :height "100%"
           :color "white"}
    :container {:padding (px 16)}
-   :row {:padding-bottom (px 8)}
+   :row {:padding-bottom (px 16)}
    :a
    ^{:pseudo {:hover {:color "#3BABFF"}}}
    {:color "white"}
    })
 
+(defn a
+  []
+  ^{:pseudo {:hover {:color "#3BABFF"}}}
+  {:color "white"})
+
+(defn sub-a
+  []
+  ^{:extend a}
+  {:padding-left (px 16)})
+
 (defn nav []
   [:div {:class (<class nav-style :root)}
    [:div {:class (<class nav-style :container)}
-    (doall
-     (map (fn [[k v] index]
-              ^{:key (:label v)}
+    (map (fn [[k v] index]
+           ^{:key (:label v)}
+           [:div
+            [:div  {:class (<class nav-style :row)}
+             [:a {:class (<class a)
+                  :href (str "#" (name k))}
+              [:span [:strong (str index ". ")] (:label v)]]]
+            (when-let [sub (:sub v)]
               [:div {:class (<class nav-style :row)}
-               [:a {:class (<class nav-style :a)
-                    :href (str "#" (name k))}
-                [:span [:strong (str index ". ")] (:label v)]]])
-          items
-          (range)))]])
+               (map (fn [[k v] sub-index]
+                      [:a {:class (<class sub-a)
+                           :href (str "#" (name k))}
+                       [:span [:strong (str index "." sub-index " ")] (:label v)]])
+                    sub
+                    (range))])])
+         items
+         (range))]])
