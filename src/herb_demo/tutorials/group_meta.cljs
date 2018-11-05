@@ -20,7 +20,7 @@
         e4 (macros/example-src "group_pattern.html")
         e5 (macros/example-src "my_group.cljs")
         e6 (macros/example-src "my_group_args.cljs")]
-    [paper
+    [paper {:id "group-meta"}
      [text {:variant :title}
       "Group metadata"]
      [text

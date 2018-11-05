@@ -14,7 +14,7 @@
   []
   (let [e1 (macros/example-src "keyfn.cljs")
         e2 (macros/example-src "keyfn.html")]
-    [paper
+    [paper {:id "key-meta"}
      [text {:variant :title}
       "Key meta data"]
      [text

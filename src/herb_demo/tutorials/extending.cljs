@@ -19,7 +19,7 @@
   (let [e1 (macros/example-src "extend.cljs")
         e2 (macros/example-src "extend_args.cljs")
         e3 (macros/example-src "extend_multi.cljs")]
-    [paper
+    [paper {:id "extending"}
      [text {:variant :title}
       "Extending functions"]
      [text

@@ -14,7 +14,7 @@
 (defn why-fns
   []
   (let [e1 (macros/example-src "state_fn.cljs")]
-    [paper
+    [paper {:id "why-fns"}
      [text {:variant :title}
       "Why functions?"]
      [text
