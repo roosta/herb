@@ -16,20 +16,14 @@
           :height "100%"
           :color "white"}
    :container {:padding (px 16)}
-   :row {:padding-bottom (px 16)}
-   :a
-   ^{:pseudo {:hover {:color "#3BABFF"}}}
-   {:color "white"}
-   })
+   :row {:padding-bottom (px 16)}})
 
-(defn a
-  []
+(defn a-style []
   ^{:pseudo {:hover {:color "#3BABFF"}}}
   {:color "white"})
 
-(defn sub-a
-  []
-  ^{:extend a}
+(defn sub-a-style []
+  ^{:extend a-style}
   {:padding-left (px 16)})
 
 (defn nav []
@@ -39,14 +33,14 @@
            ^{:key (:label v)}
            [:div
             [:div  {:class (<class nav-style :row)}
-             [:a {:class (<class a)
+             [:a {:class (<class a-style)
                   :href (str "#" (name k))}
               [:span [:strong (str index ". ")] (:label v)]]]
             (when-let [sub (:sub v)]
               [:div {:class (<class nav-style :row)}
                (map (fn [[k v] sub-index]
                       ^{:key (:label v)}
-                      [:a {:class (<class sub-a)
+                      [:a {:class (<class sub-a-style)
                            :href (str "#" (name k))}
                        [:span [:strong (str index "." sub-index " ")] (:label v)]])
                     sub
