@@ -45,10 +45,11 @@
             (when-let [sub (:sub v)]
               [:div {:class (<class nav-style :row)}
                (map (fn [[k v] sub-index]
+                      ^{:key (:label v)}
                       [:a {:class (<class sub-a)
                            :href (str "#" (name k))}
                        [:span [:strong (str index "." sub-index " ")] (:label v)]])
                     sub
-                    (range))])])
+                    (map inc (range)))])])
          items
-         (range))]])
+         (map inc (range)))]])
