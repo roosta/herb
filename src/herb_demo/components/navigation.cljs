@@ -9,6 +9,7 @@
             [reagent.core :as r])
   (:require-macros [garden.def :refer [defcssfn]]))
 
+(def appbar-height 50)
 (def sidebar-width (r/atom 256))
 
 (def items {:intro {:label "Introduction"}
@@ -25,7 +26,7 @@
           :width (px @sidebar-width)
           :height "100%"
           :color "white"}
-   :container {:padding (px 16)}
+   :container {:padding [[(px appbar-height) (px 16) (px 16) (px 16)]]}
    :row {:padding-bottom (px 16)}})
 
 (defn a-style []
@@ -60,7 +61,6 @@
           (map inc (range))))]])
 
 
-(def appbar-height 50)
 
 (defcssfn calc
   [& args]
@@ -74,6 +74,8 @@
           :display "flex"
           :top 0
           :height (px appbar-height)}
+   :header {:font-weight "300 !important"
+            :color "rgba(0,0,0,0.5) !important"}
    :column {:flex-basis "33%"}})
 
 (defn underline
@@ -100,7 +102,8 @@
                           (<class underline @scroll?)]}
          [:div {:class (<class appbar-style :column)}]
          [:div {:class (<class appbar-style :column)}
-          [text {:variant :title
+          [text {:variant :headline
+                 :class (<class appbar-style :header)
                  :align :center}
            "Herb: styling using functions"]]
          [:div {:class (<class appbar-style :column)}]])})))
