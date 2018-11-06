@@ -13,6 +13,9 @@
 
 (defgroup nav-style
   {:root {:background "#333"
+          :position "fixed"
+          :overflow-y "auto"
+          :width (px @width)
           :height "100%"
           :color "white"}
    :container {:padding (px 16)}

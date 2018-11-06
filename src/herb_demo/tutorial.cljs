@@ -29,18 +29,12 @@
     "Clojurescript styling using functions"]])
 
 (defgroup main-style
-  (let [nav-width 256]
-    {:root {}
-     :content {:padding-left (px nav-width)}
-     :nav {:position "fixed"
-           :overflow-y "auto"
-           :width (px nav-width)
-           :height "100%"}}))
+  {:root {}
+   :content {:padding-left (px @nav/width)}})
 
 (defn main []
   [:div {:class (<class main-style :root)}
-   [:div {:class (<class main-style :nav)}
-    [nav/sidebar]]
+   [nav/sidebar]
    [:div {:class (<class main-style :content)}
     [container
      [header]
