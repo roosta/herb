@@ -78,7 +78,7 @@
 
 (defn underline
   [underline?]
-  {:border-bottom (if underline? "1px solid rgba(0, 0, 0, 0.25)" "none")})
+  {:border-bottom (if underline? "1px solid rgba(0, 0, 0, 0.15)" "none")})
 
 (defn on-scroll
   [state e]
