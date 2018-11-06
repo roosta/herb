@@ -31,7 +31,8 @@
 
 (defgroup main-style
   {:root {}
-   :content {:padding-left (px @nav/width)}})
+   :content {:padding [[(px 150) 0 (px 100) 0]]
+             :padding-left (px @nav/sidebar-width)}})
 
 (defn main []
   [:main {:class (<class main-style :root)}
