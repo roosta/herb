@@ -31,15 +31,16 @@
 
 (defgroup main-style
   {:root {}
-   :content {:padding [[(px 150) 0 (px 100) 0]]
+   :content {:padding [[(px 100) 0 (px 100) 0]]
              :padding-left (px @nav/sidebar-width)}})
 
 (defn main []
   [:main {:class (<class main-style :root)}
    [nav/sidebar]
    [:section {:class (<class main-style :content)}
+    [nav/appbar]
     [container
-     [header]
+     #_[header]
      [intro]
      [why-fns]
      [extending]
