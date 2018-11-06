@@ -38,16 +38,14 @@
            :height "100%"}}))
 
 (defn main []
-  (let [state (r/atom "green")]
-    (fn []
-      [:div {:class (<class main-style :root)}
-       [:div {:class (<class main-style :nav)}
-        [nav]]
-       [:div {:class (<class main-style :content)}
-        [container
-         [header]
-         [intro]
-         [why-fns]
-         [extending]
-         [key-meta]
-         [group-meta]]]])))
+  [:div {:class (<class main-style :root)}
+   [:div {:class (<class main-style :nav)}
+    [nav]]
+   [:div {:class (<class main-style :content)}
+    [container
+     [header]
+     [intro]
+     [why-fns]
+     [extending]
+     [key-meta]
+     [group-meta]]]])
