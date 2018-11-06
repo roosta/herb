@@ -1,4 +1,4 @@
-(ns herb-demo.nav
+(ns herb-demo.components.navigation
   (:require [garden.units :refer [px]]
             [herb-demo.components.text :refer [text]]
             [herb.core :refer-macros [<class defgroup]]
@@ -26,7 +26,7 @@
   ^{:extend a-style}
   {:padding-left (px 16)})
 
-(defn nav []
+(defn sidebar []
   [:div {:class (<class nav-style :root)}
    [:div {:class (<class nav-style :container)}
     (map (fn [[k v] index]

@@ -3,7 +3,7 @@
             [herb-demo.components.container :refer [container]]
             [herb-demo.components.paper :refer [paper]]
             [herb-demo.components.text :refer [text]]
-            [herb-demo.nav :refer [nav]]
+            [herb-demo.components.navigation :as nav]
             [herb-demo.tutorials.intro :refer [intro]]
             [herb-demo.tutorials.key-meta :refer [key-meta]]
             [herb-demo.tutorials.extending :refer [extending]]
@@ -40,7 +40,7 @@
 (defn main []
   [:div {:class (<class main-style :root)}
    [:div {:class (<class main-style :nav)}
-    [nav]]
+    [nav/sidebar]]
    [:div {:class (<class main-style :content)}
     [container
      [header]
