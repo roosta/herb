@@ -21,7 +21,7 @@
 
 (defn header
   []
-  [:div {:class (<class header-style :container)}
+  [:header {:class (<class header-style :container)}
    [text {:align :center
           :variant :display}
     "Herb"]
@@ -34,9 +34,9 @@
    :content {:padding-left (px @nav/width)}})
 
 (defn main []
-  [:div {:class (<class main-style :root)}
+  [:main {:class (<class main-style :root)}
    [nav/sidebar]
-   [:div {:class (<class main-style :content)}
+   [:section {:class (<class main-style :content)}
     [container
      [header]
      [intro]

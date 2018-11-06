@@ -43,6 +43,6 @@
 
 (defn paper
   [{:keys [class id]}]
-  (into [:div {:id id
-               :class (<class paper-style)}]
+  (into [:article {:id id
+                   :class (<class paper-style)}]
         (r/children (r/current-component))))

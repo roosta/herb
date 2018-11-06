@@ -32,11 +32,11 @@
   {:padding-left (px 16)})
 
 (defn sidebar []
-  [:div {:class (<class nav-style :root)}
+  [:nav {:class (<class nav-style :root)}
    [:div {:class (<class nav-style :container)}
     (map (fn [[k v] index]
            ^{:key (:label v)}
-           [:div
+           [:nav
             [:div  {:class (<class nav-style :row)}
              [:a {:class (<class a-style)
                   :href (str "#" (name k))}
