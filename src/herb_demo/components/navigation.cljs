@@ -4,6 +4,8 @@
             [herb.core :refer-macros [<class defgroup]]
             [reagent.core :as r]))
 
+(def width (r/atom 256))
+
 (def items {:intro {:label "Introduction"}
             :why-fns {:label "Why functions?"}
             :extending {:label "Extending style functions"}

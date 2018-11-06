@@ -3,6 +3,7 @@
             [herb-demo.components.container :refer [container]]
             [herb-demo.components.paper :refer [paper]]
             [herb-demo.components.text :refer [text]]
+            [herb-demo.easing :as easing]
             [herb-demo.components.navigation :as nav]
             [herb-demo.tutorials.intro :refer [intro]]
             [herb-demo.tutorials.key-meta :refer [key-meta]]
