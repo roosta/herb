@@ -12,7 +12,7 @@
                          :sub {:defgroup {:label "defgroup macro"}}}})
 
 (defgroup nav-style
-  {:root {:background "#2e3138"
+  {:root {:background "#333"
           :height "100%"
           :color "white"}
    :container {:padding (px 16)}
