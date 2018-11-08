@@ -12,9 +12,7 @@
 (defglobal global
   [:body {:background "#eee"
           :box-sizing "border-box"
-          :margin 0
-          :font-size (px 14)
-          :font-family ["Lato" "Helvetica Neue" "Arial" "Helvetica" "sans-serif"]}]
+          :margin 0}]
   [:button {:border "none"}]
   [:code {:background-color "#eee"
           :border-radius "2px"

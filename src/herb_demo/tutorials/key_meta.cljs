@@ -15,7 +15,7 @@
   (let [e1 (macros/example-src "keyfn.cljs")
         e2 (macros/example-src "keyfn.html")]
     [paper {:id "key-meta"}
-     [text {:variant :title}
+     [text {:variant :heading}
       "Key meta data"]
      [text
       "Another feature of Herb is the use of the `:key` meta data,

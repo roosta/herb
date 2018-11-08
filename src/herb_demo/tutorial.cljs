@@ -16,16 +16,14 @@
   (:require-macros [herb-demo.macros :as macros]))
 
 (defgroup header-style
-  {:subheading {:font-weight 300}
-   :container {:flex-basis "100%"
+  {:container {:flex-basis "100%"
                :margin-bottom (px 10)}})
 
 (defn header
   []
   [:header {:class (<class header-style :container)}
    [text {:align :center
-          :class (<class header-style :subheading)
-          :variant :headline}
+          :variant :subtitle}
     "Clojurescript styling using functions"]])
 
 (defgroup main-style

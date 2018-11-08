@@ -20,7 +20,7 @@
   (let [intro-cljs (macros/example-src "intro.cljs")
         intro-html (macros/example-src "intro.html")]
     [paper {:id "intro"}
-     [text {:variant :title}
+     [text {:variant :heading}
       "Introduction"]
      [text
       "Herb is a CSS styling library for " [:a {:href "https://clojurescript.org"} "Clojurescript"]

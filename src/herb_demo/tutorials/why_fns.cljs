@@ -15,7 +15,7 @@
   []
   (let [e1 (macros/example-src "state_fn.cljs")]
     [paper {:id "why-fns"}
-     [text {:variant :title}
+     [text {:variant :heading}
       "Why functions?"]
      [text
       "The whole idea for Herb came from the fact that alot of the time I needed

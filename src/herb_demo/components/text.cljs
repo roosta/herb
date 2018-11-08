@@ -6,9 +6,9 @@
             [reagent.core :as r]))
 
 (def mappings
-  {:display :h1
-   :headline :h1
-   :title :h2
+  {:title :h4
+   :heading :h5
+   :subtitle :h5
    :subheading :h3
    :body :p})
 
@@ -17,31 +17,32 @@
   (c {:black {:color "#333"}
       :white {:color "white"}}))
 
+(defn px->rem
+  [size]
+  (let [html-font-size 16
+        font-size 14
+        coef (/ font-size 14)]
+    (str (* (/ size html-font-size) coef) "rem")))
+
 (defn variants
   [variant]
-  (let [v {:display {:font-size  (rem 7)
+  (let [v {:heading {:font-size (px->rem 24)
+                     :margin [[(em 1.2) 0 (em 1.2) 0]]
                      :font-weight 400
-                     :margin 0
-                     :line-height (em 1.14286)
-                     :letter-spacing (em -0.04)}
-           :headline {:font-size (rem 1.5)
-                      :font-weight 400
-                      :line-height (em 1.16667)
-                      :text-align "center"}
-           :title {:font-size (rem 1.3125)
-                   :font-weight 500
-                   :margin 0
-                   :margin-bottom (em 0.35)
-                   :line-height (em 1.16667)
-                   :text-align "center"}
-           :subheading {:font-size (rem 1)
+                     :font-family ["Raleway" "sans-serif"]}
+           :title {:font-size (px->rem 34)
+                   :font-weight 400
+                   :font-family ["Raleway" "sans-serif"]}
+           :subtitle {:font-size (px->rem 24)
+                      :font-family ["Raleway" "sans-serif"]
+                      :margin [[(em 1.2) 0 (em 1.2) 0]]
+                      :font-weight 300}
+           :subheading {:font-size (px->rem 16)
                         :font-weight 400
-                        :line-height (em 1.5)}
-           :body {:font-size (rem 0.875)
-                  :margin-bottom (px 16)
-                  :font-weight 400
-                  :line-height (em 1.46429)}}]
-     (variant v)))
+                        :font-family ["Open Sans" "sans-serif"]}
+           :body {:font-size (px->rem 14)
+                  :font-family ["Open Sans" "sans-serif"]}}]
+    (variant v)))
 
 (defn aligns
   [align]

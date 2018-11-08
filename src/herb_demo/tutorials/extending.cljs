@@ -20,7 +20,7 @@
         e2 (macros/example-src "extend_args.cljs")
         e3 (macros/example-src "extend_multi.cljs")]
     [paper {:id "extending"}
-     [text {:variant :title}
+     [text {:variant :heading}
       "Extending functions"]
      [text
       "Herb uses metadata for various tasks related to but not part of a style

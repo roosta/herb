@@ -74,7 +74,6 @@
           :display "flex"
           :top 0
           :height (px appbar-height)}
-   :header {}
    :column {:flex-basis "33%"}})
 
 (defn divider-style
@@ -83,7 +82,7 @@
    :width "100%"
    :position "absolute"
    :bottom 0
-   :height "1px"
+   :height (px 1)
    :background (rgba 0 0 0 0.15)
    :opacity (if scroll? 1 0)})
 
@@ -106,8 +105,7 @@
         [:header {:class (<class appbar-style :root)}
          [:div {:class (<class appbar-style :column)}]
          [:div {:class (<class appbar-style :column)}
-          [text {:variant :headline
-                 :class (<class appbar-style :header)
+          [text {:variant :title
                  :align :center}
            "Herb"]]
          [:div {:class (<class appbar-style :column)}]

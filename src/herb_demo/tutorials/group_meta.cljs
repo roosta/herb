@@ -21,7 +21,7 @@
         e5 (macros/example-src "my_group.cljs")
         e6 (macros/example-src "my_group_args.cljs")]
     [paper {:id "group-meta"}
-     [text {:variant :title}
+     [text {:variant :heading}
       "Group metadata"]
      [text
       "Another kind of meta data that works in conjuction with `:key` is the
