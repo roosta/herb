@@ -2,6 +2,8 @@
   (:require [garden.units :refer [px]]
             [goog.events :as events]
             [debux.cs.core :as d :refer-macros [clog clogn dbg dbgn break]]
+            [herb-demo.easing :as easing]
+            [garden.color :refer [rgba]]
             [goog.dom :as dom]
             [goog.events.EventType :as event-type]
             [herb-demo.components.text :refer [text]]
@@ -60,8 +62,6 @@
           items
           (map inc (range))))]])
 
-
-
 (defcssfn calc
   [& args]
   [args])
@@ -74,13 +74,18 @@
           :display "flex"
           :top 0
           :height (px appbar-height)}
-   :header {:font-weight "300 !important"
-            :color "rgba(0,0,0,0.5) !important"}
+   :header {}
    :column {:flex-basis "33%"}})
 
-(defn underline
-  [underline?]
-  {:border-bottom (if underline? "1px solid rgba(0, 0, 0, 0.15)" "none")})
+(defn divider-style
+  [scroll?]
+  {:transition (str "opacity 400ms " (:ease-in-out-quad easing/easing))
+   :width "100%"
+   :position "absolute"
+   :bottom 0
+   :height "1px"
+   :background (rgba 0 0 0 0.15)
+   :opacity (if scroll? 1 0)})
 
 (defn on-scroll
   [state e]
@@ -98,12 +103,12 @@
                                             #(on-scroll scroll? %)))
       :reagent-render
       (fn []
-        [:header {:class [(<class appbar-style :root)
-                          (<class underline @scroll?)]}
+        [:header {:class (<class appbar-style :root)}
          [:div {:class (<class appbar-style :column)}]
          [:div {:class (<class appbar-style :column)}
           [text {:variant :headline
                  :class (<class appbar-style :header)
                  :align :center}
-           "Herb: styling using functions"]]
-         [:div {:class (<class appbar-style :column)}]])})))
+           "Herb"]]
+         [:div {:class (<class appbar-style :column)}]
+         [:div {:class (<class divider-style @scroll?)}]])})))

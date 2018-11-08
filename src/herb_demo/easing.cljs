@@ -24,15 +24,3 @@
    :ease-in-out-expo "cubic-bezier(1, 0, 0, 1)"
    :ease-in-out-circ "cubic-bezier(.785, .135, .15, .86)"}
   )
-
-(defn transition
-  "Helper function that generates a transition string for multiple properties"
-  [{:keys [properties durations delays easings]
-    :or {durations (take (count properties) (repeat "500ms"))
-         easings (take (count properties) (repeat :ease-in-cubic))
-         delays (take (count properties) (repeat "0s"))}}]
-  (let [transitions (map (fn [p d dl e]
-                           (let [f (e easing)]
-                             (str/join " " [p d dl f])))
-                         properties durations delays easings)]
-    (str/join ", " transitions)))
