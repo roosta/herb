@@ -28,7 +28,7 @@
           :width (px @sidebar-width)
           :height "100%"
           :color "white"}
-   :container {:padding [[(px appbar-height) (px 16) (px 16) (px 16)]]}
+   :container {:padding (px 16)}
    :row {:padding-bottom (px 16)}})
 
 (defn a-style []
@@ -47,16 +47,20 @@
             ^{:key (:label v)}
             [:div
              [:div  {:class (<class sidebar-style :row)}
-              [:a {:class (<class a-style)
-                   :href (str "#" (name k))}
-               [:span [:strong (str index ". ")] (:label v)]]]
+              [:a {:href (str "#" (name k))}
+               [text {:class (<class a-style)
+                      :color :white
+                      :variant :a}
+                [:strong (str index ". ")] (:label v)]]]
              (when-let [sub (:sub v)]
                [:div {:class (<class sidebar-style :row)}
                 (map (fn [[k v] sub-index]
                        ^{:key (:label v)}
                        [:a {:class (<class sub-a-style)
                             :href (str "#" (name k))}
-                        [:span [:strong (str index "." sub-index " ")] (:label v)]])
+                        [text {:variant :a
+                               :color :white}
+                         [:strong (str index "." sub-index " ")] (:label v)]])
                      sub
                      (map inc (range)))])])
           items

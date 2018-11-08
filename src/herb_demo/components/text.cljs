@@ -9,6 +9,7 @@
   {:title :h4
    :heading :h5
    :subtitle :h5
+   :a :span
    :subheading :h3
    :body :p})
 
@@ -37,6 +38,8 @@
                       :font-family ["Raleway" "sans-serif"]
                       :margin [[(em 1.2) 0 (em 1.2) 0]]
                       :font-weight 300}
+           :a {:font-size (px->rem 14)
+               :font-family ["Open Sans" "sans-serif"]}
            :subheading {:font-size (px->rem 16)
                         :font-weight 400
                         :font-family ["Open Sans" "sans-serif"]}
