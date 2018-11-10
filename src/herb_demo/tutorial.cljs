@@ -17,7 +17,7 @@
 
 (defgroup header-style
   {:container {:flex-basis "100%"
-               :margin-bottom (px 10)}})
+               :margin-bottom (rem 0.625)}})
 
 (defn header
   []
@@ -28,8 +28,8 @@
 
 (defgroup main-style
   {:root {}
-   :content {:padding [[(px 35) 0 (px 50) 0]]
-             :padding-left (px @nav/sidebar-width)}})
+   :content {:padding [[(rem 2) 0 (rem 3) 0]]
+             :padding-left nav/sidebar-width}})
 
 (defn main []
   [:main {:class (<class main-style :root)}

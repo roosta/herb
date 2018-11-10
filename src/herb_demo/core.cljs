@@ -1,6 +1,6 @@
 (ns herb-demo.core
   (:require [accountant.core :as accountant]
-            [garden.units :refer [px]]
+            [garden.units :refer [px em]]
             [herb-demo.examples :as examples]
             [herb-demo.tutorial :as tutorial]
             [reagent.session :as session]
@@ -16,7 +16,7 @@
   [:button {:border "none"}]
   [:code {:background-color "#eee"
           :border-radius "2px"
-          :padding (px 2)}]
+          :padding (em 0.125)}]
   [:a {:text-decoration "none"
        :color "#09f"}])
 

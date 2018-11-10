@@ -1,5 +1,5 @@
 (ns herb-demo.components.navigation
-  (:require [garden.units :refer [px]]
+  (:require [garden.units :refer [px rem]]
             [goog.events :as events]
             [debux.cs.core :as d :refer-macros [clog clogn dbg dbgn break]]
             [herb-demo.easing :as easing]
@@ -11,8 +11,8 @@
             [reagent.core :as r])
   (:require-macros [garden.def :refer [defcssfn]]))
 
-(def appbar-height 50)
-(def sidebar-width (r/atom 256))
+(def appbar-height (rem 3))
+(def sidebar-width (rem 16))
 
 (def items {:intro {:label "Introduction"}
             :why-fns {:label "Why functions?"}
@@ -25,11 +25,11 @@
   {:root {:background "#333"
           :position "fixed"
           :overflow-y "auto"
-          :width (px @sidebar-width)
+          :width sidebar-width
           :height "100%"
           :color "white"}
-   :container {:padding (px 16)}
-   :row {:padding-bottom (px 16)}})
+   :container {:padding (rem 1)}
+   :row {:padding-bottom (rem 1)}})
 
 (defn a-style []
   ^{:pseudo {:hover {:color "#3BABFF"}}}
@@ -37,7 +37,7 @@
 
 (defn sub-a-style []
   ^{:extend a-style}
-  {:padding-left (px 16)})
+  {:padding-left (rem 1)})
 
 (defn sidebar []
   [:section {:class (<class sidebar-style :root)}
@@ -73,11 +73,11 @@
 (defgroup appbar-style
   {:root {:position "fixed"
           :background "#eee"
-          :width (calc "100%" '- (px @sidebar-width))
+          :width (calc "100%" '- sidebar-width)
           :align-items "center"
           :display "flex"
           :top 0
-          :height (px appbar-height)}
+          :height appbar-height}
    :column {:flex-basis "33%"}})
 
 (defn divider-style

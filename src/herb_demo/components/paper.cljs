@@ -37,9 +37,9 @@
   []
   ^{:extend [box-shadow 3]}
   {:background "white"
-   :margin-bottom (px 12)
+   :margin-bottom (rem 1)
    :flex-basis "100%"
-   :padding (px 24)})
+   :padding (rem 1.5)})
 
 (defn paper
   [{:keys [class id]}]
