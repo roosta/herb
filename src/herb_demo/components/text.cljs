@@ -20,10 +20,8 @@
 
 (defn px->rem
   [size]
-  (let [html-font-size 16
-        font-size 14
-        coef (/ font-size 14)]
-    (str (* (/ size html-font-size) coef) "rem")))
+  (let [html-font-size 16]
+    (str (/ size html-font-size) "rem")))
 
 (defn variants
   [variant]
