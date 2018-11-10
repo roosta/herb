@@ -71,9 +71,8 @@
   [args])
 
 (defgroup appbar-style
-  {:root {:position "fixed"
+  {:root {:position #{"-webkit-sticky" "sticky" }
           :background "#eee"
-          :width (calc "100%" '- sidebar-width)
           :align-items "center"
           :display "flex"
           :top 0
