@@ -109,6 +109,7 @@
          [:div {:class (<class appbar-style :column)}]
          [:div {:class (<class appbar-style :column)}
           [text {:variant :title
+                 :margin :none
                  :align :center}
            "Herb"]]
          [:div {:class (<class appbar-style :column)}]

@@ -16,8 +16,7 @@
   (:require-macros [herb-demo.macros :as macros]))
 
 (defgroup header-style
-  {:container {:flex-basis "100%"
-               :margin-bottom (rem 0.625)}})
+  {:container {:flex-basis "100%"}})
 
 (defn header
   []

@@ -31,10 +31,11 @@
                      :font-family ["Raleway" "sans-serif"]}
            :title {:font-size (px->rem 34)
                    :font-weight 400
+                   :margin 0
                    :font-family ["Raleway" "sans-serif"]}
            :subtitle {:font-size (px->rem 24)
                       :font-family ["Raleway" "sans-serif"]
-                      :margin [[(em 1.2) 0 (em 1.2) 0]]
+                      :margin [[(em 1) 0 (em 1.7) 0]]
                       :font-weight 300}
            :a {:font-size (px->rem 14)
                :font-family ["Open Sans" "sans-serif"]}
