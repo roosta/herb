@@ -7,6 +7,7 @@
             [goog.dom :as dom]
             [goog.events.EventType :as event-type]
             [herb-demo.components.text :refer [text]]
+            [cljsjs.waypoints]
             [herb.core :refer-macros [<class defgroup]]
             [reagent.core :as r])
   (:require-macros [garden.def :refer [defcssfn]]))
@@ -14,12 +15,23 @@
 (def appbar-height (rem 3))
 (def sidebar-width (rem 16))
 
+(def state (r/atom :intro))
+
 (def items {:intro {:label "Introduction"}
             :why-fns {:label "Why functions?"}
             :extending {:label "Extending style functions"}
             :key-meta {:label "The key matadata"}
             :group-meta {:label "The group metadata"
                          :sub {:defgroup {:label "defgroup macro"}}}})
+
+(defn create-waypoints
+  []
+  (into {}
+        (map (fn [[k v]]
+               (let [el (dom/getElement (name k))]
+                 {k (js/Waypoint. #js {:element el
+                                       :handler #(reset! state k)})}))
+             items)))
 
 (defgroup sidebar-style
   {:root {:background "#333"
@@ -40,31 +52,35 @@
   {:padding-left (rem 1)})
 
 (defn sidebar []
-  [:section {:class (<class sidebar-style :root)}
-   [:nav {:class (<class sidebar-style :container)}
-    (doall
-     (map (fn [[k v] index]
-            ^{:key (:label v)}
-            [:div
-             [:div  {:class (<class sidebar-style :row)}
-              [:a {:href (str "#" (name k))}
-               [text {:class (<class a-style)
-                      :color :white
-                      :variant :a}
-                [:strong (str index ". ")] (:label v)]]]
-             (when-let [sub (:sub v)]
-               [:div {:class (<class sidebar-style :row)}
-                (map (fn [[k v] sub-index]
-                       ^{:key (:label v)}
-                       [:a {:class (<class sub-a-style)
-                            :href (str "#" (name k))}
-                        [text {:variant :a
-                               :color :white}
-                         [:strong (str index "." sub-index " ")] (:label v)]])
-                     sub
-                     (map inc (range)))])])
-          items
-          (map inc (range))))]])
+  (r/create-class
+   {:component-did-mount create-waypoints
+    :reagent-render
+    (fn []
+      [:section {:class (<class sidebar-style :root)}
+       [:nav {:class (<class sidebar-style :container)}
+        (doall
+         (map (fn [[k v] index]
+                ^{:key (:label v)}
+                [:div
+                 [:div  {:class (<class sidebar-style :row)}
+                  [:a {:href (str "#" (name k))}
+                   [text {:class (<class a-style)
+                          :color :white
+                          :variant :a}
+                    [:strong (str index ". ")] (:label v)]]]
+                 (when-let [sub (:sub v)]
+                   [:div {:class (<class sidebar-style :row)}
+                    (map (fn [[k v] sub-index]
+                           ^{:key (:label v)}
+                           [:a {:class (<class sub-a-style)
+                                :href (str "#" (name k))}
+                            [text {:variant :a
+                                   :color :white}
+                             [:strong (str index "." sub-index " ")] (:label v)]])
+                         sub
+                         (map inc (range)))])])
+              items
+              (map inc (range))))]])}))
 
 (defcssfn calc
   [& args]
