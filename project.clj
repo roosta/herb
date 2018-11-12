@@ -17,8 +17,8 @@
   :jar-exclusions [#"(?:^|\/)herb_demo\/" #"(?:^|\/)public\/" #"server.clj"]
 
   :dependencies [[org.clojure/clojure "1.9.0" :scope "provided"]
-                 [org.clojure/clojurescript "1.10.339" :scope "provided"]
-                 [philoskim/debux-stubs "0.5.1"]
+                 [org.clojure/clojurescript "1.10.439" :scope "provided"]
+                 [philoskim/debux-stubs "0.5.2"]
                  [org.clojure/tools.analyzer.jvm "0.7.2"]
                  [org.clojure/tools.analyzer "0.6.9"]
                  [garden "1.3.6"]]
@@ -28,22 +28,23 @@
 
   :aliases {"demo-release" ["with-profile" "+demo" "cljsbuild" "once" "demo-release"]}
 
-  :profiles {:dev {:dependencies [[philoskim/debux "0.5.1"]
+  :profiles {:dev {:dependencies [[philoskim/debux "0.5.2"]
                                   [binaryage/devtools "0.9.10"]
                                   [org.clojure/test.check "0.10.0-alpha3"]
                                   [compojure "1.6.1"]
-                                  [ring "1.7.0"]
+                                  [ring "1.7.1"]
                                   [ring/ring-defaults "0.3.2"]
-                                  [figwheel "0.5.16"]
-                                  [figwheel-sidecar "0.5.16"]
+                                  [figwheel "0.5.17"]
+                                  [figwheel-sidecar "0.5.17"]
                                   [etaoin "0.2.9"]]
-                   :plugins [[lein-figwheel "0.5.16"]]
+                   :plugins [[lein-figwheel "0.5.17"]]
                    :source-paths ["test" "dev"]}
-             :dev-cider {:dependencies [[cider/piggieback "0.3.9"]]
+             :dev-cider {:dependencies [[cider/piggieback "0.3.10"]]
                          :figwheel {:nrepl-middleware [cider.piggieback/wrap-cljs-repl]}}
-             :demo {:dependencies [[com.taoensso/tufte "1.2.0"]
+             :demo {:dependencies [[com.taoensso/tufte "2.0.1"]
                                    [reagent-utils "0.3.1"]
                                    [bidi "2.1.4"]
+                                   [cljsjs/waypoints "4.0.1-0"]
                                    [pez/clerk "1.0.0"]
                                    [cljsjs/highlight "9.12.0-2"]
                                    [venantius/accountant "0.2.4"]
