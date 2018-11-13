@@ -44,37 +44,23 @@
    :container {:padding (rem 1)}
    :row {:padding-bottom (rem 1)}})
 
-(defn nav-item-style [padding?]
-  ^{:pseudo {:hover {:color "#3BABFF"}}
-    :key padding?}
-  {:color "white"
-   :padding-left (if padding? (rem 1) 0)})
+(defn nav-item-style [padding? active?]
+  (let [c "#3BABFF"]
+    ^{:pseudo {:hover {:color "#3BABFF"}}
+      :key (str padding? active?)}
+    {:color (if active? c "white")
+     :padding-left (if padding? (rem 1) 0)}))
 
 (defn nav-item
-  [[k v] index]
-  (let [sub? (> index (count items))
-        strindex (str index)]
+  [k v index sub?]
+  (let [active? (= k @state)]
     [:div  {:class (<class sidebar-style :row)}
      [:a {:href (str "#" (name k))}
-      [text {:class (<class nav-item-style sub?)
+      [text {:class (<class nav-item-style sub? active?)
              :color :white
              :variant :a}
-       [:strong (if sub?
-                  (str (first strindex) "." (apply str (rest strindex)) ". ")
-                  (str index ". "))]
+       [:strong (str index ". ")]
        (:label v)]]]))
-
-(defn create-nav
-  [items index result]
-  (if (seq items)
-    (if-let [sub (-> items first val :sub)]
-      (recur (rest items)
-             (inc index)
-             (into result (create-nav sub (+ (* 10 (dec index)) 1) (list))))
-      (recur (rest items)
-             (inc index)
-             (conj result ^{:key index} [nav-item (first items) index])))
-    (reverse result)))
 
 (defn sidebar []
   (r/create-class
@@ -83,7 +69,17 @@
     (fn []
       [:section {:class (<class sidebar-style :root)}
        [:nav {:class (<class sidebar-style :container)}
-        (create-nav items 1 (list))]])}))
+        (map (fn [[k v] idx]
+               ^{:key k}
+               [:div
+                [nav-item k v idx false]
+                (when-let [sub (:sub v)]
+                  (map (fn [[k v] sidx]
+                         [nav-item k v (str idx "." sidx) true])
+                       sub
+                       (map inc (range))))])
+             items
+             (map inc (range)))]])}))
 
 (defcssfn calc
   [& args]
