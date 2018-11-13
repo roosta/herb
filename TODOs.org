@@ -121,7 +121,8 @@
 * TODO Defgroup in clj might need a simpler syntax when calling from <style
 * DONE Global and keyframes needs more than a symbol to identify it.
   CLOSED: [2018-10-13 Sat 19:09]
-* TODO error handling
+* DONE error handling
+  CLOSED: [2018-11-13 Tue 18:29]
 * TODO Arbitrary depth fns
   #+BEGIN_SRC clojure
     (let [fn-1 (fn []
@@ -130,5 +131,6 @@
   #+END_SRC
 * TODO ensure key works with lots of variation
 * TODO Fix namespaces like this: herb-demo.snippets/state-fn/button-style
-* TODO Fix defglobal spec when using multiple selectors ~[:html :body {:style "here}]
+* DONE Fix defglobal spec when using multiple selectors ~[:html :body {:style "here}]
+  CLOSED: [2018-11-13 Tue 18:29]
 * TODO Debugging in prod build
