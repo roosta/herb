@@ -70,11 +70,11 @@
       [:section {:class (<class sidebar-style :root)}
        [:nav {:class (<class sidebar-style :container)}
         (map (fn [[k v] idx]
-               ^{:key k}
-               [:div
+               [:div {:key k}
                 [nav-item k v idx false]
                 (when-let [sub (:sub v)]
                   (map (fn [[k v] sidx]
+                         ^{:key k}
                          [nav-item k v (str idx "." sidx) true])
                        sub
                        (map inc (range))))])
