@@ -95,6 +95,11 @@
     (reset! state true)
     (reset! state false)))
 
+(defn title-style
+  [scroll?]
+  {:transition (str "transform 200ms " (:ease-out-quad easing/easing))
+   :transform (if scroll? "scale(1)" "scale(1.5)" )})
+
 (defn appbar
   []
   (let [scroll? (r/atom nil)]
@@ -109,7 +114,8 @@
         [:header {:class (<class appbar-style :root)}
          [:div {:class (<class appbar-style :column)}]
          [:div {:class (<class appbar-style :column)}
-          [text {:variant (if @scroll? :title :display)
+          [text {:variant :title
+                 :class (<class title-style @scroll?)
                  :align :center}
            "Herb"]]
          [:div {:class (<class appbar-style :column)}]
