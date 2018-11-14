@@ -27,7 +27,7 @@
 
 (defgroup main-style
   {:root {}
-   :content {:padding [[(rem 2) 0 (rem 3) 0]]
+   :content {:padding [[(rem 3) 0 (rem 3) 0]]
              :padding-left nav/sidebar-width}})
 
 (defn main []
