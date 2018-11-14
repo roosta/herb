@@ -8,7 +8,6 @@
             [goog.dom :as dom]
             [goog.events.EventType :as event-type]
             [herb-demo.components.text :refer [text]]
-            [cljsjs.waypoints]
             [herb.core :refer-macros [<class defgroup]]
             [reagent.core :as r])
   (:require-macros [garden.def :refer [defcssfn]]))
@@ -25,14 +24,6 @@
             :group-meta {:label "The group metadata"
                          :sub {:defgroup {:label "defgroup macro"}}}})
 
-(defn create-waypoints
-  []
-  (into {}
-        (map (fn [[k v]]
-               (let [el (dom/getElement (name k))]
-                 {k (js/Waypoint. #js {:element el
-                                       :handler #(reset! state k)})}))
-             items)))
 
 (defgroup sidebar-style
   {:root {:background "#333"
@@ -64,8 +55,7 @@
 
 (defn sidebar []
   (r/create-class
-   {:component-did-mount create-waypoints
-    :reagent-render
+   {:reagent-render
     (fn []
       [:section {:class (<class sidebar-style :root)}
        [:nav {:class (<class sidebar-style :container)}

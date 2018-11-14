@@ -44,7 +44,6 @@
              :demo {:dependencies [[com.taoensso/tufte "2.0.1"]
                                    [reagent-utils "0.3.1"]
                                    [bidi "2.1.4"]
-                                   [cljsjs/waypoints "4.0.1-0"]
                                    [pez/clerk "1.0.0"]
                                    [cljsjs/highlight "9.12.0-2"]
                                    [venantius/accountant "0.2.4"]
