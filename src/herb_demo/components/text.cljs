@@ -6,7 +6,8 @@
             [reagent.core :as r]))
 
 (def mappings
-  {:title :h4
+  {:display :h1
+   :title :h4
    :heading :h5
    :subtitle :h5
    :a :span
@@ -25,7 +26,11 @@
 
 (defn variants
   [variant]
-  (let [v {:heading {:font-size (px->rem 24)
+  (let [v {:display {:font-size (px->rem 52)
+                     :font-weight 400
+                     :font-family ["Raleway" "sans-serif"]
+                     :margin 0}
+           :heading {:font-size (px->rem 24)
                      :margin [[(em 1.2) 0 (em 1.2) 0]]
                      :font-weight 400
                      :font-family ["Raleway" "sans-serif"]}

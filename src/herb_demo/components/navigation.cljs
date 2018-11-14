@@ -14,14 +14,13 @@
 
 (def appbar-height (rem 3))
 (def sidebar-width (rem 16))
-
+(defonce scroll? (r/atom nil))
 (def items {:intro {:label "Introduction"}
             :why-fns {:label "Why functions?"}
             :extending {:label "Extending style functions"}
             :key-meta {:label "The key matadata"}
             :group-meta {:label "The group metadata"
                          :sub {:defgroup {:label "defgroup macro"}}}})
-
 
 (defgroup sidebar-style
   {:root {:background "#333"
@@ -94,26 +93,24 @@
 (defn on-scroll
   [state e]
   (if (> (.-y (dom/getDocumentScroll)) 0)
-    (reset! state true)
-    (reset! state false)))
+    (reset! scroll? true)
+    (reset! scroll? false)))
 
 (defn appbar
   []
-  (let [scroll? (r/atom nil)]
-    (r/create-class
-     {:component-did-mount (fn []
-                             (on-scroll scroll? nil)
-                             (events/listen js/document
-                                            event-type/SCROLL
-                                            #(on-scroll scroll? %)))
-      :reagent-render
-      (fn []
-        [:header {:class (<class appbar-style :root)}
-         [:div {:class (<class appbar-style :column)}]
-         [:div {:class (<class appbar-style :column)}
-          [text {:variant :title
-                 :margin :none
-                 :align :center}
-           "Herb"]]
-         [:div {:class (<class appbar-style :column)}]
-         [:div {:class (<class divider-style @scroll?)}]])})))
+  (r/create-class
+   {:component-did-mount (fn []
+                           (on-scroll scroll? nil)
+                           (events/listen js/document
+                                          event-type/SCROLL
+                                          on-scroll))
+    :reagent-render
+    (fn []
+      [:header {:class (<class appbar-style :root)}
+       [:div {:class (<class appbar-style :column)}]
+       [:div {:class (<class appbar-style :column)}
+        [text {:variant (if @scroll? :title :display)
+               :align :center}
+         "Herb"]]
+       [:div {:class (<class appbar-style :column)}]
+       [:div {:class (<class divider-style @scroll?)}]])}))
