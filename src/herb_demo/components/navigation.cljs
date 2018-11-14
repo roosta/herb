@@ -15,8 +15,6 @@
 (def appbar-height (rem 3))
 (def sidebar-width (rem 16))
 
-(def state (r/atom :intro))
-
 (def items {:intro {:label "Introduction"}
             :why-fns {:label "Why functions?"}
             :extending {:label "Extending style functions"}
@@ -35,23 +33,22 @@
    :container {:padding (rem 1)}
    :row {:padding-bottom (rem 1)}})
 
-(defn nav-item-style [padding? active?]
+(defn nav-item-style [padding?]
   (let [c "#3BABFF"]
     ^{:pseudo {:hover {:color c}}
-      :key (str padding? active?)}
-    {:color (if active? c "white")
+      :key padding?}
+    {:color "white"
      :padding-left (if padding? (rem 1) 0)}))
 
 (defn nav-item
   [k v index sub?]
-  (let [active? (= k @state)]
-    [:div  {:class (<class sidebar-style :row)}
-     [:a {:href (str "#" (name k))}
-      [text {:class (<class nav-item-style sub? active?)
-             :color :white
-             :variant :a}
-       [:strong (str index ". ")]
-       (:label v)]]]))
+  [:div {:class (<class sidebar-style :row)}
+   [:a {:href (str "#" (name k))}
+    [text {:class (<class nav-item-style sub?)
+           :color :white
+           :variant :a}
+     [:strong (str index ". ")]
+     (:label v)]]])
 
 (defn sidebar []
   (r/create-class
