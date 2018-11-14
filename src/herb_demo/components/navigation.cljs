@@ -14,7 +14,6 @@
 
 (def appbar-height (rem 3))
 (def sidebar-width (rem 16))
-(defonce scroll? (r/atom nil))
 (def items {:intro {:label "Introduction"}
             :why-fns {:label "Why functions?"}
             :extending {:label "Extending style functions"}
@@ -93,24 +92,25 @@
 (defn on-scroll
   [state e]
   (if (> (.-y (dom/getDocumentScroll)) 0)
-    (reset! scroll? true)
-    (reset! scroll? false)))
+    (reset! state true)
+    (reset! state false)))
 
 (defn appbar
   []
-  (r/create-class
-   {:component-did-mount (fn []
-                           (on-scroll scroll? nil)
-                           (events/listen js/document
-                                          event-type/SCROLL
-                                          on-scroll))
-    :reagent-render
-    (fn []
-      [:header {:class (<class appbar-style :root)}
-       [:div {:class (<class appbar-style :column)}]
-       [:div {:class (<class appbar-style :column)}
-        [text {:variant (if @scroll? :title :display)
-               :align :center}
-         "Herb"]]
-       [:div {:class (<class appbar-style :column)}]
-       [:div {:class (<class divider-style @scroll?)}]])}))
+  (let [scroll? (r/atom nil)]
+    (r/create-class
+     {:component-did-mount (fn []
+                             (on-scroll scroll? nil)
+                             (events/listen js/document
+                                            event-type/SCROLL
+                                            #(on-scroll scroll? %)))
+      :reagent-render
+      (fn []
+        [:header {:class (<class appbar-style :root)}
+         [:div {:class (<class appbar-style :column)}]
+         [:div {:class (<class appbar-style :column)}
+          [text {:variant (if @scroll? :title :display)
+                 :align :center}
+           "Herb"]]
+         [:div {:class (<class appbar-style :column)}]
+         [:div {:class (<class divider-style @scroll?)}]])})))
