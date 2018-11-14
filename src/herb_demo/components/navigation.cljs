@@ -102,6 +102,7 @@
   (let [scroll? (r/atom nil)]
     (r/create-class
      {:component-did-mount (fn []
+                             (on-scroll scroll? nil)
                              (events/listen js/document
                                             event-type/SCROLL
                                             #(on-scroll scroll? %)))
