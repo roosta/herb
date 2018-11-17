@@ -3,6 +3,7 @@
             [goog.events :as events]
             [debux.cs.core :as d :refer-macros [clog clogn dbg dbgn break]]
             [clojure.string :as str]
+            [herb-demo.components.icon :as icon]
             [herb-demo.easing :as easing]
             [garden.color :refer [rgba]]
             [goog.dom :as dom]
@@ -32,7 +33,7 @@
    :row {:padding-bottom (rem 1)}})
 
 (defn nav-item-style [padding?]
-  (let [c "#3BABFF"]
+  (let [c "#69BFFF"]
     ^{:pseudo {:hover {:color c}}
       :key padding?}
     {:color "white"
@@ -77,7 +78,13 @@
           :display "flex"
           :top 0
           :height appbar-height}
-   :column {:flex-basis "33%"}})
+   :column {:flex-basis "33%"}
+   :icon {:color "#333"}})
+
+(defn icon-column
+  []
+  ^{:extend [appbar-style :column]}
+  {:display "flex"})
 
 (defn divider-style
   [scroll?]
@@ -112,7 +119,8 @@
       :reagent-render
       (fn []
         [:header {:class (<class appbar-style :root)}
-         [:div {:class (<class appbar-style :column)}]
+         [:div {:class [(<class icon-column)]}
+          [icon/menu {:class (<class appbar-style :icon)}]]
          [:div {:class (<class appbar-style :column)}
           [text {:variant :title
                  :class (<class title-style @scroll?)
