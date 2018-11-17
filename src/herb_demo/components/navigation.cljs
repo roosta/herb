@@ -78,8 +78,17 @@
           :display "flex"
           :top 0
           :height appbar-height}
-   :column {:flex-basis "33%"}
-   :icon {:color "#333"}})
+   :column {:flex-basis "33%"}})
+
+(defn icon-style
+  [scroll?]
+  {:color "#333"
+   :padding (rem 0.625)
+   :width (rem 1.5)
+   :transition (str "transform 400ms " (:ease-in-out-quad easing/easing))
+   :height (rem 1.5)
+   :transform (if scroll? "translate(0, 0)" "translate(0, -100%)")
+   })
 
 (defn icon-column
   []
@@ -120,7 +129,7 @@
       (fn []
         [:header {:class (<class appbar-style :root)}
          [:div {:class [(<class icon-column)]}
-          [icon/menu {:class (<class appbar-style :icon)}]]
+          [icon/menu {:class (<class icon-style @scroll?)}]]
          [:div {:class (<class appbar-style :column)}
           [text {:variant :title
                  :class (<class title-style @scroll?)
