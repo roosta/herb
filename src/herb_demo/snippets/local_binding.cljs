@@ -5,13 +5,13 @@
 
 (defn headline
   [size text]
-  (letfn [(headline-style []
+  (letfn [(style []
             ^{:key size}
             {:font-size (case size
                           :large (rem 3)
                           :small (rem 1))
              :font-family ["Raleway" "sans-serif"]})]
-    [(size {:large :h1 :small :h4}) {:class (<class headline-style)}
+    [(size {:large :h1 :small :h4}) {:class (<class style)}
      text]))
 
 (defn component
