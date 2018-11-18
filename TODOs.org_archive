@@ -283,3 +283,243 @@ Archived entries from file /home/roosta/src/herb/TODOs.org
   :ARCHIVE_TODO: CANCELLED
   :END:
   Already works with :pseudo parsing
+
+* DONE Fix defglobal spec when using multiple selectors ~[:html :body {:style "here}]
+  CLOSED: [2018-11-13 Tue 18:29]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-11-18 Sun 16:30
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE error handling
+  CLOSED: [2018-11-13 Tue 18:29]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-11-18 Sun 16:30
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE Global and keyframes needs more than a symbol to identify it.
+  CLOSED: [2018-10-13 Sat 19:09]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-11-18 Sun 16:30
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE Global vendor prefixes
+  CLOSED: [2018-10-16 Tue 18:29]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-11-18 Sun 16:30
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE Check that all meta types are supported in a group
+  CLOSED: [2018-10-16 Tue 18:29]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-11-18 Sun 16:30
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* CANCELLED meta for entire group
+  CLOSED: [2018-10-16 Tue 18:29]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-11-18 Sun 16:30
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: CANCELLED
+  :END:
+  like vendor prefixes and auto-prefix
+
+* DONE Vendors
+  CLOSED: [2018-10-05 Fri 20:39]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-11-18 Sun 16:30
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE Vendors
+  CLOSED: [2018-10-05 Fri 20:39]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-11-18 Sun 16:30
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE Keyframes
+  CLOSED: [2018-10-12 Fri 20:21]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-11-18 Sun 16:30
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* CANCELLED Target static example
+  CLOSED: [2018-10-03 Wed 18:38]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-11-18 Sun 16:31
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: CANCELLED
+  :END:
+
+* DONE Mirror clojure namespaces in data-herb tag
+  CLOSED: [2018-09-25 Tue 20:36]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-11-18 Sun 16:31
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE @supports
+  CLOSED: [2018-10-03 Wed 20:00]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-11-18 Sun 16:31
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE @supports
+  CLOSED: [2018-10-03 Wed 20:00]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-11-18 Sun 16:31
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* CANCELLED Some way to target static classnames
+  CLOSED: [2018-10-13 Sat 19:13]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-11-18 Sun 16:31
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: CANCELLED
+  :END:
+  By using a regular style function, target a supplied class name that is used
+  instead of default
+
+* CANCELLED Some way to target static classnames
+  CLOSED: [2018-10-13 Sat 19:13]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-11-18 Sun 16:31
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: CANCELLED
+  :END:
+  By using a regular style function, target a supplied class name that is used
+  instead of default
+
+* DONE Use loop in recur functions herb
+  CLOSED: [2018-09-27 Thu 19:33]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-11-18 Sun 16:31
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE Try wrapping macros in reader cond
+  CLOSED: [2018-05-22 Tue 20:46]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-11-18 Sun 16:31
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE Rename mode to pseudo, allow for arbitrary forms
+  CLOSED: [2018-05-22 Tue 20:45]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-11-18 Sun 16:31
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE Test to see if you can deref ratoms directly in styles
+  CLOSED: [2018-05-22 Tue 20:45]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-11-18 Sun 16:31
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE Optimize css on prod
+  CLOSED: [2018-09-26 Wed 20:10]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-11-18 Sun 16:31
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* CANCELLED ::after ::before
+  CLOSED: [2018-09-19 Wed 19:59]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-11-18 Sun 16:32
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: CANCELLED
+  :END:
+  Already works with :pseudo parsing
+
+* DONE Add helper macro for defining component function
+  CLOSED: [2018-09-25 Tue 18:38]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-11-18 Sun 16:32
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* CANCELLED Check merge order of extensions in form [style1 style2]
+  CLOSED: [2018-10-03 Wed 19:02]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-11-18 Sun 16:32
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: CANCELLED
+  :END:
+
+* CANCELLED Check merge order of extensions in form [style1 style2]
+  CLOSED: [2018-10-03 Wed 19:02]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-11-18 Sun 16:32
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: CANCELLED
+  :END:
+
+* DONE Do new perf test
+  CLOSED: [2018-10-04 Thu 20:31]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-11-18 Sun 16:32
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE Spec input
+  CLOSED: [2018-11-18 Sun 16:30]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2018-11-18 Sun 16:32
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:

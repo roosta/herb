@@ -14,12 +14,16 @@
 ** TODO refer vs refer-macros
 ** TODO group args
 * DEMO
-** TODO demo inheritance variants
-** TODO demo state
+** DONE demo inheritance variants
+   CLOSED: [2018-11-18 Sun 16:32]
+** DONE demo state
+   CLOSED: [2018-11-18 Sun 16:32]
 ** TODO demo media
-** TODO demo keys
+** DONE demo keys
+   CLOSED: [2018-11-18 Sun 16:32]
 ** TODO demo anon
-** TODO demo group/defgroup
+** DONE demo group/defgroup
+   CLOSED: [2018-11-18 Sun 16:32]
 *** Demo meta data in groups
 ** TODO demo nested
 ** TODO Add demo for selecting elements by class
@@ -59,70 +63,24 @@
   The ~local-context~ macro provides a map to the most immediate lexical bindings,
   which is what you want.
 
-* TODO Spec input
 * TODO Fix single rule not causing newline
-* DONE Do new perf test
-  CLOSED: [2018-10-04 Thu 20:31]
-* CANCELLED Check merge order of extensions in form [style1 style2]
-  CLOSED: [2018-10-03 Wed 19:02]
-* DONE Add helper macro for defining component function
-  CLOSED: [2018-09-25 Tue 18:38]
-* CANCELLED ::after ::before
-  CLOSED: [2018-09-19 Wed 19:59]
-  Already works with :pseudo parsing
 * TODO Mention clojurescript version and requiring functions
-* DONE Optimize css on prod
-  CLOSED: [2018-09-26 Wed 20:10]
 * MAYBE Change defgroup to stylegroup
-* DONE Test to see if you can deref ratoms directly in styles
-  CLOSED: [2018-05-22 Tue 20:45]
-* DONE Rename mode to pseudo, allow for arbitrary forms
-  CLOSED: [2018-05-22 Tue 20:45]
-* TODO Add global init
+* DONE Add global init
+  CLOSED: [2018-11-18 Sun 16:33]
   Possibly create instances?
-* DONE Try wrapping macros in reader cond
-  CLOSED: [2018-05-22 Tue 20:46]
 * PARTIAL What happens when trying to extend a style group with no arguments?
   CLOSED: [2018-10-03 Wed 19:09]
   It thows the defgroup error with a blank for component. Consider improving error message
-* DONE Use loop in recur functions herb
-  CLOSED: [2018-09-27 Thu 19:33]
-* CANCELLED Some way to target static classnames
-  CLOSED: [2018-10-13 Sat 19:13]
-  By using a regular style function, target a supplied class name that is used
-  instead of default
-* DONE Remove data-herb when prod build
-  CLOSED: [2018-09-26 Wed 20:09]
 * TODO Add note about setting debug flag to false on prod builds
 * TODO Look into using more complex classname chars
   I know css supports a larger range of classname chars but I think passing
   through hiccup or reagent they get sanitized
-* DONE @supports
-  CLOSED: [2018-10-03 Wed 20:00]
-* DONE Mirror clojure namespaces in data-herb tag
-  CLOSED: [2018-09-25 Tue 20:36]
-* CANCELLED Target static example
-  CLOSED: [2018-10-03 Wed 18:38]
 * PARTIAL Test that clj logic is still sound
   CLOSED: [2018-10-13 Sat 19:09]
  Specifically that the compose-data-string still works with new regexp
-* DONE Keyframes
-  CLOSED: [2018-10-12 Fri 20:21]
-* DONE Vendors
-  CLOSED: [2018-10-05 Fri 20:39]
-* CANCELLED meta for entire group
-  CLOSED: [2018-10-16 Tue 18:29]
-  like vendor prefixes and auto-prefix
-* DONE Check that all meta types are supported in a group
-  CLOSED: [2018-10-16 Tue 18:29]
 * TODO [[https://github.com/divs1210/xodarap][divs1210/xodarap: Fearless recursion in Clojure!]]
-* DONE Global vendor prefixes
-  CLOSED: [2018-10-16 Tue 18:29]
 * TODO Defgroup in clj might need a simpler syntax when calling from <style
-* DONE Global and keyframes needs more than a symbol to identify it.
-  CLOSED: [2018-10-13 Sat 19:09]
-* DONE error handling
-  CLOSED: [2018-11-13 Tue 18:29]
 * TODO Arbitrary depth fns
   #+BEGIN_SRC clojure
     (let [fn-1 (fn []
@@ -131,6 +89,6 @@
   #+END_SRC
 * TODO ensure key works with lots of variation
 * TODO Fix namespaces like this: herb-demo.snippets/state-fn/button-style
-* DONE Fix defglobal spec when using multiple selectors ~[:html :body {:style "here}]
-  CLOSED: [2018-11-13 Tue 18:29]
 * TODO Debugging in prod build
+* TODO Finish tests
+* TODO Add instance support with customer injection point
