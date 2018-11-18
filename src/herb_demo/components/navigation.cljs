@@ -1,5 +1,5 @@
 (ns herb-demo.components.navigation
-  (:require [garden.units :refer [px rem]]
+  (:require [garden.units :refer [px rem percent]]
             [goog.events :as events]
             [debux.cs.core :as d :refer-macros [clog clogn dbg dbgn break]]
             [clojure.string :as str]
@@ -90,10 +90,13 @@
 
 (defn icon-style
   [scroll?]
+  ^{:pseudo {:hover {:background (rgba 0 0 0 0.1)}}}
   {:color "#333"
    :padding (rem 0.625)
+   :border-radius (percent 100)
+   :cursor "pointer"
    :width (rem 1.5)
-   :transition (str "transform 400ms " (:ease-in-out-quad easing/easing))
+   :transition (str "transform, background 400ms, 100ms " (:ease-in-out-quad easing/easing))
    :height (rem 1.5)
    :transform (if scroll? "translate(0, 0)" "translate(0, -100%)")
    })
@@ -101,7 +104,9 @@
 (defn icon-column
   []
   ^{:extend [appbar-style :column]}
-  {:display "flex"})
+  {:padding-left (rem 0.5)
+   :display "flex"
+   :align-items "center"})
 
 (defn divider-style
   [scroll?]
