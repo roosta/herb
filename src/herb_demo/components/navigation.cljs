@@ -14,6 +14,7 @@
   (:require-macros [garden.def :refer [defcssfn]]))
 
 (def appbar-height (rem 3))
+(defonce sidebar-open? (r/atom true))
 (def sidebar-width (rem 16))
 (def items {:intro {:label "Introduction"}
             :why-fns {:label "Why functions?"}
@@ -23,14 +24,21 @@
                          :sub {:defgroup {:label "defgroup macro"}}}})
 
 (defgroup sidebar-style
-  {:root {:background "#333"
-          :position "fixed"
-          :overflow-y "auto"
-          :width sidebar-width
-          :height "100%"
-          :color "white"}
-   :container {:padding (rem 1)}
+  {:container {:padding (rem 1)}
    :row {:padding-bottom (rem 1)}})
+
+(defn sidebar-root-style
+  []
+  {:background "#333"
+   :position "fixed"
+   :transform (if @sidebar-open?
+                "translate(0, 0)"
+                "translate(-100%, 0)")
+   :transition (str "transform 400ms " (:ease-in-out-quad easing/easing))
+   :width sidebar-width
+   :overflow-y "auto"
+   :height "100%"
+   :color "white"})
 
 (defn nav-item-style [padding?]
   (let [c "#69BFFF"]
@@ -53,7 +61,7 @@
   (r/create-class
    {:reagent-render
     (fn []
-      [:section {:class (<class sidebar-style :root)}
+      [:section {:class (<class sidebar-root-style)}
        [:nav {:class (<class sidebar-style :container)}
         (map (fn [[k v] idx]
                [:div {:key k}
@@ -127,8 +135,10 @@
                                             #(on-scroll scroll? %)))
       :reagent-render
       (fn []
+        (.log js/console @sidebar-open?)
         [:header {:class (<class appbar-style :root)}
-         [:div {:class [(<class icon-column)]}
+         [:div {:on-click #(swap! sidebar-open? not)
+                :class [(<class icon-column)]}
           [icon/menu {:class (<class icon-style @scroll?)}]]
          [:div {:class (<class appbar-style :column)}
           [text {:variant :title
