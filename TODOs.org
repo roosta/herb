@@ -82,7 +82,7 @@
 * TODO [[https://github.com/divs1210/xodarap][divs1210/xodarap: Fearless recursion in Clojure!]]
 * TODO Defgroup in clj might need a simpler syntax when calling from <style
 * CANCELLED Arbitrary depth fns
-  CLOSED: [2018-11-18 Sun 17:14]
+  CLOSED: [2018-11-18 Sun 18:14]
   #+BEGIN_SRC clojure
     (let [fn-1 (fn []
                  (let [fn-2 (fn [] {})]
@@ -94,3 +94,4 @@
 * TODO Finish tests
 * TODO Add instance support with custom injection point
 * TODO Support various meta options inside supports/media query
+* TODO Fix local_binding.html example to have correct data-herb and classnames
