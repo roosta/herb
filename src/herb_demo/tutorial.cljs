@@ -44,6 +44,6 @@
      [intro]
      [why-fns]
      [extending]
-     [fn-vars]
      [key-meta]
-     [group-meta]]]])
+     [group-meta]
+     [fn-vars]]]])

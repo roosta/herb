@@ -19,10 +19,16 @@
 (def items {:intro {:label "Introduction"}
             :why-fns {:label "Why functions?"}
             :extending {:label "Extending style functions"}
-            :fn-vars {:label "Function variations"}
             :key-meta {:label "The key matadata"}
             :group-meta {:label "The group metadata"
-                         :sub {:defgroup {:label "defgroup macro"}}}})
+                         :sub {:defgroup {:label "defgroup macro"}}}
+
+            :fn-vars {:label "Function variations"
+                      :sub {:anon {:label "Anonymous functions"}
+                            :local {:label "Local binding"}
+                            :named {:label "Named anonymous"}
+                            :bound {:label "Bound anonymous"}}}
+            })
 
 (defgroup sidebar-style
   {:container {:padding (rem 1)}
