@@ -385,6 +385,12 @@
           [:div {:class (<class nested-fn "black")}
            "letfn block"])
 
+        [:div {:class (<class (fn named-anon []
+                                {:background-color "pink"
+                                 :color "black"}))}
+         "Named anon fn"
+         ]
+
         [:input {:class (<class hover-focus)
                  :default-value "test modes hover, active"}]
         [:div
