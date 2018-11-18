@@ -19,6 +19,7 @@
 (def items {:intro {:label "Introduction"}
             :why-fns {:label "Why functions?"}
             :extending {:label "Extending style functions"}
+            :anonymous {:label "Anonymous functions"}
             :key-meta {:label "The key matadata"}
             :group-meta {:label "The group metadata"
                          :sub {:defgroup {:label "defgroup macro"}}}})

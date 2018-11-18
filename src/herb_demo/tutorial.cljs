@@ -7,6 +7,7 @@
             [herb-demo.components.navigation :as nav]
             [herb-demo.tutorials.intro :refer [intro]]
             [herb-demo.tutorials.key-meta :refer [key-meta]]
+            [herb-demo.tutorials.anonymous :refer [anonymous]]
             [herb-demo.tutorials.extending :refer [extending]]
             [herb-demo.tutorials.group-meta :refer [group-meta]]
             [herb-demo.tutorials.why-fns :refer [why-fns]]
@@ -43,5 +44,6 @@
      [intro]
      [why-fns]
      [extending]
+     [anonymous]
      [key-meta]
      [group-meta]]]])
