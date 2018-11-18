@@ -55,10 +55,9 @@
      [text
       "Albeit verbose, the classname is still telling, and can be statically
      targeted like others."]
-     [text
-      "For the sake of thoroughness, there is one last variation to look at,
-      although it is handled the same as the local binding, the named anonymous
-      function:"]
+     [text {:id "named"}
+      "Another variation is the named anonymous function, and it is treated the
+      same as the local binding variation: "]
      [code {:lang :clojure}
       e5]
      [text {:variant :subheading}
