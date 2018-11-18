@@ -96,7 +96,8 @@
    :border-radius (percent 100)
    :cursor "pointer"
    :width (rem 1.5)
-   :transition (str "transform, background 400ms, 100ms " (:ease-in-out-quad easing/easing))
+   :transition (str "transform 400ms " (:ease-in-out-quad easing/easing) ", "
+                    "background 100ms " (:ease-in-out-quad easing/easing))
    :height (rem 1.5)
    :transform (if scroll? "translate(0, 0)" "translate(0, -100%)")
    })
