@@ -95,3 +95,4 @@
 * TODO Add instance support with custom injection point
 * TODO Support various meta options inside supports/media query
 * TODO Fix local_binding.html example to have correct data-herb and classnames
+* TODO Fix appbar taking up screen when navigating to item
