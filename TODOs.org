@@ -81,7 +81,8 @@
  Specifically that the compose-data-string still works with new regexp
 * TODO [[https://github.com/divs1210/xodarap][divs1210/xodarap: Fearless recursion in Clojure!]]
 * TODO Defgroup in clj might need a simpler syntax when calling from <style
-* TODO Arbitrary depth fns
+* CANCELLED Arbitrary depth fns
+  CLOSED: [2018-11-18 Sun 17:14]
   #+BEGIN_SRC clojure
     (let [fn-1 (fn []
                  (let [fn-2 (fn [] {})]
@@ -91,4 +92,5 @@
 * TODO Fix namespaces like this: herb-demo.snippets/state-fn/button-style
 * TODO Debugging in prod build
 * TODO Finish tests
-* TODO Add instance support with customer injection point
+* TODO Add instance support with custom injection point
+* TODO Support various meta options inside supports/media query
