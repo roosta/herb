@@ -142,7 +142,6 @@
                                             #(on-scroll scroll? %)))
       :reagent-render
       (fn []
-        (.log js/console @sidebar-open?)
         [:header {:class (<class appbar-style :root)}
          [:div {:on-click #(swap! sidebar-open? not)
                 :class [(<class icon-column)]}
