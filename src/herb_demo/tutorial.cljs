@@ -28,8 +28,8 @@
 
 (defgroup main-style
   {:root {}
-   :content {:padding [[(rem 3) 0 (rem 3) 0]]
-             :transition (str "padding 400ms " (:ease-in-out-quad easing/easing))
+   :spacer {:height nav/appbar-height}
+   :content {:transition (str "padding 400ms " (:ease-in-out-quad easing/easing))
              :padding-left (if @nav/sidebar-open?
                              nav/sidebar-width
                              0)}})
@@ -38,6 +38,7 @@
   [:main {:class (<class main-style :root)}
    [nav/sidebar]
    [:section {:class (<class main-style :content)}
+    [:div#top {:class (<class main-style :spacer)}]
     [nav/appbar]
     [container
      [header]

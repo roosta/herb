@@ -53,7 +53,7 @@
                          route-params (:route-params match)]
                      (session/put! :route {:current-page current-page
                                            :route-params route-params}))
-                   (clerk/navigate-page! path))
+                   (clerk/navigate-page! path "top"))
     :path-exists? (fn [path]
                     (boolean (bidi/match-route app-routes path)))})
   (accountant/dispatch-current!)
