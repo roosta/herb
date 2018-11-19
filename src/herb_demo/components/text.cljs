@@ -30,10 +30,6 @@
                      :font-weight 400
                      :font-family ["Raleway" "sans-serif"]
                      :margin 0}
-           :heading {:font-size (px->rem 24)
-                     :margin [[(em 1.2) 0 (em 1.2) 0]]
-                     :font-weight 400
-                     :font-family ["Raleway" "sans-serif"]}
            :title {:font-size (px->rem 34)
                    :font-weight 400
                    :margin 0
@@ -42,11 +38,15 @@
                       :font-family ["Raleway" "sans-serif"]
                       :margin [[(em 1) 0 (em 1.7) 0]]
                       :font-weight 300}
-           :a {:font-size (px->rem 14)
-               :font-family ["Open Sans" "sans-serif"]}
+           :heading {:font-size (px->rem 24)
+                     :margin [[(em 1.2) 0 (em 1.2) 0]]
+                     :font-weight 400
+                     :font-family ["Raleway" "sans-serif"]}
            :subheading {:font-size (px->rem 16)
                         :font-weight 400
                         :font-family ["Open Sans" "sans-serif"]}
+           :a {:font-size (px->rem 14)
+               :font-family ["Open Sans" "sans-serif"]}
            :body {:font-size (px->rem 14)
                   :font-family ["Open Sans" "sans-serif"]}}]
     (variant v)))
