@@ -19,18 +19,17 @@
 (def sidebar-width (rem 16))
 (def items {:intro {:label "Introduction"}
             :why-fns {:label "Why functions?"}
-            :metadata {:label "Metadata"}
+            :metadata {:label "Metadata"
+                       :sub {:pseudo {:label "Pseudo classes / elements"}}}
             :extending {:label "Extending style functions"}
             :key-meta {:label "Key matadata"}
             :group-meta {:label "Group metadata"
                          :sub {:defgroup {:label "defgroup macro"}}}
-
             :fn-vars {:label "Function variations"
                       :sub {:anon {:label "Anonymous functions"}
                             :local {:label "Local binding"}
                             :named {:label "Named anonymous"}
-                            :bound {:label "Bound anonymous"}}}
-            })
+                            :bound {:label "Bound anonymous"}}}})
 
 (defgroup sidebar-style
   {:container {:padding (rem 1)}

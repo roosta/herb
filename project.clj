@@ -18,7 +18,7 @@
 
   :dependencies [[org.clojure/clojure "1.9.0" :scope "provided"]
                  [org.clojure/clojurescript "1.10.439" :scope "provided"]
-                 [philoskim/debux-stubs "0.5.2"]
+                 ;; [philoskim/debux-stubs "0.5.2"]
                  [org.clojure/tools.analyzer.jvm "0.7.2"]
                  [org.clojure/tools.analyzer "0.6.9"]
                  [garden "1.3.6"]]
