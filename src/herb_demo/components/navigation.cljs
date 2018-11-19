@@ -19,9 +19,10 @@
 (def sidebar-width (rem 16))
 (def items {:intro {:label "Introduction"}
             :why-fns {:label "Why functions?"}
+            :metadata {:label "Metadata"}
             :extending {:label "Extending style functions"}
-            :key-meta {:label "The key matadata"}
-            :group-meta {:label "The group metadata"
+            :key-meta {:label "Key matadata"}
+            :group-meta {:label "Group metadata"
                          :sub {:defgroup {:label "defgroup macro"}}}
 
             :fn-vars {:label "Function variations"

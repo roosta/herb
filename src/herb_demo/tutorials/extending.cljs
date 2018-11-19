@@ -23,11 +23,9 @@
      [text {:variant :heading}
       "Extending functions"]
      [text
-      "Herb uses metadata for various tasks related to but not part of a style
-      map. To attach metadata the shorthand `^{:some :meta}` can be used or clojure.core's "
-      [:a {:href "https://clojuredocs.org/clojure.core/with-meta"} "with-meta"] " and "
-      [:a {:href "https://clojuredocs.org/clojure.core/vary-meta"} "vary-meta"]
-      ". To extend a style function use the metadata `:extend`, like so:"]
+      "In Herb you can extend a style functions from another. You can build a
+      hierarchy of styles and Herb ensures the proper precedence. To extend a
+      style function use the metadata `:extend`, like so:"]
      [code {:lang :clojure}
       e1]
      [text {:variant :subheading}

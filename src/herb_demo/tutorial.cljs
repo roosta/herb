@@ -11,6 +11,7 @@
             [herb-demo.tutorials.intro :refer [intro]]
             [herb-demo.tutorials.key-meta :refer [key-meta]]
             [herb-demo.tutorials.why-fns :refer [why-fns]]
+            [herb-demo.tutorials.metadata :refer [metadata]]
             [herb.core :as herb :refer-macros [<class <id defgroup]]
             [reagent.core :as r]
             [reagent.debug :as d])
@@ -44,6 +45,7 @@
      [header]
      [intro]
      [why-fns]
+     [metadata]
      [extending]
      [key-meta]
      [group-meta]
