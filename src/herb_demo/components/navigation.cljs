@@ -11,7 +11,8 @@
             [herb-demo.components.text :refer [text]]
             [herb.core :refer-macros [<class defgroup]]
             [reagent.core :as r])
-  (:require-macros [garden.def :refer [defcssfn]]))
+  (:require-macros [garden.def :refer [defcssfn]])
+  (:import [goog.async Throttle]))
 
 (def appbar-height (rem 3))
 (defonce sidebar-open? (r/atom true))
@@ -128,14 +129,18 @@
 
 (defn on-scroll
   [state e]
-  (if (> (.-y (dom/getDocumentScroll)) 0)
-    (reset! state true)
-    (reset! state false)))
+  (reset! state (> (.-y (dom/getDocumentScroll)) 0)))
 
 (defn title-style
   [scroll?]
   {:transition (str "transform 200ms " (:ease-out-quad easing/easing))
    :transform (if scroll? "scale(1)" "scale(1.5)" )})
+
+(defn throttle [listener interval]
+  "https://medium.com/@alehatsman/clojurescript-throttle-debounce-a651dfb66ac"
+  (let [new (Throttle. listener interval)]
+    (fn [& args]
+      (.apply (.-fire new) new (to-array args)))))
 
 (defn appbar
   []
@@ -143,9 +148,11 @@
     (r/create-class
      {:component-did-mount (fn []
                              (on-scroll scroll? nil)
-                             (events/listen js/document
-                                            event-type/SCROLL
-                                            #(on-scroll scroll? %)))
+                              (events/listen js/document
+                                             event-type/SCROLL
+                                             (throttle
+                                              #(on-scroll scroll? %)
+                                              200)))
       :reagent-render
       (fn []
         [:header {:class (<class appbar-style :root)}
