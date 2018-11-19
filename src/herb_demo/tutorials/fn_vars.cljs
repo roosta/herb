@@ -21,7 +21,10 @@
     [paper {:id "fn-vars"}
      [text {:variant :heading}
       "Function variations"]
-     [text {:id "anon"}
+     [text {:id "anon"
+            :variant :subheading}
+      "Anonymous functions"]
+     [text
       "Herb allows for different function variations, one of them being anonymous
       functions: "]
      [code {:lang :clojure}
@@ -40,7 +43,10 @@
       it is contained, and `anonymous-HASH`. The hash is calculated from the
       style map it receives, and is the same every time, but targeting
       classnames is more difficult using anonymous functions."]
-     [text {:id "local"}
+     [text {:id "local"
+            :variant :subheading}
+      "Local binding"]
+     [text
       "Lets take a look at another variation, one that solves the previous
       problem with anonymous functions, the local binding form:"]
      [code {:lang :clojure}
@@ -55,7 +61,10 @@
      [text
       "Albeit verbose, the classname is still telling, and can be statically
      targeted like others."]
-     [text {:id "named"}
+     [text {:id "named"
+            :variant :subheading}
+      "Named anonymous"]
+     [text
       "Another variation is the named anonymous function, and it is treated the
       same as the local binding variation: "]
      [code {:lang :clojure}
@@ -65,10 +74,11 @@
      [named-anon-example/component]
      [text
       "The DOM looks the same as the local binding variation."]
+     [text {:variant :subheading}
+      "Bound anonymous"]
      [text {:id "bound"}
-      "One caveat to note is that functions in a let block like this: "]
+      "Anonymous functions bound to a symbol are still treated as anonymous:"]
      [code {:lang :clojure}
       e6]
      [text
-      "Are still treated as an anonymous function, Herb does not capture what
-     the symbol name is."]]))
+      "Herb does not capture what the symbol name is."]]))

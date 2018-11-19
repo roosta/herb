@@ -45,10 +45,13 @@
      [text "Here is what the DOM looks like:"]
      [code {:lang :html}
       e4]
-     [text {:id "defgroup"}
-      "This pattern is a bit verbose, and I included it to demonstrate how the
-    group meta works. There is a macro `defgroup` in `herb.core` that simplify
-    creating style groups:"]
+     [text {:id "defgroup"
+            :variant :subheading}
+      "defgroup macro"]
+     [text
+      "The previous pattern was a bit verbose, but I included it to demonstrate
+    how the group meta works. There is a macro `defgroup` in `herb.core` that
+    simplify creating style groups:"]
      [code {:lang :clojure}
       e5]
      [text
