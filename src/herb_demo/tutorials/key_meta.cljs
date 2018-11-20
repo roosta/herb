@@ -31,4 +31,8 @@
      [text
       "We can take a look at a DOM approximation to see the result: "]
      [code {:lang :html}
-      e2]]))
+      e2]
+     [text
+      "The routine Herb use to sanitize the key isn't fool proof, the key needs
+      to resolve to a valid classname but it might not, its worth inspecting the
+      DOM when for some reason Herb fails to do what it's supposed to"]]))
