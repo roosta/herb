@@ -139,7 +139,7 @@
   [n k]
   (str (sanitize n)
        (when k
-         (str "-" (sanitize k)))))
+         (str "_" (sanitize k)))))
 
 (defn compose-data-string
   "Creates a datastring by stripping away all but last of either slash or dollar
