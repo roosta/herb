@@ -139,10 +139,10 @@
            "herb-demo_examples_anonymous-660680338"))
 
     (is (= (impl/compose-selector "herb-demo/examples/cycle-color" "purple")
-           "herb-demo_examples_cycle-color-purple"))
+           "herb-demo_examples_cycle-color_purple"))
 
     (is (= (impl/compose-selector "herb-demo/examples/style-group-static" :keyword)
-           "herb-demo_examples_style-group-static-keyword"))))
+           "herb-demo_examples_style-group-static_keyword"))))
 
 (deftest compose-data-string
   (testing "Composing data string"
