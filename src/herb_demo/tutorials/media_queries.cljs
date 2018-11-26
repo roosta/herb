@@ -11,7 +11,7 @@
   []
   (let [e1 (macros/example-src "media_queries.cljs")
         e2 (macros/example-src "media_queries.html")]
-    [paper
+    [paper {:id "media-queries"}
      [text {:variant :heading}
       "Media queries"]
      [text
