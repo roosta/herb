@@ -17,19 +17,20 @@
 (def appbar-height (rem 3))
 (defonce sidebar-open? (r/atom true))
 (def sidebar-width (rem 16))
-(def items {:intro {:label "Introduction"}
-            :why-fns {:label "Why functions?"}
-            :metadata {:label "Metadata"}
-            :pseudo {:label "Pseudo classes / elements"}
-            :extending {:label "Extending style functions"}
-            :key-meta {:label "Key matadata"}
-            :group-meta {:label "Group metadata"
-                         :sub {:defgroup {:label "defgroup macro"}}}
-            :fn-vars {:label "Function variations"
-                      :sub {:anon {:label "Anonymous functions"}
-                            :local {:label "Local binding"}
-                            :named {:label "Named anonymous"}
-                            :bound {:label "Bound anonymous"}}}})
+(def items [[:intro "Introduction"]
+            [:why-fns "Why functions?"]
+            [:metadata "Metadata"]
+            [:pseudo "Pseudo classes / elements"]
+            [:media-queries "Media queries"]
+            [:extending "Extending style functions"]
+            [:key-meta "Key matadata"]
+            [:group-meta "group metadata"
+             [[:defgroup "defgroup macro"]]]
+            [:fn-vars "Function variations"
+             [[:anon "Anonymous functions"]
+              [:local "Local binding"]
+              [:named "Named anonymous"]
+              [:bound "Bound anonymous"]]]])
 
 (defgroup sidebar-style
   {:container {:padding (rem 1)}
@@ -56,14 +57,14 @@
      :padding-left (if padding? (rem 1) 0)}))
 
 (defn nav-item
-  [k v index sub?]
+  [kw label index sub?]
   [:div {:class (<class sidebar-style :row)}
-   [:a {:href (str "#" (name k))}
+   [:a {:href (str "#" (name kw))}
     [text {:class (<class nav-item-style sub?)
            :color :white
            :variant :a}
      [:strong (str index ". ")]
-     (:label v)]]])
+     label]]])
 
 (defn sidebar []
   (r/create-class
@@ -71,17 +72,15 @@
     (fn []
       [:section {:class (<class sidebar-root-style)}
        [:nav {:class (<class sidebar-style :container)}
-        (map (fn [[k v] idx]
-               [:div {:key k}
-                [nav-item k v idx false]
-                (when-let [sub (:sub v)]
-                  (map (fn [[k v] sidx]
-                         ^{:key k}
-                         [nav-item k v (str idx "." sidx) true])
-                       sub
-                       (map inc (range))))])
-             items
-             (map inc (range)))]])}))
+        (map (fn [i [kw label sub]]
+               [:div {:key kw}
+                [nav-item kw label i false]
+                (when (seq sub)
+                  (map (fn [j [kw label]]
+                         ^{:key kw}
+                         [nav-item kw label (str i "." j) true])
+                       (map inc (range)) sub))])
+             (map inc (range)) items)]])}))
 
 (defcssfn calc
   [& args]
