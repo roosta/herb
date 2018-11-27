@@ -14,6 +14,7 @@
             [herb-demo.tutorials.key-meta :refer [key-meta]]
             [herb-demo.tutorials.pseudo :refer [pseudo]]
             [herb-demo.tutorials.why-fns :refer [why-fns]]
+            [herb-demo.tutorials.feature-queries :refer [feature-queries]]
             [herb.core :as herb :refer-macros [<class <id defgroup]]
             [reagent.core :as r]
             [reagent.debug :as d])
@@ -51,6 +52,7 @@
      [pseudo]
      [media-queries]
      [extending]
+     [feature-queries]
      [key-meta]
      [group-meta]
      [fn-vars]]]])

@@ -23,6 +23,7 @@
             [:pseudo "Pseudo classes / elements"]
             [:media-queries "Media queries"]
             [:extending "Extending style functions"]
+            [:feature-queries "Feature queries"]
             [:key-meta "Key matadata"]
             [:group-meta "group metadata"
              [[:defgroup "defgroup macro"]]]

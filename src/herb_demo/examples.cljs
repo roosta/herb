@@ -341,8 +341,7 @@
        [:div {:class (<class extend-group)}
         "Extend a style group"]
        [:div {:class [(<class group-macro :box) (<class white-text) "hello" nil]}
-        "Multiple classes"
-        ]
+        "Multiple classes"]
 
        [:div {:class (<class style-group-stateful :box "#ddd")}
         [:span {:class (<class style-group-stateful :text @state)}
