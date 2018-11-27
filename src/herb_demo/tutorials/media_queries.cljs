@@ -16,7 +16,7 @@
       "Media queries"]
      [text
       "Like with pseudo classes and elements, to attach a media query to a style
-      map we use the `:media` metadata. The full syntax is: "]
+      map we use the `:media` metadata. The syntax is: "]
      [code {:lang :clojure}
       (pr-str {:media {{:query :here} {:style :here}}})]
      [text

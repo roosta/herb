@@ -9,12 +9,12 @@
 (defn metadata
   []
   (let [e1 (macros/example-src "metadata.cljs")]
-    [paper
+    [paper {:id "metadata"}
      [text {:variant :heading}
       "Metadata"]
      [text
       "Herb uses metadata for various tasks related to but not part of a style
-      map. To attach metadata the the caret notation `^{:some :meta}` can be
+      map. To attach metadata the caret notation `^{:some :meta}` can be
       used or clojure.core's "
       [:a {:href "https://clojuredocs.org/clojure.core/with-meta"} "with-meta"] " and "
       [:a {:href "https://clojuredocs.org/clojure.core/vary-meta"} "vary-meta"] "."]
