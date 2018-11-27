@@ -14,7 +14,8 @@
       "Metadata"]
      [text
       "Herb uses metadata for various tasks related to but not part of a style
-      map. To attach metadata the shorthand `^{:some :meta}` can be used or clojure.core's "
+      map. To attach metadata the the caret notation `^{:some :meta}` can be
+      used or clojure.core's "
       [:a {:href "https://clojuredocs.org/clojure.core/with-meta"} "with-meta"] " and "
       [:a {:href "https://clojuredocs.org/clojure.core/vary-meta"} "vary-meta"] "."]
      [code {:lang :clojure}
