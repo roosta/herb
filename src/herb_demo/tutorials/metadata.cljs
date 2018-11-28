@@ -6,7 +6,7 @@
    [herb-demo.snippets.metadata])
   (:require-macros [herb-demo.macros :as macros]))
 
-(defn metadata
+(defn main
   []
   (let [e1 (macros/example-src "metadata.cljs")]
     [paper {:id "metadata"}

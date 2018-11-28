@@ -24,6 +24,7 @@
             [:media-queries "Media queries"]
             [:extending "Extending style functions"]
             [:feature-queries "Feature queries"]
+            [:keyframes "Keyframes"]
             [:key-meta "Key matadata"]
             [:group-meta "group metadata"
              [[:defgroup "defgroup macro"]]]

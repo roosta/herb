@@ -1,24 +1,21 @@
 (ns herb-demo.tutorial
-  (:require [garden.units :refer [em px rem]]
-            [herb-demo.components.container :refer [container]]
-            [herb-demo.components.navigation :as nav]
-            [herb-demo.components.paper :refer [paper]]
-            [herb-demo.components.text :refer [text]]
-            [herb-demo.easing :as easing]
-            [herb-demo.tutorials.extending :refer [extending]]
-            [herb-demo.tutorials.fn-vars :refer [fn-vars]]
-            [herb-demo.tutorials.group-meta :refer [group-meta]]
-            [herb-demo.tutorials.intro :refer [intro]]
-            [herb-demo.tutorials.metadata :refer [metadata]]
-            [herb-demo.tutorials.media-queries :refer [media-queries]]
-            [herb-demo.tutorials.key-meta :refer [key-meta]]
-            [herb-demo.tutorials.pseudo :refer [pseudo]]
-            [herb-demo.tutorials.why-fns :refer [why-fns]]
-            [herb-demo.tutorials.feature-queries :refer [feature-queries]]
-            [herb.core :as herb :refer-macros [<class <id defgroup]]
-            [reagent.core :as r]
-            [reagent.debug :as d])
-  (:require-macros [herb-demo.macros :as macros]))
+  (:require
+   [herb-demo.components.container :refer [container]]
+   [herb-demo.components.navigation :as nav]
+   [herb-demo.components.text :refer [text]]
+   [herb-demo.easing :as easing]
+   [herb-demo.tutorials.extending :as extending]
+   [herb-demo.tutorials.feature-queries :as feature-queries]
+   [herb-demo.tutorials.fn-vars :as fn-vars]
+   [herb-demo.tutorials.group-meta :as group-meta]
+   [herb-demo.tutorials.intro :as intro]
+   [herb-demo.tutorials.key-meta :as key-meta]
+   [herb-demo.tutorials.keyframes :as keyframes]
+   [herb-demo.tutorials.media-queries :as media-queries]
+   [herb-demo.tutorials.metadata :as metadata]
+   [herb-demo.tutorials.pseudo :as pseudo]
+   [herb-demo.tutorials.why-fns :as why-fns]
+   [herb.core :as herb :refer-macros [<class defgroup]]))
 
 (defgroup header-style
   {:container {:flex-basis "100%"}})
@@ -46,13 +43,14 @@
     [nav/appbar]
     [container
      [header]
-     [intro]
-     [why-fns]
-     [metadata]
-     [pseudo]
-     [media-queries]
-     [extending]
-     [feature-queries]
-     [key-meta]
-     [group-meta]
-     [fn-vars]]]])
+     [intro/main]
+     [why-fns/main]
+     [metadata/main]
+     [pseudo/main]
+     [media-queries/main]
+     [extending/main]
+     [feature-queries/main]
+     [keyframes/main]
+     [key-meta/main]
+     [group-meta/main]
+     [fn-vars/main]]]])

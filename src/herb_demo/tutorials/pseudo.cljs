@@ -10,7 +10,7 @@
   (:require-macros [herb-demo.macros :as macros])
   )
 
-(defn pseudo
+(defn main
   []
   (let [e1 (macros/example-src "pseudo.cljs")
         e2 (macros/example-src "pseudo.html")]

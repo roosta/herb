@@ -14,7 +14,7 @@
 ;; {:href \"https://clojuredocs.org/clojure.core/with-meta\" :title \"with-meta\"} and
 ;; {:href \"https://clojuredocs.org/clojure.core/vary-meta\" :title \"vary-meta\"}
 
-(defn extending
+(defn main
   []
   (let [e1 (macros/example-src "extend.cljs")
         e2 (macros/example-src "extend_args.cljs")

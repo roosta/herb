@@ -7,7 +7,7 @@
   (:require-macros [herb-demo.macros :as macros])
   )
 
-(defn media-queries
+(defn main
   []
   (let [e1 (macros/example-src "media_queries.cljs")
         e2 (macros/example-src "media_queries.html")]

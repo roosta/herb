@@ -12,7 +12,7 @@
             [reagent.core :as r]
             [reagent.debug :as d]))
 
-(defn group-meta
+(defn main
   []
   (let [e1 (macros/example-src "group.cljs")
         e2 (macros/example-src "group.html")

@@ -15,7 +15,7 @@
                 :p {}}]
     (with-meta (component styles) {:key component})))
 
-(defn intro
+(defn main
   []
   (let [intro-cljs (macros/example-src "intro.cljs")
         intro-html (macros/example-src "intro.html")]

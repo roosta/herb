@@ -11,7 +11,7 @@
   (:require-macros
    [herb-demo.macros :as macros]))
 
-(defn why-fns
+(defn main
   []
   (let [e1 (macros/example-src "state_fn.cljs")]
     [paper {:id "why-fns"}

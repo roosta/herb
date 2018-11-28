@@ -9,7 +9,7 @@
   (:require-macros [herb-demo.macros :as macros])
   )
 
-(defn feature-queries
+(defn main
   []
   (let [e1 (macros/example-src "supports.cljs")
         e2 (macros/example-src "supports.html")]

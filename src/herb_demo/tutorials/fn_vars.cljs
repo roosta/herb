@@ -9,7 +9,7 @@
             [herb-demo.components.text :refer [text]]
             [herb-demo.snippets.state-fn :as e1]))
 
-(defn fn-vars
+(defn main
   []
   (let [e1 (macros/example-src "anon.cljs")
         e2 (macros/example-src "anon.html")

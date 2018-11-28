@@ -11,7 +11,7 @@
             [reagent.debug :as d])
   (:require-macros [herb-demo.macros :as macros]))
 
-(defn key-meta
+(defn main
   []
   (let [e1 (macros/example-src "keyfn.cljs")
         e2 (macros/example-src "keyfn.html")
