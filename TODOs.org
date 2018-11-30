@@ -94,7 +94,10 @@
 * TODO Finish tests
 * TODO Add instance support with custom injection point
 * TODO Support various meta options inside supports/media query
-* TODO Fix local_binding.html example to have correct data-herb and classnames
+* DONE Fix local_binding.html example to have correct data-herb and classnames
+  CLOSED: [2018-11-30 Fri 18:18]
 * TODO Fix appbar taking up screen when navigating to item
 * TODO Add better key meta second example
 * TODO Add metadata spec
+* TODO Fix HTML syntax highlighting
+* TODO Fix keyframes of the same name
