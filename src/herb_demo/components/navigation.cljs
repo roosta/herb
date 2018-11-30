@@ -23,11 +23,12 @@
             [:pseudo "Pseudo classes / elements"]
             [:media-queries "Media queries"]
             [:extending "Extending style functions"]
-            [:feature-queries "Feature queries"]
-            [:keyframes "Keyframes"]
             [:key-meta "Key matadata"]
             [:group-meta "group metadata"
              [[:defgroup "defgroup macro"]]]
+            [:feature-queries "Feature queries"]
+            [:global "Global styles"]
+            [:keyframes "Keyframes"]
             [:fn-vars "Function variations"
              [[:anon "Anonymous functions"]
               [:local "Local binding"]

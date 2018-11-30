@@ -18,17 +18,21 @@
    CLOSED: [2018-11-18 Sun 16:32]
 ** DONE demo state
    CLOSED: [2018-11-18 Sun 16:32]
-** TODO demo media
+** DONE demo media
+   CLOSED: [2018-11-30 Fri 20:04]
 ** DONE demo keys
    CLOSED: [2018-11-18 Sun 16:32]
-** TODO demo anon
+** DONE demo anon
+   CLOSED: [2018-11-30 Fri 20:04]
 ** DONE demo group/defgroup
    CLOSED: [2018-11-18 Sun 16:32]
 *** Demo meta data in groups
-** TODO demo nested
+** DONE demo nested
+   CLOSED: [2018-11-30 Fri 20:04]
 ** TODO Add demo for selecting elements by class
-** TODO Demo global-style!
-** TODO demo using multiple classes using reagent and or join-classes fn
+** DONE Demo global-style!
+   CLOSED: [2018-11-30 Fri 20:04]
+** MAYBE demo using multiple classes using reagent and or join-classes fn
 * &env macro
   In order to evaluate things in context, you first need to garner the bindings
   in the current context. Fortunately, Clojure macros provide an implicit

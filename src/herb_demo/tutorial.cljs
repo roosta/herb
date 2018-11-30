@@ -15,6 +15,7 @@
    [herb-demo.tutorials.metadata :as metadata]
    [herb-demo.tutorials.pseudo :as pseudo]
    [herb-demo.tutorials.why-fns :as why-fns]
+   [herb-demo.tutorials.global :as global]
    [herb.core :as herb :refer-macros [<class defgroup]]))
 
 (defgroup header-style
@@ -49,8 +50,9 @@
      [pseudo/main]
      [media-queries/main]
      [extending/main]
-     [feature-queries/main]
-     [keyframes/main]
      [key-meta/main]
      [group-meta/main]
+     [feature-queries/main]
+     [global/main]
+     [keyframes/main]
      [fn-vars/main]]]])
