@@ -15,6 +15,7 @@
    [herb-demo.tutorials.metadata :as metadata]
    [herb-demo.tutorials.pseudo :as pseudo]
    [herb-demo.tutorials.why-fns :as why-fns]
+   [herb-demo.tutorials.vendor-prefixes :as vendor-prefixes]
    [herb-demo.tutorials.global :as global]
    [herb.core :as herb :refer-macros [<class defgroup]]))
 
@@ -54,5 +55,6 @@
      [group-meta/main]
      [feature-queries/main]
      [global/main]
+     [vendor-prefixes/main]
      [keyframes/main]
      [fn-vars/main]]]])

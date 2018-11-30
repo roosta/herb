@@ -13,6 +13,7 @@
   []
   {:animation [[pulse-animation "2s" :infinite :alternate]]
    :background-color "black"
+   :transition "all 1s ease-out"
    :width (px 20)
    :height (px 20)})
 

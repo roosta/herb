@@ -33,6 +33,7 @@
 ** DONE Demo global-style!
    CLOSED: [2018-11-30 Fri 20:04]
 ** MAYBE demo using multiple classes using reagent and or join-classes fn
+** TODO Demo advanced compilation
 * &env macro
   In order to evaluate things in context, you first need to garner the bindings
   in the current context. Fortunately, Clojure macros provide an implicit
@@ -105,3 +106,4 @@
 * TODO Add metadata spec
 * TODO Fix HTML syntax highlighting
 * TODO Fix keyframes of the same name
+* TODO Global style vendor prefixes

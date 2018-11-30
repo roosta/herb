@@ -58,6 +58,6 @@
                     (boolean (bidi/match-route app-routes path)))})
   (accountant/dispatch-current!)
 
-  (herb/init! {:vendors ["o"]
-               :auto-prefix #{:transition}})
+  (herb/init! {:vendors ["webkit" :moz]
+               :auto-prefix #{:transition :animation}})
   (mount-root))
