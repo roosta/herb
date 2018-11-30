@@ -271,6 +271,11 @@
   [:from {:width "100%"}]
   [:to {:width "50%"}])
 
+(defkeyframes percentages
+  ["0%" {:top 0 :left 0}]
+  ["30%" {:top (px 50)}]
+  ["68%" {:left (px 50)}])
+
 (defn pulse-component
   []
   {

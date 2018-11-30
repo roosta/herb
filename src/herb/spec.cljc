@@ -5,7 +5,7 @@
 (s/def ::vendors (s/coll-of (s/or :string string? :keyword keyword?) :kind vector?))
 (s/def ::options (s/keys :opt-un [::vendors ::auto-prefix]))
 (s/def ::classes (s/+ (s/or :s string? :n nil?)))
-(s/def ::frame (s/or :frame (s/cat :keyframe keyword? :style map?)))
+(s/def ::frame (s/or :frame (s/cat :keyframe (s/or :kw keyword? :str string?) :style map?)))
 (s/def ::style (s/or :style (s/cat :identifier (s/+ (s/alt :kw keyword? :str string?)) :style map?)))
 
 (s/def ::frames (s/+ ::frame))
