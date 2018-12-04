@@ -3,7 +3,7 @@
   (:require
    [herb.core
     :include-macros true
-    :refer [<class defgroup join-classes <id defkeyframes defglobal]]
+    :refer [<class defgroup join <id defkeyframes defglobal]]
    [garden.selectors :as s]
    [garden.core :refer [css]]
    [garden.stylesheet :refer [at-media]]
@@ -325,7 +325,7 @@
         [:span {:class (<class group-with-args :text)}
          "Group that takes args"]]
        [:div.global "global style"]
-       [:div {:class (join-classes (<class row) (<class simple))}
+       [:div {:class (join (<class row) (<class simple))}
         "multiple classes"]
        [:div {:class (<class multiple-meta-group :component-1)}]
        [:div {:class (<class multiple-vendor-group :component-1)}

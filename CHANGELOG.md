@@ -3,6 +3,7 @@
 ### Breaking change
 - `:auto-prefix` in component meta is removed, instead use either global config
   via herb.core/init! or pass `:prefix true` and `:vendors` for a local override.
+- `join-classes` is renamed to `join`
 
 ### Added
 - New global `herb.core/init!` function defined and currently takes only

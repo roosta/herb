@@ -21,17 +21,17 @@
                                             (impl/convert-vendors))
                                :auto-prefix (:auto-prefix options)}))))
 
-(defn join-classes
+(defn join
   "Joins multiple classes together, filtering out nils:
   ```
-  (join-classes (<class fn-1) (<class fn-2))
+  (join (<class fn-1) (<class fn-2))
   ```"
   [& classes]
   (if (s/valid? :herb.spec/classes classes)
     (->> classes
          (filter identity)
          (str/join " "))
-    (throw (ex-info "join-classes takes one or more strings as arguments" (s/explain-data :herb.spec/classes classes)))))
+    (throw (ex-info "join takes one or more strings as arguments" (s/explain-data :herb.spec/classes classes)))))
 
 #?(:clj
    (defmacro defkeyframes
