@@ -141,15 +141,14 @@
        (when k
          (str "_" (sanitize k)))))
 
-(defn compose-data-string
-  "Creates a datastring by stripping away all but last of either slash or dollar
-  sign from input name, mirroring how a clojure fully qualified namespace looks"
+(defn create-data-string
+  "Create a fully qualified name string for use in the data-herb attr"
   [n k]
-  (str
-   (-> n
-    (str/replace #"(/|\$)(?=[^/\-\$\-]*(/|\$))" ".")
-    (str/replace #"\$" "/"))
-   (when k (str "[" k "]"))))
+  (let [c (str/split n #?(:cljs #"/" :clj #"\$"))
+        ns (apply str (interpose "." (butlast c)))
+        sym (last c)]
+    (str (symbol ns sym)
+         (when k (str "[" k "]")))))
 
 (defn get-name
   [style-fn ns-name style-data]
@@ -187,8 +186,8 @@
         {:keys [group key prefix] :as meta-data} (-> resolved-styles last meta)
         name* (get-name style-fn ns-name style-data)
         data-str (when dev? (if group
-                              (compose-data-string name* nil)
-                              (compose-data-string name* key)))
+                              (create-data-string name* nil)
+                              (create-data-string name* key)))
         selector (compose-selector name* key)
         identifier (if group
                      (sanitize name*)

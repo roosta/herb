@@ -94,7 +94,8 @@
                    {}))])
   #+END_SRC
 * TODO ensure key works with lots of variation
-* TODO Fix namespaces like this: herb-demo.snippets/state-fn/button-style
+* DONE Fix namespaces like this: herb-demo.snippets/state-fn/button-style
+  CLOSED: [2018-12-08 Sat 16:59]
 * TODO Debugging in prod build
 * TODO Finish tests
 * TODO Add instance support with custom injection point
