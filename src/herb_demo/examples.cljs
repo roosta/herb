@@ -112,10 +112,10 @@
   {:background-color "cyan"})
 
 (defn media-query-test
-  []
+  [color]
   ^{:extend cyan-div
     :media {{:screen true} {:color "white"
-                            :background-color "green"}
+                            :background-color color}
             {:max-width "800px"} {:background-color "yellow"}}}
   {:background "magenta"
    :text-align "center"
@@ -414,7 +414,7 @@
 
         [:div {:class (<class keyed :sheet)}]
 
-        [:div {:class (<class media-query-test)}
+        [:div {:class (<class media-query-test @state)}
          "Media query test"]]
        #_[:div {:class (with-style some-style)}
           "Regular maps"]

@@ -110,4 +110,5 @@
 * CANCELLED Fix keyframes of the same name
   CLOSED: [2018-12-08 Sat 15:14]
 * TODO Global style vendor prefixes
-* TODO Check if dereffing inside metadata works as intended
+* DONE Check if dereffing inside metadata works as intended
+  CLOSED: [2018-12-08 Sat 17:03]
