@@ -107,3 +107,4 @@
 * TODO Fix HTML syntax highlighting
 * TODO Fix keyframes of the same name
 * TODO Global style vendor prefixes
+* TODO Check if dereffing inside metadata works as intended
