@@ -102,10 +102,12 @@
 * TODO Support various meta options inside supports/media query
 * DONE Fix local_binding.html example to have correct data-herb and classnames
   CLOSED: [2018-11-30 Fri 18:18]
-* TODO Fix appbar taking up screen when navigating to item
+* DONE Fix appbar taking up screen when navigating to item
+  CLOSED: [2018-12-08 Sat 15:15]
 * TODO Add better key meta second example
 * TODO Add metadata spec
 * TODO Fix HTML syntax highlighting
-* TODO Fix keyframes of the same name
+* CANCELLED Fix keyframes of the same name
+  CLOSED: [2018-12-08 Sat 15:14]
 * TODO Global style vendor prefixes
 * TODO Check if dereffing inside metadata works as intended
