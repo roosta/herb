@@ -6,6 +6,8 @@
             [herb-demo.components.icon :as icon]
             [herb-demo.easing :as easing]
             [garden.color :refer [rgba]]
+            [herb-demo.utils :as utils]
+            [herb-demo.async :as async]
             [goog.dom :as dom]
             [goog.events.EventType :as event-type]
             [herb-demo.components.text :refer [text]]
@@ -139,12 +141,6 @@
   {:transition (str "transform 200ms " (:ease-out-quad easing/easing))
    :transform (if scroll? "scale(1)" "scale(1.5)" )})
 
-(defn throttle [listener interval]
-  "https://medium.com/@alehatsman/clojurescript-throttle-debounce-a651dfb66ac"
-  (let [new (Throttle. listener interval)]
-    (fn [& args]
-      (.apply (.-fire new) new (to-array args)))))
-
 (defn appbar
   []
   (let [scroll? (r/atom nil)]
@@ -153,7 +149,7 @@
                              (on-scroll scroll? nil)
                              (events/listen js/document
                                             event-type/SCROLL
-                                            (throttle
+                                            (async/throttle
                                              #(on-scroll scroll? %)
                                              200)))
       :reagent-render

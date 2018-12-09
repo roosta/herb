@@ -1,6 +1,7 @@
 (ns herb-demo.utils
   (:require
    [goog.events :as gevents]
+   [herb-demo.async :as async]
    [goog.events.EventType :as event-type]
    [reagent.core :as r])
   (:import
@@ -16,13 +17,11 @@
 
 (defn on-resize
   [timer]
-  (js/clearTimeout @timer)
-  (reset! timer (js/setTimeout
-                 #(reset! viewport-size (get-width))
-                 100)))
+  (reset! viewport-size (get-width)))
 
 (defonce vsm-listener
-  (let [timer (atom nil)]
-    (gevents/listen vsm
-                    event-type/RESIZE
-                    #(on-resize timer))))
+  (gevents/listen vsm
+                  event-type/RESIZE
+                  (async/debounce
+                   on-resize
+                   200)))
