@@ -151,11 +151,11 @@
     (r/create-class
      {:component-did-mount (fn []
                              (on-scroll scroll? nil)
-                              (events/listen js/document
-                                             event-type/SCROLL
-                                             (throttle
-                                              #(on-scroll scroll? %)
-                                              200)))
+                             (events/listen js/document
+                                            event-type/SCROLL
+                                            (throttle
+                                             #(on-scroll scroll? %)
+                                             200)))
       :reagent-render
       (fn []
         [:header {:class (<class appbar-style :root)}
