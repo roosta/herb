@@ -15,8 +15,7 @@
 
 (def viewport-size (r/atom (get-width)))
 
-(defn on-resize
-  [timer]
+(defn on-resize []
   (reset! viewport-size (get-width)))
 
 (defonce vsm-listener
