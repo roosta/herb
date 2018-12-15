@@ -4,6 +4,7 @@
             [debux.cs.core :as d :refer-macros [clog clogn dbg dbgn break]]
             [clojure.string :as str]
             [herb-demo.components.icon :as icon]
+            [goog.labs.userAgent.device :as device]
             [herb-demo.easing :as easing]
             [garden.color :refer [rgba]]
             [herb-demo.utils :as utils]
@@ -17,7 +18,7 @@
   (:import [goog.async Throttle]))
 
 (def appbar-height (rem 3))
-(defonce sidebar-open? (r/atom true))
+(defonce sidebar-open? (r/atom (device/isDesktop)))
 (def sidebar-width (rem 16))
 (def items [[:intro "Introduction"]
             [:why-fns "Why functions?"]
