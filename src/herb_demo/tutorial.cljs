@@ -1,5 +1,6 @@
 (ns herb-demo.tutorial
   (:require
+   [garden.units :refer [px em rem]]
    [herb-demo.components.container :refer [container]]
    [herb-demo.components.navigation :as nav]
    [herb-demo.components.text :refer [text]]
@@ -7,6 +8,7 @@
    [herb-demo.tutorials.extending :as extending]
    [herb-demo.tutorials.feature-queries :as feature-queries]
    [herb-demo.tutorials.fn-vars :as fn-vars]
+   [herb-demo.tutorials.global :as global]
    [herb-demo.tutorials.group-meta :as group-meta]
    [herb-demo.tutorials.intro :as intro]
    [herb-demo.tutorials.key-meta :as key-meta]
@@ -14,10 +16,10 @@
    [herb-demo.tutorials.media-queries :as media-queries]
    [herb-demo.tutorials.metadata :as metadata]
    [herb-demo.tutorials.pseudo :as pseudo]
-   [herb-demo.tutorials.why-fns :as why-fns]
    [herb-demo.tutorials.vendor-prefixes :as vendor-prefixes]
-   [herb-demo.tutorials.global :as global]
-   [herb.core :as herb :refer-macros [<class defgroup]]))
+   [herb-demo.tutorials.why-fns :as why-fns]
+   [herb.core :as herb :refer-macros [<class defgroup]]
+   ))
 
 (defgroup header-style
   {:container {:flex-basis "100%"}})
@@ -32,10 +34,12 @@
 (defgroup main-style
   {:root {}
    :spacer {:height nav/appbar-height}
-   :content {:transition (str "padding 400ms " (:ease-in-out-quad easing/easing))
-             :padding-left (if @nav/sidebar-open?
-                             nav/sidebar-width
-                             0)}})
+   :content
+   ^{:media {{:screen :only :max-width (em 53)} {:width "100%"}}}
+   {:transition (str "padding 400ms " (:ease-in-out-quad easing/easing))
+    :padding-left (if @nav/sidebar-open?
+                    nav/sidebar-width
+                    0)}})
 
 (defn main []
   [:main {:class (<class main-style :root)}
