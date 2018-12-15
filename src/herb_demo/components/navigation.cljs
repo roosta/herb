@@ -36,7 +36,8 @@
              [[:anon "Anonymous functions"]
               [:local "Local binding"]
               [:named "Named anonymous"]
-              [:bound "Bound anonymous"]]]])
+              [:bound "Bound anonymous"]]]
+            [:examples "Examples and extras"]])
 
 (defgroup sidebar-style
   {:container {:padding (rem 1)}

@@ -1,25 +1,24 @@
 (ns herb-demo.tutorial
-  (:require
-   [garden.units :refer [px em rem]]
-   [herb-demo.components.container :refer [container]]
-   [herb-demo.components.navigation :as nav]
-   [herb-demo.components.text :refer [text]]
-   [herb-demo.easing :as easing]
-   [herb-demo.tutorials.extending :as extending]
-   [herb-demo.tutorials.feature-queries :as feature-queries]
-   [herb-demo.tutorials.fn-vars :as fn-vars]
-   [herb-demo.tutorials.global :as global]
-   [herb-demo.tutorials.group-meta :as group-meta]
-   [herb-demo.tutorials.intro :as intro]
-   [herb-demo.tutorials.key-meta :as key-meta]
-   [herb-demo.tutorials.keyframes :as keyframes]
-   [herb-demo.tutorials.media-queries :as media-queries]
-   [herb-demo.tutorials.metadata :as metadata]
-   [herb-demo.tutorials.pseudo :as pseudo]
-   [herb-demo.tutorials.vendor-prefixes :as vendor-prefixes]
-   [herb-demo.tutorials.why-fns :as why-fns]
-   [herb.core :as herb :refer-macros [<class defgroup]]
-   ))
+  (:require [garden.units :refer [em px rem]]
+            [herb-demo.components.container :refer [container]]
+            [herb-demo.components.navigation :as nav]
+            [herb-demo.components.text :refer [text]]
+            [herb-demo.easing :as easing]
+            [herb-demo.tutorials.examples :as examples]
+            [herb-demo.tutorials.extending :as extending]
+            [herb-demo.tutorials.feature-queries :as feature-queries]
+            [herb-demo.tutorials.fn-vars :as fn-vars]
+            [herb-demo.tutorials.global :as global]
+            [herb-demo.tutorials.group-meta :as group-meta]
+            [herb-demo.tutorials.intro :as intro]
+            [herb-demo.tutorials.key-meta :as key-meta]
+            [herb-demo.tutorials.keyframes :as keyframes]
+            [herb-demo.tutorials.media-queries :as media-queries]
+            [herb-demo.tutorials.metadata :as metadata]
+            [herb-demo.tutorials.pseudo :as pseudo]
+            [herb-demo.tutorials.vendor-prefixes :as vendor-prefixes]
+            [herb-demo.tutorials.why-fns :as why-fns]
+            [herb.core :as herb :refer-macros [<class defgroup]]))
 
 (defgroup header-style
   {:container {:flex-basis "100%"}})
@@ -61,4 +60,5 @@
      [global/main]
      [vendor-prefixes/main]
      [keyframes/main]
-     [fn-vars/main]]]])
+     [fn-vars/main]
+     [examples/main]]]])
