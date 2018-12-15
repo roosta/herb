@@ -14,8 +14,7 @@
             [herb-demo.components.text :refer [text]]
             [herb.core :refer-macros [<class defgroup]]
             [reagent.core :as r])
-  (:require-macros [garden.def :refer [defcssfn]])
-  (:import [goog.async Throttle]))
+  (:require-macros [garden.def :refer [defcssfn]]))
 
 (def appbar-height (rem 3))
 (defonce sidebar-open? (r/atom (device/isDesktop)))
