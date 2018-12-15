@@ -35,9 +35,12 @@
 
 (defn paper-style
   []
-  ^{:extend [box-shadow 3]}
+  ^{:extend [box-shadow 3]
+    :media {{:screen :only :max-width (em 52)} {:padding (rem 1)}}}
   {:background "white"
    :margin-bottom (rem 1)
+   :box-sizing "border-box"
+   :width "100%"
    :flex-basis "100%"
    :padding (rem 1.5)})
 
