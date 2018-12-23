@@ -144,14 +144,14 @@
     (is (= (impl/compose-selector "herb-demo/examples/style-group-static" :keyword)
            "herb-demo_examples_style-group-static_keyword"))))
 
-(deftest compose-data-string
-  (testing "Composing data string"
-    (is (= (impl/compose-data-string "herb-demo/examples/width-vary-component" :keyed)
+(deftest create-data-string
+  (testing "Creating data string"
+    (is (= (impl/create-data-string "herb-demo$examples$width-vary-component" :keyed)
            "herb-demo.examples/width-vary-component[:keyed]"))
-    (is (= (impl/compose-data-string "herb-demo/examples$pulse-component-two" nil)
+    (is (= (impl/create-data-string "herb-demo$examples$pulse-component-two" nil)
            "herb-demo.examples/pulse-component-two" ))
-    (is (= (impl/compose-data-string "herb-demo/examples/main-/-nested-fn" nil)
-           "herb-demo.examples/main-/-nested-fn"))))
+    (is (= (impl/create-data-string "herb-demo$examples$main-$-nested-fn" nil)
+           "herb-demo.examples.main-/-nested-fn"))))
 
 (defn test-fn-1
   []
