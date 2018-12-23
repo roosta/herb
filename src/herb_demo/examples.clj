@@ -24,3 +24,10 @@
 (defn test-anon
   []
   (<class (fn [] {:color "red"})))
+
+(defn test-nested
+  []
+  (letfn [(nested []
+            {:color "red"})]
+    (<class nested))
+  )
