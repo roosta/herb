@@ -30,4 +30,5 @@
   (let [colors (partition 2 1 ["#6c0e23" "#c42021" "#d58936" "#ef2d56"])]
     [:div {:class (<class flex-container)}
      (for [pair colors]
+       ^{:key pair}
        [:div {:class (<class style pair)}])]))
