@@ -16,11 +16,11 @@
   ;; Exclude the demo,site and compiled files from the output of either 'lein jar' or 'lein install'
   :jar-exclusions [#"(?:^|\/)herb_demo\/" #"(?:^|\/)public\/" #"server.clj"]
 
-  :dependencies [[org.clojure/clojure "1.9.0" :scope "provided"]
+  :dependencies [[org.clojure/clojure "1.10.0" :scope "provided"]
                  [org.clojure/clojurescript "1.10.439" :scope "provided"]
                  ;; [philoskim/debux-stubs "0.5.2"]
                  [org.clojure/tools.analyzer.jvm "0.7.2"]
-                 [org.clojure/tools.analyzer "0.6.9"]
+                 [org.clojure/tools.analyzer "0.7.0"]
                  [garden "1.3.6"]]
 
   :figwheel {:css-dirs ["resources/public/css"]
@@ -34,10 +34,10 @@
                                   [compojure "1.6.1"]
                                   [ring "1.7.1"]
                                   [ring/ring-defaults "0.3.2"]
-                                  [figwheel "0.5.17"]
-                                  [figwheel-sidecar "0.5.17"]
+                                  [figwheel "0.5.18"]
+                                  [figwheel-sidecar "0.5.18"]
                                   [etaoin "0.2.9"]]
-                   :plugins [[lein-figwheel "0.5.17"]]
+                   :plugins [[lein-figwheel "0.5.18"]]
                    :source-paths ["test" "dev"]}
              :dev-cider {:dependencies [[cider/piggieback "0.3.10"]]
                          :figwheel {:nrepl-middleware [cider.piggieback/wrap-cljs-repl]}}
