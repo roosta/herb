@@ -12,7 +12,8 @@
 ** [[https://github.com/igrishaev/etaoin][igrishaev/etaoin: Pure Clojure Webdriver protocol implementation]]
 * DOCS
 ** TODO refer vs refer-macros
-** TODO group args
+** DONE group args
+   CLOSED: [2018-12-27 Thu 16:53]
 * DEMO
 ** DONE demo inheritance variants
    CLOSED: [2018-11-18 Sun 16:32]
@@ -34,6 +35,8 @@
    CLOSED: [2018-11-30 Fri 20:04]
 ** MAYBE demo using multiple classes using reagent and or join-classes fn
 ** TODO Demo advanced compilation / debugging
+** TODO Add <id
+** TODO Add clj usage
 * &env macro
   In order to evaluate things in context, you first need to garner the bindings
   in the current context. Fortunately, Clojure macros provide an implicit
