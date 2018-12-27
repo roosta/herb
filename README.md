@@ -1,4 +1,4 @@
-# herb
+# Herb
 [![Build Status](https://travis-ci.org/roosta/herb.svg?branch=master)](https://travis-ci.org/roosta/herb)
 
 Herb is a CSS styling library for [Clojurescript](https://clojurescript.org/), built using [Garden](https://github.com/noprompt/garden), whose main focus is on component level styling using functions.
