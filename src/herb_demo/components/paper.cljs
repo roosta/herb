@@ -41,7 +41,7 @@
    :margin-bottom (rem 1)
    :box-sizing "border-box"
    :width "100%"
-   :flex-basis "100%"
+   :flex-basis "auto"
    :padding (rem 1.5)})
 
 (defn paper
