@@ -115,3 +115,4 @@
 * TODO Global style vendor prefixes
 * DONE Check if dereffing inside metadata works as intended
   CLOSED: [2018-12-08 Sat 17:03]
+* TODO Test prod build using psuedo-names
