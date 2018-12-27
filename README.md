@@ -5,9 +5,10 @@ Herb is a CSS styling library for [Clojurescript](https://clojurescript.org/), b
 
 - API
 - Tutorial
+- [Changelog](https://github.com/roosta/herb/blob/master/CHANGELOG.md)
 
 ## Requirements
-Herb requires at least Clojure 1.9.0 and ClojureScript 1.10.x due to use of [clojure.spec.alpha](https://cljs.github.io/api/cljs.spec.alpha/) to validate macro input.
+Herb requires at least Clojure 1.9.0 and ClojureScript 1.9.542 due to use of [clojure.spec.alpha](https://cljs.github.io/api/cljs.spec.alpha/) to validate macro input.
 
 ## Usage
 Add TODO
