@@ -1,5 +1,7 @@
 # Change Log
 ## [Unreleased]
+
+## [v0.7.0] - 2018-12-27
 ### Breaking change
 - `:auto-prefix` in component meta is removed, instead use either global config
   via herb.core/init! or pass `:prefix true` and `:vendors` for a local override.
@@ -8,6 +10,18 @@
 ### Added
 - New global `herb.core/init!` function defined and currently takes only
   `:vendors` and `:auto-prefix` as possible options
+- Finish first draft of the tutorial page
+
+### Changed
+- Improve error handling, and use `clojure.spec` for various input validation
+- `:auto-prefix` now accepts strings as well as keywords
+- Add passing multiple elements in `defglobal` for a single rule:
+  ```clojure
+  (defglobal [:body :html {:margin 0}])
+  ```
+
+### Fixed
+- Change how the `data-herb` attr is parsed, fixing issue with namespace slashes not matching fully qualified name
 
 ## [v0.6.0] - 2018-10-13
 ### Breaking change
@@ -112,7 +126,8 @@ from `herb.macro` to `herb.core`
 ### Fixed
 - Fixed issues with inheritance precedence
 
-[Unreleased]: https://github.com/roosta/herb/compare/v0.6.0...HEAD
+[Unreleased]: https://github.com/roosta/herb/compare/v0.7.0...HEAD
+[v0.7.0]: https://github.com/roosta/herb/compare/v0.6.0...v0.7.0
 [v0.6.0]: https://github.com/roosta/herb/compare/v0.5.0...v0.6.0
 [v0.5.0]: https://github.com/roosta/herb/compare/v0.4.0...v0.5.0
 [v0.4.0]: https://github.com/roosta/herb/compare/v0.3.5...v0.4.0
