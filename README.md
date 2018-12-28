@@ -32,13 +32,12 @@ Herb has two main macros, `<class` and `<id`, these macros takes a function that
 Refer to the tutorial for a full overview and examples of Herbs features.
 
 ## Development
-Development is done using the demo/tutorial page as a testbed. To start the development server [Leiningen](https://leiningen.org/) is required:
+To start the development server [Leiningen](https://leiningen.org/) is required:
 ```shell
-lein with-profile +demo figwheel
+lein figwheel
 ```
 
 To use in Emacs using [Cider](https://github.com/clojure-emacs/cider) `m-x cider-jack-in-clojurescript` and pick figwheel to start a ClojureScript repl environment and a server. See [.dir-locals.el](https://github.com/roosta/herb/blob/master/.dir-locals.el).
-
 
 Point your browser to `localhost:3449`
 
