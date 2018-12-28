@@ -116,3 +116,5 @@
 * DONE Check if dereffing inside metadata works as intended
   CLOSED: [2018-12-08 Sat 17:03]
 * TODO Test prod build using psuedo-names
+* TODO Fix advanced complite data herb still showing up
+* TODO Fix anonymous not getting a munged name
