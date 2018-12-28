@@ -128,30 +128,30 @@
 
 (deftest sanitize
   (testing "Sanitize names"
-    (is (= (impl/sanitize "herb-demo/examples/main-/-nested-fn!")
-           "herb-demo_examples_main-_-nested-fn_"))
+    (is (= (impl/sanitize "demo/examples/main-/-nested-fn!")
+           "demo_examples_main-_-nested-fn_"))
     (is (= (impl/sanitize :some$keyword*!)
            "some_keyword__"))))
 
 (deftest compose-selector
   (testing "Composing selector"
-    (is (= (impl/compose-selector "herb-demo.examples/anonymous-660680338" nil)
-           "herb-demo_examples_anonymous-660680338"))
+    (is (= (impl/compose-selector "demo.examples/anonymous-660680338" nil)
+           "demo_examples_anonymous-660680338"))
 
-    (is (= (impl/compose-selector "herb-demo/examples/cycle-color" "purple")
-           "herb-demo_examples_cycle-color_purple"))
+    (is (= (impl/compose-selector "demo/examples/cycle-color" "purple")
+           "demo_examples_cycle-color_purple"))
 
-    (is (= (impl/compose-selector "herb-demo/examples/style-group-static" :keyword)
-           "herb-demo_examples_style-group-static_keyword"))))
+    (is (= (impl/compose-selector "demo/examples/style-group-static" :keyword)
+           "demo_examples_style-group-static_keyword"))))
 
 (deftest create-data-string
   (testing "Creating data string"
-    (is (= (impl/create-data-string "herb-demo$examples$width-vary-component" :keyed)
-           "herb-demo.examples/width-vary-component[:keyed]"))
-    (is (= (impl/create-data-string "herb-demo$examples$pulse-component-two" nil)
-           "herb-demo.examples/pulse-component-two" ))
-    (is (= (impl/create-data-string "herb-demo$examples$main-$-nested-fn" nil)
-           "herb-demo.examples.main-/-nested-fn"))))
+    (is (= (impl/create-data-string "demo$examples$width-vary-component" :keyed)
+           "demo.examples/width-vary-component[:keyed]"))
+    (is (= (impl/create-data-string "demo$examples$pulse-component-two" nil)
+           "demo.examples/pulse-component-two" ))
+    (is (= (impl/create-data-string "demo$examples$main-$-nested-fn" nil)
+           "demo.examples.main-/-nested-fn"))))
 
 (defn test-fn-1
   []

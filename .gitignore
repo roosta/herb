@@ -9,7 +9,7 @@ pom.xml.asc
 /.nrepl-port
 .hgignore
 .hg/
-site/public/js
+site/resources/public/js
 site/figwheel_server.log
 site/target
 .nrepl-port
