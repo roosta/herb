@@ -5,10 +5,7 @@
             [config.core :refer [env]]))
 
 (def mount-target
-  [:div#app
-   [:h2 "Welcome to site"]
-   [:p "please wait while Figwheel is waking up ..."]
-   [:p "(Check the js console for hints if nothing exсiting happens.)"]])
+  [:div#app])
 
 (defn head []
   [:head
