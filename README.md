@@ -11,7 +11,7 @@ Herb is a CSS styling library for [Clojurescript](https://clojurescript.org/), b
 ## Requirements
 Herb requires at least Clojure 1.9.0 and ClojureScript 1.9.542 due to use of [clojure.spec.alpha](https://cljs.github.io/api/cljs.spec.alpha/) to validate macro input.
 
-## Usage
+## Quick start
 ![](https://clojars.org/herb/latest-version.svg)
 
 ```clojure
@@ -25,7 +25,43 @@ Herb requires at least Clojure 1.9.0 and ClojureScript 1.9.542 due to use of [cl
   [:div {:class (<class style)}])
 ```
 
-Herb has two main macros, `<class` and `<id`, these macros takes a function that returns a [Garden](https://github.com/noprompt/garden) style map, and returns a classname/id based on the functions fully qualified name: In this case `user/style`.
+Herb has two main macros, `<class` and `<id`, these macros takes a function that returns a [Garden](https://github.com/noprompt/garden) style map, and returns a classname/id based on the functions fully qualified name, in this case `user/style`.
+
+The style is injected into the DOM when any one of Herb's macros are called.
+
+
+Pass arguments:
+
+```clojure
+(ns user
+  (:require [herb.core :include-macros true :as herb]))
+
+(defn style
+  [color]
+  {:color color})
+
+(defn component []
+  [:div {:class (herb/<class style "red")}])
+```
+
+Extend existing functions:
+
+```clojure
+(ns user
+  (:require [herb.core :include-macros true :refer [<class]]))
+
+(defn button-style
+  [color]
+  {:color color})
+
+(defn red-button-style []
+  ^{:extend [button "red"]}
+  {})
+
+(defn button []
+  [:button {:class (<class red-button-style)}])
+```
+
 
 [Garden](https://github.com/noprompt/garden) is used to translate the style map to CSS, which enables most of Gardens functionality, so familiarizing yourself with its features is a good idea.
 
