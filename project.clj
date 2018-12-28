@@ -9,6 +9,10 @@
 
   :source-paths ["src"]
 
+  :codox {:language :clojurescript
+          :output-path "doc"
+          :source-paths ["src"]}
+
   :min-lein-version "2.5.0"
 
   :clean-targets ^{:protect false} ["resources/public/js" "target"]
