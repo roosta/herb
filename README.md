@@ -5,7 +5,7 @@
 Herb is a CSS styling library for [Clojurescript](https://clojurescript.org/), built using [Garden](https://github.com/noprompt/garden), whose main focus is on component level styling using functions.
 
 - API
-- Tutorial
+- [Tutorial](http://herb.roosta.sh/)
 - [Changelog](https://github.com/roosta/herb/blob/master/CHANGELOG.md)
 
 ## Requirements
@@ -65,7 +65,7 @@ Extend existing functions:
 
 [Garden](https://github.com/noprompt/garden) is used to translate the style map to CSS, which enables most of Gardens functionality, so familiarizing yourself with its features is a good idea.
 
-Refer to the tutorial for a full overview and examples of Herbs features.
+Refer to the [tutorial](http://herb.roosta.sh/) for a full overview and examples of Herbs features.
 
 ## Development
 To start the development server [Leiningen](https://leiningen.org/) is required:
