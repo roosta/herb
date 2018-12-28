@@ -118,3 +118,4 @@
 * TODO Test prod build using psuedo-names
 * TODO Fix advanced complite data herb still showing up
 * TODO Fix anonymous not getting a munged name
+* TODO Fix private functions
