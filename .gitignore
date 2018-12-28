@@ -17,3 +17,4 @@ site/.cljs_rhino_repl
 out
 resources/public/js
 *.log
+*.min.css

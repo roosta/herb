@@ -40,8 +40,8 @@
   :source-paths ["src"]
   :resource-paths ["resources" "target/cljsbuild"]
 
-  :minify-assets {:assets {"resources/public/css/atelier-forest-light.min.css"
-                           "resources/public/css/atelier-forest-light.css"}}
+  :minify-assets [[:css {:source "resources/public/css/atelier-forest-light.css"
+                         :target "resources/public/css/atelier-forest-light.min.css"}]]
 
   :cljsbuild {:builds {:min {:source-paths ["src" "env/prod"]
                              :compiler {:output-to "target/cljsbuild/public/js/app.js"
