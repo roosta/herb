@@ -44,7 +44,7 @@
                         :source-paths ["demo"]
                         :figwheel true
                         :watch-paths ["src" "demo" "test"]
-                        :compiler {:main "demo.dev"
+                        :compiler {:main "herbdemo.dev"
                                    :output-to "resources/public/js/demo.js"
                                    :preloads [devtools.preload]
                                    :output-dir "resources/public/js/out"
@@ -55,7 +55,7 @@
 
                        {:id "demo-release"
                         :source-paths ["demo"]
-                        :compiler {:main "demo.prod"
+                        :compiler {:main "herbdemo.prod"
                                    :output-to "resources/public/js/demo.js"
                                    :output-dir "resources/public/js/release"
                                    :closure-defines {"goog.DEBUG" false}

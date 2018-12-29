@@ -1,4 +1,4 @@
-(ns demo.examples
+(ns herbdemo.examples
   (:require [herb.core
              :refer [<class <style defgroup defkeyframes <keyframes]]))
 

@@ -1,4 +1,4 @@
-(ns demo.examples
+(ns herbdemo.examples
   ;; (:require-macros [garden.def :refer [defkeyframes]])
   (:require
    [herb.core

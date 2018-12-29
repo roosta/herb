@@ -1,7 +1,7 @@
-(ns demo.core
+(ns herbdemo.core
   (:require [garden.units :refer [px em rem em]]
             [herb.core :refer-macros [<class]]
-            [demo.examples :as examples]
+            [herbdemo.examples :as examples]
             [reagent.core :as r]) )
 
 (defn appframe []
