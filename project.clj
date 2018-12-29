@@ -10,7 +10,7 @@
   :source-paths ["src"]
 
   :codox {:language :clojurescript
-          :output-path "doc"
+          :output-path "docs"
           :source-paths ["src"]}
 
   :min-lein-version "2.5.0"
