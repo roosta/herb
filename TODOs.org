@@ -115,7 +115,11 @@
 * TODO Global style vendor prefixes
 * DONE Check if dereffing inside metadata works as intended
   CLOSED: [2018-12-08 Sat 17:03]
-* TODO Test prod build using psuedo-names
-* TODO Fix advanced complite data herb still showing up
+* DONE Test prod build using psuedo-names
+  CLOSED: [2018-12-29 Sat 17:02]
+* CANCELLED Fix advanced compile data herb still showing up
+  CLOSED: [2018-12-29 Sat 17:02]
 * TODO Fix anonymous not getting a munged name
-* TODO Fix private functions
+* CANCELLED Fix private functions
+  CLOSED: [2018-12-29 Sat 17:02]
+* TODO Have data-herb reflect namespace when goog.debug is disabled
