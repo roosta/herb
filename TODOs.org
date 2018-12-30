@@ -119,7 +119,7 @@
   CLOSED: [2018-12-29 Sat 17:02]
 * CANCELLED Fix advanced compile data herb still showing up
   CLOSED: [2018-12-29 Sat 17:02]
-* TODO Fix anonymous not getting a munged name
-* CANCELLED Fix private functions
-  CLOSED: [2018-12-29 Sat 17:02]
+* CANCELLED Fix anonymous not getting a munged name
+  CLOSED: [2018-12-30 Sun 16:22]
+* TODO Fix private functions
 * TODO Have data-herb reflect namespace when goog.debug is disabled
