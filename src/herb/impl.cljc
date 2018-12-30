@@ -5,10 +5,8 @@
    [clojure.set :as set]
    [garden.stylesheet :refer [at-media at-keyframes at-supports]]
    #?@(:cljs [[cljs.compiler :as compiler]
-              [debux.cs.core :as d :refer-macros [clog clogn dbg dbgn break]]
               [cljs.analyzer :as ana]]
-       :clj [[clojure.tools.analyzer.jvm :refer [analyze]]
-             [debux.core :refer [dbg]]])))
+       :clj [[clojure.tools.analyzer.jvm :refer [analyze]]])))
 
 #?(:cljs (def dev? ^boolean js/goog.DEBUG)
    :clj (def dev? true))

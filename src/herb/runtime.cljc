@@ -1,7 +1,5 @@
 (ns herb.runtime
-  (:require #?@(:clj [[debux.core :refer [dbg]]]
-                :cljs [[goog.dom :as dom]
-                       [debux.cs.core :as d :refer-macros [clog clogn dbg dbgn break]]
+  (:require #?@(:cljs [[goog.dom :as dom]
                        [goog.object :as gobj]])
             [garden.core :refer [css]]
             [clojure.set :as set]

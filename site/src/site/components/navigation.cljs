@@ -1,7 +1,6 @@
 (ns site.components.navigation
   (:require [garden.units :refer [px rem percent]]
             [goog.events :as events]
-            [debux.cs.core :as d :refer-macros [clog clogn dbg dbgn break]]
             [clojure.string :as str]
             [site.components.icon :as icon]
             [goog.labs.userAgent.device :as device]

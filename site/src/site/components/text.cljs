@@ -1,7 +1,6 @@
 (ns site.components.text
   (:require [garden.units :refer [rem em px]]
             [herb.core :refer-macros [<class]]
-            [debux.cs.core :as d :refer-macros [clog clogn dbg dbgn break]]
             [clojure.string :as str]
             [reagent.core :as r]))
 

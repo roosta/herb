@@ -3,9 +3,7 @@
             [herb.spec]
             [clojure.spec.alpha :as s]
             [clojure.string :as str]
-            [herb.runtime :as runtime]
-            #?@(:clj [[debux.core :refer [dbg]]]
-                :cljs [[debux.cs.core :as d :refer-macros [clog clogn dbg dbgn break]]]))
+            [herb.runtime :as runtime])
   #?(:clj
      (:import garden.types.CSSAtRule)))
 
