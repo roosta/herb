@@ -9,7 +9,7 @@
    [garden.stylesheet :refer [at-media]]
    [taoensso.tufte :as tufte :refer-macros [defnp p profiled profile]]
    [garden.core :refer [css]]
-   [garden.units :refer [px em]]
+   [garden.units :refer [px em rem]]
    [reagent.debug :as d]
    [reagent.core :as r])
   )
@@ -210,8 +210,9 @@
 
 (defn container
   []
-  {:max-width (px 600)
-   :margin "0 auto"})
+  ^{:media {{:screen :only :min-width (em 32)} {:width (rem 33)}
+            {:screen :only :min-width (em 52)} {:width (rem 53)}}}
+  {:margin "0 auto"})
 
 (defn extend-group
   []
