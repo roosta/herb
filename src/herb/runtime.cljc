@@ -18,7 +18,8 @@
   [identifier #?(:cljs element) new]
   (let [css-str (css {:vendors (seq (:vendors @options))
                       :auto-prefix (seq (:auto-prefix @options))
-                      :pretty-print? dev?}
+                      ;; :pretty-print? dev?
+                      }
                      (map (fn [[classname {:keys [style pseudo media supports prefix vendors]}]]
                             [classname (with-meta style {:prefix prefix :vendors vendors})
                              pseudo media supports])
@@ -74,7 +75,7 @@
                 :global injected-global
                 :keyframes injected-keyframes)]
     (when-not (= (:data (get @state sym)) obj)
-      (let [css-str (css {:pretty-print? dev?} obj)]
+      (let [css-str (css #_{:pretty-print? dev?} obj)]
         #?(:cljs
            (let [element (or (.querySelector js/document (str "style[data-herb=\"" (name dispatch) "\"]"))
                              (create-element! (name dispatch)))
