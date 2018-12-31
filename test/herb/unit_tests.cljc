@@ -146,12 +146,12 @@
 
 (deftest create-data-string
   (testing "Creating data string"
-    (is (= (impl/create-data-string "demo$examples$width-vary-component" :keyed)
+    (is (= (impl/create-data-string "demo/examples/width-vary-component" :keyed)
            "demo.examples/width-vary-component[:keyed]"))
-    (is (= (impl/create-data-string "demo$examples$pulse-component-two" nil)
+    (is (= (impl/create-data-string "demo/examples/pulse-component-two" nil)
            "demo.examples/pulse-component-two" ))
-    (is (= (impl/create-data-string "demo$examples$main-$-nested-fn" nil)
-           "demo.examples.main-/-nested-fn"))))
+    (is (= (impl/create-data-string "demo/examples/main/nested-fn" nil)
+           "demo.examples.main/nested-fn"))))
 
 (defn test-fn-1
   []
@@ -173,11 +173,11 @@
 (deftest get-name
   (testing "getting function name"
     (is (= (subs (test-fn-1) 0 36)
-           "herb.unit-tests$test-fn-1$fn-binding"))
+           "herb.unit-tests/test-fn-1/fn-binding"))
     (is (= (test-fn-2)
-           "herb.unit-tests$test-fn-1"))
+           "herb.unit-tests/test-fn-1"))
     (is (= (test-fn-3)
-           "herb.unit-tests$test-fn-3$anonymous-15128758"))))
+           "herb.unit-tests/test-fn-3/anonymous-15128758"))))
 
 (deftest with-style!
   (testing "with-style! entry point"

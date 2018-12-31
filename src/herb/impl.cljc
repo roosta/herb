@@ -4,9 +4,7 @@
    [herb.runtime :as runtime]
    [clojure.set :as set]
    [garden.stylesheet :refer [at-media at-keyframes at-supports]]
-   #?@(:cljs [[cljs.compiler :as compiler]
-              [cljs.analyzer :as ana]]
-       :clj [[clojure.tools.analyzer.jvm :refer [analyze]]])))
+   #?@(:clj [[clojure.main :refer [demunge]]])))
 
 #?(:cljs (def dev? ^boolean js/goog.DEBUG)
    :clj (def dev? true))
@@ -142,7 +140,7 @@
 (defn create-data-string
   "Create a fully qualified name string for use in the data-herb attr"
   [n k]
-  (let [c (str/split n #?(:cljs #"/" :clj #"\$"))
+  (let [c (str/split n #"/")
         ns (apply str (interpose "." (butlast c)))
         sym (last c)]
     (str (symbol ns sym)
@@ -151,11 +149,10 @@
 (defn get-name
   [style-fn ns-name style-data]
   (let [name* #?(:cljs (.-name style-fn)
-                 :clj (str/replace
-                       (-> (analyze style-fn)
-                           :tag
-                           (.getName))
-                       #"_" "-"))
+                 :clj (as-> (str style-fn) $
+                         (demunge $)
+                         (re-find #"(.+)@" $)
+                         (last $)))
         anon? #?(:clj (str/includes? name* "fn--")
                  :cljs (empty? name*))
         hash* (when anon?

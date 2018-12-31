@@ -22,13 +22,12 @@
 
   :dependencies [[org.clojure/clojure "1.10.0" :scope "provided"]
                  [org.clojure/clojurescript "1.10.439" :scope "provided"]
-                 [org.clojure/tools.analyzer.jvm "0.7.2"]
-                 [org.clojure/tools.analyzer "0.7.0"]
                  [garden "1.3.6"]]
 
   :profiles {:dev {:dependencies [[binaryage/devtools "0.9.10"]
                                   [org.clojure/test.check "0.10.0-alpha3"]
                                   [figwheel "0.5.18"]
+                                  [philoskim/debux "0.5.2"]
                                   [reagent "0.8.1"]
                                   [com.taoensso/tufte "2.0.1"]
                                   [figwheel-sidecar "0.5.18"]
