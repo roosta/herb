@@ -1,8 +1,11 @@
 # Change Log
 ## [Unreleased]
+## [v0.7.2] - 2019-01-01
 ### Changed
 - Remove clojure tools.analyzer dependency
-- Temporarily disable pretty printing due to a [standing bug](https://github.com/noprompt/garden/issues/168) in Garden
+- Temporarily disable pretty printing due to a
+  [bug](https://github.com/noprompt/garden/issues/168) affecting certain media
+  queries.
 - Remove debux-stubs dependency
 
 ## [v0.7.1] - 2018-12-28
@@ -135,7 +138,8 @@ from `herb.macro` to `herb.core`
 ### Fixed
 - Fixed issues with inheritance precedence
 
-[Unreleased]: https://github.com/roosta/herb/compare/v0.7.1...HEAD
+[Unreleased]: https://github.com/roosta/herb/compare/v0.7.2...HEAD
+[v0.7.1]: https://github.com/roosta/herb/compare/v0.7.1...v0.7.2
 [v0.7.1]: https://github.com/roosta/herb/compare/v0.7.0...v0.7.1
 [v0.7.0]: https://github.com/roosta/herb/compare/v0.6.0...v0.7.0
 [v0.6.0]: https://github.com/roosta/herb/compare/v0.5.0...v0.6.0
