@@ -46,7 +46,7 @@
                              :compiler {:output-to "target/cljsbuild/public/js/app.js"
                                         :output-dir "target/cljsbuild/public/js"
                                         :source-map "target/cljsbuild/public/js/app.js.map"
-                                        ;; :closure-defines {"goog.DEBUG" false}
+                                        :closure-defines {"goog.DEBUG" false}
                                         :optimizations :advanced
                                         :pretty-print  false}}
                        :app {:source-paths ["src" "env/dev"]

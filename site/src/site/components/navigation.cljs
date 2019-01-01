@@ -36,6 +36,7 @@
               [:local "Local binding"]
               [:named "Named anonymous"]
               [:bound "Bound anonymous"]]]
+            [:advanced-compile "Advanced compilation"]
             [:examples "Examples and extras"]])
 
 (defgroup sidebar-style

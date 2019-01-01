@@ -5,6 +5,7 @@
             [site.components.text :refer [text]]
             [site.easing :as easing]
             [site.tutorials.examples :as examples]
+            [site.tutorials.advanced-compile :as adv]
             [site.tutorials.extending :as extending]
             [site.tutorials.feature-queries :as feature-queries]
             [site.tutorials.fn-vars :as fn-vars]
@@ -61,4 +62,5 @@
      [vendor-prefixes/main]
      [keyframes/main]
      [fn-vars/main]
+     [adv/main]
      [examples/main]]]])

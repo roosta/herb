@@ -1,0 +1,13 @@
+(defproject my-project "0.1.0-SNAPSHOT"
+  :dependencies [[org.clojure/clojure "1.10.0" :scope "provided"]
+                 [org.clojure/clojurescript "1.10.439" :scope "provided"]
+                 [herb "0.7.2"]]
+
+  :cljsbuild {:builds [{:id "release"
+                        :source-paths ["demo"]
+                        :compiler {:main "my-project.prod"
+                                   :output-to "resources/public/js/my-project.js"
+                                   :output-dir "resources/public/js/release"
+                                   :closure-defines {"goog.DEBUG" false}
+                                   :optimizations :advanced
+                                   :pretty-print false}}]})
