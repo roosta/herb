@@ -1,5 +1,10 @@
 # Change Log
 ## [Unreleased]
+### Changed
+- Remove clojure tools.analyzer dependency
+- Temporarily disable pretty printing due to a [standing bug](https://github.com/noprompt/garden/issues/168) in Garden
+- Remove debux-stubs dependency
+
 ## [v0.7.1] - 2018-12-28
 ### Changed
 - Split out site as a separate project.
