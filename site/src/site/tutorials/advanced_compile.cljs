@@ -32,6 +32,6 @@
      [code {:lang :html}
       e2]
      [text "Note that keys are currently not munged and `pretty-printing` is
-     disabled due to a "
-      [:a {:href "https://github.com/noprompt/garden/issues/168"} "bug in Garden"]
-      " affecting media queries."]]))
+     temporarily disabled due to a "
+      [:a {:href "https://github.com/noprompt/garden/issues/168"} "bug "]
+      " affecting certain media queries."]]))
