@@ -124,3 +124,4 @@
 * TODO Fix private functions
 * TODO Have data-herb reflect namespace when goog.debug is disabled
 * TODO Munge key names?
+* TODO Update doc strings for functions that used to pass a result coll
