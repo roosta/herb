@@ -28,9 +28,9 @@
      [text "Need more examples? This site is made using Herb. It's located under "
       [:a {:href "https://github.com/roosta/herb/tree/master/site"} "site"]
       ". There is also "
-      [:a {:href "https://github.com/roosta/herb/blob/master/demo/examples.cljs"} "examples.cljs"]
+      [:a {:href "https://github.com/roosta/herb/blob/master/demo/herbdemo/examples.cljs"} "examples.cljs"]
       " and "
-      [:a {:href "https://github.com/roosta/herb/blob/master/demo/examples.clj"} "examples.clj"]
+      [:a {:href "https://github.com/roosta/herb/blob/master/demo/herbdemo/examples.clj"} "examples.clj"]
       " that is used during development and contain example components
      for each of Herbs features. It need some serious attention to be truly
      useful to anyone but for now it is what it is."]]))
