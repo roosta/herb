@@ -10,6 +10,7 @@
   :source-paths ["src"]
 
   :codox {:language :clojurescript
+          :metadata {:doc/format :markdown}
           :output-path "docs"
           :source-paths ["src"]}
 
