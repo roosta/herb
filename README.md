@@ -12,7 +12,7 @@ Herb is a CSS styling library for [Clojurescript](https://clojurescript.org/), b
 Herb requires at least Clojure 1.9.0 and ClojureScript 1.9.542 due to use of [clojure.spec.alpha](https://cljs.github.io/api/cljs.spec.alpha/) to validate macro input.
 
 ## Quick start
-![](https://clojars.org/herb/latest-version.svg)
+[![Clojars Project](http://clojars.org/herb/latest-version.svg)](http://clojars.org/herb)
 
 ```clojure
 (ns user
