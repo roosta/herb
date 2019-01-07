@@ -523,3 +523,127 @@ Archived entries from file /home/roosta/src/herb/TODOs.org
   :ARCHIVE_CATEGORY: TODOs
   :ARCHIVE_TODO: DONE
   :END:
+
+* CANCELLED Fix advanced compile data herb still showing up
+  CLOSED: [2018-12-29 Sat 17:02]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2019-01-07 Mon 18:47
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: CANCELLED
+  :END:
+
+* CANCELLED Fix anonymous not getting a munged name
+  CLOSED: [2018-12-30 Sun 16:22]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2019-01-07 Mon 18:47
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: CANCELLED
+  :END:
+
+* DONE Check if dereffing inside metadata works as intended
+  CLOSED: [2018-12-08 Sat 17:03]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2019-01-07 Mon 18:47
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE Test prod build using psuedo-names
+  CLOSED: [2018-12-29 Sat 17:02]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2019-01-07 Mon 18:47
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE Fix private functions
+  CLOSED: [2019-01-07 Mon 18:47]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2019-01-07 Mon 18:47
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE Update doc strings for functions that used to pass a result coll
+  CLOSED: [2019-01-07 Mon 18:47]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2019-01-07 Mon 18:47
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE Update doc strings for functions that used to pass a result coll
+  CLOSED: [2019-01-07 Mon 18:47]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2019-01-07 Mon 18:47
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: CANCELLED
+  :END:
+
+* DONE Fix appbar taking up screen when navigating to item
+  CLOSED: [2018-12-08 Sat 15:15]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2019-01-07 Mon 18:48
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE Fix local_binding.html example to have correct data-herb and classnames
+  CLOSED: [2018-11-30 Fri 18:18]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2019-01-07 Mon 18:48
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE Fix local_binding.html example to have correct data-herb and classnames
+  CLOSED: [2018-11-30 Fri 18:18]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2019-01-07 Mon 18:48
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* CANCELLED Arbitrary depth fns
+  CLOSED: [2018-11-18 Sun 18:14]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2019-01-07 Mon 18:48
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: CANCELLED
+  :END:
+  #+BEGIN_SRC clojure
+    (let [fn-1 (fn []
+                 (let [fn-2 (fn [] {})]
+                   {}))])
+  #+END_SRC
+
+* DONE Add global init
+  CLOSED: [2018-11-18 Sun 16:33]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2019-01-07 Mon 18:48
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+  Possibly create instances?
+
+* DONE Test that clj logic is still sound
+  CLOSED: [2019-01-07 Mon 18:48]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2019-01-07 Mon 18:48
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+ Specifically that the compose-data-string still works with new regexp

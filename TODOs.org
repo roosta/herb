@@ -74,9 +74,6 @@
 * TODO Fix single rule not causing newline
 * TODO Mention clojurescript version and requiring functions
 * MAYBE Change defgroup to stylegroup
-* DONE Add global init
-  CLOSED: [2018-11-18 Sun 16:33]
-  Possibly create instances?
 * PARTIAL What happens when trying to extend a style group with no arguments?
   CLOSED: [2018-10-03 Wed 19:09]
   It thows the defgroup error with a blank for component. Consider improving error message
@@ -84,44 +81,16 @@
 * TODO Look into using more complex classname chars
   I know css supports a larger range of classname chars but I think passing
   through hiccup or reagent they get sanitized
-* PARTIAL Test that clj logic is still sound
-  CLOSED: [2018-10-13 Sat 19:09]
- Specifically that the compose-data-string still works with new regexp
 * TODO [[https://github.com/divs1210/xodarap][divs1210/xodarap: Fearless recursion in Clojure!]]
 * TODO Defgroup in clj might need a simpler syntax when calling from <style
-* CANCELLED Arbitrary depth fns
-  CLOSED: [2018-11-18 Sun 18:14]
-  #+BEGIN_SRC clojure
-    (let [fn-1 (fn []
-                 (let [fn-2 (fn [] {})]
-                   {}))])
-  #+END_SRC
 * TODO ensure key works with lots of variation
-* DONE Fix namespaces like this: herb-demo.snippets/state-fn/button-style
-  CLOSED: [2018-12-08 Sat 16:59]
 * TODO Debugging in prod build
 * TODO Finish tests
 * TODO Add instance support with custom injection point
 * TODO Support various meta options inside supports/media query
-* DONE Fix local_binding.html example to have correct data-herb and classnames
-  CLOSED: [2018-11-30 Fri 18:18]
-* DONE Fix appbar taking up screen when navigating to item
-  CLOSED: [2018-12-08 Sat 15:15]
 * TODO Add better key meta second example
 * TODO Add metadata spec
 * TODO Fix HTML syntax highlighting
-* CANCELLED Fix keyframes of the same name
-  CLOSED: [2018-12-08 Sat 15:14]
 * TODO Global style vendor prefixes
-* DONE Check if dereffing inside metadata works as intended
-  CLOSED: [2018-12-08 Sat 17:03]
-* DONE Test prod build using psuedo-names
-  CLOSED: [2018-12-29 Sat 17:02]
-* CANCELLED Fix advanced compile data herb still showing up
-  CLOSED: [2018-12-29 Sat 17:02]
-* CANCELLED Fix anonymous not getting a munged name
-  CLOSED: [2018-12-30 Sun 16:22]
-* TODO Fix private functions
 * TODO Have data-herb reflect namespace when goog.debug is disabled
 * TODO Munge key names?
-* TODO Update doc strings for functions that used to pass a result coll
