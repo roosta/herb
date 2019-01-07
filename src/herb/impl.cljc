@@ -150,9 +150,9 @@
   [style-fn ns-name style-data]
   (let [name* #?(:cljs (.-name style-fn)
                  :clj (as-> (str style-fn) $
-                         (demunge $)
-                         (re-find #"(.+)@" $)
-                         (last $)))
+                        (demunge $)
+                        (re-find #"(.+)@" $)
+                        (last $)))
         anon? #?(:clj (str/includes? name* "fn--")
                  :cljs (empty? name*))
         hash* (when anon?
