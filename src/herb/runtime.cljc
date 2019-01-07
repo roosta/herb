@@ -8,12 +8,37 @@
 #?(:cljs (def dev? ^boolean js/goog.DEBUG)
    :clj (def dev? true))
 
-(defonce injected-styles (atom {}))
-(defonce injected-keyframes (atom {}))
-(defonce injected-global (atom {}))
-(defonce options (atom {}))
+(defonce
+  ^{:private true
+    :doc "Atom containing all styles added to DOM. Takes the form of a map with
+  classnames as keys. The map entry contains a `:data` which is Herb's
+  representation of a style unit, `:data-string` which is what is used as the
+  style data attribute in DOM, and `:css` which contains the rendered CSS
+  string."}
+  injected-styles (atom {}))
 
-(defn update-style!
+(defonce
+  ^{:private true
+    :doc "Atom containing all keyframe CSS added to DOM. Takes the form of a map
+  with a namespace as a key. A map entry contains the keys `:data` which is herb's
+  representation of a keyframe unit and `:css` which is the rendered CSS
+  string"}
+  injected-keyframes (atom {}))
+
+(defonce
+  ^{:private true
+    :doc "Atom containing all global style added to DOM. Takes the form of a map
+  with namespace as keys. A map entry contains `:data` which is a collection of
+  global styles for a given via defglobal call and `:css` that contains the
+  rendered CSS"}
+  injected-global (atom {}))
+
+(defonce
+  ^{:doc "Atom containing a map with options passed from `herb.core/init!`.
+  Entry includes `:vendors` and `:auto-prefix`"}
+  options (atom {}))
+
+(defn- update-style!
   "Create css string and update DOM"
   [identifier #?(:cljs element) new]
   (let [css-str (css {:vendors (seq (:vendors @options))
@@ -28,7 +53,7 @@
     (swap! injected-styles assoc identifier (assoc new :css css-str))))
 
 #?(:cljs
-   (defn create-element!
+   (defn- create-element!
      "Create an element in the DOM with an optional data-herb attribute"
      [attr]
      (let [head (.-head js/document)]
@@ -40,7 +65,7 @@
          (.appendChild head element)
          element))))
 
-(defn create-style
+(defn- create-style
   "Create a style element in head if identifier is not already present Attach a
   data attr with namespace and call update-style with new element"
   [identifier new data-str]

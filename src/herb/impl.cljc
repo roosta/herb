@@ -9,20 +9,20 @@
 #?(:cljs (def dev? ^boolean js/goog.DEBUG)
    :clj (def dev? true))
 
-(defn convert-pseudo
+(defn- convert-pseudo
   [pseudos]
   (map
    (fn [[kw p]]
      [(keyword (str "&" kw)) p])
    pseudos))
 
-(defn convert-media
+(defn- convert-media
   [media]
   (map (fn [[query style]]
          (at-media query [:& style]))
        media))
 
-(defn convert-supports
+(defn- convert-supports
   [supports]
   (map (fn [[query style]]
          (at-supports query [:& style]))
@@ -37,7 +37,7 @@
          (distinct))
         vendors))
 
-(defn resolve-style-fns
+(defn- resolve-style-fns
   "Calls each function provided in a collection of style-fns. Input can take
   multiple forms depending on how it got called from the consumer side either
   using the macro directly or via extend meta data. Takes a collection of
@@ -63,7 +63,7 @@
                  (rest sf)
                  (into result (resolve-style-fns input))))))))
 
-(defn process-meta-xform
+(defn- process-meta-xform
   "Return a transducer that pulls out a given meta type from a sequence and filter
   out nil values"
   [meta-type]
@@ -72,7 +72,7 @@
    (map meta-type)
    (filter identity)))
 
-(defn extract-styles
+(defn- extract-styles
   "Extract all the `:extend` meta, ensuring what we walk the entire tree, passing
   each extend vector of style-fns to `resolve-style-fns` for resolution.
   Takes a collection of `style-fns` and a result collection that is returned
@@ -92,7 +92,7 @@
                (into styles result)))
       :else result)))
 
-(defn extract-meta
+(defn- extract-meta
   "Takes a group of resolved styles and a meta type. Pull out each meta obj and
   merge to prevent duplicates, finally convert to garden acceptable input and
   return"
@@ -111,7 +111,7 @@
                      (apply merge {} extracted))]
         (convert-fn merged)))))
 
-(defn prepare-data
+(defn- prepare-data
   "Prepare `resolved-styles` so they can be passed to `garden.core/css` Merge
   the styles to remove duplicate entries and ensuring precedence. Extract all
   meta and return a final vector of styles including meta."
@@ -123,7 +123,7 @@
     :supports (extract-meta resolved-styles :supports)
     :media (extract-meta resolved-styles :media)})
 
-(defn sanitize
+(defn- sanitize
   "Takes `input` and remove any non-valid characters"
   [input]
   (when input
@@ -131,13 +131,13 @@
       (keyword? input) (sanitize (name input))
       :else (str/replace (str input) #"[^A-Za-z0-9-_]" "_"))))
 
-(defn compose-selector
+(defn- compose-selector
   [n k]
   (str (sanitize n)
        (when k
          (str "_" (sanitize k)))))
 
-(defn create-data-string
+(defn- create-data-string
   "Create a fully qualified name string for use in the data-herb attr"
   [n k]
   (let [c (str/split n #"/")
@@ -146,7 +146,7 @@
     (str (symbol ns sym)
          (when k (str "[" k "]")))))
 
-(defn get-name
+(defn- get-name
   [style-fn ns-name style-data]
   (let [name* #?(:cljs (.-name style-fn)
                  :clj (as-> (str style-fn) $
