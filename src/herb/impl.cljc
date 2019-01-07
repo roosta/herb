@@ -41,8 +41,7 @@
   "Calls each function provided in a collection of style-fns. Input can take
   multiple forms depending on how it got called from the consumer side either
   using the macro directly or via extend meta data. Takes a collection of
-  `style-fns` and a collection `result` that is returned with the resolved style
-  maps."
+  `style-fns`  and returns a vector with the resolved style maps."
   [style-fns]
   (loop [sf style-fns
          result []]
@@ -74,9 +73,8 @@
 
 (defn- extract-styles
   "Extract all the `:extend` meta, ensuring what we walk the entire tree, passing
-  each extend vector of style-fns to `resolve-style-fns` for resolution.
-  Takes a collection of `style-fns` and a result collection that is returned
-  with the resolved styles"
+  each extend vector of style-fns to `resolve-style-fns` for resolution. Returns
+  vector of resolved styles"
   [style-fns]
   (loop [sf style-fns
          result []]
