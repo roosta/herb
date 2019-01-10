@@ -32,4 +32,4 @@
      [code {:lang :html}
       e2]
      [text
-      "As you can see the rendered CSS has our psudo class and element"]]))
+      "As you can see the rendered CSS has our pseudo class and element"]]))
