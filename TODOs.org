@@ -97,4 +97,5 @@
 * TODO Global style vendor prefixes
 * TODO Have data-herb reflect namespace when goog.debug is disabled
 * TODO Munge key names?
-* TODO Log statements doesn't work in extended paren fn
+* CANCELLED Log statements doesn't work in extended paren fn
+  CLOSED: [2019-02-04 Mon 13:10]
