@@ -72,12 +72,15 @@
   which is what you want.
 
 * TODO Fix single rule not causing newline
-* TODO Mention clojurescript version and requiring functions
-* MAYBE Change defgroup to stylegroup
+* DONE Mention clojurescript version and requiring functions
+  CLOSED: [2019-02-04 Mon 12:57]
+* CANCELLED Change defgroup to stylegroup
+  CLOSED: [2019-02-04 Mon 12:57]
 * PARTIAL What happens when trying to extend a style group with no arguments?
   CLOSED: [2018-10-03 Wed 19:09]
   It thows the defgroup error with a blank for component. Consider improving error message
-* TODO Add note about setting debug flag to false on prod builds
+* DONE Add note about setting debug flag to false on prod builds
+  CLOSED: [2019-02-04 Mon 12:57]
 * TODO Look into using more complex classname chars
   I know css supports a larger range of classname chars but I think passing
   through hiccup or reagent they get sanitized
@@ -94,3 +97,4 @@
 * TODO Global style vendor prefixes
 * TODO Have data-herb reflect namespace when goog.debug is disabled
 * TODO Munge key names?
+* TODO Log statements
