@@ -7,15 +7,15 @@
   :dependencies [[org.clojure/clojure "1.10.0"]
                  [ring-server "0.5.0"]
                  [reagent "0.8.1"]
-                 [reagent-utils "0.3.1"]
+                 [reagent-utils "0.3.2"]
                  [ring "1.7.1"]
                  [herb "0.7.2"]
                  [ring/ring-defaults "0.3.2"]
                  [hiccup "1.0.5"]
                  [cljsjs/highlight "9.12.0-2"]
                  [yogthos/config "1.1.1"]
-                 [org.clojure/clojurescript "1.10.439"]
-                 [metosin/reitit "0.2.9"]
+                 [org.clojure/clojurescript "1.10.520"]
+                 [metosin/reitit "0.2.13"]
                  [pez/clerk "1.0.0"]
                  [venantius/accountant "0.2.4"
                   :exclusions [org.clojure/tools.reader]]]
@@ -67,14 +67,14 @@
              :ring-handler site.handler/app}
 
   :profiles {:dev {:repl-options {:init-ns site.repl}
-                   :dependencies [[cider/piggieback "0.3.10"]
+                   :dependencies [[cider/piggieback "0.4.0"]
                                   [binaryage/devtools "0.9.10"]
                                   [prone "1.6.1"]
                                   [ring/ring-mock "0.3.2"]
                                   [ring/ring-devel "1.7.1"]
                                   [pjstadig/humane-test-output "0.9.0"]
                                   [figwheel-sidecar "0.5.18"]
-                                  [nrepl "0.5.3"]]
+                                  [nrepl "0.6.0"]]
                    :source-paths ["env/dev"]
                    :injections [(require 'pjstadig.humane-test-output)
                                 (pjstadig.humane-test-output/activate!)]
