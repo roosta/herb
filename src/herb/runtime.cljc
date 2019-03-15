@@ -39,7 +39,7 @@
   options (atom {}))
 
 (defn- update-style!
-  "Create css string and update DOM"
+  "Create CSS string and update DOM"
   [identifier #?(:cljs element) new]
   (let [css-str (css {:vendors (seq (:vendors @options))
                       :auto-prefix (seq (:auto-prefix @options))
