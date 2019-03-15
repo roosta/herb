@@ -1,5 +1,10 @@
 # Change Log
-## [Unreleased]
+## [v0.7.3-SNAPSHOT]
+### Changed
+- Updated dependencies
+### Fixed
+- Allow passing at-rules (at-media, at-supports ...) to defglobal
+
 ## [v0.7.2] - 2019-01-01
 ### Changed
 - Remove clojure tools.analyzer dependency
@@ -138,7 +143,7 @@ from `herb.macro` to `herb.core`
 ### Fixed
 - Fixed issues with inheritance precedence
 
-[Unreleased]: https://github.com/roosta/herb/compare/v0.7.2...HEAD
+[v0.7.3-SNAPSHOT]: https://github.com/roosta/herb/compare/v0.7.2...HEAD
 [v0.7.2]: https://github.com/roosta/herb/compare/v0.7.1...v0.7.2
 [v0.7.1]: https://github.com/roosta/herb/compare/v0.7.0...v0.7.1
 [v0.7.0]: https://github.com/roosta/herb/compare/v0.6.0...v0.7.0
