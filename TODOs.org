@@ -99,3 +99,4 @@
 * TODO Munge key names?
 * CANCELLED Log statements doesn't work in extended paren fn
   CLOSED: [2019-02-04 Mon 13:10]
+* TODO Add selectors
