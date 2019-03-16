@@ -647,3 +647,39 @@ Archived entries from file /home/roosta/src/herb/TODOs.org
   :ARCHIVE_TODO: DONE
   :END:
  Specifically that the compose-data-string still works with new regexp
+
+* CANCELLED Log statements doesn't work in extended paren fn
+  CLOSED: [2019-02-04 Mon 13:10]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2019-03-16 Sat 14:52
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: CANCELLED
+  :END:
+
+* DONE Add note about setting debug flag to false on prod builds
+  CLOSED: [2019-02-04 Mon 12:57]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2019-03-16 Sat 14:52
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* DONE Mention clojurescript version and requiring functions
+  CLOSED: [2019-02-04 Mon 12:57]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2019-03-16 Sat 14:52
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: DONE
+  :END:
+
+* CANCELLED Change defgroup to stylegroup
+  CLOSED: [2019-02-04 Mon 12:57]
+  :PROPERTIES:
+  :ARCHIVE_TIME: 2019-03-16 Sat 14:52
+  :ARCHIVE_FILE: ~/src/herb/TODOs.org
+  :ARCHIVE_CATEGORY: TODOs
+  :ARCHIVE_TODO: CANCELLED
+  :END:

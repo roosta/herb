@@ -72,15 +72,9 @@
   which is what you want.
 
 * TODO Fix single rule not causing newline
-* DONE Mention clojurescript version and requiring functions
-  CLOSED: [2019-02-04 Mon 12:57]
-* CANCELLED Change defgroup to stylegroup
-  CLOSED: [2019-02-04 Mon 12:57]
 * PARTIAL What happens when trying to extend a style group with no arguments?
   CLOSED: [2018-10-03 Wed 19:09]
   It thows the defgroup error with a blank for component. Consider improving error message
-* DONE Add note about setting debug flag to false on prod builds
-  CLOSED: [2019-02-04 Mon 12:57]
 * TODO Look into using more complex classname chars
   I know css supports a larger range of classname chars but I think passing
   through hiccup or reagent they get sanitized
@@ -93,10 +87,9 @@
 * TODO Support various meta options inside supports/media query
 * TODO Add better key meta second example
 * TODO Add metadata spec
+* MAYBE convert ints to valid garden units
 * TODO Fix HTML syntax highlighting
 * TODO Global style vendor prefixes
 * TODO Have data-herb reflect namespace when goog.debug is disabled
 * TODO Munge key names?
-* CANCELLED Log statements doesn't work in extended paren fn
-  CLOSED: [2019-02-04 Mon 13:10]
 * TODO Add selectors
