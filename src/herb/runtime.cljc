@@ -2,6 +2,7 @@
   (:require #?@(:cljs [[goog.dom :as dom]
                        [goog.object :as gobj]])
             [garden.core :refer [css]]
+            [garden.selectors :as s]
             [clojure.set :as set]
             [clojure.string :as str]))
 
@@ -45,9 +46,9 @@
                       :auto-prefix (seq (:auto-prefix @options))
                       ;; :pretty-print? dev?
                       }
-                     (map (fn [[classname {:keys [style pseudo media supports prefix vendors]}]]
+                     (map (fn [[classname {:keys [style pseudo media supports prefix vendors selectors]}]]
                             [classname (with-meta style {:prefix prefix :vendors vendors})
-                             pseudo media supports])
+                             pseudo media supports selectors])
                           (:data new)))]
     #?(:cljs (set! (.-innerHTML element) css-str))
     (swap! injected-styles assoc identifier (assoc new :css css-str))))

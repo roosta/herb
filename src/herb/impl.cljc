@@ -37,6 +37,13 @@
          (distinct))
         vendors))
 
+(defn convert-selectors
+  [selectors]
+  (map (fn [[sel style]]
+         [sel style])
+       selectors)
+  )
+
 (defn- resolve-style-fns
   "Calls each function provided in a collection of style-fns. Input can take
   multiple forms depending on how it got called from the consumer side either
@@ -100,11 +107,13 @@
                      :supports convert-supports
                      :prefix identity
                      :vendors convert-vendors
-                     :pseudo convert-pseudo)
+                     :pseudo convert-pseudo
+                     :selectors convert-selectors)
         extracted (into [] (process-meta-xform meta-type) styles)]
     (when (seq extracted)
       (let [merged (case meta-type
                      :prefix (last extracted)
+                     :selectors (apply concat extracted)
                      :vendors (apply concat extracted)
                      (apply merge {} extracted))]
         (convert-fn merged)))))
@@ -119,7 +128,8 @@
     :vendors (extract-meta resolved-styles :vendors)
     :prefix (extract-meta resolved-styles :prefix)
     :supports (extract-meta resolved-styles :supports)
-    :media (extract-meta resolved-styles :media)})
+    :media (extract-meta resolved-styles :media)
+    :selectors (extract-meta resolved-styles :selectors)})
 
 (defn- sanitize
   "Takes `input` and remove any non-valid characters"

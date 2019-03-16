@@ -1,6 +1,7 @@
 (ns herb.unit-tests
   (:require [clojure.test :as t :refer [deftest testing is are]]
             [garden.stylesheet :refer [at-media at-keyframes at-supports]]
+            [garden.selectors :as s]
             [herb.runtime :as runtime]
             [herb.impl :as impl]))
 
@@ -110,18 +111,25 @@
                 (with-meta
                   {:transition "all 1s ease-out"}
                   {:vendors ["ms" "webkit"]
-                   :prefix true})]
+                   :prefix true})
+                (with-meta
+                  {:box-sizing "border-box"}
+                  {:selectors {(s/> :div) {:margin-left "10px"}
+                               (s/+ :div :p) {:margin-left "20px"}}})]
         expected {:style {:color "black",
                           :background-color "red",
                           :border-radius "5px",
                           :font-style "italic",
                           :font-weight "bold"
-                          :transition "all 1s ease-out"}
+                          :transition "all 1s ease-out"
+                          :box-sizing "border-box"}
                   :vendors ["ms" "webkit"]
                   :prefix true
                   :supports (list (at-supports {:display :grid} [:& {:font-size "24px"}]))
                   :pseudo (list [:&:hover {:color "magenta"}])
-                  :media (list (at-media {:screen true} [:& {:background-color "blue"}]))}
+                  :media (list (at-media {:screen true} [:& {:background-color "blue"}]))
+                  :selectors (list [(s/> :div) {:margin-left "10px"}]
+                                   [(s/+ :div :p) {:margin-left "20px"}])}
         actual (#'herb.impl/prepare-data styles)]
     (testing "Prepare data"
       (is (= actual expected)))))
@@ -196,6 +204,7 @@
                :vendors nil,
                :prefix nil,
                :supports nil,
-               :media nil}},
+               :media nil
+               :selectors nil}},
              :data-string "herb.unit-tests/test-fn-4",
              :css ".herb_unit-tests_test-fn-4 {\n  background: red;\n}"}}))))
