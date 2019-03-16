@@ -4,6 +4,38 @@
 - Updated dependencies
 ### Fixed
 - Allow passing at-rules (at-media, at-supports ...) to defglobal
+### Added
+- New meta type `:selectors`, allows for targeting using garden selectors:
+```clojure
+(defn selector-test []
+  ^{:selectors {(s/> :div) {:margin-left "10px"
+                            :background "red"}
+                (s/+ :div :p) {:background "purple"
+                               :margin 0
+                               :margin-left "20px"}}}
+  {:background :blue
+   :color :white})
+```
+Result:
+
+```css
+.herbdemo_examples_selector-test {
+  background: blue;
+  color: white;
+}
+
+.herbdemo_examples_selector-test div {
+  margin-left: 10px;
+  background: red;
+}
+
+.herbdemo_examples_selector-test div + p {
+  background: purple;
+  margin: 0;
+  margin-left: 20px;
+}
+```
+
 
 ## [v0.7.2] - 2019-01-01
 ### Changed
