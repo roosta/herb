@@ -22,11 +22,13 @@
              :font-size (px 24)}])
 
 (defn selector-test []
-  ^{:selectors {(s/> :div) {:margin-left "10px"
-                            :background "red"}
-                (s/+ :div :p) {:background "purple"
-                               :margin 0
-                               :margin-left "20px"}}}
+  ^{:combinators {[:> :div :span] {:margin-left "10px"
+                                   :background "red"}
+                  [:+ :p] {:background "purple"
+                           :margin 0
+                           :margin-left "20px"}
+                  [:- :div] {:background "yellow"}
+                  [:descendant :div] {:background "green"}}}
   {:background :blue
    :color :white})
 
@@ -323,6 +325,7 @@
   ^{:key in}
   {:background-color (:color in)})
 
+
 (defn main []
   (let [state (r/atom "green")]
     (fn []
@@ -335,10 +338,16 @@
        [:div {:class (<class group-with-args :box "black")}
         [:span {:class (<class group-with-args :text)}
          "Group that takes args"]]
-       [:div {:class (<class selector-test)}
-        "Testing selectors"
-        [:div "Child combinator"]
-        [:p "Adjacent sibling"]]
+       [:div
+        [:div {:class (<class selector-test)}
+         "Testing selectors"
+         [:div
+          [:span "Child combinator"]]
+         [:div
+          [:span
+           "Child combinator"]]]
+        [:p "Adjacent sibling"]
+        [:div "General sibling"]]
        [:div.global "global style"]
        [:div {:class (join (<class row) (<class simple))}
         "multiple classes"]
