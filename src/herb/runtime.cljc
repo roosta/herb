@@ -42,7 +42,7 @@
 (defn- update-style!
   "Create CSS string and update DOM"
   [identifier #?(:cljs element) new]
-  (let [style (mapcat (fn [[classname {:keys [style pseudo media supports prefix vendors selectors]}]]
+  (let [style (mapcat (fn [[classname {:keys [style pseudo media supports prefix vendors combinators]}]]
                         [[classname (with-meta style {:prefix prefix :vendors vendors})
                           pseudo media supports]
                          [(map (fn [[[combinator & elements] style]]
@@ -51,7 +51,7 @@
                                     :+ [(apply s/+ classname elements) style]
                                     :- [(apply s/- classname elements) style]
                                     :descendant [(apply s/descendant classname elements) style]))
-                           selectors)]])
+                           combinators)]])
                       (:data new))
         css-str (css {:vendors (seq (:vendors @options))
                       :auto-prefix (seq (:auto-prefix @options))}
