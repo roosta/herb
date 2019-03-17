@@ -106,7 +106,6 @@
     (when (seq extracted)
       (let [merged (case meta-type
                      :prefix (last extracted)
-                     :combinators (last extracted)
                      :vendors (apply concat extracted)
                      (apply merge {} extracted))]
         (convert-fn merged)))))

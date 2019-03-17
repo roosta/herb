@@ -21,13 +21,18 @@
   [:.global {:color "magenta"
              :font-size (px 24)}])
 
+(defn selector-inherit
+  []
+  ^{:combinators {[:- :div] {:background "yellow"}}}
+  {:font-size "16px"})
+
 (defn selector-test []
-  ^{:combinators {[:> :div :span] {:margin-left "10px"
+  ^{:extend selector-inherit
+    :combinators {[:> :div :span] {:margin-left "10px"
                                    :background "red"}
                   [:+ :p] {:background "purple"
                            :margin 0
                            :margin-left "20px"}
-                  [:- :div] {:background "yellow"}
                   [:descendant :div] {:background "green"}}}
   {:background :blue
    :color :white})
@@ -329,7 +334,6 @@
 (defn main []
   (let [state (r/atom "green")]
     (fn []
-
       [:div {:class (<class container)}
        (for [d data]
          ^{:key d}
