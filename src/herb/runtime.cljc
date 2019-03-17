@@ -42,14 +42,20 @@
 (defn- update-style!
   "Create CSS string and update DOM"
   [identifier #?(:cljs element) new]
-  (let [css-str (css {:vendors (seq (:vendors @options))
-                      :auto-prefix (seq (:auto-prefix @options))
-                      ;; :pretty-print? dev?
-                      }
-                     (map (fn [[classname {:keys [style pseudo media supports prefix vendors selectors]}]]
-                            [classname (with-meta style {:prefix prefix :vendors vendors})
-                             pseudo media supports selectors])
-                          (:data new)))]
+  (let [style (mapcat (fn [[classname {:keys [style pseudo media supports prefix vendors selectors]}]]
+                        [[classname (with-meta style {:prefix prefix :vendors vendors})
+                          pseudo media supports]
+                         [(map (fn [[[combinator & elements] style]]
+                                  (case combinator
+                                    :> [(apply s/> classname elements) style]
+                                    :+ [(apply s/+ classname elements) style]
+                                    :- [(apply s/- classname elements) style]
+                                    :descendant [(apply s/descendant classname elements) style]))
+                           selectors)]])
+                      (:data new))
+        css-str (css {:vendors (seq (:vendors @options))
+                      :auto-prefix (seq (:auto-prefix @options))}
+                     style)]
     #?(:cljs (set! (.-innerHTML element) css-str))
     (swap! injected-styles assoc identifier (assoc new :css css-str))))
 

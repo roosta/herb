@@ -108,12 +108,12 @@
                      :prefix identity
                      :vendors convert-vendors
                      :pseudo convert-pseudo
-                     :selectors convert-selectors)
+                     :selectors identity)
         extracted (into [] (process-meta-xform meta-type) styles)]
     (when (seq extracted)
       (let [merged (case meta-type
                      :prefix (last extracted)
-                     :selectors (apply concat extracted)
+                     :selectors (last extracted)
                      :vendors (apply concat extracted)
                      (apply merge {} extracted))]
         (convert-fn merged)))))
