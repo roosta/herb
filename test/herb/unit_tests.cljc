@@ -114,8 +114,10 @@
                    :prefix true})
                 (with-meta
                   {:box-sizing "border-box"}
-                  {:selectors {(s/> :div) {:margin-left "10px"}
-                               (s/+ :div :p) {:margin-left "20px"}}})]
+                  {:combinators {[:> :div :span] {:background "red"}
+                                 [:+ :p] {:background "purple"}
+                                 [:- :div] {:background "yellow"}
+                                 [:descendant :div] {:background "green"}}})]
         expected {:style {:color "black",
                           :background-color "red",
                           :border-radius "5px",
@@ -128,8 +130,10 @@
                   :supports (list (at-supports {:display :grid} [:& {:font-size "24px"}]))
                   :pseudo (list [:&:hover {:color "magenta"}])
                   :media (list (at-media {:screen true} [:& {:background-color "blue"}]))
-                  :selectors (list [(s/> :div) {:margin-left "10px"}]
-                                   [(s/+ :div :p) {:margin-left "20px"}])}
+                  :combinators {[:> :div :span] {:background "red"}
+                                [:+ :p] {:background "purple"}
+                                [:- :div] {:background "yellow"}
+                                [:descendant :div] {:background "green"}}}
         actual (#'herb.impl/prepare-data styles)]
     (testing "Prepare data"
       (is (= actual expected)))))
@@ -205,6 +209,6 @@
                :prefix nil,
                :supports nil,
                :media nil
-               :selectors nil}},
+               :combinators nil}},
              :data-string "herb.unit-tests/test-fn-4",
              :css ".herb_unit-tests_test-fn-4 {\n  background: red;\n}"}}))))
