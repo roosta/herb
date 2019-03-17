@@ -5,36 +5,51 @@
 ### Fixed
 - Allow passing at-rules (at-media, at-supports ...) to defglobal
 ### Added
-- New meta type `:selectors`, allows for targeting using garden selectors:
+- New meta type `:combinators`, allows for targeting using garden selector
+  combinators like `>`, `+`, `-`, `descendant` from `garden.selectors` namespace.
+
 ```clojure
 (defn selector-test []
-  ^{:selectors {(s/> :div) {:margin-left "10px"
-                            :background "red"}
-                (s/+ :div :p) {:background "purple"
-                               :margin 0
-                               :margin-left "20px"}}}
+  ^{:combinators {[:> :div :span] {:margin-left "10px"
+                                   :background "red"}
+                  [:+ :p] {:background "purple"
+                           :margin 0
+                           :margin-left "20px"}
+                  [:- :div] {:background "yellow"}
+                  [:descendant :div] {:background "green"}}}
   {:background :blue
    :color :white})
 ```
 Result:
 
 ```css
+
 .herbdemo_examples_selector-test {
   background: blue;
   color: white;
 }
 
-.herbdemo_examples_selector-test div {
+.herbdemo_examples_selector-test > div > span {
   margin-left: 10px;
   background: red;
 }
 
-.herbdemo_examples_selector-test div + p {
+.herbdemo_examples_selector-test + p {
   background: purple;
   margin: 0;
   margin-left: 20px;
 }
+
+.herbdemo_examples_selector-test ~ div {
+  background: yellow;
+}
+
+.herbdemo_examples_selector-test div {
+  background: green;
+}
 ```
+
+The syntax is a map with a vector of variable length as a key, starting with whatever combinator function you want to run as a keyword. Some combinators takes multiple elements as arguments. After that put whatever style map you'd like to be applied.
 
 
 ## [v0.7.2] - 2019-01-01
