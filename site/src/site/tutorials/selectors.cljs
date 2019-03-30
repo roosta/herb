@@ -33,16 +33,8 @@
      [code {:lang :html}
       e2]
      [text
-      "The syntax for the combinators key value, is a map with vectors as keys,
-     where the first element in the vector is the combinator function that you
-     want used as a keyword (`:>`, `:+` `:-` `:descendant`). The remaining
-     elements are keywords for whatever elements/classnames/ids you want
-     selected. The different selector functions takes different amount of
-     arguments. Refer to "
-      [:a {:href "https://github.com/noprompt/garden/blob/master/src/garden/selectors.cljc"}
-       "garden.selectors"]
-      " documentation for their use. You can view the vector as really a
-      function call, where the generated classname is part of the arguments.
-      What follows the vector as the value in our combinator map is the style
-      map you want applied to the selected element."]
+      "The syntax is a map with a vector of variable length as a key, starting
+      with whatever combinator function you want to run as a keyword (`:>`, `:+` `:-`
+      `:descendant`). Some combinators takes multiple elements as arguments. After
+      that put whatever style map you'd like to be applied."]
      ]) )
