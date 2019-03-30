@@ -46,12 +46,16 @@
                         [[classname (with-meta style {:prefix prefix :vendors vendors})
                           pseudo media supports]
                          [(map (fn [[[combinator & elements] style]]
-                                  (case combinator
-                                    :> [(apply s/> classname elements) style]
-                                    :+ [(apply s/+ classname elements) style]
-                                    :- [(apply s/- classname elements) style]
-                                    :descendant [(apply s/descendant classname elements) style]))
-                           combinators)]])
+                                 (case combinator
+                                   :> [(apply s/> classname elements) style]
+                                   :+ [(apply s/+ classname elements) style]
+                                   :- [(apply s/- classname elements) style]
+                                   :descendant [(apply s/descendant classname elements) style]
+                                   (throw (ex-info "Unsupported combinator function "
+                                                   {:combinator combinator
+                                                    :elements elements
+                                                    :style style}))))
+                               combinators)]])
                       (:data new))
         css-str (css {:vendors (seq (:vendors @options))
                       :auto-prefix (seq (:auto-prefix @options))}
