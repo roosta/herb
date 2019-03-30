@@ -19,6 +19,7 @@
             [site.tutorials.pseudo :as pseudo]
             [site.tutorials.vendor-prefixes :as vendor-prefixes]
             [site.tutorials.why-fns :as why-fns]
+            [site.tutorials.selectors :as selectors]
             [herb.core :as herb :refer-macros [<class defgroup]]))
 
 (defgroup header-style
@@ -59,6 +60,7 @@
      [group-meta/main]
      [feature-queries/main]
      [global/main]
+     [selectors/main]
      [vendor-prefixes/main]
      [keyframes/main]
      [fn-vars/main]

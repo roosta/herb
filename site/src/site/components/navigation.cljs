@@ -29,6 +29,7 @@
              [[:defgroup "defgroup macro"]]]
             [:feature-queries "Feature queries"]
             [:global "Global styles"]
+            [:selectors "Selectors"]
             [:vendor-prefixes "Vendor prefixes"]
             [:keyframes "Keyframes"]
             [:fn-vars "Function variations"
