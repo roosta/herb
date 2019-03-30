@@ -93,6 +93,6 @@ lein test
 
 ## License
 
-Copyright © 2018 Daniel Berg
+Copyright © 2019 Daniel Berg
 
 Distributed under the Eclipse Public License, the same as Clojure.
