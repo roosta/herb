@@ -41,8 +41,7 @@
      [text
       "The classname that the anonymous function gets is the namespace in which
       it is contained, and `anonymous-HASH`. The hash is calculated from the
-      style map it receives, and is the same every time, but targeting
-      classnames is more difficult using anonymous functions."]
+      style map it receives."]
      [text {:id "local"
             :variant :subheading}
       "Local binding"]
@@ -59,8 +58,7 @@
      [code {:lang :html}
       e4]
      [text
-      "Albeit verbose, the classname is still telling, and can be statically
-     targeted like others."]
+      "Albeit verbose, the classname is still telling."]
      [text {:id "named"
             :variant :subheading}
       "Named anonymous"]
