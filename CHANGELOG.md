@@ -1,5 +1,5 @@
 # Change Log
-## [v0.7.3-SNAPSHOT]
+## [v0.8.0]
 ### Changed
 - Updated dependencies
 ### Fixed
@@ -190,7 +190,7 @@ from `herb.macro` to `herb.core`
 ### Fixed
 - Fixed issues with inheritance precedence
 
-[v0.7.3-SNAPSHOT]: https://github.com/roosta/herb/compare/v0.7.2...HEAD
+[v0.8.0]: https://github.com/roosta/herb/compare/v0.7.2...v0.8.0
 [v0.7.2]: https://github.com/roosta/herb/compare/v0.7.1...v0.7.2
 [v0.7.1]: https://github.com/roosta/herb/compare/v0.7.0...v0.7.1
 [v0.7.0]: https://github.com/roosta/herb/compare/v0.6.0...v0.7.0
