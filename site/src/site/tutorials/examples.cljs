@@ -31,6 +31,10 @@
       [:a {:href "https://github.com/roosta/herb/blob/master/demo/herbdemo/examples.cljs"} "examples.cljs"]
       " and "
       [:a {:href "https://github.com/roosta/herb/blob/master/demo/herbdemo/examples.clj"} "examples.clj"]
-      " that is used during development and contain example components
-     for each of Herbs features. It need some serious attention to be truly
-     useful to anyone but for now it is what it is."]]))
+      " that is used during development and contain example components for each
+     of Herbs features. It need some serious attention to be truly useful to
+     anyone but for now it is what it is."]
+     [text "I recently implemented a flexbox grid component using Herb, might be
+     worth a "
+      [:a {:href "https://github.com/roosta/tincture/blob/master/src/tincture/grid.cljs"} "look"]
+      "."]]))
