@@ -3,8 +3,7 @@
 
 (defn selectors []
   ^{:combinators {[:> :div :span] {:background :red}
-                  [:- :p] {:margin 0
-                           :background :green}}}
+                  [:- :.sibling] {:background :green}}}
   {:background :blue
    :color :white})
 
@@ -14,5 +13,4 @@
    [:div {:class (<class selectors)}
     [:div
      [:span "Child"]]]
-   [:p "Sibling"]]
-  )
+   [:div {:class "sibling"} "Sibling"]])
