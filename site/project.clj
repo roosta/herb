@@ -9,7 +9,7 @@
                  [reagent "0.8.1"]
                  [reagent-utils "0.3.2"]
                  [ring "1.7.1"]
-                 [herb "0.8.0"]
+                 [herb "0.8.1"]
                  [ring/ring-defaults "0.3.2"]
                  [hiccup "1.0.5"]
                  [cljsjs/highlight "9.12.0-2"]

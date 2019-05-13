@@ -1,4 +1,4 @@
-(defproject herb "0.8.0"
+(defproject herb "0.8.1"
   :description "ClojureScript styling using functions"
   :url "https://github.com/roosta/herb"
   :license {:name "Eclipse Public License"
