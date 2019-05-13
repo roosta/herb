@@ -73,8 +73,6 @@ Refer to the [tutorial](http://herb.roosta.sh/) for a full overview and examples
 ## Advanced optimizations
 During a production build add this to the `:compiler` config  `:closure-defines {"goog.DEBUG" false}`. This flag tells Herb to minify styles, remove unneeded style element attributes, and ensure anonymous functions gets the correct minified name.
 
-NOTE: Currently minifying/pretty-printing is temporarily disabled due to a [bug](https://github.com/noprompt/garden/issues/168) affecting certain media queries.
-
 ## Development
 To start the development server [Leiningen](https://leiningen.org/) is required:
 ```shell
