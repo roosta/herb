@@ -23,7 +23,7 @@
 
   :dependencies [[org.clojure/clojure "1.10.0" :scope "provided"]
                  [org.clojure/clojurescript "1.10.520" :scope "provided"]
-                 [garden "1.3.6"]]
+                 [garden "1.3.9"]]
 
   :profiles {:dev {:dependencies [[binaryage/devtools "0.9.10"]
                                   [org.clojure/test.check "0.10.0-alpha3"]

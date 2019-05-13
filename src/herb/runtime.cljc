@@ -58,6 +58,7 @@
                                combinators)]])
                       (:data new))
         css-str (css {:vendors (seq (:vendors @options))
+                      :pretty-print? dev?
                       :auto-prefix (seq (:auto-prefix @options))}
                      style)]
     #?(:cljs (set! (.-innerHTML element) css-str))
@@ -111,7 +112,7 @@
                 :global injected-global
                 :keyframes injected-keyframes)]
     (when-not (= (:data (get @state sym)) obj)
-      (let [css-str (css #_{:pretty-print? dev?} obj)]
+      (let [css-str (css {:pretty-print? dev?} obj)]
         #?(:cljs
            (let [element (or (.querySelector js/document (str "style[data-herb=\"" (name dispatch) "\"]"))
                              (create-element! (name dispatch)))
