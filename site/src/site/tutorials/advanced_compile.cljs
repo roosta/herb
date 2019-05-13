@@ -30,8 +30,4 @@
       "An example DOM might look something like this when doing advanced
      optimizations:"]
      [code {:lang :html}
-      e2]
-     [text "Note that keys are currently not munged and `pretty-printing` is
-     temporarily disabled due to a "
-      [:a {:href "https://github.com/noprompt/garden/issues/168"} "bug "]
-      " affecting certain media queries."]]))
+      e2]]))
