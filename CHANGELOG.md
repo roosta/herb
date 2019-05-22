@@ -1,12 +1,12 @@
 # Change Log
 ## [Unreleased]
 
-## [v0.8.1]
+## [v0.8.1] - 2019-05-13 
 ### Changed
 - Upgrade garden dependency to version 1.3.9
 - Re-enable minification/pretty-printing
 
-## [v0.8.0]
+## [v0.8.0] - 2019-03-30
 ### Changed
 - Updated dependencies
 ### Fixed
