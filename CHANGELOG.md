@@ -1,5 +1,7 @@
 # Change Log
-## [Unreleased]
+## [0.8.2-SNAPSHOT]
+### Fixed
+- Fixed issue in `<style` macro where `throw` would get the wrong number of arguments and error out.
 
 ## [v0.8.1] - 2019-05-13 
 ### Changed
@@ -197,7 +199,7 @@ from `herb.macro` to `herb.core`
 ### Fixed
 - Fixed issues with inheritance precedence
 
-[Unreleased]: https://github.com/roosta/herb/compare/v0.8.1...HEAD
+[0.8.2-SNAPSHOT]: https://github.com/roosta/herb/compare/v0.8.1...HEAD
 [v0.8.1]: https://github.com/roosta/herb/compare/v0.8.0...v0.8.1
 [v0.8.0]: https://github.com/roosta/herb/compare/v0.7.2...v0.8.0
 [v0.7.2]: https://github.com/roosta/herb/compare/v0.7.1...v0.7.2
