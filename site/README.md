@@ -1,6 +1,6 @@
 # Herb Tutorial Site
 
-This is the herb tutorial site project.
+This is the [Herb](https://github.com/roosta/herb) tutorial site project.
 
 ## Development mode
 
