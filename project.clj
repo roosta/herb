@@ -30,7 +30,7 @@
                                   [figwheel "0.5.18"]
                                   [philoskim/debux "0.5.5"]
                                   [reagent "0.8.1"]
-                                  [com.taoensso/tufte "2.0.1"]
+                                  [com.taoensso/tufte "1.2.0"]
                                   [figwheel-sidecar "0.5.18"]
                                   [etaoin "0.3.2"]]
                    :plugins [[lein-figwheel "0.5.18"]]
