@@ -330,11 +330,21 @@
   ^{:key in}
   {:background-color (:color in)})
 
+(defn large
+  [k]
+  ^{:key k
+    :group true}
+  {:background "magenta"
+   :width "100%"
+   :height "20px"
+   :margin [["10px" 0 "10px" 0]]})
 
 (defn main []
   (let [state (r/atom "green")]
     (fn []
       [:div {:class (<class container)}
+
+
        (for [d data]
          ^{:key d}
          [:div {:class (<class data-str d)}
@@ -446,4 +456,9 @@
          "Media query test"]]
        #_[:div {:class (with-style some-style)}
           "Regular maps"]
+
+       [:div
+        (for [k (range 100)]
+          ^{:key k}
+          [:div {:class (<class large k)}])]
        ])))
