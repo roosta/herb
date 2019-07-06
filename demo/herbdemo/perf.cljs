@@ -5,9 +5,12 @@
             [garden.core :refer [css]]
             [garden.units :refer [rem em px]]))
 
+;; (tufte/add-basic-println-handler! {})
+
 (defn profile-comp
   [n]
-  ^{:key n}
+  ^{:key n
+    :group true}
   {:width (px 100)
    :height (px 100)
    :background-color "magenta"
