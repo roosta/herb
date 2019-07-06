@@ -61,7 +61,7 @@
                       :pretty-print? dev?
                       :auto-prefix (seq (:auto-prefix @options))}
                      style)]
-    #?(:cljs (set! (.-innerHTML element) css-str))
+    #?(:cljs (gobj/set element "innerHTML" css-str))
     (swap! injected-styles assoc identifier (assoc new :css css-str))))
 
 #?(:cljs
