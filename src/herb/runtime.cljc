@@ -39,30 +39,44 @@
   Entry includes `:vendors` and `:auto-prefix`"}
   options (atom {}))
 
+(defn update-state [state ident data css element data-string]
+  (if-let [old (get @injected-styles ident)]
+    (-> (assoc-in state [ident :data (first data)] (last data))
+        (assoc-in [ident :data-string] data-string)
+        (assoc-in [ident :css] (str (:css old) "\n" css)))
+    (-> (assoc-in state [ident :data (first data)] (last data))
+        (assoc-in [ident :element] element)
+        (assoc-in [ident :data-string] data-string)
+        (assoc-in [ident :css] css))))
+
+(defn reset-state-object!
+  [{:keys [ident element]}]
+  (swap! injected-styles dissoc ident)
+  #?(:cljs (gobj/set element "innerHTML" "")))
+
 (defn- update-style!
   "Create CSS string and update DOM"
-  [identifier #?(:cljs element) new]
-  (let [style (mapcat (fn [[classname {:keys [style pseudo media supports prefix vendors combinators]}]]
-                        [[classname (with-meta style {:prefix prefix :vendors vendors})
-                          pseudo media supports]
-                         [(map (fn [[[combinator & elements] style]]
-                                 (case combinator
-                                   :> [(apply s/> classname elements) style]
-                                   :+ [(apply s/+ classname elements) style]
-                                   :- [(apply s/- classname elements) style]
-                                   :descendant [(apply s/descendant classname elements) style]
-                                   (throw (ex-info "Unsupported combinator function "
-                                                   {:combinator combinator
-                                                    :elements elements
-                                                    :style style}))))
-                               combinators)]])
-                      (:data new))
+  [identifier new]
+  (let [style (let [[classname {:keys [style pseudo media supports prefix vendors combinators]}] (:data new)]
+                [[classname (with-meta style {:prefix prefix :vendors vendors})
+                  pseudo media supports]
+                 [(map (fn [[[combinator & elements] style]]
+                         (case combinator
+                           :> [(apply s/> classname elements) style]
+                           :+ [(apply s/+ classname elements) style]
+                           :- [(apply s/- classname elements) style]
+                           :descendant [(apply s/descendant classname elements) style]
+                           (throw (ex-info "Unsupported combinator function "
+                                           {:combinator combinator
+                                            :elements elements
+                                            :style style}))))
+                       combinators)]])
         css-str (css {:vendors (seq (:vendors @options))
                       :pretty-print? dev?
                       :auto-prefix (seq (:auto-prefix @options))}
                      style)]
-    #?(:cljs (gobj/set element "innerHTML" css-str))
-    (swap! injected-styles assoc identifier (assoc new :css css-str))))
+    #?(:cljs (dom/append (:element new) (str "\n" css-str)))
+      (swap! injected-styles update-state identifier (:data new) css-str (:element new) (:data-string new))))
 
 #?(:cljs
    (defn- create-element!
@@ -77,32 +91,45 @@
          (.appendChild head element)
          element))))
 
-(defn- create-style
+(defn- create-style!
   "Create a style element in head if identifier is not already present Attach a
   data attr with namespace and call update-style with new element"
   [identifier new data-str]
-  (let [data (conj {} new)]
-    #?(:cljs
-       (let [element (create-element! data-str)]
-         (update-style! identifier element (cond-> {:data data :element element}
-                                             data-str (assoc :data-string data-str))))
-       :clj (update-style! identifier {:data data :data-string data-str}))))
+  #?(:cljs
+     (let [element (create-element! data-str)]
+       (update-style! identifier (cond-> {:data new :element element}
+                                   data-str (assoc :data-string data-str))))
+     :clj (update-style! identifier {:data new :data-string data-str})))
 
 (defn inject-style!
   "Main interface to runtime. Takes an identifier, new garden style data structure
   and a fully qualified name. Check if identifier exist in DOM already, and if it
   does, compare `new` with `current` to make sure garden is not called to create
   the same style string again"
-  [identifier new data-str]
-  (if-let [injected (get @injected-styles identifier)]
-    (let [data (:data injected)
-          target (get data (first new))]
-      (if (not= target (last new))
-        (let [data (assoc injected :data (conj data new))]
-          #?(:cljs (update-style! identifier (:element injected) data)
-             :clj  (update-style! identifier data)))
-        @injected-styles))
-    (create-style identifier new data-str)))
+  [identifier new data-str group]
+  (let [injected (get @injected-styles identifier)
+        target (get (:data injected) (first new))]
+
+    (cond
+      (not injected)
+      (create-style! identifier new data-str)
+
+      (and (some? injected)
+           (not target))
+      #?(:cljs (update-style! identifier {:data new :element (:element injected) :data-string data-str})
+         :clj  (update-style! identifier {:data new}))
+
+      (and (some? injected)
+           (some? target)
+           (not= target (last new)))
+      (do (reset-state-object! {:ident identifier :element (:element injected)})
+          (if group
+            (doseq [g (assoc (:data injected) (first new) (last new))]
+              #?(:cljs (update-style! identifier {:data g :element (:element injected) :data-string data-str})
+                 :clj (update-style! identifier {:data g})))
+            #?(:cljs (update-style! identifier {:data new :element (:element injected) :data-string data-str})
+               :clj  (update-style! identifier {:data new})))))
+    @injected-styles))
 
 (defn inject-obj!
   "Inject collection of style objects in a common element, used by passing a

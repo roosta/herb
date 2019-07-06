@@ -210,5 +210,6 @@
                :supports nil,
                :media nil
                :combinators nil}},
+             :element nil
              :data-string "herb.unit-tests/test-fn-4",
              :css ".herb_unit-tests_test-fn-4 {\n  background: red;\n}"}}))))
