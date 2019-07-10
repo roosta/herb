@@ -3,7 +3,10 @@
 ### Fixed
 - Fixed issue in `<style` macro where `throw` would get the wrong number of arguments and error out.
 
-## [v0.8.1] - 2019-05-13 
+### Changed
+- Markedly improve performance when using large stylegroups
+
+## [v0.8.1] - 2019-05-13
 ### Changed
 - Upgrade garden dependency to version 1.3.9
 - Re-enable minification/pretty-printing
