@@ -49,7 +49,8 @@
         (assoc-in [ident :data-string] data-string)
         (assoc-in [ident :css] css))))
 
-(defn reset-state-object!
+(defn- reset-style-object!
+  "Reset a given style object by passing ident."
   [{:keys [ident element]}]
   (swap! injected-styles dissoc ident)
   #?(:cljs (gobj/set element "innerHTML" "")))
@@ -101,6 +102,14 @@
                                    data-str (assoc :data-string data-str))))
      :clj (update-style! identifier {:data new :data-string data-str})))
 
+
+(defn- env-update!
+  "Use reader-conditionals to dispatch update-style! based on
+  environment."
+  [identifier data element data-str]
+  #?(:cljs (update-style! identifier {:data data :element element :data-string data-str})
+     :clj (update-style! identifier {:data data :data-string data-str})))
+
 (defn inject-style!
   "Main interface to runtime. Takes an identifier, new garden style data structure
   and a fully qualified name. Check if identifier exist in DOM already, and if it
@@ -111,24 +120,29 @@
         target (get (:data injected) (first new))]
 
     (cond
+
+      ;; Not present in state create-style
       (not injected)
       (create-style! identifier new data-str)
 
+      ;; element created but new classname
       (and (some? injected)
            (not target))
-      #?(:cljs (update-style! identifier {:data new :element (:element injected) :data-string data-str})
-         :clj  (update-style! identifier {:data new}))
+      (env-update! identifier new (:element injected) data-str)
 
+
+      ;; Updating, if its a group make sure that the entire group is
+      ;; updated
       (and (some? injected)
            (some? target)
            (not= target (last new)))
-      (do (reset-state-object! {:ident identifier :element (:element injected)})
+      (do (reset-style-object! {:ident identifier :element (:element injected)})
           (if group
             (doseq [g (assoc (:data injected) (first new) (last new))]
-              #?(:cljs (update-style! identifier {:data g :element (:element injected) :data-string data-str})
-                 :clj (update-style! identifier {:data g})))
-            #?(:cljs (update-style! identifier {:data new :element (:element injected) :data-string data-str})
-               :clj  (update-style! identifier {:data new})))))
+              (env-update! identifier g (:element injected) data-str))
+            (env-update! identifier new (:element injected) data-str))))
+
+    ;; Return style
     @injected-styles))
 
 (defn inject-obj!
