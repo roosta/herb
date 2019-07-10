@@ -21,7 +21,7 @@
 
 (defn join
   "Joins multiple classes together, filtering out nils:
-  ```
+  ```clojure
   (join (<class fn-1) (<class fn-2))
   ```"
   [& classes]
@@ -34,7 +34,7 @@
 #?(:clj
    (defmacro defkeyframes
      "Define a CSS @keyframes animation:
-  ```
+  ```clojure
   (defkeyframes my-animation
         [:from
          {:background \"red\"}]
@@ -58,7 +58,7 @@
 #?(:clj
    (defmacro defglobal
      "Define global CSS:
-  ```
+  ```clojure
   (defglobal some-global-style
     [:body {:box-sizing \"border-box\"
             :font-size (px 14)
@@ -80,7 +80,7 @@
    (defmacro <keyframes
      "Returns a CSS string from defined keyframes using the defkeyframes macro.
   Intended to be used from clojure
-  ```
+  ```clojure
   (defkeyframes pulse
     [:from {:opacity 1}]
     [:to {:opacity 0}])
@@ -107,13 +107,13 @@
    (defmacro defgroup
      "Define a style group, everything defined in a group is grouped in the same
   style element, It takes a name and a map of styles in the form:
-  ```
+  ```clojure
   (defgroup my-group
     {:a-component {:color \"red\"}})
   ```
   To use a group, use one of `<class` or `<id` macro, where the first argument is
   the key for whatever component stylesheet you want:
-  ```
+  ```clojure
   [:div {:class (<class my-group :a-component)}]
   ```"
      [n c]
