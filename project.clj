@@ -5,7 +5,7 @@
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
   :plugins [[lein-cljsbuild "1.1.7"]
-            [lein-codox "0.10.6"]]
+            [lein-codox "0.10.7"]]
 
   :source-paths ["src"]
 
@@ -21,21 +21,21 @@
   ;; Exclude the demo,site and compiled files from the output of either 'lein jar' or 'lein install'
   :jar-exclusions [#"(?:^|\/)demo\/" #"(?:^|\/)public\/"]
 
-  :dependencies [[org.clojure/clojure "1.10.0" :scope "provided"]
+  :dependencies [[org.clojure/clojure "1.10.1" :scope "provided"]
                  [org.clojure/clojurescript "1.10.520" :scope "provided"]
                  [garden "1.3.9"]]
 
   :profiles {:dev {:dependencies [[binaryage/devtools "0.9.10"]
                                   [org.clojure/test.check "0.10.0-alpha3"]
-                                  [figwheel "0.5.18"]
-                                  [philoskim/debux "0.5.5"]
+                                  [figwheel "0.5.19"]
+                                  [philoskim/debux "0.5.6"]
                                   [reagent "0.8.1"]
-                                  [com.taoensso/tufte "1.2.0"]
-                                  [figwheel-sidecar "0.5.18"]
-                                  [etaoin "0.3.2"]]
-                   :plugins [[lein-figwheel "0.5.18"]]
+                                  [com.taoensso/tufte "2.0.1"]
+                                  [figwheel-sidecar "0.5.19"]
+                                  [etaoin "0.3.5"]]
+                   :plugins [[lein-figwheel "0.5.19"]]
                    :source-paths ["test" "demo"]}
-             :dev-cider {:dependencies [[cider/piggieback "0.4.0"]]
+             :dev-cider {:dependencies [[cider/piggieback "0.4.1"]]
                          :figwheel {:nrepl-middleware [cider.piggieback/wrap-cljs-repl]}}}
 
   :cljsbuild {:builds [{:id "demo"
