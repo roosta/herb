@@ -39,7 +39,9 @@
   Entry includes `:vendors` and `:auto-prefix`"}
   options (atom {}))
 
-(defn update-state [state ident data css element data-string]
+(defn update-state
+  "Either update a style in state, or create it depending on existing state."
+  [state ident data css element data-string]
   (if-let [old (get @injected-styles ident)]
     (-> (assoc-in state [ident :data (first data)] (last data))
         (assoc-in [ident :data-string] data-string)
@@ -50,13 +52,14 @@
         (assoc-in [ident :css] css))))
 
 (defn- reset-style-object!
-  "Reset a given style object by passing ident."
+  "Reset a given style object by passing ident, and if cljs reset style
+  element. Used when updating a style."
   [{:keys [ident element]}]
   (swap! injected-styles dissoc ident)
   #?(:cljs (gobj/set element "innerHTML" "")))
 
-(defn- update-style!
-  "Create CSS string and update DOM"
+(defn- render-style!
+  "Renders CSS, and appends to DOM. Ensure state is in sync with DOM."
   [identifier new]
   (let [style (let [[classname {:keys [style pseudo media supports prefix vendors combinators]}] (:data new)]
                 [[classname (with-meta style {:prefix prefix :vendors vendors})
@@ -94,21 +97,21 @@
 
 (defn- create-style!
   "Create a style element in head if identifier is not already present Attach a
-  data attr with namespace and call update-style with new element"
+  data attr with namespace and call render-style with new element"
   [identifier new data-str]
   #?(:cljs
      (let [element (create-element! data-str)]
-       (update-style! identifier (cond-> {:data new :element element}
+       (render-style! identifier (cond-> {:data new :element element}
                                    data-str (assoc :data-string data-str))))
-     :clj (update-style! identifier {:data new :data-string data-str})))
+     :clj (render-style! identifier {:data new :data-string data-str})))
 
 
 (defn- env-update!
-  "Use reader-conditionals to dispatch update-style! based on
+  "Use reader-conditionals to dispatch render-style! based on
   environment."
   [identifier data element data-str]
-  #?(:cljs (update-style! identifier {:data data :element element :data-string data-str})
-     :clj (update-style! identifier {:data data :data-string data-str})))
+  #?(:cljs (render-style! identifier {:data data :element element :data-string data-str})
+     :clj (render-style! identifier {:data data :data-string data-str})))
 
 (defn inject-style!
   "Main interface to runtime. Takes an identifier, new garden style data structure
