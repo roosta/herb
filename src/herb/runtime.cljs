@@ -1,13 +1,10 @@
 (ns herb.runtime
-  (:require #?@(:cljs [[goog.dom :as dom]
-                       [goog.object :as gobj]])
+  (:require [goog.dom :as dom]
+            [goog.object :as gobj]
             [garden.core :refer [css]]
-            [garden.selectors :as s]
-            [clojure.set :as set]
-            [clojure.string :as str]))
+            [garden.selectors :as s]))
 
-#?(:cljs (def dev? ^boolean js/goog.DEBUG)
-   :clj (def dev? true))
+(def dev? ^boolean js/goog.DEBUG)
 
 (defonce
   ^{:private true
@@ -53,9 +50,9 @@
 (defn- reset-style-object!
   "Reset a given style object by passing ident, and if cljs reset style
   element. Used when updating a style."
-  [{:keys [ident element]}]
+  [ident element]
   (swap! injected-styles dissoc ident)
-  #?(:cljs (gobj/set element "innerHTML" "")))
+  (gobj/set element "innerHTML" ""))
 
 (defn- render-style!
   "Renders CSS, and appends to DOM. Ensure state is in sync with DOM."
@@ -78,7 +75,7 @@
                       :pretty-print? dev?
                       :auto-prefix (seq (:auto-prefix @options))}
                      style)]
-    #?(:cljs (dom/append (:element new) (str "\n" css-str)))
+    (dom/append (:element new) (str "\n" css-str))
     (swap! injected-styles update-state
            identifier
            (:data new)
@@ -86,36 +83,27 @@
            (:element new)
            (:data-string new))))
 
-#?(:cljs
-   (defn- create-element!
-     "Create an element in the DOM with an optional data-herb attribute"
-     [attr]
-     (let [head (.-head js/document)]
-       (assert (some? head) "An head element is required in the dom to inject the style.")
-       (let [element (.createElement js/document "style")]
-         (.setAttribute element "type" "text/css")
-         (when attr
-           (.setAttribute element "data-herb" attr))
-         (.appendChild head element)
-         element))))
+
+(defn- create-element!
+  "Create an element in the DOM with an optional data-herb attribute"
+  [attr]
+  (let [head (.-head js/document)]
+    (assert (some? head) "An head element is required in the dom to inject the style.")
+    (let [element (.createElement js/document "style")]
+      (.setAttribute element "type" "text/css")
+      (when attr
+        (.setAttribute element "data-herb" attr))
+      (.appendChild head element)
+      element)))
 
 (defn- create-style!
   "Create a style element in head if identifier is not already present Attach a
   data attr with namespace and call render-style with new element"
   [identifier new data-str]
-  #?(:cljs
-     (let [element (create-element! data-str)]
-       (render-style! identifier (cond-> {:data new :element element}
-                                   data-str (assoc :data-string data-str))))
-     :clj (render-style! identifier {:data new :data-string data-str})))
+  (let [element (create-element! data-str)]
+    (render-style! identifier (cond-> {:data new :element element}
+                                data-str (assoc :data-string data-str)))))
 
-
-(defn- env-render!
-  "Use reader-conditionals to dispatch render-style! based on
-  environment."
-  [identifier data element data-str]
-  #?(:cljs (render-style! identifier {:data data :element element :data-string data-str})
-     :clj (render-style! identifier {:data data :data-string data-str})))
 
 (defn inject-style!
   "Main interface to runtime. Takes an identifier, new garden style data
@@ -135,19 +123,30 @@
       ;; element created but new classname
       (and (some? injected)
            (not target))
-      (env-render! identifier new (:element injected) data-str)
-
+      (render-style!
+       identifier
+       {:data new
+        :element (:element injected)
+        :data-string data-str})
 
       ;; Updating, if its a group make sure that the entire group is
       ;; updated
       (and (some? injected)
            (some? target)
            (not= target (last new)))
-      (do (reset-style-object! {:ident identifier :element (:element injected)})
+      (do (reset-style-object! identifier (:element injected))
           (if group
             (doseq [g (assoc (:data injected) (first new) (last new))]
-              (env-render! identifier g (:element injected) data-str))
-            (env-render! identifier new (:element injected) data-str))))
+              (render-style!
+               identifier
+               {:data g
+                :element (:element injected)
+                :data-string data-str}))
+            (render-style!
+             identifier
+             {:data new
+              :element (:element injected)
+              :data-string data-str}))))
 
     ;; Return state
     (get @injected-styles identifier)))
@@ -161,9 +160,8 @@
                 :keyframes injected-keyframes)]
     (when-not (= (:data (get @state sym)) obj)
       (let [css-str (css {:pretty-print? dev?} obj)]
-        #?(:cljs
-           (let [element (or (.querySelector js/document (str "style[data-herb=\"" (name dispatch) "\"]"))
-                             (create-element! (name dispatch)))
-                 inner-html (gobj/get element "innerHTML")]
-             (gobj/set element "innerHTML" (str inner-html (when dev? "\n") css-str))))
+        (let [element (or (.querySelector js/document (str "style[data-herb=\"" (name dispatch) "\"]"))
+                          (create-element! (name dispatch)))
+              inner-html (gobj/get element "innerHTML")]
+          (gobj/set element "innerHTML" (str inner-html (when dev? "\n") css-str)))
         (swap! state assoc sym {:data obj :css css-str})))))

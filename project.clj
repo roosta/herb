@@ -4,8 +4,7 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
-  :plugins [[lein-cljsbuild "1.1.7"]
-            [lein-codox "0.10.7"]]
+  :plugins [[lein-codox "0.10.7"]]
 
   :source-paths ["src"]
 
@@ -16,47 +15,21 @@
 
   :min-lein-version "2.5.0"
 
-  :clean-targets ^{:protect false} ["resources/public/js" "target"]
+  :clean-targets ^{:protect false} ["target"]
 
-  ;; Exclude the demo,site and compiled files from the output of either 'lein jar' or 'lein install'
+  :resource-paths ["target" "resources"]
+
   :jar-exclusions [#"(?:^|\/)demo\/" #"(?:^|\/)public\/"]
 
   :dependencies [[org.clojure/clojure "1.10.1" :scope "provided"]
                  [org.clojure/clojurescript "1.10.520" :scope "provided"]
                  [garden "1.3.9"]]
-
-  :profiles {:dev {:dependencies [[binaryage/devtools "0.9.10"]
-                                  [org.clojure/test.check "0.10.0-alpha3"]
-                                  [figwheel "0.5.19"]
-                                  [philoskim/debux "0.5.6"]
+  :profiles {:dev {:dependencies [[com.bhauman/figwheel-main "0.2.1"]
                                   [reagent "0.8.1"]
-                                  [com.taoensso/tufte "2.0.1"]
-                                  [figwheel-sidecar "0.5.19"]
-                                  [etaoin "0.3.5"]]
-                   :plugins [[lein-figwheel "0.5.19"]]
-                   :source-paths ["test" "demo"]}
-             :dev-cider {:dependencies [[cider/piggieback "0.4.1"]]
-                         :figwheel {:nrepl-middleware [cider.piggieback/wrap-cljs-repl]}}}
-
-  :cljsbuild {:builds [{:id "demo"
-                        :source-paths ["demo"]
-                        :figwheel true
-                        :watch-paths ["src" "demo" "test"]
-                        :compiler {:main "herbdemo.dev"
-                                   :output-to "resources/public/js/demo.js"
-                                   :preloads [devtools.preload]
-                                   :output-dir "resources/public/js/out"
-                                   :asset-path   "js/out"
-                                   :source-map true
-                                   :optimizations :none
-                                   :pretty-print  true}}
-
-                       {:id "demo-release"
-                        :source-paths ["demo"]
-                        :compiler {:main "herbdemo.prod"
-                                   :output-to "resources/public/js/demo.js"
-                                   :output-dir "resources/public/js/release"
-                                   :closure-defines {"goog.DEBUG" false}
-                                   ;; :psudo-names true
-                                   :optimizations :advanced
-                                   :pretty-print false}}]})
+                                  [philoskim/debux "0.5.6"]
+                                  [com.taoensso/tufte "2.0.1"]]
+                   :aliases {"fig" ["trampoline" "run" "-m" "figwheel.main"]
+                             "fig:test" ["run" "-m" "figwheel.main" "-co" "test.cljs.edn" "-m" herb.test-runner]
+                             "fig:build" ["trampoline" "run" "-m" "figwheel.main" "-b" "dev" "-r"]
+                             "fig:min"   ["run" "-m" "figwheel.main" "-O" "advanced" "-bo" "dev"]}
+                   :source-paths ["test" "demo"]}})

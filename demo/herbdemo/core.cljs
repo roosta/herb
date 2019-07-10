@@ -16,3 +16,5 @@
    {:vendors ["webkit" :moz]
     :auto-prefix #{:transition :animation}})
   (mount-root))
+
+(init!)

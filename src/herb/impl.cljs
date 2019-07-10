@@ -3,11 +3,9 @@
    [clojure.string :as str]
    [herb.runtime :as runtime]
    [clojure.set :as set]
-   [garden.stylesheet :refer [at-media at-keyframes at-supports]]
-   #?@(:clj [[clojure.main :refer [demunge]]])))
+   [garden.stylesheet :refer [at-media at-keyframes at-supports]]))
 
-#?(:cljs (def dev? ^boolean js/goog.DEBUG)
-   :clj (def dev? true))
+(def dev? ^boolean js/goog.DEBUG)
 
 (defn- convert-pseudo
   [pseudos]
@@ -110,6 +108,7 @@
                      (apply merge {} extracted))]
         (convert-fn merged)))))
 
+
 (defn- prepare-data
   "Prepare `resolved-styles` so they can be passed to `garden.core/css` Merge
   the styles to remove duplicate entries and ensuring precedence. Extract all
@@ -148,28 +147,17 @@
 
 (defn- get-name
   [style-fn ns-name style-data]
-  (let [name* #?(:cljs (.-name style-fn)
-                 :clj (as-> (str style-fn) $
-                        (demunge $)
-                        (re-find #"(.+)@" $)
-                        (last $)))
-        anon? #?(:clj (str/includes? name* "fn--")
-                 :cljs (empty? name*))
-        hash* (when anon?
-                #?(:cljs (.abs js/Math (hash style-data))
-                   :clj (Math/abs (hash style-data))))
+  (let [name* (.-name style-fn)
+        anon? (empty? name*)
+        hash* (when anon? (.abs js/Math (hash style-data)))
         cname (cond
                 (and anon? (not dev?))
                 (str "A-" hash*)
 
                 (and dev? anon?)
-                #?(:cljs
-                   (str ns-name "/" "anonymous-" hash*)
-                   :clj
-                   (str/replace name* #"fn--[0-9]*" (str "anonymous-" hash*)))
+                (str ns-name "/" "anonymous-" hash*)
                 :else name*)]
-    #?(:cljs (demunge cname)
-       :clj cname)))
+    (demunge cname)))
 
 (defn with-style!
   "Entry point for macros.
