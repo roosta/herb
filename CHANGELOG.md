@@ -1,7 +1,7 @@
 # Change Log
 ## [v0.9.0-SNAPSHOT]
 
-## [v0.8.2]
+## [v0.8.2] - 2019-07-10
 ### Fixed
 - Fixed issue in `<style` macro where `throw` would get the wrong number of arguments and error out.
 
