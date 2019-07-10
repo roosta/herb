@@ -118,10 +118,10 @@
      :clj (render-style! identifier {:data data :data-string data-str})))
 
 (defn inject-style!
-  "Main interface to runtime. Takes an identifier, new garden style data structure
-  and a fully qualified name. Check if identifier exist in DOM already, and if it
-  does, compare `new` with `current` to make sure garden is not called to create
-  the same style string again"
+  "Main interface to runtime. Takes an identifier, new garden style data
+  structure, fully qualified name, and whether its a group.  Make sure
+  to only update where necessary, with concessions for
+  stylegroups. Returns the injected style state object."
   [identifier new data-str group]
   (let [injected (get @injected-styles identifier)
         target (get (:data injected) (first new))]
