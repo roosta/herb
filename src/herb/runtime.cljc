@@ -42,13 +42,12 @@
 (defn update-state
   "Either update a style in state, or create it depending on existing state."
   [state ident data css element data-string]
-  (if-let [old (get @injected-styles ident)]
+  (let [css (if-let [old (get @injected-styles ident)]
+              (str (:css old) "\n" css)
+              css)]
     (-> (assoc-in state [ident :data (first data)] (last data))
         (assoc-in [ident :data-string] data-string)
-        (assoc-in [ident :css] (str (:css old) "\n" css)))
-    (-> (assoc-in state [ident :data (first data)] (last data))
         (assoc-in [ident :element] element)
-        (assoc-in [ident :data-string] data-string)
         (assoc-in [ident :css] css))))
 
 (defn- reset-style-object!
