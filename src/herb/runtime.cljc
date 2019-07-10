@@ -39,7 +39,7 @@
   Entry includes `:vendors` and `:auto-prefix`"}
   options (atom {}))
 
-(defn update-state
+(defn- update-state
   "Either update a style in state, or create it depending on existing state."
   [state ident data css element data-string]
   (let [css (if-let [old (get @injected-styles ident)]
