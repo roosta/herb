@@ -74,20 +74,31 @@ Refer to the [tutorial](http://herb.roosta.sh/) for a full overview and examples
 During a production build add this to the `:compiler` config  `:closure-defines {"goog.DEBUG" false}`. This flag tells Herb to minify styles, remove unneeded style element attributes, and ensure anonymous functions gets the correct minified name.
 
 ## Development
-To start the development server [Leiningen](https://leiningen.org/) is required:
+Start figwheel main with the development build
+
 ```shell
-lein figwheel
+lein fig:build
 ```
 
-To use in Emacs using [Cider](https://github.com/clojure-emacs/cider) `m-x cider-jack-in-clojurescript` and pick figwheel to start a ClojureScript repl environment and a server. See [.dir-locals.el](https://github.com/roosta/herb/blob/master/.dir-locals.el).
+Figwheel-main will automatically push cljs changes to the browser. Once Figwheel
+starts up, you should be able to open <http://localhost:9500> for the
+development server.
 
-Point your browser to `localhost:3449`
 
-## Testing
-To run tests:
+# Testing
+
+Either run:
+
 ```shell
-lein test
+lein fig:test
 ```
+
+For a headless test environment using chrome, make sure its
+installed on your system.
+
+You can also start the dev build and navigate to
+[http://localhost:9500/figwheel-extra-main/auto-testing](http://localhost:9500/figwheel-extra-main/auto-testing)
+to get a nice interface while coding that runs the tests on each save.
 
 ## License
 
