@@ -164,6 +164,6 @@
         #?(:cljs
            (let [element (or (.querySelector js/document (str "style[data-herb=\"" (name dispatch) "\"]"))
                              (create-element! (name dispatch)))
-                 inner-html (.-innerHTML element)]
-             (set! (.-innerHTML element) (str inner-html (when dev? "\n") css-str))))
+                 inner-html (gobj/get element "innerHTML")]
+             (gobj/set element "innerHTML" (str inner-html (when dev? "\n") css-str))))
         (swap! state assoc sym {:data obj :css css-str})))))
