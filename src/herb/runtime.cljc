@@ -110,7 +110,7 @@
      :clj (render-style! identifier {:data new :data-string data-str})))
 
 
-(defn- env-update!
+(defn- env-render!
   "Use reader-conditionals to dispatch render-style! based on
   environment."
   [identifier data element data-str]
@@ -135,7 +135,7 @@
       ;; element created but new classname
       (and (some? injected)
            (not target))
-      (env-update! identifier new (:element injected) data-str)
+      (env-render! identifier new (:element injected) data-str)
 
 
       ;; Updating, if its a group make sure that the entire group is
@@ -146,8 +146,8 @@
       (do (reset-style-object! {:ident identifier :element (:element injected)})
           (if group
             (doseq [g (assoc (:data injected) (first new) (last new))]
-              (env-update! identifier g (:element injected) data-str))
-            (env-update! identifier new (:element injected) data-str))))
+              (env-render! identifier g (:element injected) data-str))
+            (env-render! identifier new (:element injected) data-str))))
 
     ;; Return state
     (get @injected-styles identifier)))
