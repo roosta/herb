@@ -1,0 +1,7 @@
+^{
+  ;; use an alternative landing page for the tests so that we don't
+  ;; launch the application
+  :open-url "http://[[server-hostname]]:[[server-port]]/test.html"
+  :ring-server-options {:port 9501}
+  :launch-js ["/opt/google/chrome/chrome" "--headless" "--disable-gpu" "--repl" :open-url]}
+{:main herb.test-runner}
