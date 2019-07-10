@@ -149,8 +149,8 @@
               (env-update! identifier g (:element injected) data-str))
             (env-update! identifier new (:element injected) data-str))))
 
-    ;; Return style
-    @injected-styles))
+    ;; Return state
+    (get @injected-styles identifier)))
 
 (defn inject-obj!
   "Inject collection of style objects in a common element, used by passing a

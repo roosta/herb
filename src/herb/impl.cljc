@@ -190,7 +190,5 @@
         style-data [(str (if id? "#" ".") selector) style-data]
         result (runtime/inject-style! identifier style-data data-str group)]
     (if style?
-      (-> result
-          (get identifier)
-          :css)
+      (:css result)
       selector)))
