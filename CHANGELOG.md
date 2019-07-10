@@ -7,7 +7,7 @@
 
 ### Changed
 - Markedly improve performance when using large stylegroups
-- Upgrade depenedencies
+- Upgrade dependencies
 
 ## [v0.8.1] - 2019-05-13
 ### Changed
