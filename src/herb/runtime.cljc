@@ -79,7 +79,12 @@
                       :auto-prefix (seq (:auto-prefix @options))}
                      style)]
     #?(:cljs (dom/append (:element new) (str "\n" css-str)))
-      (swap! injected-styles update-state identifier (:data new) css-str (:element new) (:data-string new))))
+    (swap! injected-styles update-state
+           identifier
+           (:data new)
+           css-str
+           (:element new)
+           (:data-string new))))
 
 #?(:cljs
    (defn- create-element!
