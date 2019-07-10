@@ -1,6 +1,7 @@
 (ns herb.impl-test
-  (:require [cljs.test :refer-macros [deftest testing is are]]
+  (:require [cljs.test :refer-macros [deftest testing is are async]]
             [garden.stylesheet :refer [at-media at-keyframes at-supports]]
+            [debux.cs.core :refer [clog]]
             [herb.runtime :as runtime]
             [herb.impl :as impl]))
 
@@ -173,6 +174,12 @@
 
 (defn test-fn-4
   []
+  ;; ^{:pseudo {:hover {:color "yellow"}}
+  ;;   :vendors ["webkit"]
+  ;;   :prefix true
+  ;;   :supports {{:display :grid} {:font-size "20px"}}
+  ;;   :media {{:screen true} {:color "magenta"}}
+  ;;   :combinators {[:- :div] {:background "yellow"}}}
   {:background :red})
 
 (deftest get-name
@@ -184,29 +191,21 @@
     (is (= (test-fn-3)
            "herb.impl-test/anonymous-15128758"))))
 
-;; (deftest with-style!
-;;   (testing "with-style! entry point"
-;;     (let [result (deref (deref #'herb.runtime/injected-styles))]
-;;       (is (= (impl/with-style! {} "test-fn-1" "herb.unit-tests" test-fn-4)
-;;              "herb_unit-tests_test-fn-4"))
-;;       (is (= (impl/with-style! {:style? true} "test-fn-1" "herb.unit-tests" test-fn-4)
-;;              ".herb_unit-tests_test-fn-4 {
-;;   background: red;
-;; }"))
-;;       (is (= (first result) "herb_unit-tests_test-fn-4"))
-;;       (is (= (:data (last result)) ".herb_unit-tests_test-fn-4"))
-;;       (is (= ()))
-;;       (is (=
-;;            {"herb_unit-tests_test-fn-4"
-;;             {:data
-;;              {".herb_unit-tests_test-fn-4"
-;;               {:style {:background :red},
-;;                :pseudo nil,
-;;                :vendors nil,
-;;                :prefix nil,
-;;                :supports nil,
-;;                :media nil
-;;                :combinators nil}},
-;;              :element nil
-;;              :data-string "herb.unit-tests/test-fn-4",
-;;              :css ".herb_unit-tests_test-fn-4 {\n  background: red;\n}"}})))))
+(deftest with-style!
+  (testing "with-style! entry point"
+           (is (= (impl/with-style! {} "test-fn-1" "herb.unit-tests" test-fn-4)
+                  "herb_impl-test_test-fn-4"))
+           (is (= (impl/with-style! {:style? true} "test-fn-1" "herb.unit-tests" test-fn-4)
+                  ".herb_impl-test_test-fn-4 {
+  background: red;
+}"))
+
+           (let [result (deref (deref #'herb.runtime/injected-styles))
+                 data (first (:data (val (first result))))]
+
+             (is (= (key (first result)) "herb_impl-test_test-fn-4"))
+             (is (= (key data) ".herb_impl-test_test-fn-4"))
+             (is (= (:style (val data)) {:background :red}))
+             (is (= (:data-string (val (first result))) "herb.impl-test/test-fn-4"))
+             (is (= (:css (val (first result))) ".herb_impl-test_test-fn-4 {\n  background: red;\n}")))
+           ))
