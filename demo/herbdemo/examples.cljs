@@ -1,13 +1,9 @@
 (ns herbdemo.examples
-  ;; (:require-macros [garden.def :refer [defkeyframes]])
   (:require
-   [herb.core
-    :include-macros true
-    :refer [<class defgroup join <id defkeyframes defglobal]]
+   [herb.core :refer [<class defgroup join <id defkeyframes defglobal]]
    [garden.selectors :as s]
    [garden.core :refer [css]]
    [garden.stylesheet :refer [at-media]]
-   [taoensso.tufte :as tufte :refer-macros [defnp p profiled profile]]
    [garden.core :refer [css]]
    [garden.units :refer [px em rem]]
    [reagent.debug :as d]
