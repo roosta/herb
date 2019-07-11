@@ -218,23 +218,11 @@
   (letfn [(fn-binding [] {:some :map})]
     (#'herb.impl/get-name fn-binding "herb.impl-test" {})))
 
-(defn test-fn-2
-  []
-  (#'herb.impl/get-name test-fn-1 "herb.impl-test" {}))
+(defn test-fn-2 [] (#'herb.impl/get-name test-fn-1 "herb.impl-test" {}))
 
-(defn test-fn-3
-  []
-  (#'herb.impl/get-name #({}) "herb.impl-test" {}))
+(defn test-fn-3 [] (#'herb.impl/get-name #({}) "herb.impl-test" {}))
 
-(defn test-fn-4
-  []
-  ;; ^{:pseudo {:hover {:color "yellow"}}
-  ;;   :vendors ["webkit"]
-  ;;   :prefix true
-  ;;   :supports {{:display :grid} {:font-size "20px"}}
-  ;;   :media {{:screen true} {:color "magenta"}}
-  ;;   :combinators {[:- :div] {:background "yellow"}}}
-  {:background :red})
+(defn test-fn-4 [] {:background :red})
 
 (deftest get-name
   (testing "getting function name"
@@ -250,9 +238,7 @@
     (is (= (impl/with-style! {} "test-fn-1" "herb.unit-tests" test-fn-4)
            "herb_impl-test_test-fn-4"))
     (is (= (impl/with-style! {:style? true} "test-fn-1" "herb.unit-tests" test-fn-4)
-           ".herb_impl-test_test-fn-4 {
-  background: red;
-}"))
+           ".herb_impl-test_test-fn-4 {\n  background: red;\n}"))
 
     (let [result (deref (deref #'herb.runtime/injected-styles))
           data (first (:data (val (first result))))]
@@ -261,5 +247,4 @@
       (is (= (key data) ".herb_impl-test_test-fn-4"))
       (is (= (:style (val data)) {:background :red}))
       (is (= (:data-string (val (first result))) "herb.impl-test/test-fn-4"))
-      (is (= (:css (val (first result))) ".herb_impl-test_test-fn-4 {\n  background: red;\n}")))
-    ))
+      (is (= (:css (val (first result))) ".herb_impl-test_test-fn-4 {\n  background: red;\n}")))))
