@@ -32,9 +32,16 @@
   (testing "converting CSS supports"
     (let [input {{:display :grid} {:display :grid}
                  {:display :flex } {:display :flex}}
-          expected (list (at-supports {:display :grid} [:& {:display :grid}])
-                         (at-supports {:display :flex} [:& {:display :flex}]))]
-      (is (= (#'herb.impl/convert-supports input) expected)))))
+          result (#'herb.impl/convert-supports input)]
+
+      (is (= (:identifier (first result)) :feature))
+      (is (= (:feature-queries (:value (first result))) {:display :grid}))
+      (is (= (:rules (:value (first result))) '([:& {:display :grid}])))
+
+
+      (is (= (:identifier (second result)) :feature))
+      (is (= (:feature-queries (:value (second result))) {:display :flex}))
+      (is (= (:rules (:value (second result))) '([:& {:display :flex}]))))))
 
 (deftest process-meta-xform
   (testing "process metadata transducer"
