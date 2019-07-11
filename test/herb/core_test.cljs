@@ -33,3 +33,37 @@
            (is (= (.-message e) "join takes one or more strings as arguments"))
            (is (= (-> (.-data e) :cljs.spec.alpha/spec) :herb.spec/classes))
            (is (= (-> (.-data e) :cljs.spec.alpha/value) '(1 :key)))))))
+
+
+(deftest defkeyframes
+  (testing "defkeyframes macro"
+    (let [expansion (macroexpand '(core/defkeyframes pulse-animation
+                                    [:from {:opacity 1}]
+                                    [:to {:opacity 0}]))]
+      (is (= (-> expansion first) 'do))
+      (is (= (-> expansion second first) 'herb.runtime/inject-obj!))
+      (is (= (-> expansion second second) '(clojure.core/str "herb.core-test" "/" 'pulse-animation)))
+      (is (= (nth (second expansion) 2) :keyframes))
+      (is (= (nth (second expansion) 3) '(garden.types.CSSAtRule.
+                                          :keyframes
+                                          {:identifier (clojure.core/str 'pulse-animation),
+                                           :frames (clojure.core/list [:from {:opacity 1}] [:to {:opacity 0}])})))
+      (is (= (-> (nth expansion 2) first) 'def))
+      (is (= (-> (nth expansion 2) second) 'pulse-animation))
+      (is (= (-> (nth expansion 2) last) '(garden.types.CSSAtRule.
+                                           :keyframes
+                                           {:identifier (clojure.core/str 'pulse-animation),
+                                            :frames (clojure.core/list [:from {:opacity 1}] [:to {:opacity 0}])})))
+
+      (core/defkeyframes pulse-animation
+        [:from {:opacity 1}]
+        [:to {:opacity 0}])
+
+      (let [result (get (deref (deref #'herb.runtime/injected-keyframes)) "herb.core-test/pulse-animation")
+            el-html (.-innerHTML (.item (.querySelectorAll js/document "[data-herb='keyframes']") 0))]
+        (is (= (-> result :data first :identifier) :keyframes))
+        (is (= (-> result :data first :value) {:identifier "pulse-animation",
+                                               :frames '([:from {:opacity 1}] [:to {:opacity 0}])}))
+
+        (is (= el-html "\n@keyframes pulse-animation {\n\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n  }\n\n}"))
+        ))))
