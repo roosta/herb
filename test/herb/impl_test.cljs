@@ -74,13 +74,18 @@
           (nth result 1) {:background-color "green"}
           (nth result 2) {:background-color "red"})))))
 
-(deftest extract-styles
+(deftest extract-extended-styles
   (testing "extracting extended style functions"
     (letfn [(parent [] {:font-size "24px"})
             (extend-1 [color] ^{:extend parent} {:background-color color})
             (extend-2 [] ^{:extend [[extend-1 "red"]]} {:border-radius "5px"})]
-      (let [expected [{:font-size "24px"} {:background-color "red"} {:border-radius "5px"}]]
-        (is (= (#'herb.impl/extract-extended-styles extend-2) expected))))))
+      (let [result (#'herb.impl/extract-extended-styles extend-2)]
+        (is vector? result)
+        (are [x y] (= x y)
+          (count result)  3
+          (first result)  {:font-size "24px"}
+          (second result) {:background-color "red"}
+          (last result)   {:border-radius "5px"})))))
 
 (deftest extract-meta-pseudo
   (testing "extracting meta data"
