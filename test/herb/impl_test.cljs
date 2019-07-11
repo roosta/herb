@@ -152,24 +152,39 @@
                                    [:+ :p] {:background "purple"}
                                    [:- :div] {:background "yellow"}
                                    [:descendant :div] {:background "green"}}})]
-          expected {:style {:color "black",
-                            :background-color "red",
-                            :border-radius "5px",
-                            :font-style "italic",
-                            :font-weight "bold"
-                            :transition "all 1s ease-out"
-                            :box-sizing "border-box"}
-                    :vendors ["ms" "webkit"]
-                    :prefix true
-                    :supports (list (at-supports {:display :grid} [:& {:font-size "24px"}]))
-                    :pseudo (list [:&:hover {:color "magenta"}])
-                    :media (list (at-media {:screen true} [:& {:background-color "blue"}]))
-                    :combinators {[:> :div :span] {:background "red"}
-                                  [:+ :p] {:background "purple"}
-                                  [:- :div] {:background "yellow"}
-                                  [:descendant :div] {:background "green"}}}
-          actual (#'herb.impl/prepare-data styles)]
-      (is (= actual expected)))))
+          result (#'herb.impl/prepare-data styles)]
+
+      (is (vector? (:vendors result)))
+      (is (:prefix result))
+      (are [x y] (= x y)
+        (-> result :style :color) "black"
+        (-> result :style :background-color) "red"
+        (-> result :style :border-radius) "5px"
+        (-> result :style :font-style) "italic"
+        (-> result :style :font-weight) "bold"
+        (-> result :style :transition) "all 1s ease-out"
+        (-> result :style :box-sizing) "border-box"
+
+        (count (-> result :vendors)) 2
+        (-> result :vendors first) "ms"
+        (-> result :vendors last) "webkit"
+
+        (-> result :supports first :identifier) :feature
+        (-> result :supports first :value :feature-queries) {:display :grid}
+        (-> result :supports first :value :rules) '([:& {:font-size "24px"}])
+
+        (-> result :pseudo first first) :&:hover
+        (-> result :pseudo first last) {:color "magenta"}
+
+        (-> result :media first :identifier) :media
+        (-> result :media first :value :media-queries) {:screen true}
+        (-> result :media first :value :rules) '([:& {:background-color "blue"}])
+
+        (count (-> result :combinators)) 4
+        (get (-> result :combinators) [:> :div :span]) {:background "red"}
+        (get (-> result :combinators) [:+ :p]) {:background "purple"}
+        (get (-> result :combinators) [:- :div]) {:background "yellow"}
+        (get (-> result :combinators) [:descendant :div]) {:background "green"}))))
 
 (deftest sanitize
   (testing "Sanitize names"
