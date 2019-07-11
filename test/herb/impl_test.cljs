@@ -69,6 +69,7 @@
       (let [result (#'herb.impl/resolve-style-fns [[[fn-1] [fn-2 "green"] [fn-3]]])]
         (is vector? result)
         (are [x y] (= x y)
+          (count result) 3
           (nth result 0) {:border-radius "5px"}
           (nth result 1) {:background-color "green"}
           (nth result 2) {:background-color "red"})))))
