@@ -76,7 +76,7 @@
             (extend-1 [color] ^{:extend parent} {:background-color color})
             (extend-2 [] ^{:extend [[extend-1 "red"]]} {:border-radius "5px"})]
       (let [expected [{:font-size "24px"} {:background-color "red"} {:border-radius "5px"}]]
-        (is (= (#'herb.impl/extract-styles extend-2) expected))))))
+        (is (= (#'herb.impl/extract-extended-styles extend-2) expected))))))
 
 (deftest extract-meta-pseudo
   (testing "extracting meta data"

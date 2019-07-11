@@ -69,7 +69,7 @@
    (map meta-type)
    (filter identity)))
 
-(defn- extract-styles
+(defn- extract-extended-styles
   "Extract all the `:extend` meta, ensuring what we walk the entire tree, passing
   each extend vector of style-fns to `resolve-style-fns` for resolution. Returns
   vector of resolved styles"
@@ -164,7 +164,7 @@
   Takes an `opt` map as first argument, and currently only supports `:id true`
   which appends an id identifier instead of a class to the DOM"
   [{:keys [id? style?]} fn-name ns-name style-fn & args]
-  (let [resolved-styles (extract-styles (into [style-fn] args))
+  (let [resolved-styles (extract-extended-styles (into [style-fn] args))
         style-data (prepare-data resolved-styles)
         {:keys [group key prefix] :as meta-data} (-> resolved-styles last meta)
         name* (get-name style-fn ns-name style-data)
