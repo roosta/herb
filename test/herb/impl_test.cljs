@@ -201,19 +201,19 @@
 
 (deftest with-style!
   (testing "with-style! entry point"
-           (is (= (impl/with-style! {} "test-fn-1" "herb.unit-tests" test-fn-4)
-                  "herb_impl-test_test-fn-4"))
-           (is (= (impl/with-style! {:style? true} "test-fn-1" "herb.unit-tests" test-fn-4)
-                  ".herb_impl-test_test-fn-4 {
+    (is (= (impl/with-style! {} "test-fn-1" "herb.unit-tests" test-fn-4)
+           "herb_impl-test_test-fn-4"))
+    (is (= (impl/with-style! {:style? true} "test-fn-1" "herb.unit-tests" test-fn-4)
+           ".herb_impl-test_test-fn-4 {
   background: red;
 }"))
 
-           (let [result (deref (deref #'herb.runtime/injected-styles))
-                 data (first (:data (val (first result))))]
+    (let [result (deref (deref #'herb.runtime/injected-styles))
+          data (first (:data (val (first result))))]
 
-             (is (= (key (first result)) "herb_impl-test_test-fn-4"))
-             (is (= (key data) ".herb_impl-test_test-fn-4"))
-             (is (= (:style (val data)) {:background :red}))
-             (is (= (:data-string (val (first result))) "herb.impl-test/test-fn-4"))
-             (is (= (:css (val (first result))) ".herb_impl-test_test-fn-4 {\n  background: red;\n}")))
-           ))
+      (is (= (key (first result)) "herb_impl-test_test-fn-4"))
+      (is (= (key data) ".herb_impl-test_test-fn-4"))
+      (is (= (:style (val data)) {:background :red}))
+      (is (= (:data-string (val (first result))) "herb.impl-test/test-fn-4"))
+      (is (= (:css (val (first result))) ".herb_impl-test_test-fn-4 {\n  background: red;\n}")))
+    ))
