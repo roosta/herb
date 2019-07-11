@@ -1,2 +1,4 @@
+addons:
+  chrome: stable
 language: clojure
-script: lein test
+script: lein fig:test
