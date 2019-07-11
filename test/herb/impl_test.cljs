@@ -88,16 +88,21 @@
           (last result)   {:border-radius "5px"})))))
 
 (deftest extract-meta-pseudo
-  (testing "extracting meta data"
+  (testing "extracting pesudo meta data"
     (let [styles [^{:pseudo {:hover {:color "red"}
                              :focus {:color "blue"}}}
                   {:color "white"}
 
                   ^{:pseudo {:hover {:color "green"}}}
                   {:border "2px solid black"}]
-          actual (#'herb.impl/extract-meta styles :pseudo)
-          expected '([:&:hover {:color "green"}] [:&:focus {:color "blue"}])]
-      (is (= actual expected)))))
+          result (#'herb.impl/extract-meta styles :pseudo)]
+      (is (seq? result))
+      (are [x y] (= x y)
+        (count result) 2
+        (ffirst result) :&:hover
+        (-> result first last) {:color "green"}
+        (-> result second first) :&:focus
+        (-> result second last) {:color "blue"}))))
 
 (deftest extract-meta-media
   (testing "Extracting media meta data"
