@@ -92,3 +92,40 @@
         (is (= (-> result :data ffirst) [:.global {:color "magenta", :font-size "24px"}]))
         (is (= (-> result :css) ".global {\n  color: magenta;\n  font-size: 24px;\n}"))
         (is (= el-html "\n.global {\n  color: magenta;\n  font-size: 24px;\n}"))))))
+
+(deftest defgroup
+  (testing "creating groups using defgroup macro"
+    (let [expansion (macroexpand-1 '(core/defgroup a-group
+                                      {:text {:font-weight "bold"}
+                                       :box {:background-color "#333"}}))]
+
+      (is (= (-> expansion first) 'clojure.core/defn))
+      (is (= (-> expansion second) 'a-group))
+      (is (= (nth expansion 2) '[component  & args]))
+      (is (= (-> (nth expansion 3) first) 'clojure.core/if-let))
+      (is (= (-> (nth expansion 3) second second) '(clojure.core/get
+                                                    {:text {:font-weight "bold"}, :box {:background-color "#333"}}
+                                                    component)))
+      (is (= (first (nth (nth expansion 3) 2)) 'clojure.core/vary-meta))
+      (is (= (nth (nth (nth expansion 3) 2) 2) 'clojure.core/assoc))
+      (is (= (nth (nth (nth expansion 3) 2) 3) :key))
+      (is (= (nth (nth (nth expansion 3) 2) 4) 'component))
+      (is (= (nth (nth (nth expansion 3) 2) 5) ':group))
+      (is (= (nth (nth (nth expansion 3) 2) 6) true))
+      (is (= (first (nth (nth expansion 3) 3)) 'throw))
+      (is (= (second (nth (nth expansion 3) 3)) '(clojure.core/str "Herb error: failed to get component: " component " in stylegroup: " 'a-group))))
+
+    (let [result (get (deref (deref #'herb.runtime/injected-styles)) "herb_core-test_a-group")
+          el-html (.-innerHTML (.item (.querySelectorAll js/document "[data-herb='herb.core-test/a-group']") 0))]
+      (core/defgroup a-group
+        {:text {:font-weight "bold"}
+         :box {:background-color "#333"}})
+      (is (= (core/<class a-group :text) "herb_core-test_a-group_text"))
+      (is (= (core/<class a-group :box) "herb_core-test_a-group_box"))
+
+      (is (= (:style (get (:data result) ".herb_core-test_a-group_text")) {:font-weight "bold"}))
+      (is (= (:style (get (:data result) ".herb_core-test_a-group_box")) {:background-color "#333"}))
+
+      (is (= (:data-string result) "herb.core-test/a-group"))
+      (is (= (:css result) ".herb_core-test_a-group_text {\n  font-weight: bold;\n}\n.herb_core-test_a-group_box {\n  background-color: #333;\n}"))
+      (is (= el-html "\n.herb_core-test_a-group_text {\n  font-weight: bold;\n}\n.herb_core-test_a-group_box {\n  background-color: #333;\n}")))))
