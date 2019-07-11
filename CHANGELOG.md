@@ -1,5 +1,13 @@
 # Change Log
 ## [v0.9.0-SNAPSHOT]
+### Breaking change
+- This library from here on out only supports `cljs`
+  environment. Previously most of the library was written in `cljc` to
+  allow for easier testing, which made it possible to use Herb in
+  regular Clojure environments. The functionality was severly limited
+  and honestly I don't see much use for it. If you'd like to do some
+  server side CSS rendering a much better option is simply using
+  [Garden](https://github.com/noprompt/garden) directly.
 
 ## [v0.8.2] - 2019-07-10
 ### Fixed
