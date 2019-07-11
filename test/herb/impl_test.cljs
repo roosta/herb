@@ -19,9 +19,14 @@
   (testing "converting media queries"
     (let [input {{:screen true} {:color "white"}
                  {:min-width "100px"} {:color "blue"}}
-          expected (list (at-media {:screen true} [:& {:color "white"}])
-                         (at-media {:min-width "100px"} [:& {:color "blue"}]))]
-        (is (= (#'herb.impl/convert-media input) expected)))))
+          result (#'herb.impl/convert-media input)]
+      (is (= (:identifier (first result)) :media))
+      (is (= (:media-queries (:value (first result))) {:screen true}))
+      (is (= (:rules (:value (first result))) '([:& {:color "white"}])))
+
+      (is (= (:identifier (last result)) :media))
+      (is (= (:media-queries (:value (last result))) {:min-width "100px"}))
+      (is (= (:rules (:value (last result))) '([:& {:color "blue"}]))))))
 
 (deftest convert-supports
   (testing "converting CSS supports"
