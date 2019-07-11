@@ -22,3 +22,14 @@
            (is (= (.-message e) "Invalid input"))
            (is (= (-> (.-data e) :cljs.spec.alpha/spec) :herb.spec/options))
            (is (= (-> (.-data e) :cljs.spec.alpha/value) {:auto-prefix [1 2 3]}))))))
+
+(deftest join
+  (testing "Joining classnames"
+    (is (= (core/join "class-1") "class-1"))
+    (is (= (core/join "class-1" "class-2") "class-1 class-2"))
+    (is (= (core/join "class-1" nil nil "class-2") "class-1 class-2"))
+    (try (core/join 1 :key)
+         (catch js/Error e
+           (is (= (.-message e) "join takes one or more strings as arguments"))
+           (is (= (-> (.-data e) :cljs.spec.alpha/spec) :herb.spec/classes))
+           (is (= (-> (.-data e) :cljs.spec.alpha/value) '(1 :key)))))))
