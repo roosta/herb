@@ -112,10 +112,18 @@
 
                   ^{:media {{:screen true} {:color "purple"}}}
                   {:color "white"}]
-          expected (list (at-media {:screen true} [:& {:color "purple"}])
-                         (at-media {:max-width "412px"} [:& {:color "blue"}]))
-          actual (#'herb.impl/extract-meta styles :media)]
-      (is (= actual expected)))))
+          result (#'herb.impl/extract-meta styles :media)]
+
+      (is (seq? result))
+      (are [x y] (= x y)
+        (count result) 2
+        (:identifier (first result)) :media
+        (:media-queries (:value (first result))) {:screen true}
+        (:rules (:value (first result))) '([:& {:color "purple"}])
+
+        (:identifier (last result)) :media
+        (:media-queries (:value (last result))) {:max-width "412px"}
+        (:rules (:value (last result))) '([:& {:color "blue"}])))))
 
 (deftest prepare-data
   (testing "Prepare data for rendering"
