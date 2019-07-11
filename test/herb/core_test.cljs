@@ -67,3 +67,28 @@
 
         (is (= el-html "\n@keyframes pulse-animation {\n\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n  }\n\n}"))
         ))))
+
+(deftest defglobal
+  (testing "defglobal macro"
+    (let [expansion (macroexpand '(core/defglobal global
+                                    [:.global {:color "magenta"
+                                               :font-size "24px"}]))]
+      (is (= (-> expansion first) 'do))
+      (is (= (-> expansion second first) 'herb.runtime/inject-obj!))
+      (is (= (-> expansion second second) '(clojure.core/str "herb.core-test" "/" 'global)))
+      (is (= (nth (second expansion) 2) :global))
+      (is (= (nth (second expansion) 3) '(clojure.core/list [:.global {:color "magenta", :font-size "24px"}])))
+
+      (is (= (-> (nth expansion 2) first) 'def))
+      (is (= (-> (nth expansion 2) second) 'global))
+      (is (= (-> (nth expansion 2) last) '(clojure.core/list [:.global {:color "magenta", :font-size "24px"}])))
+
+      (core/defglobal global
+        [:.global {:color "magenta"
+                   :font-size "24px"}])
+
+      (let [result (get (deref (deref #'herb.runtime/injected-global)) "herb.core-test/global")
+            el-html (.-innerHTML (.item (.querySelectorAll js/document "[data-herb='global']") 0))]
+        (is (= (-> result :data ffirst) [:.global {:color "magenta", :font-size "24px"}]))
+        (is (= (-> result :css) ".global {\n  color: magenta;\n  font-size: 24px;\n}"))
+        (is (= el-html "\n.global {\n  color: magenta;\n  font-size: 24px;\n}"))))))
