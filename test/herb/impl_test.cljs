@@ -20,13 +20,15 @@
     (let [input {{:screen true} {:color "white"}
                  {:min-width "100px"} {:color "blue"}}
           result (#'herb.impl/convert-media input)]
-      (is (= (:identifier (first result)) :media))
-      (is (= (:media-queries (:value (first result))) {:screen true}))
-      (is (= (:rules (:value (first result))) '([:& {:color "white"}])))
 
-      (is (= (:identifier (last result)) :media))
-      (is (= (:media-queries (:value (last result))) {:min-width "100px"}))
-      (is (= (:rules (:value (last result))) '([:& {:color "blue"}]))))))
+      (are [x y] (= x y)
+        (:identifier (first result)) :media
+        (:media-queries (:value (first result))) {:screen true}
+        (:rules (:value (first result))) '([:& {:color "white"}])
+
+        (:identifier (last result)) :media
+        (:media-queries (:value (last result))) {:min-width "100px"}
+        (:rules (:value (last result))) '([:& {:color "blue"}])))))
 
 (deftest convert-supports
   (testing "converting CSS supports"
@@ -34,14 +36,14 @@
                  {:display :flex } {:display :flex}}
           result (#'herb.impl/convert-supports input)]
 
-      (is (= (:identifier (first result)) :feature))
-      (is (= (:feature-queries (:value (first result))) {:display :grid}))
-      (is (= (:rules (:value (first result))) '([:& {:display :grid}])))
+      (are [x y] (= x y)
+        (:identifier (first result)) :feature
+        (:feature-queries (:value (first result))) {:display :grid}
+        (:rules (:value (first result))) '([:& {:display :grid}])
 
-
-      (is (= (:identifier (second result)) :feature))
-      (is (= (:feature-queries (:value (second result))) {:display :flex}))
-      (is (= (:rules (:value (second result))) '([:& {:display :flex}]))))))
+        (:identifier (second result)) :feature
+        (:feature-queries (:value (second result))) {:display :flex}
+        (:rules (:value (second result))) '([:& {:display :flex}])))))
 
 (deftest process-meta-xform
   (testing "process metadata transducer"
