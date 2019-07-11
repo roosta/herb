@@ -1,7 +1,6 @@
 (ns herb.impl-test
   (:require [cljs.test :refer-macros [deftest testing is are async]]
             [garden.stylesheet :refer [at-media at-keyframes at-supports]]
-            [debux.cs.core :refer [clog]]
             [herb.runtime :as runtime]
             [herb.impl :as impl]))
 
@@ -9,8 +8,12 @@
   (testing "Converting pseudo classes"
     (let [input {:hover {:opacity 1}
                  :focus {:color "yellow"}}
-          expected (list [:&:hover {:opacity 1}] [:&:focus {:color "yellow"}])]
-      (is (= (#'herb.impl/convert-pseudo input) expected)))))
+          result  (#'herb.impl/convert-pseudo input)]
+      (is (seq? result))
+      (is (= (ffirst result) :&:hover))
+      (is (= (-> result first last) {:opacity 1}))
+      (is (= (-> result last first) :&:focus))
+      (is (= (-> result last last) {:color "yellow"})))))
 
 (deftest convert-media
   (testing "converting media queries"
