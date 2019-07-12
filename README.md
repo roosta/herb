@@ -66,12 +66,40 @@ Extend existing functions:
 ```
 
 
-[Garden](https://github.com/noprompt/garden) is used to translate the style map to CSS, which enables most of Gardens functionality, so familiarizing yourself with its features is a good idea.
+[Garden](https://github.com/noprompt/garden) is used to translate the
+style map to CSS, which enables most of Gardens functionality, so
+familiarizing yourself with its features is a good idea.
 
-Refer to the [tutorial](http://herb.roosta.sh/) for a full overview and examples of Herbs features.
+Refer to the [tutorial](http://herb.roosta.sh/) for a full overview
+and examples of Herbs features.
 
 ## Advanced optimizations
-During a production build add this to the `:compiler` config  `:closure-defines {"goog.DEBUG" false}`. This flag tells Herb to minify styles, remove unneeded style element attributes, and ensure anonymous functions gets the correct minified name.
+During a production build add this to the `:compiler` config
+`:closure-defines {"goog.DEBUG" false}`. This flag tells Herb to
+minify styles, remove unneeded style element attributes, and ensure
+anonymous functions gets the correct minified name.
+
+## Debugging advanced compilation
+
+During advanced compilation Herb minify styles and removes the
+`data-herb` attribute. If you need to debug production build it can be
+helpful to see the function namespaces unmunged to get a clearer image
+of what is happening.
+
+To do this remove the `goog.DEBUG false` from production build and
+enable `:pseudo-names`:
+
+``` clojure
+:cljsbuild {:builds {:min {:source-paths ["src" "env/prod"]
+                           :compiler {:pseudo-names true
+                                      :optimizations :advanced
+                                      ...
+                                      }}
+```
+
+That way you will see both full classnames and the namespace reflected
+in the `data-herb` HTML attribute.
+
 
 ## Development
 Start figwheel main with the development build
