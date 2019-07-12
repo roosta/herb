@@ -142,42 +142,42 @@
         (is (= (-> expansion first) 'clojure.core/cond))
         (is (= (-> expansion second) '(clojure.core/not (clojure.core/fn? top-level-fn))))
         (is (= (nth (nth expansion 2) 0) 'throw))
-        (is (= (nth (nth expansion 2) 1)
-               '(clojure.core/ex-info
-                 (clojure.core/str
-                  "herb error in ns \""
-                  "herb.core-test"
-                  "\" the first argument to <class needs to be a function.")
-                 {:function 'top-level-fn,
-                  :return-value
-                  (top-level-fn
-                   {:text {:font-weight "bold"}, :box {:background-color "#333"}}),
-                  :namespace "herb.core-test"})))
+        (is (= (nth (nth (nth expansion 2) 1) 1)
+               '(clojure.core/str
+                 "herb error in ns \""
+                 "herb.core-test"
+                 "\" the first argument to <class needs to be a function.")))
+        (is (= (nth (nth (nth expansion 2) 1) 2)
+               '{:function 'top-level-fn,
+                 :return-value
+                 (top-level-fn
+                  {:text {:font-weight "bold"}, :box {:background-color "#333"}}),
+                 :namespace "herb.core-test"}))
         (is (= (nth expansion 3) '(clojure.core/not
                                    (clojure.core/map?
                                     (top-level-fn
                                      {:text {:font-weight "bold"}, :box {:background-color "#333"}})))))
         (is (= (nth (nth expansion 4) 0) 'throw))
-        (is (= (nth (nth expansion 4) 1)
-               '(clojure.core/ex-info
-                 (clojure.core/str
-                  "herb error: style function \""
-                  "herb.core-test"
-                  "/"
-                  'top-level-fn
-                  "\" needs to return a map.")
-                 {:function 'top-level-fn,
-                  :return-value
-                  (top-level-fn
-                   {:text {:font-weight "bold"}, :box {:background-color "#333"}}),
-                  :namespace "herb.core-test"})))
+        (is (= (nth (nth (nth expansion 4) 1) 1)
+               '(clojure.core/str
+                 "herb error: style function \""
+                 "herb.core-test"
+                 "/"
+                 'top-level-fn
+                 "\" needs to return a map.")))
+        (is (= (nth (nth (nth expansion 4) 1) 2)
+               '{:function 'top-level-fn,
+                 :return-value
+                 (top-level-fn
+                  {:text {:font-weight "bold"}, :box {:background-color "#333"}}),
+                 :namespace "herb.core-test"}))
         (is (= (nth expansion 5) :else))
-        (is (= (nth expansion 6) '(herb.impl/with-style!
-                                    {}
-                                    'top-level-fn
-                                    "herb.core-test"
-                                    top-level-fn
-                                    {:text {:font-weight "bold"}, :box {:background-color "#333"}})))
-
+        (is (= (nth expansion 6)
+               '(herb.impl/with-style!
+                  {}
+                  'top-level-fn
+                  "herb.core-test"
+                  top-level-fn
+                  {:text {:font-weight "bold"}, :box {:background-color "#333"}})))
 
         ))))
