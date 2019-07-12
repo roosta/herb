@@ -121,7 +121,7 @@
       (is (= (core/<class a-group :text) "herb_core-test_a-group_text"))
       (is (= (core/<class a-group :box) "herb_core-test_a-group_box"))
 
-      (let [result  (get (deref (deref #'herb.runtime/injected-styles)) "herb_core-test_a-group")
+      (let [result (get (deref (deref #'herb.runtime/injected-styles)) "herb_core-test_a-group")
             el-html (.-innerHTML (.item (.querySelectorAll js/document "[data-herb='herb.core-test/a-group']") 0))]
         (is (= (:style (get (:data result) ".herb_core-test_a-group_text")) {:font-weight "bold"}))
         (is (= (:style (get (:data result) ".herb_core-test_a-group_box")) {:background-color "#333"}))
@@ -180,4 +180,28 @@
                   top-level-fn
                   {:text {:font-weight "bold"}, :box {:background-color "#333"}})))
 
-        ))))
+        (is (= (core/<class top-level-fn) "herb_core-test_top-level-fn"))
+        (is (= (core/<class nested-fn "blue") "herb_core-test_nested-fn"))
+        (is (= (core/<class (fn [] {:color "blue"})) "herb_core-test_anonymous-231793611"))
+
+        (let [top-level-result (get (deref (deref #'herb.runtime/injected-styles)) "herb_core-test_top-level-fn")
+              nested-fn-result (get (deref (deref #'herb.runtime/injected-styles)) "herb_core-test_nested-fn")
+              anon-fn-result (get (deref (deref #'herb.runtime/injected-styles)) "herb_core-test_anonymous-231793611")
+              top-level-html (.-innerHTML (.item (.querySelectorAll js/document "[data-herb='herb.core-test/top-level-fn']") 0))
+              nested-fn-html (.-innerHTML (.item (.querySelectorAll js/document "[data-herb='herb.core-test/nested-fn']") 0))
+              anon-fn-html (.-innerHTML (.item (.querySelectorAll js/document "[data-herb='herb.core-test/anonymous-231793611']") 0))]
+          (is (= (:style (get (:data top-level-result) ".herb_core-test_top-level-fn")) {:background "red"}))
+          (is (= (:data-string top-level-result) "herb.core-test/top-level-fn"))
+          (is (= (:css top-level-result) ".herb_core-test_top-level-fn {\n  background: red;\n}"))
+
+          (is (= (:style (get (:data nested-fn-result) ".herb_core-test_nested-fn")) {:background "blue"}))
+          (is (= (:data-string nested-fn-result) "herb.core-test/nested-fn"))
+          (is (= (:css nested-fn-result) ".herb_core-test_nested-fn {\n  background: blue;\n}"))
+
+          (is (= (:style (get (:data anon-fn-result) ".herb_core-test_anonymous-231793611")) {:color "blue"}))
+          (is (= (:data-string anon-fn-result) "herb.core-test/anonymous-231793611"))
+          (is (= (:css anon-fn-result) ".herb_core-test_anonymous-231793611 {\n  color: blue;\n}"))
+
+          (is (= top-level-html "\n.herb_core-test_top-level-fn {\n  background: red;\n}"))
+          (is (= nested-fn-html "\n.herb_core-test_nested-fn {\n  background: blue;\n}"))
+          (is (= anon-fn-html "\n.herb_core-test_anonymous-231793611 {\n  color: blue;\n}")))))))
