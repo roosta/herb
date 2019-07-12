@@ -9,7 +9,7 @@
                  [reagent "0.8.1"]
                  [reagent-utils "0.3.2"]
                  [ring "1.7.1"]
-                 [herb "0.8.1"]
+                 [herb "0.8.2"]
                  [ring/ring-defaults "0.3.2"]
                  [hiccup "1.0.5"]
                  [cljsjs/highlight "9.12.0-2"]
@@ -47,6 +47,7 @@
                                         :output-dir "target/cljsbuild/public/js"
                                         :source-map "target/cljsbuild/public/js/app.js.map"
                                         :closure-defines {"goog.DEBUG" false}
+                                        ;; :pseudo-names true
                                         :optimizations :advanced
                                         :pretty-print  false}}
                        :app {:source-paths ["src" "env/dev"]
