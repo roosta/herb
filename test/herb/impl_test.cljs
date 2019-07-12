@@ -240,11 +240,7 @@
     (is (= (impl/with-style! {:style? true} "test-fn-1" "herb.unit-tests" test-fn-4)
            ".herb_impl-test_test-fn-4 {\n  background: red;\n}"))
 
-    (let [result (deref (deref #'herb.runtime/injected-styles))
-          data (first (:data (val (first result))))]
-
-      (is (= (key (first result)) "herb_impl-test_test-fn-4"))
-      (is (= (key data) ".herb_impl-test_test-fn-4"))
-      (is (= (:style (val data)) {:background :red}))
-      (is (= (:data-string (val (first result))) "herb.impl-test/test-fn-4"))
-      (is (= (:css (val (first result))) ".herb_impl-test_test-fn-4 {\n  background: red;\n}")))))
+    (let [result (get (deref (deref #'herb.runtime/injected-styles)) "herb_impl-test_test-fn-4")]
+      (is (= (:style (get (:data result) ".herb_impl-test_test-fn-4")) {:background :red}))
+      (is (= (:data-string result) "herb.impl-test/test-fn-4"))
+      (is (= (:css result) ".herb_impl-test_test-fn-4 {\n  background: red;\n}")))))
