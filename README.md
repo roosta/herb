@@ -9,7 +9,10 @@ Herb is a CSS styling library for [Clojurescript](https://clojurescript.org/), b
 - [Changelog](https://github.com/roosta/herb/blob/master/CHANGELOG.md)
 
 ## Requirements
-Herb requires at least Clojure 1.9.0 and ClojureScript 1.9.542 due to use of [clojure.spec.alpha](https://cljs.github.io/api/cljs.spec.alpha/) to validate macro input.
+Herb requires at least Clojure 1.9.0 and ClojureScript 1.9.542 due to
+use of
+[clojure.spec.alpha](https://cljs.github.io/api/cljs.spec.alpha/) to
+validate macro input.
 
 ## Quick start
 [![Clojars Project](http://clojars.org/herb/latest-version.svg)](http://clojars.org/herb)
@@ -25,9 +28,13 @@ Herb requires at least Clojure 1.9.0 and ClojureScript 1.9.542 due to use of [cl
   [:div {:class (<class style)}])
 ```
 
-Herb has two main macros, `<class` and `<id`, these macros takes a function that returns a [Garden](https://github.com/noprompt/garden) style map, and returns a classname/id based on the functions fully qualified name, in this case `user/style`.
+Herb has two main macros, `<class` and `<id`, these macros takes a
+function that returns a [Garden](https://github.com/noprompt/garden)
+style map, and returns a classname/id based on the functions fully
+qualified name, in this case `user/style`.
 
-The style is injected into the DOM when any one of Herb's macros are called.
+The style is injected into the DOM when any one of Herb's macros are
+called.
 
 
 Pass arguments:
