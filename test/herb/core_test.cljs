@@ -115,17 +115,17 @@
       (is (= (first (nth (nth expansion 3) 3)) 'throw))
       (is (= (second (nth (nth expansion 3) 3)) '(clojure.core/str "Herb error: failed to get component: " component " in stylegroup: " 'a-group))))
 
-    (let [result (get (deref (deref #'herb.runtime/injected-styles)) "herb_core-test_a-group")
-          el-html (.-innerHTML (.item (.querySelectorAll js/document "[data-herb='herb.core-test/a-group']") 0))]
       (core/defgroup a-group
         {:text {:font-weight "bold"}
          :box {:background-color "#333"}})
       (is (= (core/<class a-group :text) "herb_core-test_a-group_text"))
       (is (= (core/<class a-group :box) "herb_core-test_a-group_box"))
 
-      (is (= (:style (get (:data result) ".herb_core-test_a-group_text")) {:font-weight "bold"}))
-      (is (= (:style (get (:data result) ".herb_core-test_a-group_box")) {:background-color "#333"}))
+      (let [result  (get (deref (deref #'herb.runtime/injected-styles)) "herb_core-test_a-group")
+            el-html (.-innerHTML (.item (.querySelectorAll js/document "[data-herb='herb.core-test/a-group']") 0))]
+        (is (= (:style (get (:data result) ".herb_core-test_a-group_text")) {:font-weight "bold"}))
+        (is (= (:style (get (:data result) ".herb_core-test_a-group_box")) {:background-color "#333"}))
 
-      (is (= (:data-string result) "herb.core-test/a-group"))
-      (is (= (:css result) ".herb_core-test_a-group_text {\n  font-weight: bold;\n}\n.herb_core-test_a-group_box {\n  background-color: #333;\n}"))
-      (is (= el-html "\n.herb_core-test_a-group_text {\n  font-weight: bold;\n}\n.herb_core-test_a-group_box {\n  background-color: #333;\n}")))))
+        (is (= (:data-string result) "herb.core-test/a-group"))
+        (is (= (:css result) ".herb_core-test_a-group_text {\n  font-weight: bold;\n}\n.herb_core-test_a-group_box {\n  background-color: #333;\n}"))
+        (is (= el-html "\n.herb_core-test_a-group_text {\n  font-weight: bold;\n}\n.herb_core-test_a-group_box {\n  background-color: #333;\n}")))))
