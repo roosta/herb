@@ -9,6 +9,17 @@
   server side CSS rendering a much better option is simply using
   [Garden](https://github.com/noprompt/garden) directly.
 
+### Changed
+- By using the [macro sugar
+  trick](https://blog.fikesfarm.com/posts/2016-03-01-clojurescript-macro-sugar.html)
+  users no longer have to require macros via the usual methods like
+  `:require-macros`, just require in the macros like any other
+  function from `herb.core`
+  ```clojure
+  (ns my.namespace
+    (:require [herb.core :refer [<class defgroup]]))
+  ```
+
 ## [v0.8.2] - 2019-07-10
 ### Fixed
 - Fixed issue in `<style` macro where `throw` would get the wrong number of arguments and error out.
