@@ -129,3 +129,55 @@
         (is (= (:data-string result) "herb.core-test/a-group"))
         (is (= (:css result) ".herb_core-test_a-group_text {\n  font-weight: bold;\n}\n.herb_core-test_a-group_box {\n  background-color: #333;\n}"))
         (is (= el-html "\n.herb_core-test_a-group_text {\n  font-weight: bold;\n}\n.herb_core-test_a-group_box {\n  background-color: #333;\n}")))))
+
+(defn top-level-fn [] {:background "red"})
+
+(deftest <class
+  (testing "using <class macro to create a classname and appending style to DOM"
+    (letfn [(nested-fn [color]
+              {:background color})]
+      (let [expansion (macroexpand-1 '(core/<class top-level-fn
+                                                   {:text {:font-weight "bold"}
+                                                    :box {:background-color "#333"}}))]
+        (is (= (-> expansion first) 'clojure.core/cond))
+        (is (= (-> expansion second) '(clojure.core/not (clojure.core/fn? top-level-fn))))
+        (is (= (nth (nth expansion 2) 0) 'throw))
+        (is (= (nth (nth expansion 2) 1)
+               '(clojure.core/ex-info
+                 (clojure.core/str
+                  "herb error in ns \""
+                  "herb.core-test"
+                  "\" the first argument to <class needs to be a function.")
+                 {:function 'top-level-fn,
+                  :return-value
+                  (top-level-fn
+                   {:text {:font-weight "bold"}, :box {:background-color "#333"}}),
+                  :namespace "herb.core-test"})))
+        (is (= (nth expansion 3) '(clojure.core/not
+                                   (clojure.core/map?
+                                    (top-level-fn
+                                     {:text {:font-weight "bold"}, :box {:background-color "#333"}})))))
+        (is (= (nth (nth expansion 4) 0) 'throw))
+        (is (= (nth (nth expansion 4) 1)
+               '(clojure.core/ex-info
+                 (clojure.core/str
+                  "herb error: style function \""
+                  "herb.core-test"
+                  "/"
+                  'top-level-fn
+                  "\" needs to return a map.")
+                 {:function 'top-level-fn,
+                  :return-value
+                  (top-level-fn
+                   {:text {:font-weight "bold"}, :box {:background-color "#333"}}),
+                  :namespace "herb.core-test"})))
+        (is (= (nth expansion 5) :else))
+        (is (= (nth expansion 6) '(herb.impl/with-style!
+                                    {}
+                                    'top-level-fn
+                                    "herb.core-test"
+                                    top-level-fn
+                                    {:text {:font-weight "bold"}, :box {:background-color "#333"}})))
+
+
+        ))))
