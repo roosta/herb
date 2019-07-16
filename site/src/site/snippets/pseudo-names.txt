@@ -1,0 +1,5 @@
+:cljsbuild {:builds {:min {:source-paths ["src" "env/prod"]
+                           :compiler {:pseudo-names true
+                                      :optimizations :advanced
+                                      ...
+                                      }}

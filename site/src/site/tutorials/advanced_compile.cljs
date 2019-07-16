@@ -8,7 +8,8 @@
 (defn main
   []
   (let [e1 (macros/example-src "project.txt")
-        e2 (macros/example-src "advanced_compile.html")]
+        e2 (macros/example-src "advanced_compile.html")
+        e3 (macros/example-src "pseudo-names.txt")]
     [paper {:id "advanced-compile"}
      [text {:variant :heading}
       "Advanced Compilation"]
@@ -23,11 +24,23 @@
      {\"goog.debug\" false}`:"]
      [code {:lang :clojure}
       e1]
-     [text "There are plans to include something like a `pseudo-names` flag to
-     enable fully qualified name approximation during advanced compilation to
-     facilitate better debugging in production builds."]
      [text
       "An example DOM might look something like this when doing advanced
-     optimizations:"]
+       optimizations:"]
      [code {:lang :html}
-      e2]]))
+      e2]
+     [text {:variant :subheading}
+      "Debugging advanced compile"]
+     [text "During advanced compilation Herb minify styles and removes the
+     `data-herb` attribute. If you need to debug production build it can be
+     helpful to see the function namespaces unmunged to get a clearer image
+     of what is happening."
+
+      [text "To do this remove the `goog.DEBUG false` from production build and
+       enable `:pseudo-names`: "]]
+
+     [code {:lang :clojure}
+      e3]
+     [text
+      "That way you will see both full classnames and the namespace reflected
+       in the `data-herb` HTML attribute."]]))
