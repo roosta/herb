@@ -20,8 +20,7 @@
      [text "Herb also uses a debug flag that that toggles of various development
      features, most notably disables the `data-herb` attribute in style
      elements, and disables pretty-print in Garden. To enable this include in
-     your compiler config for the production build `:closure-defines
-     {\"goog.debug\" false}`:"]
+     your compiler config for the production build `:closure-defines {\"goog.debug\" false}`:"]
      [code {:lang :clojure}
       e1]
      [text
