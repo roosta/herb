@@ -45,10 +45,12 @@
      [code {:lang :html}
       intro-html]
      [text
-      "The classname is a sanitized version of the input functions fully
-      qualified name. This way we avoid name collisions but keep a deterministic
-      classname that can be targeted."]
+      "The classname is a sanitized version of the input functions
+      fully qualified name, this way we avoid name collisions."]
      [text
-      "The " [:code "data-herb"] " attribute reflects the current namespace for
-     a given style, and only in development. It is removed on advanced compile.
-     "]]))
+      "The " [:code "data-herb"] " attribute reflects the current
+     namespace for a given style, and only in development. It is
+     removed on advanced compile, if you include "
+      [:code ":closure-defines {\"goog.DEBUG\" false}"]
+      " In your compiler options for production builds. More on that "
+      [:a {:href "#advanced-compile"} "here"] "."]]))
