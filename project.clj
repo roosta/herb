@@ -19,7 +19,7 @@
 
   :resource-paths ["target" "resources"]
 
-  :jar-exclusions [#"(?:^|\/)demo\/" #"(?:^|\/)public\/"]
+  :jar-exclusions [#"(?:^|\/)public\/"]
 
   :dependencies [[org.clojure/clojure "1.10.1" :scope "provided"]
                  [org.clojure/clojurescript "1.10.520" :scope "provided"]
