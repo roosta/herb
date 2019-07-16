@@ -2,7 +2,6 @@
   (:import garden.types.CSSAtRule)
   (:require [herb.spec]))
 
-
 (defmacro defkeyframes
   "Define a CSS @keyframes animation:
   ```clojure
@@ -50,7 +49,6 @@
 
 (defmacro <keyframes
   "Returns a CSS string from defined keyframes using the defkeyframes macro.
-  Intended to be used from clojure
   ```clojure
   (defkeyframes pulse
     [:from {:opacity 1}]
