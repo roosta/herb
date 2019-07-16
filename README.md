@@ -1,8 +1,21 @@
-# Herb
-[![Build Status](https://travis-ci.org/roosta/herb.svg?branch=master)](https://travis-ci.org/roosta/herb)
-[![Clojars Project](https://img.shields.io/clojars/v/herb.svg)](https://clojars.org/herb)
+<p align="center">
+  <img height="400" src="./assets/herb.svg">
+</p>
 
-Herb is a CSS styling library for [Clojurescript](https://clojurescript.org/), built using [Garden](https://github.com/noprompt/garden), whose main focus is on component level styling using functions.
+<p align="center">
+  <a href="https://travis-ci.org/roosta/herb">
+    <img src="https://travis-ci.org/roosta/herb.svg?branch=master">
+  </a>
+  <a href="https://clojars.org/herb">
+    <img src="https://img.shields.io/clojars/v/herb.svg">
+  </a>
+</p>
+
+
+Herb is a CSS styling library for
+[Clojurescript](https://clojurescript.org/), built using
+[Garden](https://github.com/noprompt/garden), whose main focus is on
+component level styling using functions.
 
 - [API](https://roosta.github.io/herb/)
 - [Tutorial](http://herb.roosta.sh/)
