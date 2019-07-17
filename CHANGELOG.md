@@ -1,5 +1,6 @@
 # Change Log
-## [v0.9.0-SNAPSHOT]
+## [v0.9.1-SNAPSHOT]
+## [v0.9.0]
 ### Breaking change
 - This library from here on out only supports `cljs`
   environment. Previously most of the library was written in `cljc` to
@@ -224,7 +225,8 @@ from `herb.macro` to `herb.core`
 ### Fixed
 - Fixed issues with inheritance precedence
 
-[v0.9.0-SNAPSHOT]: https://github.com/roosta/herb/compare/v0.8.2...HEAD
+[v0.9.1-SNAPSHOT]: https://github.com/roosta/herb/compare/v0.9.0...HEAD
+[v0.9.0]: https://github.com/roosta/herb/compare/v0.8.2...v0.9.0
 [v0.8.2]: https://github.com/roosta/herb/compare/v0.8.1...v0.8.2
 [v0.8.1]: https://github.com/roosta/herb/compare/v0.8.0...v0.8.1
 [v0.8.0]: https://github.com/roosta/herb/compare/v0.7.2...v0.8.0
