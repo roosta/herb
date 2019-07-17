@@ -1,5 +1,5 @@
 <p align="center">
-  <img height="400" src="./assets/herb.svg">
+  <img height="400" src="https://raw.githubusercontent.com/roosta/herb/master/assets/herb.svg?sanitize=true">
 </p>
 
 <p align="center">
