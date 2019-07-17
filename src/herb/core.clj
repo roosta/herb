@@ -1,6 +1,8 @@
 (ns herb.core
-  (:import garden.types.CSSAtRule)
-  (:require [herb.spec]))
+  (:require [herb.spec]
+            [garden.types])
+  (:import [garden.types CSSAtRule])
+  )
 
 (defmacro defkeyframes
   "Define a CSS @keyframes animation:
