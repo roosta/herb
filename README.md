@@ -9,6 +9,9 @@
   <a href="https://clojars.org/herb">
     <img src="https://img.shields.io/clojars/v/herb.svg">
   </a>
+  <a href="https://cljdoc.org/d/herb/herb/CURRENT">
+    <img src="https://cljdoc.org/badge/herb/herb">
+  </a>
 </p>
 
 
@@ -17,7 +20,7 @@ Herb is a CSS styling library for
 [Garden](https://github.com/noprompt/garden), whose main focus is on
 component level styling using functions.
 
-- [API](https://roosta.github.io/herb/)
+- [Documentation](https://cljdoc.org/d/herb/herb/CURRENT)
 - [Tutorial](http://herb.roosta.sh/)
 - [Changelog](https://github.com/roosta/herb/blob/master/CHANGELOG.md)
 
