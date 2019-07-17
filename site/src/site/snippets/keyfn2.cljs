@@ -1,5 +1,5 @@
 (ns site.snippets.keyfn2
-  (:require [herb.core :refer-macros [<class]]))
+  (:require [herb.core :refer [<class]]))
 
 (defn style
   [qty]

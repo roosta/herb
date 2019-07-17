@@ -1,5 +1,5 @@
 (ns site.snippets.keyframes
-  (:require [herb.core :refer-macros [<class defkeyframes]]))
+  (:require [herb.core :refer [<class defkeyframes]]))
 
 (defkeyframes pulse-animation
   [:from {:opacity 1}]

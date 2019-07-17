@@ -20,7 +20,7 @@
             [site.tutorials.vendor-prefixes :as vendor-prefixes]
             [site.tutorials.why-fns :as why-fns]
             [site.tutorials.selectors :as selectors]
-            [herb.core :as herb :refer-macros [<class defgroup]]))
+            [herb.core :as herb :refer [<class defgroup]]))
 
 (defgroup header-style
   {:container {:flex-basis "100%"}})

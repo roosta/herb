@@ -1,5 +1,5 @@
 (ns site.snippets.my-group-args
-  (:require [herb.core :refer-macros [<class defgroup]]
+  (:require [herb.core :refer [<class defgroup]]
             [garden.units :refer [px]]))
 
 (defgroup my-group

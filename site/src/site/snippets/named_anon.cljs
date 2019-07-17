@@ -1,7 +1,7 @@
 (ns site.snippets.named-anon
   (:require
    [garden.units :refer [px percent rem]]
-   [herb.core :refer-macros [<class]]))
+   [herb.core :refer [<class]]))
 
 (defn avatar
   [initial]

@@ -1,6 +1,6 @@
 (ns site.components.grid
   (:require [clojure.string :as str]
-            [herb.core :include-macros true :as herb]
+            [herb.core :as herb]
             [garden.units :refer [percent]]
             [reagent.core :as r]))
 

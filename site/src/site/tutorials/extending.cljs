@@ -7,7 +7,7 @@
             [site.snippets.extend-args :as ext-args]
             [site.snippets.extend-multi :as ext-multi]
             [site.components.text :refer [text]]
-            [herb.core :as herb :refer-macros [<class <id]]
+            [herb.core :as herb :refer [<class <id]]
             [reagent.core :as r]
             [reagent.debug :as d]))
 

@@ -1,5 +1,5 @@
 (ns site.snippets.my-group
-  (:require [herb.core :refer-macros [<class defgroup]]
+  (:require [herb.core :refer [<class defgroup]]
             [garden.units :refer [px]]))
 
 ;; Same as the previous example, defgroup takes a name and a map of styles, and

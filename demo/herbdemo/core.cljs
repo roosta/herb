@@ -1,6 +1,6 @@
 (ns herbdemo.core
   (:require [garden.units :refer [px em rem em]]
-            [herb.core :refer-macros [<class] :as herb]
+            [herb.core :refer [<class] :as herb]
             [herbdemo.examples :as examples]
             [reagent.core :as r]) )
 

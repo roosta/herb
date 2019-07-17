@@ -11,7 +11,7 @@
             [goog.dom :as dom]
             [goog.events.EventType :as event-type]
             [site.components.text :refer [text]]
-            [herb.core :refer-macros [<class defgroup]]
+            [herb.core :refer [<class defgroup]]
             [reagent.core :as r])
   (:require-macros [garden.def :refer [defcssfn]]))
 

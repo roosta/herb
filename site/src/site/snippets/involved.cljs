@@ -1,7 +1,7 @@
 (ns site.snippets.involved
   (:require-macros [garden.def :refer [defcssfn]])
   (:require
-   [herb.core :refer-macros [<class]]
+   [herb.core :refer [<class]]
    [garden.units :refer [px percent]]))
 
 ;; Use gardens cssfn macro to create a linear gradient this makes

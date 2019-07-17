@@ -1,5 +1,5 @@
 (ns site.snippets.selectors
-  (:require [herb.core :refer-macros [<class]]))
+  (:require [herb.core :refer [<class]]))
 
 (defn selectors []
   ^{:combinators {[:> :div :span] {:background :red}

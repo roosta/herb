@@ -1,5 +1,5 @@
 (ns site.snippets.keyfn
-  (:require [herb.core :refer-macros [<class]]
+  (:require [herb.core :refer [<class]]
             [garden.units :refer [px]]))
 
 ;; Here we create a style function that takes an argument "color" Note the use

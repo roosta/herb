@@ -8,7 +8,7 @@
             [site.snippets.my-group :as my-group]
             [site.snippets.my-group-args :as my-group-args]
             [site.snippets.group-pattern :as group-pattern]
-            [herb.core :as herb :refer-macros [<class <id]]
+            [herb.core :as herb :refer [<class <id]]
             [reagent.core :as r]
             [reagent.debug :as d]))
 

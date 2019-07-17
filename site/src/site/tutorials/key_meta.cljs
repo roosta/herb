@@ -6,7 +6,7 @@
             [site.snippets.involved :as involved]
             [site.snippets.keyfn :as keyfn]
             [site.snippets.keyfn2 :as keyfn2]
-            [herb.core :as herb :refer-macros [<class <id]]
+            [herb.core :as herb :refer [<class <id]]
             [reagent.core :as r]
             [reagent.debug :as d])
   (:require-macros [site.macros :as macros]))

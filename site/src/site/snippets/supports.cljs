@@ -1,5 +1,5 @@
 (ns site.snippets.supports
-  (:require [herb.core :refer-macros [<class]]))
+  (:require [herb.core :refer [<class]]))
 
 (defn style
   []

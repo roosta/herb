@@ -1,5 +1,5 @@
 (ns site.snippets.anon
-  (:require [herb.core :refer-macros [<class]]))
+  (:require [herb.core :refer [<class]]))
 
 (defn link []
   [:a {:href "https://clojurescript.org/"

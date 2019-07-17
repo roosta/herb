@@ -1,5 +1,5 @@
 (ns site.snippets.local-binding
-  (:require [herb.core :refer-macros [<class]]
+  (:require [herb.core :refer [<class]]
             [garden.units :refer [rem]]
             [reagent.core :as r]))
 

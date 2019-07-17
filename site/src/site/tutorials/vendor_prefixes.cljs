@@ -7,7 +7,7 @@
    [site.snippets.vendor-init :as init]
    [site.snippets.vendor-local :as local]
    [site.snippets.inline-prefixes :as inline]
-   [herb.core :as herb :refer-macros [<class <id]]
+   [herb.core :as herb :refer [<class <id]]
    [reagent.core :as r])
   (:require-macros
    [site.macros :as macros])

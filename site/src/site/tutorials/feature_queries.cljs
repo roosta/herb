@@ -4,7 +4,7 @@
             [site.components.paper :refer [paper]]
             [site.snippets.supports :as example]
             [site.components.text :refer [text]]
-            [herb.core :as herb :refer-macros [<class <id]]
+            [herb.core :as herb :refer [<class <id]]
             [reagent.core :as r])
   (:require-macros [site.macros :as macros])
   )

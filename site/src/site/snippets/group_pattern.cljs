@@ -1,5 +1,5 @@
 (ns site.snippets.group-pattern
-  (:require [herb.core :refer-macros [<class]]
+  (:require [herb.core :refer [<class]]
             [garden.units :refer [px]]))
 
 ;; Here we pick out a component based on a passed key, and modify that styles

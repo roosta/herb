@@ -1,5 +1,5 @@
 (ns site.snippets.group
-  (:require [herb.core :refer-macros [<class]]
+  (:require [herb.core :refer [<class]]
             [garden.units :refer [px]]))
 
 ;; Adding {:group true} to a keyed style, groups results in the same <style>

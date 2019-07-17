@@ -1,5 +1,5 @@
 (ns site.snippets.pseudo
-  (:require [herb.core :refer-macros [<class]]))
+  (:require [herb.core :refer [<class]]))
 
 (defn style []
   ;; Add hover pseudo class and after pseudo element

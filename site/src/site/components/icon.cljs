@@ -1,6 +1,6 @@
 (ns site.components.icon
   (:require
-   [herb.core :refer-macros [<class]]
+   [herb.core :refer [<class]]
    [clojure.string :as str]
    [reagent.core :as r]))
 

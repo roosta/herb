@@ -1,5 +1,5 @@
 (ns site.snippets.media-queries
-  (:require [herb.core :refer-macros [<class]]
+  (:require [herb.core :refer [<class]]
             [garden.units :refer [em rem]]))
 
 (defn style

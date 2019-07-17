@@ -1,5 +1,5 @@
 (ns site.snippets.global
-  (:require [herb.core :refer-macros [defglobal]]))
+  (:require [herb.core :refer [defglobal]]))
 
 (defglobal global
   [:body :html {:margin 0}]

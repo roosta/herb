@@ -1,7 +1,7 @@
 (ns site.core
     (:require [reagent.core :as reagent :refer [atom]]
               [reagent.session :as session]
-              [herb.core :as herb :refer [defglobal] :include-macros true]
+              [herb.core :as herb :refer [defglobal]]
               [garden.units :refer [em]]
               [site.tutorial :as tutorial]
               [reitit.frontend :as reitit]

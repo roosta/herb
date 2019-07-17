@@ -1,7 +1,7 @@
 (ns site.snippets.keyframes-use
   (:require
    [garden.units :refer [px]]
-   [herb.core :refer-macros [<class defkeyframes]]))
+   [herb.core :refer [<class defkeyframes]]))
 
 (defkeyframes pulse-animation
   [:from {:opacity 1}]

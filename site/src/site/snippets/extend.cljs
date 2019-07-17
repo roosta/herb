@@ -1,5 +1,5 @@
 (ns site.snippets.extend
-  (:require [herb.core :refer-macros [<class]]
+  (:require [herb.core :refer [<class]]
             [garden.units :refer [px]]))
 
 (defn button

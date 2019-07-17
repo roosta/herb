@@ -2,7 +2,7 @@
 ;; various garden namespaces, and use them in our style function
 (ns site.snippets.state-fn
   (:require
-   [herb.core :refer-macros [<class <id]]
+   [herb.core :refer [<class <id]]
    [garden.units :refer [px]]
    [clojure.string :as str]
    [reagent.core :refer [atom]]

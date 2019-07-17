@@ -1,6 +1,6 @@
 (ns site.tutorials.why-fns
   (:require
-   [herb.core :refer-macros [<class <id] :as herb]
+   [herb.core :refer [<class <id] :as herb]
    [site.components.text :refer [text]]
    [site.components.code :refer [code]]
    [site.snippets.state-fn :as e1]

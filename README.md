@@ -35,7 +35,7 @@ validate macro input.
 
 ```clojure
 (ns user
-  (:require [herb.core :refer-macros [<class]]))
+  (:require [herb.core :refer [<class]]))
 
 (defn style []
   {:background "red"})
@@ -57,21 +57,21 @@ Pass arguments:
 
 ```clojure
 (ns user
-  (:require [herb.core :include-macros true :as herb]))
+  (:require [herb.core :refer [<class]]))
 
 (defn style
   [color]
   {:color color})
 
 (defn component []
-  [:div {:class (herb/<class style "red")}])
+  [:div {:class (<class style "red")}])
 ```
 
 Extend existing functions:
 
 ```clojure
 (ns user
-  (:require [herb.core :include-macros true :refer [<class]]))
+  (:require [herb.core :refer [<class]]))
 
 (defn button-style [text-color]
   {:display "inline-block"
