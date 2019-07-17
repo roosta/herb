@@ -4,14 +4,14 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
-  :plugins [[lein-codox "0.10.7"]]
+  ;; :plugins [[lein-codox "0.10.7"]]
 
   :source-paths ["src"]
 
-  :codox {:language :clojurescript
-          :metadata {:doc/format :markdown}
-          :output-path "docs"
-          :source-paths ["src"]}
+  ;; :codox {:language :clojurescript
+  ;;         :metadata {:doc/format :markdown}
+  ;;         :output-path "docs"
+  ;;         :source-paths ["src"]}
 
   :min-lein-version "2.5.0"
 
