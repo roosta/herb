@@ -102,7 +102,7 @@
         n (name (ns-name *ns*))]
     `(cond
        (not (fn? ~style-fn))
-       (throw (ex-info (str "herb error in \"" ~n "\", the first argument to " (str "<" (name ~kind)) " must be a function.")
+       (throw (ex-info (str "herb error in \"" ~n "\", the first argument to " "<" (name ~kind) " must be a function.")
                        {:input ~f
                         :namespace ~n}))
        (not (map? (~style-fn ~@args)))
