@@ -235,9 +235,9 @@
 
 (deftest with-style!
   (testing "with-style! entry point"
-    (is (= (impl/with-style! {} "test-fn-1" "herb.unit-tests" test-fn-4)
+    (is (= (impl/with-style! :class "test-fn-1" "herb.unit-tests" test-fn-4)
            "herb_impl-test_test-fn-4"))
-    (is (= (impl/with-style! {:style? true} "test-fn-1" "herb.unit-tests" test-fn-4)
+    (is (= (impl/with-style! :style "test-fn-1" "herb.unit-tests" test-fn-4)
            ".herb_impl-test_test-fn-4 {\n  background: red;\n}"))
 
     (let [result (get (deref (deref #'herb.runtime/injected-styles)) "herb_impl-test_test-fn-4")]

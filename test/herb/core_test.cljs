@@ -148,14 +148,13 @@
         (is (= (nth (nth expansion 2) 0) 'throw))
         (is (= (nth (nth (nth expansion 2) 1) 1)
                '(clojure.core/str
-                 "herb error in ns \""
+                 "herb error in \""
                  "herb.core-test"
-                 "\" the first argument to <class needs to be a function.")))
+                 "\", the first argument to "
+                 "<" (clojure.core/name :class)
+                 " must be a function.")))
         (is (= (nth (nth (nth expansion 2) 1) 2)
-               '{:function 'top-level-fn,
-                 :return-value
-                 (top-level-fn
-                  {:text {:font-weight "bold"}, :box {:background-color "#333"}}),
+               '{:input 'top-level-fn,
                  :namespace "herb.core-test"}))
         (is (= (nth expansion 3) '(clojure.core/not
                                    (clojure.core/map?
@@ -178,7 +177,7 @@
         (is (= (nth expansion 5) :else))
         (is (= (nth expansion 6)
                '(herb.impl/with-style!
-                  {}
+                  :class
                   'top-level-fn
                   "herb.core-test"
                   top-level-fn
