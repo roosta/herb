@@ -163,7 +163,7 @@
   "Entry point for macros.
   Takes an `opt` map as first argument, and currently only supports `:id true`
   which appends an id identifier instead of a class to the DOM"
-  [{:keys [id? style?]} fn-name ns-name style-fn & args]
+  [kind fn-name ns-name style-fn & args]
   (let [resolved-styles (extract-extended-styles (into [style-fn] args))
         style-data (prepare-data resolved-styles)
         {:keys [group key prefix] :as meta-data} (-> resolved-styles last meta)
@@ -175,8 +175,8 @@
         identifier (if group
                      (sanitize name*)
                      selector)
-        style-data [(str (if id? "#" ".") selector) style-data]
+        style-data [(str (if (= kind :id) "#" ".") selector) style-data]
         result (runtime/inject-style! identifier style-data data-str group)]
-    (if style?
+    (if (= kind :style)
       (:css result)
       selector)))

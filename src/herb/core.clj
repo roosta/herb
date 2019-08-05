@@ -96,6 +96,21 @@
         :group true)
        (throw (str "Herb error: failed to get component: " ~'component " in stylegroup: " '~n)))))
 
+(defn- dispatch
+  [style-fn kind args]
+  (let [f `'~style-fn
+        n (name (ns-name *ns*))]
+    `(cond
+       (not (fn? ~style-fn))
+       (throw (ex-info (str "herb error in \"" ~n "\", the first argument to " (str "<" (name ~kind)) " must be a function.")
+                       {:input ~f
+                        :namespace ~n}))
+       (not (map? (~style-fn ~@args)))
+       (throw (ex-info (str "herb error: style function \"" ~n "/" ~f "\" needs to return a map.")
+                       {:function ~f
+                        :namespace ~n
+                        :return-value (~style-fn ~@args)}))
+       :else (herb.impl/with-style! ~kind ~f ~n ~style-fn ~@args))))
 
 (defmacro <style
   "Takes a function `style-fn` that returns a map. Arguments `args` can be passed
@@ -103,21 +118,7 @@
   `(<style some-fn arg1 arg2)`.
   Returns a CSS string that is the result of calling passed function"
   [style-fn & args]
-  (let [f `'~style-fn
-        n (name (ns-name *ns*))]
-    `(cond
-       (not (fn? ~style-fn))
-       (throw (ex-info (str "herb error in ns \"" ~n "\" the first argument to <style needs to be a function.")
-                       {:function ~f
-                        :namespace ~n
-                        :return-value (~style-fn ~@args)}))
-       (not (map? (~style-fn ~@args)))
-       (throw (ex-info (str "herb error: style function \"" ~n "/" ~f "\" needs to return a map.")
-                       {:function ~f
-                        :namespace ~n
-                        :return-value (~style-fn ~@args)}))
-       :else (herb.impl/with-style! {:style? true} ~f ~n ~style-fn ~@args))))
-
+  (dispatch style-fn :style args))
 
 (defmacro <id
   "Takes a function `style-fn` that returns a map. Arguments `args` can be passed
@@ -125,20 +126,7 @@
   `(<id some-fn arg1 arg2)`.
   Returns a unique id based on the fully qualified name of the passed function "
   [style-fn & args]
-  (let [f `'~style-fn
-        n (name (ns-name *ns*))]
-    `(cond
-       (not (fn? ~style-fn))
-       (throw (ex-info (str "herb error in ns \"" ~n "\" the first argument to <id needs to be a function.")
-                       {:function ~f
-                        :namespace ~n
-                        :return-value (~style-fn ~@args)}))
-       (not (map? (~style-fn ~@args)))
-       (throw (ex-info (str "herb error: style function \"" ~n "/" ~f "\" needs to return a map.")
-                       {:function ~f
-                        :namespace ~n
-                        :return-value (~style-fn ~@args)}))
-       :else (herb.impl/with-style! {:id? true} ~f ~n ~style-fn ~@args))))
+  (dispatch style-fn :id args))
 
 
 (defmacro <class
@@ -147,17 +135,4 @@
   `(<class some-fn arg1 arg2)`.
   Returns a unique class based on the fully qualified name of the passed function"
   [style-fn & args]
-  (let [f `'~style-fn
-        n (name (ns-name *ns*))]
-    `(cond
-       (not (fn? ~style-fn))
-       (throw (ex-info (str "herb error in ns \"" ~n "\" the first argument to <class needs to be a function.")
-                       {:function ~f
-                        :namespace ~n
-                        :return-value (~style-fn ~@args)}))
-       (not (map? (~style-fn ~@args)))
-       (throw (ex-info (str "herb error: style function \"" ~n "/" ~f "\" needs to return a map.")
-                       {:function ~f
-                        :namespace ~n
-                        :return-value (~style-fn ~@args)}))
-       :else (herb.impl/with-style! {} ~f ~n ~style-fn ~@args))))
+  (dispatch style-fn :class args))
