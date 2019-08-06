@@ -75,25 +75,27 @@
          :css)))
 
 (defmacro defgroup
-  "Define a style group, everything defined in a group is grouped in the same
-  style element, It takes a name and a map of styles in the form:
+  "Define a style group, takes a name and a map of styles in the form:
+
   ```clojure
   (defgroup my-group
     {:a-component {:color \"red\"}})
   ```
+
   To use a group, use one of `<class` or `<id` macro, where the first argument is
   the key for whatever component stylesheet you want:
   ```clojure
   [:div {:class (<class my-group :a-component)}]
-  ```"
+  ```
+
+  Since version `0.10.0` this macro is less useful than it once was due to how
+  arguments are handled (every function is grouped), but keeping for backward
+  compatibility.
+  "
   [n c]
   `(defn ~n [~'component & ~'args]
      (if-let [style# (get ~c ~'component)]
-       (vary-meta
-        style#
-        assoc
-        :key ~'component
-        :group true)
+       style#
        (throw (str "Herb error: failed to get component: " ~'component " in stylegroup: " '~n)))))
 
 (defn- dispatch
