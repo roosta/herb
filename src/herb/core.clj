@@ -125,16 +125,33 @@
 (defmacro <id
   "Takes a function `style-fn` that returns a map. Arguments `args` can be passed
   along with the function as additional arguments to <id i.e
-  `(<id some-fn arg1 arg2)`.
-  Returns a unique id based on the fully qualified name of the passed function "
+  `(<id some-fn arg1 arg2)`.  Returns a unique id based on the fully qualified
+  name and a hash of the arguments from the passed function
+
+  **example:**
+  (defn style-fn
+    [color]
+    {:background color})
+
+  [:div {:class (<id style-fn \"red\")}]
+  "
   [style-fn & args]
   (dispatch style-fn :id args))
-
 
 (defmacro <class
   "Takes a function `style-fn` that returns a map. Arguments `args` can be passed
   along with the function as additional arguments to <class i.e
-  `(<class some-fn arg1 arg2)`.
-  Returns a unique class based on the fully qualified name of the passed function"
+  `(<class some-fn arg1 arg2)`.  Returns a unique class based on the fully
+  qualified name and a hash of the arguments from the passed function
+
+  **example:**
+  ```clojure
+
+  (defn style-fn
+      [color]
+      {:background color})
+
+    [:div {:class (<class style-fn \"red\")}]
+  ```"
   [style-fn & args]
   (dispatch style-fn :class args))
