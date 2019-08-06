@@ -138,12 +138,11 @@
 
 (defn- create-data-string
   "Create a fully qualified name string for use in the data-herb attr"
-  [n k]
+  [n]
   (let [c (str/split n #"/")
         ns (apply str (interpose "." (butlast c)))
         sym (last c)]
-    (str (symbol ns sym)
-         (when k (str "[" k "]")))))
+    (str (symbol ns sym))))
 
 (defn- get-name
   [style-fn ns-name style-data]
@@ -168,9 +167,7 @@
         style-data (prepare-data resolved-styles)
         {:keys [group key prefix] :as meta-data} (-> resolved-styles last meta)
         name* (get-name style-fn ns-name style-data)
-        data-str (when dev? (if group
-                              (create-data-string name* nil)
-                              (create-data-string name* key)))
+        data-str (when dev? (create-data-string name*))
         selector (compose-selector name* key)
         identifier (if group
                      (sanitize name*)
