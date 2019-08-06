@@ -335,12 +335,16 @@
    :height "20px"
    :margin [["10px" 0 "10px" 0]]})
 
+(defn simple-state [color]
+  {:background color
+   :height (px 100)
+   :width "100%"})
+
 (defn main []
   (let [state (r/atom "green")]
     (fn []
+
       [:div {:class (<class container)}
-
-
        (for [d data]
          ^{:key d}
          [:div {:class (<class data-str d)}
@@ -450,9 +454,11 @@
 
         [:div {:class (<class media-query-test @state)}
          "Media query test"]]
-       #_[:div {:class (with-style some-style)}
-          "Regular maps"]
-
+       [:br]
+       [:div {:class (<class simple-state @state)}]
+       [:br]
+       [:button {:on-click #(swap! state toggle-color)}
+        "Change color"]
        [:div
         (for [k (range 100)]
           ^{:key k}
