@@ -150,7 +150,7 @@
                 (and anon? (not dev?)) (str "A-")
                 (and dev? anon?) (str ns-name "/" "anonymous")
                 :else name*)]
-    (demunge cname)))
+    (if dev? (demunge cname) cname)))
 
 (defn with-style!
   "Entry point for macros.
