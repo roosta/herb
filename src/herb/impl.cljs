@@ -143,16 +143,12 @@
     (str (symbol ns sym))))
 
 (defn- get-name
-  [style-fn ns-name style-data]
+  [style-fn ns-name]
   (let [name* (.-name style-fn)
         anon? (empty? name*)
-        hash* (when anon? (.abs js/Math (hash style-data)))
         cname (cond
-                (and anon? (not dev?))
-                (str "A-" hash*)
-
-                (and dev? anon?)
-                (str ns-name "/" "anonymous-" hash*)
+                (and anon? (not dev?)) (str "A-")
+                (and dev? anon?) (str ns-name "/" "anonymous")
                 :else name*)]
     (demunge cname)))
 
@@ -164,9 +160,9 @@
   (let [resolved-styles (extract-extended-styles (into [style-fn] args))
         style-data (prepare-data resolved-styles)
         ;; {:keys [group key prefix] :as meta-data} (-> resolved-styles last meta)
-        name* (get-name style-fn ns-name style-data)
+        name* (get-name style-fn ns-name)
         data-str (when dev? (create-data-string name*))
-        selector (compose-selector name* (hash args))
+        selector (compose-selector name* (hash style-data))
         identifier (sanitize name*)
         style-data [(str (if (= kind :id) "#" ".") selector) style-data]
         result (runtime/inject-style! identifier style-data data-str)]
