@@ -40,8 +40,8 @@
    :background-color color})
 
 (defn toggle-color
-  [color]
-  (case color
+  [previous]
+  (case previous
     "red" "green"
     "green" "red"))
 
