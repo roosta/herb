@@ -371,7 +371,7 @@
         [:div {:class (<class pulse-component-two)}]
         [:div {:class (<class width-vary-component)}]]
        [:div {:class (<class transition @state)}
-        [:button {:on-click #(reset! state (toggle-color @state))}
+        [:button {:on-click #(swap! state toggle-color)}
          "Change color"]]
        [:div {:class (<class inline-prefixes)}
         "inline vendor prefixes"]
@@ -435,7 +435,7 @@
          [:h2 {:class (<class state-hover @state)}
           "Testing hover and state change via button"]
          [:button {:class (<class button)
-                   :on-click #(reset! state (toggle-color @state))}
+                   :on-click #(swap! state toggle-color)}
           "change color"]
          (for [c ["yellow" "blue" "green" "purple"]]
            ^{:key c}
