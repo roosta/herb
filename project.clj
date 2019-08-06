@@ -31,4 +31,7 @@
                              "fig:test" ["run" "-m" "figwheel.main" "-co" "test.cljs.edn" "-m" herb.test-runner]
                              "fig:build" ["trampoline" "run" "-m" "figwheel.main" "-b" "dev" "-r"]
                              "fig:min"   ["run" "-m" "figwheel.main" "-O" "advanced" "-bo" "dev"]}
-                   :source-paths ["test" "demo"]}})
+                   :source-paths ["test" "demo"]}
+             :benchmark {:dependencies [[com.bhauman/figwheel-main "0.2.1"]]
+                         :source-paths ["benchmark"]
+                         :aliases {"fig:benchmark" ["run" "-m" "figwheel.main" "-co" "benchmark.cljs.edn" "-m" herb.benchmark-runner]}}})

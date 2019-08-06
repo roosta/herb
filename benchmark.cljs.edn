@@ -1,0 +1,4 @@
+^{:open-url "http://[[server-hostname]]:[[server-port]]/benchmark.html"
+  :ring-server-options {:port 9501}
+  :launch-js ["/opt/google/chrome/chrome" "--headless" "--disable-gpu" "--repl" :open-url]}
+{:main herb.benchmark-runner}
