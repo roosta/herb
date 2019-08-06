@@ -159,7 +159,6 @@
   [kind fn-name ns-name style-fn & args]
   (let [resolved-styles (extract-extended-styles (into [style-fn] args))
         style-data (prepare-data resolved-styles)
-        ;; {:keys [group key prefix] :as meta-data} (-> resolved-styles last meta)
         name* (get-name style-fn ns-name)
         data-str (when dev? (create-data-string name*))
         selector (compose-selector name* (hash style-data))
