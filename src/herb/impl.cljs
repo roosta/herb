@@ -81,7 +81,7 @@
       (fn? sf)
       (recur [sf] result)
 
-      (and (vector? sf) (not (empty? sf)))
+      (and (vector? sf) (seq sf))
       (let [styles (resolve-style-fns sf)
             new-meta (into [] (process-meta-xform :extend) styles)]
         (recur new-meta
