@@ -131,10 +131,8 @@
       :else (str/replace (str input) #"[^A-Za-z0-9-_]" "_"))))
 
 (defn- compose-selector
-  [n k]
-  (str (sanitize n)
-       (when k
-         (str "_" (sanitize k)))))
+  [n hsh]
+  (str (sanitize n) "_" hsh))
 
 (defn- create-data-string
   "Create a fully qualified name string for use in the data-herb attr"
@@ -165,15 +163,13 @@
   [kind fn-name ns-name style-fn & args]
   (let [resolved-styles (extract-extended-styles (into [style-fn] args))
         style-data (prepare-data resolved-styles)
-        {:keys [group key prefix] :as meta-data} (-> resolved-styles last meta)
+        ;; {:keys [group key prefix] :as meta-data} (-> resolved-styles last meta)
         name* (get-name style-fn ns-name style-data)
         data-str (when dev? (create-data-string name*))
-        selector (compose-selector name* key)
-        identifier (if group
-                     (sanitize name*)
-                     selector)
+        selector (compose-selector name* (hash args))
+        identifier (sanitize name*)
         style-data [(str (if (= kind :id) "#" ".") selector) style-data]
-        result (runtime/inject-style! identifier style-data data-str group)]
+        result (runtime/inject-style! identifier style-data data-str)]
     (if (= kind :style)
       (:css result)
       selector)))

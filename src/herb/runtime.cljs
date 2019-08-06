@@ -38,7 +38,7 @@
 
 (defn- update-state
   "Either update a style in state, or create it depending on existing state."
-  [state ident data css element data-string]
+  [state ident {:keys [data data-string element]} css]
   (let [css (if-let [old (get @injected-styles ident)]
               (str (:css old) "\n" css)
               css)]
@@ -46,13 +46,6 @@
         (assoc-in [ident :data-string] data-string)
         (assoc-in [ident :element] element)
         (assoc-in [ident :css] css))))
-
-(defn- reset-style-object!
-  "Reset a given style object by passing ident, and if cljs reset style
-  element. Used when updating a style."
-  [ident element]
-  (swap! injected-styles dissoc ident)
-  (gobj/set element "innerHTML" ""))
 
 (defn- render-style!
   "Renders CSS, and appends to DOM. Ensure state is in sync with DOM."
@@ -76,12 +69,7 @@
                       :auto-prefix (seq (:auto-prefix @options))}
                      style)]
     (dom/append (:element new) (str "\n" css-str))
-    (swap! injected-styles update-state
-           identifier
-           (:data new)
-           css-str
-           (:element new)
-           (:data-string new))))
+    (swap! injected-styles update-state identifier new css-str)))
 
 
 (defn- create-element!
@@ -107,10 +95,9 @@
 
 (defn inject-style!
   "Main interface to runtime. Takes an identifier, new garden style data
-  structure, fully qualified name, and whether its a group.  Make sure
-  to only update where necessary, with concessions for
-  stylegroups. Returns the injected style state object."
-  [identifier new data-str group]
+  structure, fully qualified name. Make sure to add style only where
+  necessary. Returns the injected style state object."
+  [identifier new data-str]
   (let [injected (get @injected-styles identifier)
         target (get (:data injected) (first new))]
 
@@ -127,26 +114,7 @@
        identifier
        {:data new
         :element (:element injected)
-        :data-string data-str})
-
-      ;; Updating, if its a group make sure that the entire group is
-      ;; updated
-      (and (some? injected)
-           (some? target)
-           (not= target (last new)))
-      (do (reset-style-object! identifier (:element injected))
-          (if group
-            (doseq [g (assoc (:data injected) (first new) (last new))]
-              (render-style!
-               identifier
-               {:data g
-                :element (:element injected)
-                :data-string data-str}))
-            (render-style!
-             identifier
-             {:data new
-              :element (:element injected)
-              :data-string data-str}))))
+        :data-string data-str}))
 
     ;; Return state
     (get @injected-styles identifier)))
