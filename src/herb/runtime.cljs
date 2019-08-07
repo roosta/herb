@@ -97,18 +97,9 @@
   structure, fully qualified name. Make sure to add style only where
   necessary. Returns the injected style state object."
   [identifier new data-str]
-  (let [injected (get @injected-styles identifier)
-        target (get (:data injected) (first new))]
-
-    (cond
-
-      ;; Not present in state create-style
-      (not injected)
+  (let [injected (get @injected-styles identifier)]
+    (if (not injected)
       (create-style! identifier new data-str)
-
-      ;; element created but new classname
-      (and (some? injected)
-           (not target))
       (render-style!
        identifier
        {:data new
