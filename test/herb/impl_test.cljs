@@ -195,22 +195,22 @@
 
 (deftest compose-selector
   (testing "Composing selector"
-    (is (= (#'herb.impl/compose-selector "demo.examples/anonymous-660680338" nil)
-           "demo_examples_anonymous-660680338"))
+    (is (= (#'herb.impl/compose-selector "demo.examples/anonymous" 660680338 :class)
+           ".demo_examples_anonymous_660680338"))
 
-    (is (= (#'herb.impl/compose-selector "demo/examples/cycle-color" "purple")
-           "demo_examples_cycle-color_purple"))
+    (is (= (#'herb.impl/compose-selector "demo.examples/cycle-color" 1234567 :id)
+           "#demo_examples_cycle-color_1234567"))
 
-    (is (= (#'herb.impl/compose-selector "demo/examples/style-group-static" :keyword)
-           "demo_examples_style-group-static_keyword"))))
+    (is (= (#'herb.impl/compose-selector "demo.examples/style-group-static" 1234567 :class)
+           ".demo_examples_style-group-static_1234567"))))
 
 (deftest create-data-string
   (testing "Creating a data string from cljs function name"
-    (is (= (#'herb.impl/create-data-string "demo/examples/width-vary-component" :keyed)
-           "demo.examples/width-vary-component[:keyed]"))
-    (is (= (#'herb.impl/create-data-string "demo/examples/pulse-component-two" nil)
+    (is (= (#'herb.impl/create-data-string "demo/examples/width-vary-component")
+           "demo.examples/width-vary-component"))
+    (is (= (#'herb.impl/create-data-string "demo/examples/pulse-component-two")
            "demo.examples/pulse-component-two" ))
-    (is (= (#'herb.impl/create-data-string "demo/examples/main/nested-fn" nil)
+    (is (= (#'herb.impl/create-data-string "demo/examples/main/nested-fn")
            "demo.examples.main/nested-fn"))))
 
 (defn test-fn-1
@@ -231,16 +231,16 @@
     (is (= (test-fn-2)
            "herb/impl-test/test-fn-1"))
     (is (= (test-fn-3)
-           "herb.impl-test/anonymous-15128758"))))
+           "herb.impl-test/anonymous"))))
 
 (deftest with-style!
   (testing "with-style! entry point"
     (is (= (impl/with-style! :class "test-fn-1" "herb.unit-tests" test-fn-4)
-           "herb_impl-test_test-fn-4"))
-    (is (= (impl/with-style! :style "test-fn-1" "herb.unit-tests" test-fn-4)
-           ".herb_impl-test_test-fn-4 {\n  background: red;\n}"))
+           "herb_impl-test_test-fn-4_1982280413"))
+    (is (= (impl/with-style! :style "test-fn-1" "herb.unit-tests" test-fn-4 nil)
+           ".herb_impl-test_test-fn-4_1982280413 {\n  background: red;\n}"))
 
     (let [result (get (deref (deref #'herb.runtime/injected-styles)) "herb_impl-test_test-fn-4")]
-      (is (= (:style (get (:data result) ".herb_impl-test_test-fn-4")) {:background :red}))
+      (is (= (:style (get (:data result) ".herb_impl-test_test-fn-4_1982280413")) {:background :red}))
       (is (= (:data-string result) "herb.impl-test/test-fn-4"))
-      (is (= (:css result) ".herb_impl-test_test-fn-4 {\n  background: red;\n}")))))
+      (is (= (:css result) ".herb_impl-test_test-fn-4_1982280413 {\n  background: red;\n}")))))

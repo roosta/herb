@@ -37,24 +37,6 @@
 
 (deftest defkeyframes
   (testing "defkeyframes macro"
-    (let [expansion (macroexpand '(core/defkeyframes pulse-animation
-                                    [:from {:opacity 1}]
-                                    [:to {:opacity 0}]))]
-      (is (= (-> expansion first) 'do))
-      (is (= (-> expansion second first) 'herb.runtime/inject-obj!))
-      (is (= (-> expansion second second) '(clojure.core/str "herb.core-test" "/" 'pulse-animation)))
-      (is (= (nth (second expansion) 2) :keyframes))
-      (is (= (nth (second expansion) 3) '(garden.types.CSSAtRule.
-                                          :keyframes
-                                          {:identifier (clojure.core/str 'pulse-animation),
-                                           :frames (clojure.core/list [:from {:opacity 1}] [:to {:opacity 0}])})))
-      (is (= (-> (nth expansion 2) first) 'def))
-      (is (= (-> (nth expansion 2) second) 'pulse-animation))
-      (is (= (-> (nth expansion 2) last) '(garden.types.CSSAtRule.
-                                           :keyframes
-                                           {:identifier (clojure.core/str 'pulse-animation),
-                                            :frames (clojure.core/list [:from {:opacity 1}] [:to {:opacity 0}])})))
-
       (core/defkeyframes pulse-animation
         [:from {:opacity 1}]
         [:to {:opacity 0}])
@@ -66,69 +48,36 @@
                                                :frames '([:from {:opacity 1}] [:to {:opacity 0}])}))
 
         (is (= el-html "\n@keyframes pulse-animation {\n\n  from {\n    opacity: 1;\n  }\n\n  to {\n    opacity: 0;\n  }\n\n}"))
-        ))))
+        )))
 
 (deftest defglobal
   (testing "defglobal macro"
-    (let [expansion (macroexpand '(core/defglobal global
-                                    [:.global {:color "magenta"
-                                               :font-size "24px"}]))]
-      (is (= (-> expansion first) 'do))
-      (is (= (-> expansion second first) 'herb.runtime/inject-obj!))
-      (is (= (-> expansion second second) '(clojure.core/str "herb.core-test" "/" 'global)))
-      (is (= (nth (second expansion) 2) :global))
-      (is (= (nth (second expansion) 3) '(clojure.core/list [:.global {:color "magenta", :font-size "24px"}])))
+    (core/defglobal global
+      [:.global {:color "magenta"
+                 :font-size "24px"}])
 
-      (is (= (-> (nth expansion 2) first) 'def))
-      (is (= (-> (nth expansion 2) second) 'global))
-      (is (= (-> (nth expansion 2) last) '(clojure.core/list [:.global {:color "magenta", :font-size "24px"}])))
-
-      (core/defglobal global
-        [:.global {:color "magenta"
-                   :font-size "24px"}])
-
-      (let [result (get (deref (deref #'herb.runtime/injected-global)) "herb.core-test/global")
-            el-html (.-innerHTML (.item (.querySelectorAll js/document "[data-herb='global']") 0))]
-        (is (= (-> result :data ffirst) [:.global {:color "magenta", :font-size "24px"}]))
-        (is (= (-> result :css) ".global {\n  color: magenta;\n  font-size: 24px;\n}"))
-        (is (= el-html "\n.global {\n  color: magenta;\n  font-size: 24px;\n}"))))))
+    (let [result (get (deref (deref #'herb.runtime/injected-global)) "herb.core-test/global")
+          el-html (.-innerHTML (.item (.querySelectorAll js/document "[data-herb='global']") 0))]
+      (is (= (-> result :data ffirst) [:.global {:color "magenta", :font-size "24px"}]))
+      (is (= (-> result :css) ".global {\n  color: magenta;\n  font-size: 24px;\n}"))
+      (is (= el-html "\n.global {\n  color: magenta;\n  font-size: 24px;\n}")))))
 
 (deftest defgroup
   (testing "creating groups using defgroup macro"
-    (let [expansion (macroexpand-1 '(core/defgroup a-group
-                                      {:text {:font-weight "bold"}
-                                       :box {:background-color "#333"}}))]
-
-      (is (= (-> expansion first) 'clojure.core/defn))
-      (is (= (-> expansion second) 'a-group))
-      (is (= (nth expansion 2) '[component  & args]))
-      (is (= (-> (nth expansion 3) first) 'clojure.core/if-let))
-      (is (= (-> (nth expansion 3) second second) '(clojure.core/get
-                                                    {:text {:font-weight "bold"}, :box {:background-color "#333"}}
-                                                    component)))
-      (is (= (first (nth (nth expansion 3) 2)) 'clojure.core/vary-meta))
-      (is (= (nth (nth (nth expansion 3) 2) 2) 'clojure.core/assoc))
-      (is (= (nth (nth (nth expansion 3) 2) 3) :key))
-      (is (= (nth (nth (nth expansion 3) 2) 4) 'component))
-      (is (= (nth (nth (nth expansion 3) 2) 5) ':group))
-      (is (= (nth (nth (nth expansion 3) 2) 6) true))
-      (is (= (first (nth (nth expansion 3) 3)) 'throw))
-      (is (= (second (nth (nth expansion 3) 3)) '(clojure.core/str "Herb error: failed to get component: " component " in stylegroup: " 'a-group))))
-
       (core/defgroup a-group
         {:text {:font-weight "bold"}
          :box {:background-color "#333"}})
-      (is (= (core/<class a-group :text) "herb_core-test_a-group_text"))
-      (is (= (core/<class a-group :box) "herb_core-test_a-group_box"))
+      (is (= (core/<class a-group :text) "herb_core-test_a-group_1357205618"))
+      (is (= (core/<class a-group :box) "herb_core-test_a-group_-1329735411"))
 
       (let [result (get (deref (deref #'herb.runtime/injected-styles)) "herb_core-test_a-group")
             el-html (.-innerHTML (.item (.querySelectorAll js/document "[data-herb='herb.core-test/a-group']") 0))]
-        (is (= (:style (get (:data result) ".herb_core-test_a-group_text")) {:font-weight "bold"}))
-        (is (= (:style (get (:data result) ".herb_core-test_a-group_box")) {:background-color "#333"}))
+        (is (= (:style (get (:data result) ".herb_core-test_a-group_1357205618")) {:font-weight "bold"}))
+        (is (= (:style (get (:data result) ".herb_core-test_a-group_-1329735411")) {:background-color "#333"}))
 
         (is (= (:data-string result) "herb.core-test/a-group"))
-        (is (= (:css result) ".herb_core-test_a-group_text {\n  font-weight: bold;\n}\n.herb_core-test_a-group_box {\n  background-color: #333;\n}"))
-        (is (= el-html "\n.herb_core-test_a-group_text {\n  font-weight: bold;\n}\n.herb_core-test_a-group_box {\n  background-color: #333;\n}")))))
+        (is (= (:css result) ".herb_core-test_a-group_1357205618 {\n  font-weight: bold;\n}\n.herb_core-test_a-group_-1329735411 {\n  background-color: #333;\n}"))
+        (is (= el-html "\n.herb_core-test_a-group_1357205618 {\n  font-weight: bold;\n}\n.herb_core-test_a-group_-1329735411 {\n  background-color: #333;\n}")))))
 
 (defn top-level-fn [] {:background "red"})
 
@@ -140,81 +89,38 @@
   (testing "using <class macro to create a classname and appending style to DOM"
     (letfn [(nested-fn [color]
               {:background color})]
-      (let [expansion (macroexpand-1 '(core/<class top-level-fn
-                                                   {:text {:font-weight "bold"}
-                                                    :box {:background-color "#333"}}))]
-        (is (= (-> expansion first) 'clojure.core/cond))
-        (is (= (-> expansion second) '(clojure.core/not (clojure.core/fn? top-level-fn))))
-        (is (= (nth (nth expansion 2) 0) 'throw))
-        (is (= (nth (nth (nth expansion 2) 1) 1)
-               '(clojure.core/str
-                 "herb error in \""
-                 "herb.core-test"
-                 "\", the first argument to "
-                 "<" (clojure.core/name :class)
-                 " must be a function.")))
-        (is (= (nth (nth (nth expansion 2) 1) 2)
-               '{:input 'top-level-fn,
-                 :namespace "herb.core-test"}))
-        (is (= (nth expansion 3) '(clojure.core/not
-                                   (clojure.core/map?
-                                    (top-level-fn
-                                     {:text {:font-weight "bold"}, :box {:background-color "#333"}})))))
-        (is (= (nth (nth expansion 4) 0) 'throw))
-        (is (= (nth (nth (nth expansion 4) 1) 1)
-               '(clojure.core/str
-                 "herb error: style function \""
-                 "herb.core-test"
-                 "/"
-                 'top-level-fn
-                 "\" needs to return a map.")))
-        (is (= (nth (nth (nth expansion 4) 1) 2)
-               '{:function 'top-level-fn,
-                 :return-value
-                 (top-level-fn
-                  {:text {:font-weight "bold"}, :box {:background-color "#333"}}),
-                 :namespace "herb.core-test"}))
-        (is (= (nth expansion 5) :else))
-        (is (= (nth expansion 6)
-               '(herb.impl/with-style!
-                  :class
-                  'top-level-fn
-                  "herb.core-test"
-                  top-level-fn
-                  {:text {:font-weight "bold"}, :box {:background-color "#333"}})))
-
-        (is (= (core/<class top-level-fn) "herb_core-test_top-level-fn"))
-        (is (= (core/<class nested-fn "blue") "herb_core-test_nested-fn"))
-        (is (= (core/<class (fn [] {:color "blue"})) "herb_core-test_anonymous-231793611"))
-        (is (= (core/<class extended-fn) "herb_core-test_extended-fn"))
+        (is (= (core/<class top-level-fn) "herb_core-test_top-level-fn_-1172868095"))
+        (is (= (core/<class nested-fn "blue") "herb_core-test_nested-fn_391792308"))
+        (is (= (core/<class (fn [] {:color "blue"})) "herb_core-test_anonymous_-231793611"))
+        (is (= (core/<class extended-fn) "herb_core-test_extended-fn_-1721910037"))
 
         (let [top-level-result (get (deref (deref #'herb.runtime/injected-styles)) "herb_core-test_top-level-fn")
               nested-fn-result (get (deref (deref #'herb.runtime/injected-styles)) "herb_core-test_nested-fn")
-              anon-fn-result (get (deref (deref #'herb.runtime/injected-styles)) "herb_core-test_anonymous-231793611")
+              anon-fn-result (get (deref (deref #'herb.runtime/injected-styles)) "herb_core-test_anonymous")
               extended-fn-result (get (deref (deref #'herb.runtime/injected-styles)) "herb_core-test_extended-fn")
               top-level-html (.-innerHTML (.item (.querySelectorAll js/document "[data-herb='herb.core-test/top-level-fn']") 0))
               nested-fn-html (.-innerHTML (.item (.querySelectorAll js/document "[data-herb='herb.core-test/nested-fn']") 0))
-              anon-fn-html (.-innerHTML (.item (.querySelectorAll js/document "[data-herb='herb.core-test/anonymous-231793611']") 0))
+              anon-fn-html (.-innerHTML (.item (.querySelectorAll js/document "[data-herb='herb.core-test/anonymous']") 0))
               extended-fn-html (.-innerHTML (.item (.querySelectorAll js/document "[data-herb='herb.core-test/extended-fn']") 0))
               ]
-          (is (= (:style (get (:data top-level-result) ".herb_core-test_top-level-fn")) {:background "red"}))
+          (is (= (:style (get (:data top-level-result) ".herb_core-test_top-level-fn_-1172868095")) {:background "red"}))
           (is (= (:data-string top-level-result) "herb.core-test/top-level-fn"))
-          (is (= (:css top-level-result) ".herb_core-test_top-level-fn {\n  background: red;\n}"))
+          (is (= (:css top-level-result) ".herb_core-test_top-level-fn_-1172868095 {\n  background: red;\n}"))
 
-          (is (= (:style (get (:data nested-fn-result) ".herb_core-test_nested-fn")) {:background "blue"}))
+          (is (= (:style (get (:data nested-fn-result) ".herb_core-test_nested-fn_391792308")) {:background "blue"}))
           (is (= (:data-string nested-fn-result) "herb.core-test/nested-fn"))
-          (is (= (:css nested-fn-result) ".herb_core-test_nested-fn {\n  background: blue;\n}"))
+          (is (= (:css nested-fn-result) ".herb_core-test_nested-fn_391792308 {\n  background: blue;\n}"))
 
-          (is (= (:style (get (:data anon-fn-result) ".herb_core-test_anonymous-231793611")) {:color "blue"}))
-          (is (= (:data-string anon-fn-result) "herb.core-test/anonymous-231793611"))
-          (is (= (:css anon-fn-result) ".herb_core-test_anonymous-231793611 {\n  color: blue;\n}"))
+          (is (= (:style (get (:data anon-fn-result) ".herb_core-test_anonymous_-231793611")) {:color "blue"}))
+          (is (= (:data-string anon-fn-result) "herb.core-test/anonymous"))
+          (is (= (:css anon-fn-result) ".herb_core-test_anonymous_-231793611 {\n  color: blue;\n}"))
 
-          (is (= (:style (get (:data extended-fn-result) ".herb_core-test_extended-fn")) {:color "black" :background "red"}))
+          (is (= (:style (get (:data extended-fn-result) ".herb_core-test_extended-fn_-1721910037")) {:color "black" :background "red"}))
           (is (= (:data-string extended-fn-result) "herb.core-test/extended-fn"))
-          (is (= (:css extended-fn-result) ".herb_core-test_extended-fn {\n  background: red;\n  color: black;\n}"))
+          (is (= (:css extended-fn-result) ".herb_core-test_extended-fn_-1721910037 {\n  background: red;\n  color: black;\n}"))
 
-          (is (= top-level-html "\n.herb_core-test_top-level-fn {\n  background: red;\n}"))
-          (is (= nested-fn-html "\n.herb_core-test_nested-fn {\n  background: blue;\n}"))
-          (is (= anon-fn-html "\n.herb_core-test_anonymous-231793611 {\n  color: blue;\n}"))
-          (is (= extended-fn-html "\n.herb_core-test_extended-fn {\n  background: red;\n  color: black;\n}"))
-          )))))
+          (is (= top-level-html "\n.herb_core-test_top-level-fn_-1172868095 {\n  background: red;\n}"))
+          (is (= nested-fn-html "\n.herb_core-test_nested-fn_391792308 {\n  background: blue;\n}"))
+          (is (= anon-fn-html "\n.herb_core-test_anonymous_-231793611 {\n  color: blue;\n}"))
+          (is (= extended-fn-html "\n.herb_core-test_extended-fn_-1721910037 {\n  background: red;\n  color: black;\n}"))
+          ))))
