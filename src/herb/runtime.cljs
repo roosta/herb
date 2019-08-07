@@ -115,7 +115,6 @@
         :element (:element injected)
         :data-string data-str}))
 
-    ;; Return state
     (get @injected-styles identifier)))
 
 (defn inject-obj!
