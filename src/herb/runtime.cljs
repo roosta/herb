@@ -7,7 +7,8 @@
 (def dev? ^boolean js/goog.DEBUG)
 
 (defonce
-  ^{:doc "Atom containing all styles added to DOM. Takes the form of a map with
+  ^{:private true
+    :doc "Atom containing all styles added to DOM. Takes the form of a map with
   classnames as keys. The map entry contains a `:data` which is Herb's
   representation of a style unit, `:data-string` which is what is used as the
   style data attribute in DOM, and `:css` which contains the rendered CSS
@@ -97,9 +98,14 @@
   structure, fully qualified name. Make sure to add style only where
   necessary. Returns the injected style state object."
   [identifier new data-str]
-  (let [injected (get @injected-styles identifier)]
-    (if (not injected)
+  (let [injected (get @injected-styles identifier)
+        target (get (:data injected) (first new))]
+    (cond
+      (not injected)
       (create-style! identifier new data-str)
+
+      (and (some? injected)
+           (not target))
       (render-style!
        identifier
        {:data new

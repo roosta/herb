@@ -161,13 +161,9 @@
         style-data (-> (extract-extended-styles (into [style-fn] args))
                        (prepare-data))
         selector (compose-selector name* (hash style-data) kind)
-        identifier (sanitize name*)]
-    (if-not (-> (get @runtime/injected-styles identifier)
-                :data
-                (get selector))
-      (let [data-str (when dev? (create-data-string name*))
-            result (runtime/inject-style! identifier [selector style-data] data-str)]
+        identifier (sanitize name*)
+        data-str (when dev? (create-data-string name*))
+        result (runtime/inject-style! identifier [selector style-data] data-str)]
         (if (= kind :style)
           (:css result)
-          (subs selector 1)))
-      (subs selector 1))))
+          (subs selector 1))))
