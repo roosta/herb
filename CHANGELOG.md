@@ -9,6 +9,21 @@
   the API much simpler. This also has the added benefit of improving
   grouping performance significantly.
 
+### Added
+- Add `:hint` meta data. Can be used to extend classname in case you
+  need some more data to attached to classname
+  ```clojure
+  (defn style []
+    ^{:hint "my-hint"}
+    {:color "red"})
+  ```
+  ```css
+
+  .ns_function_my-hint_1234567 {
+    color: red;
+  }
+  ```
+
 ## [v0.9.0]
 ### Breaking change
 - This library from here on out only supports `cljs`
