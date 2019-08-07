@@ -386,8 +386,9 @@
           "Anon function without meta"]]
 
         [:div {:class (<class (fn [color]
-                                {:color color})
-                              "green")}
+                                {:background "orange"
+                                 :color color})
+                              "black")}
           "Same signature anon"]
 
         (letfn [(nested-fn [color]
