@@ -1,5 +1,16 @@
 # Change Log
-## [v0.9.1-SNAPSHOT]
+## [v0.10.0-SNAPSHOT]
+### Changed
+- The `:key` and `:group` meta data is now completely removed,
+  deciding instead to "automatically key" all functions based on it's
+  function and argument signature. This results in a bit different
+  class/id where a hash is appended to the selector based on its
+  function and arguments, this won't break anything but it does make
+  the API much simpler.
+- Improve performance on several key areas in the codebase. The
+  removal of groups also boosts runtime performance markedly.
+
+
 ## [v0.9.0]
 ### Breaking change
 - This library from here on out only supports `cljs`
@@ -225,7 +236,7 @@ from `herb.macro` to `herb.core`
 ### Fixed
 - Fixed issues with inheritance precedence
 
-[v0.9.1-SNAPSHOT]: https://github.com/roosta/herb/compare/v0.9.0...HEAD
+[v0.10.0-SNAPSHOT]: https://github.com/roosta/herb/compare/v0.9.0...HEAD
 [v0.9.0]: https://github.com/roosta/herb/compare/v0.8.2...v0.9.0
 [v0.8.2]: https://github.com/roosta/herb/compare/v0.8.1...v0.8.2
 [v0.8.1]: https://github.com/roosta/herb/compare/v0.8.0...v0.8.1
