@@ -158,14 +158,14 @@
   which appends an id identifier instead of a class to the DOM"
   [kind fn-name ns-name style-fn & args]
   (let [name* (get-name style-fn ns-name)
-        selector (compose-selector name* (hash [style-fn args]) kind)
+        style-data (-> (extract-extended-styles (into [style-fn] args))
+                       (prepare-data))
+        selector (compose-selector name* (hash style-data) kind)
         identifier (sanitize name*)]
     (if-not (-> (get @runtime/injected-styles identifier)
                 :data
                 (get selector))
-      (let [style-data (-> (extract-extended-styles (into [style-fn] args))
-                           (prepare-data))
-            data-str (when dev? (create-data-string name*))
+      (let [data-str (when dev? (create-data-string name*))
             result (runtime/inject-style! identifier [selector style-data] data-str)]
         (if (= kind :style)
           (:css result)
