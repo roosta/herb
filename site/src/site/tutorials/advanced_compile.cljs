@@ -33,10 +33,10 @@
      [text "During advanced compilation Herb minify styles and removes the
      `data-herb` attribute. If you need to debug production build it can be
      helpful to see the function namespaces unmunged to get a clearer image
-     of what is happening."
+     of what is happening."]
 
-      [text "To do this remove the `goog.DEBUG false` from production build and
-       enable `:pseudo-names`: "]]
+     [text "To do this remove the `goog.DEBUG false` from production build and
+       enable `:pseudo-names`: "]
 
      [code {:lang :clojure}
       e3]
