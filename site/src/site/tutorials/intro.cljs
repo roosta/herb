@@ -39,14 +39,17 @@
      [text {:variant :subheading}
       "Lets have a look at the DOM"]
      [text
-      "A style element is appended to the DOM containing the input functions
-      computed styles. Each function gets its own DOM element, and is updated
-      only if necessary. Our example DOM might now look something like this:"]
+      "A style element is appended to the DOM containing the input
+      functions computed styles. Each function gets its own DOM
+      element, and is updated whenever the style function gets new
+      arguments. Our example DOM might now look something like this:"]
      [code {:lang :html}
       intro-html]
      [text
       "The classname is a sanitized version of the input functions
-      fully qualified name, this way we avoid name collisions."]
+      fully qualified name, and a hash of the computed style
+      data. That way the hash after each classname represents the
+      different arguments passed to said style function"]
      [text
       "The " [:code "data-herb"] " attribute reflects the current
      namespace for a given style, and only in development. It is
