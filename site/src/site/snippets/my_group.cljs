@@ -2,9 +2,9 @@
   (:require [herb.core :refer [<class defgroup]]
             [garden.units :refer [px]]))
 
-;; Same as the previous example, defgroup takes a name and a map of styles, and
-;; when used as a function for <class its first argument is the component
-;; classname you want out of the group.
+;; defgroup takes a name and a map of styles, and when used as a
+;; function for <class its first argument is the component classname
+;; you want out of the group.
 (defgroup my-group
   {:container {:display :flex}
    :component-1
