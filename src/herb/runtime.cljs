@@ -47,6 +47,12 @@
         (assoc-in [ident :element] element)
         (assoc-in [ident :css] css))))
 
+(def combinator-fns
+  {:> s/>
+   :+ s/+
+   :- s/-
+   :descendant s/descendant})
+
 (defn- render-style!
   "Renders CSS, and appends to DOM. Ensure state is in sync with DOM."
   [identifier new]
@@ -54,11 +60,8 @@
                 [[classname (with-meta style {:prefix prefix :vendors vendors})
                   pseudo media supports]
                  [(map (fn [[[combinator & elements] style]]
-                         (case combinator
-                           :> [(apply s/> classname elements) style]
-                           :+ [(apply s/+ classname elements) style]
-                           :- [(apply s/- classname elements) style]
-                           :descendant [(apply s/descendant classname elements) style]
+                         (if-let [cfn (get combinator-fns combinator)]
+                           [(apply cfn classname elements) style]
                            (throw (ex-info "Unsupported combinator function "
                                            {:combinator combinator
                                             :elements elements
