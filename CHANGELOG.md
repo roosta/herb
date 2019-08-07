@@ -6,10 +6,8 @@
   function and argument signature. This results in a bit different
   class/id where a hash is appended to the selector based on its
   function and arguments, this won't break anything but it does make
-  the API much simpler.
-- Improve performance on several key areas in the codebase. The
-  removal of groups also boosts runtime performance markedly.
-
+  the API much simpler. This also has the added benefit of improving
+  grouping performance significantly.
 
 ## [v0.9.0]
 ### Breaking change
