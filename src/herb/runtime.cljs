@@ -7,8 +7,7 @@
 (def dev? ^boolean js/goog.DEBUG)
 
 (defonce
-  ^{:private true
-    :doc "Atom containing all styles added to DOM. Takes the form of a map with
+  ^{:doc "Atom containing all styles added to DOM. Takes the form of a map with
   classnames as keys. The map entry contains a `:data` which is Herb's
   representation of a style unit, `:data-string` which is what is used as the
   style data attribute in DOM, and `:css` which contains the rendered CSS

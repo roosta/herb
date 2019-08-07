@@ -131,8 +131,8 @@
       :else (str/replace (str input) #"[^A-Za-z0-9-_]" "_"))))
 
 (defn- compose-selector
-  [n hsh]
-  (str (sanitize n) "_" hsh))
+  [n hsh kind]
+  (str (if (= kind :id) "#" ".") (sanitize n) "_" hsh))
 
 (defn- create-data-string
   "Create a fully qualified name string for use in the data-herb attr"
@@ -157,14 +157,17 @@
   Takes an `opt` map as first argument, and currently only supports `:id true`
   which appends an id identifier instead of a class to the DOM"
   [kind fn-name ns-name style-fn & args]
-  (let [resolved-styles (extract-extended-styles (into [style-fn] args))
-        style-data (prepare-data resolved-styles)
-        name* (get-name style-fn ns-name)
-        data-str (when dev? (create-data-string name*))
-        selector (compose-selector name* (hash style-data))
-        identifier (sanitize name*)
-        style-data [(str (if (= kind :id) "#" ".") selector) style-data]
-        result (runtime/inject-style! identifier style-data data-str)]
-    (if (= kind :style)
-      (:css result)
-      selector)))
+  (let [name* (get-name style-fn ns-name)
+        selector (compose-selector name* (hash [style-fn args]) kind)
+        identifier (sanitize name*)]
+    (if-not (-> (get @runtime/injected-styles identifier)
+                :data
+                (get selector))
+      (let [style-data (-> (extract-extended-styles (into [style-fn] args))
+                           (prepare-data))
+            data-str (when dev? (create-data-string name*))
+            result (runtime/inject-style! identifier [selector style-data] data-str)]
+        (if (= kind :style)
+          (:css result)
+          (subs selector 1)))
+      (subs selector 1))))
