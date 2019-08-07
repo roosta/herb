@@ -95,7 +95,9 @@
   [n c]
   `(defn ~n [~'component & ~'args]
      (if-let [style# (get ~c ~'component)]
-       style#
+       (vary-meta
+        style# assoc
+        :hint (name ~'component))
        (throw (str "Herb error: failed to get component: " ~'component " in stylegroup: " '~n)))))
 
 (defn- dispatch
