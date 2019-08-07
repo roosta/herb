@@ -10,6 +10,7 @@
   {:width "20px"})
 
 (defn extend-me []
+  ^{:extend extend-more}
   {:color "red"})
 
 (defn extended-style []
@@ -18,6 +19,10 @@
    :height (px 100)
    :background-color "magenta"
    :border-radius "5px"})
+
+(defn function-with-args [n]
+  ^{:extend extend-me}
+  {:width (px n)})
 
 (def resolved-styles [^{:pseudo {:hover {:color "yellow"}}
                         :vendors ["webkit"]
@@ -30,6 +35,17 @@
 
 
 (defn -main [& args]
+
+  (println "<class macro with arguments")
+  (let [runs 1000
+        start (.getTime (js/Date.))
+        _ (dotimes [n runs]
+              (<class function-with-args n))
+        end (.getTime (js/Date.))
+        elapsed (- end start)]
+    (println (str runs " runs, " elapsed " msecs")))
+  (println)
+
   (println "<class macro")
   (simple-benchmark [] (<class extended-style) 10000)
   (println)
@@ -73,5 +89,4 @@
                                                :height (px 100)
                                                :background-color "magenta"
                                                :border-radius "5px"}])
-                    10000)
-  )
+                    10000))
