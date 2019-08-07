@@ -92,9 +92,7 @@
 
 (defn cycle-color
   [color]
-  ^{:key color
-    :group true
-    :extend [[dynamic-text-color color] [bold]]}
+  ^{:extend [[dynamic-text-color color] [bold]]}
   {:text-align "center"
    :background-color color}
   )
@@ -133,31 +131,8 @@
    :text-align "center"
    :color "white"})
 
-(defn keyed
-  [k]
-  (let [styles {:paper
-                {:background-color "grey"
-                 :width (px 50)
-                 :display "inline-block"
-                 :margin (px 10)
-                 :height (px 50)
-                 :border-radius (px 5)}
-                :sheet
-                ^{:pseudo {:active {:color "white"}
-                           :hover {:border-radius (px 5)}}}
-                {:background-color "white"
-                 :width (px 50)
-                 :margin (px 10)
-                 :display "inline-block"
-                 :height (px 50)
-                 :box-shadow "0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)"}}]
-    (vary-meta
-     (k styles)
-     assoc :key (name k))))
-
 (defn profile-comp
   [n]
-  ^{:key n}
   {:width (px 100)
    :height (px 100)
    :background-color "magenta"
@@ -165,13 +140,11 @@
 
 (defn extend-1
   [color]
-  ^{:key color}
   {:background-color color})
 
 (defn extend-2
   [color]
-  ^{:key color
-    :extend [extend-1 "green"]}
+  ^{:extend [extend-1 "green"]}
   {:color color})
 
 (defn extend-3
@@ -181,25 +154,19 @@
 
 (defn style-group-stateful
   [component color]
-  (with-meta
-    (component
-     {:text {:color color}
-      :box {:background-color color
-            :padding (px 12)}
-      :text-2 {:color color}})
-    {:group true
-     :key component}))
+  (component
+   {:text {:color color}
+    :box {:background-color color
+          :padding (px 12)}
+    :text-2 {:color color}}))
 
 (defn style-group-static
   [component]
-  (with-meta
-    (component
-     {:text {:color "magenta"}
-      :box {:background "white"
-            :padding (px 12)}
-      :text-2 {:color "cyan"}})
-    {:group true
-     :key component}))
+  (component
+   {:text {:color "magenta"}
+    :box {:background "white"
+          :padding (px 12)}
+    :text-2 {:color "cyan"}}))
 
 (defgroup group-macro
   {:text {:font-weight "bold"
@@ -323,13 +290,10 @@
 
 (defn data-str
   [in]
-  ^{:key in}
   {:background-color (:color in)})
 
 (defn large
   [k]
-  ^{:key k
-    :group true}
   {:background "magenta"
    :width "100%"
    :height "20px"
@@ -453,9 +417,6 @@
          [:br]
          [:div {:class (<class cyan-div)}
           "inheritance test"]]
-        [:div {:class (<class keyed :paper)}]
-
-        [:div {:class (<class keyed :sheet)}]
 
         [:div {:class (<class media-query-test @state)}
          "Media query test"]]
