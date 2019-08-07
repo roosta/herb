@@ -1,2 +1,0 @@
-#!/bin/sh
-lein with-profile benchmark fig:benchmark
