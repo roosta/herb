@@ -158,7 +158,7 @@
                 :class [(<class icon-column)]}
           [icon/menu {:class (<class icon-style @scroll?)}]]
          [:div {:class (<class appbar-style :column)}
-          [text {:variant :title
+          #_[text {:variant :title
                  :class (<class title-style @scroll?)
                  :align :center}
            "Herb"]]

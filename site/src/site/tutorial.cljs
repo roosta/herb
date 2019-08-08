@@ -1,8 +1,13 @@
 (ns site.tutorial
   (:require [garden.units :refer [em px rem]]
+            [goog.dom :as dom]
             [site.components.container :refer [container]]
             [site.components.navigation :as nav]
+            [goog.events.EventType :as event-type]
             [site.components.text :refer [text]]
+            [goog.events :as events]
+            [reagent.core :as r]
+            [site.async :as async]
             [site.easing :as easing]
             [site.tutorials.examples :as examples]
             [site.tutorials.advanced-compile :as adv]
@@ -21,15 +26,42 @@
             [site.tutorials.selectors :as selectors]
             [herb.core :as herb :refer [<class defgroup]]))
 
-(defgroup header-style
-  {:container {:flex-basis "100%"}})
 
-(defn header
+(defn image-style []
+  {:flex-basis "100%"
+   :text-align :center
+   :padding-bottom "1rem"}
+  )
+
+(defgroup title-style
+  {:container {:position "sticky"
+               :top 0
+               :flex-basis "100%"}
+   :text {:transform "scale(1.5)"}})
+
+(defn title
   []
-  [:header {:class (<class header-style :container)}
-   [text {:align :center
-          :variant :subtitle}
-    "Clojurescript styling using functions"]])
+  [:div {:class (<class title-style :container)}
+   [text {:variant :title
+          :class (<class title-style :text)
+          :align :center}
+    "Herb"]])
+
+(defn logo
+  []
+  [:div {:class (<class image-style)}
+   [:img {:height "400" :src "assets/herb.svg"}]])
+
+(defn subheading-style
+  []
+  {:flex-basis "100%"})
+
+(defn subheading []
+  [text {:align :center
+         :class (<class subheading-style)
+         :variant :subtitle}
+   "Clojurescript styling using functions"]
+  )
 
 (defgroup main-style
   {:root {}
@@ -48,7 +80,9 @@
     [:div#top {:class (<class main-style :spacer)}]
     [nav/appbar]
     [container
-     [header]
+     [logo]
+     [title]
+     [subheading]
      [intro/main]
      [why-fns/main]
      [metadata/main]
