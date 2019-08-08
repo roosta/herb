@@ -41,22 +41,22 @@
                :top (px 3)
                :flex-basis "100%"}
    :text {:transition (str "transform 200ms " (:ease-out-quad easing/easing))
+          :color "#0b486b"
           :transform (if @sticky? "scale(1)" "scale(1.5)")}})
 
-
-(def observer (create-observer sticky?))
 
 (defn break-style []
   {:height "1px"
    :visibility "hidden"})
 
-(defn break []
-  (r/create-class
-   {:component-did-mount #(.observe observer (.querySelector js/document "#break"))
-    :reagent-render
-    (fn []
-      [:div {:id "break"
-             :class (<class break-style)}])}))
+(defn break [id state]
+  (let [observer (create-observer state)]
+    (r/create-class
+     {:component-did-mount #(.observe observer (.querySelector js/document (str "#" id)))
+      :reagent-render
+      (fn []
+        [:div {:id id
+               :class (<class break-style)}])})))
 
 (defn title []
   [:div {:class (<class title-style :container)}
@@ -95,12 +95,13 @@
   [:main {:class (<class main-style :root)}
    [nav/sidebar]
    [:section {:class (<class main-style :content)}
-    [:div#top {:class (<class main-style :spacer)}]
+    #_[:div#top {:class (<class main-style :spacer)}]
     [nav/appbar]
+    [break "appbar-break" nav/sticky?]
     [container
      [logo]
      [title]
-     [break]
+     [break "title-break" sticky?]
      [subheading]
      [intro/main]
      [why-fns/main]

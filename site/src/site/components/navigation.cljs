@@ -3,6 +3,7 @@
             [goog.events :as events]
             [clojure.string :as str]
             [site.components.icon :as icon]
+            [site.observer :refer [create-observer]]
             [goog.labs.userAgent.device :as device]
             [site.easing :as easing]
             [garden.color :refer [rgba]]
@@ -37,6 +38,8 @@
               [:bound "Bound anonymous"]]]
             [:advanced-compile "Advanced compilation"]
             [:examples "Examples and extras"]])
+
+(def sticky? (r/atom 0))
 
 (defgroup sidebar-style
   {:container {:padding (rem 1)}
@@ -100,8 +103,7 @@
           :height appbar-height}
    :column {:flex-basis "33%"}})
 
-(defn icon-style
-  [scroll?]
+(defn icon-style []
   ^{:pseudo {:hover {:background (rgba 0 0 0 0.1)}}}
   {:color "#333"
    :padding (rem 0.625)
@@ -111,47 +113,29 @@
    :transition (str "transform 400ms " (:ease-in-out-quad easing/easing) ", "
                     "background 100ms " (:ease-in-out-quad easing/easing))
    :height (rem 1.5)
-   :transform (if scroll? "translate(0, 0)" "translate(0, -100%)")
+   ;; :transform (if @sticky? "translate(0, 0)" "translate(0, -100%)")
    })
 
-(defn icon-column
-  []
+(defn icon-column []
   ^{:extend [appbar-style :column]}
   {:padding-left (rem 0.5)
    :display "flex"
    :align-items "center"})
 
-(defn divider-style
-  [scroll?]
+(defn divider-style []
   {:transition (str "opacity 400ms " (:ease-in-out-quad easing/easing))
    :width "100%"
    :position "absolute"
    :bottom 0
    :height (px 1)
    :background (rgba 0 0 0 0.15)
-   :opacity (if scroll? 1 0)})
+   :opacity (if @sticky? 1 0)})
 
-(defn on-scroll
-  [state e]
-  (reset! state (> (.-y (dom/getDocumentScroll)) 0)))
-
-(defn appbar
-  []
-  (let [scroll? (r/atom nil)]
-    (r/create-class
-     {:component-did-mount (fn []
-                             (on-scroll scroll? nil)
-                             (events/listen js/document
-                                            event-type/SCROLL
-                                            (async/throttle
-                                             #(on-scroll scroll? %)
-                                             200)))
-      :reagent-render
-      (fn []
-        [:header {:class (<class appbar-style :root)}
-         [:div {:on-click #(swap! sidebar-open? not)
-                :class [(<class icon-column)]}
-          [icon/menu {:class (<class icon-style @scroll?)}]]
-         [:div {:class (<class appbar-style :column)}]
-         [:div {:class (<class appbar-style :column)}]
-         [:div {:class (<class divider-style @scroll?)}]])})))
+(defn appbar []
+  [:header {:class (<class appbar-style :root)}
+   [:div {:on-click #(swap! sidebar-open? not)
+          :class [(<class icon-column)]}
+    [icon/menu {:class (<class icon-style)}]]
+   [:div {:class (<class appbar-style :column)}]
+   [:div {:class (<class appbar-style :column)}]
+   [:div {:class (<class divider-style)}]])
