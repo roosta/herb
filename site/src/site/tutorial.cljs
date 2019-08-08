@@ -33,14 +33,34 @@
    :padding-bottom "1rem"}
   )
 
+(def sticky? (r/atom 0))
+
 (defgroup title-style
   {:container {:position "sticky"
-               :top 0
+               :top (px 3)
                :flex-basis "100%"}
-   :text {:transform "scale(1.5)"}})
+   :text {:transition (str "transform 200ms " (:ease-out-quad easing/easing))
+          :transform (if @sticky? "scale(1)" "scale(1.5)")}})
 
-(defn title
-  []
+
+(def observer (js/IntersectionObserver.
+               (fn [entries]
+                 (reset! sticky? (= (.-intersectionRatio (first entries)) 0)))
+               #js {:threshold [0 1]}))
+
+(defn break-style []
+  {:height "1px"
+   :visibility "hidden"})
+
+(defn break []
+  (r/create-class
+   {:component-did-mount #(.observe observer (.querySelector js/document "#break"))
+    :reagent-render
+    (fn []
+      [:div {:id "break"
+             :class (<class break-style)}])}))
+
+(defn title []
   [:div {:class (<class title-style :container)}
    [text {:variant :title
           :class (<class title-style :text)
@@ -82,6 +102,7 @@
     [container
      [logo]
      [title]
+     [break]
      [subheading]
      [intro/main]
      [why-fns/main]
