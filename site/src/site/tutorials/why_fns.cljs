@@ -13,7 +13,9 @@
 
 (defn main
   []
-  (let [e1 (macros/example-src "state_fn.cljs")]
+  (let [e1 (macros/example-src "state_fn.cljs")
+        e2 (macros/example-src "state_fn.html")
+        e3 (macros/example-src "state_fn_clicked.html")]
     [paper {:id "why-fns"}
      [text {:variant :heading}
       "Why functions?"]
@@ -31,6 +33,16 @@
      [text {:variant :subheading}
       "Output:"]
      [e1/button]
-     #_[text
-      "A new style element has been added to the DOM, and " [:code "herb"] "
-     ensures that only that element is updated when clicking the button."]]))
+     [text
+      "Initially before clicking the button the DOM looks something like this:"]
+     [code {:lang :html}
+      e2]
+     [text
+      "Here we can see that the classname reflects the namespace of
+      the style function, and importantly a numeric sequence at the
+      end, being the hash of the computed styles based on passed
+      arguments. When we click the button, the style data changes and
+      new styles are appended to the DOM:"]
+     [code {:lang :html}
+      e3]
+     ]))
