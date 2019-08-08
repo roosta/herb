@@ -33,15 +33,15 @@
       "Output:"]
      [anon-example/link]
      [text
-      "As you can see anonymous functions can take the same meta data as a
-     defined one, the only real difference between the two is how Herb handles
-     the classname. Lets look at a DOM approximation:"]
+      "As you can see anonymous functions can take the same meta data
+     as a defined one, there isn't much of a difference on how the
+     classnames are handled other than we don't have a fully qualified
+     name to use. Instead herb just calls the classnames `anonymous`
+     and as with everything else appends a hash of the computed styles
+     to the end of it. All anonymous styles in a given namespace is
+     grouped. Lets look at a DOM approximation:"]
      [code {:lang :html}
       e2]
-     [text
-      "The classname that the anonymous function gets is the namespace in which
-      it is contained, and `anonymous-HASH`. The hash is calculated from the
-      style map it receives."]
      [text {:id "local"
             :variant :subheading}
       "Local binding"]
@@ -58,7 +58,11 @@
      [code {:lang :html}
       e4]
      [text
-      "Albeit verbose, the classname is still telling."]
+      "The classname is verbose but it is "
+      [:a {:href "https://clojurescript.org/reference/advanced-compilation#access-from-javascript"} "munged"]
+      " on `:advanced` compile, resulting in something munch shorter. More on that "
+      [:a {:href "#advanced-compile"} "here"]
+      "."]
      [text {:id "named"
             :variant :subheading}
       "Named anonymous"]

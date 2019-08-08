@@ -6,7 +6,6 @@
 (defn headline
   [size text]
   (letfn [(style []
-            ^{:key size}
             {:font-size (case size
                           :large (rem 3)
                           :small (rem 1))
