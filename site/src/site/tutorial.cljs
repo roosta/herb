@@ -5,6 +5,7 @@
             [site.components.navigation :as nav]
             [goog.events.EventType :as event-type]
             [site.components.text :refer [text]]
+            [site.observer :refer [create-observer]]
             [goog.events :as events]
             [reagent.core :as r]
             [site.async :as async]
@@ -43,10 +44,7 @@
           :transform (if @sticky? "scale(1)" "scale(1.5)")}})
 
 
-(def observer (js/IntersectionObserver.
-               (fn [entries]
-                 (reset! sticky? (= (.-intersectionRatio (first entries)) 0)))
-               #js {:threshold [0 1]}))
+(def observer (create-observer sticky?))
 
 (defn break-style []
   {:height "1px"
