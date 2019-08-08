@@ -2,8 +2,7 @@
   (:require
    [clojure.string :as str]
    [herb.runtime :as runtime]
-   [clojure.set :as set]
-   [garden.stylesheet :refer [at-media at-keyframes at-supports]]))
+   [garden.stylesheet :refer [at-media at-supports]]))
 
 (def dev? ^boolean js/goog.DEBUG)
 
