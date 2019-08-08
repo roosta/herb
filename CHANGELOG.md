@@ -3,12 +3,11 @@
 ## [v0.10.0]
 ### Changed
 - The `:key` and `:group` meta data is now completely removed,
-  deciding instead to "automatically key" all functions based on it's
-  function and argument signature. This results in a bit different
-  class/id where a hash is appended to the selector based on its
-  function and arguments, this won't break anything but it does make
-  the API much simpler. This also has the added benefit of improving
-  grouping performance significantly.
+  deciding instead to "automatically key" all functions based on the
+  computed style. This results in a bit different class/id where a
+  hash is appended to the selector. This won't break anything but it
+  does make the API much simpler. This also has the added benefit of
+  improving grouping performance significantly.
 
 ### Added
 - Add `:hint` meta data. Can be used to extend classname in case you
