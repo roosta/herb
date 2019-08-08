@@ -8,7 +8,6 @@
   (let [colors ["#6c0e23" "#c42021" "#d58936" "#ef2d56"]]
     [:div {:class (<class (fn style []
                             (let [c (rand-nth colors)]
-                              ^{:key c}
                               {:width (rem 4)
                                :height (rem 4)
                                :background c

@@ -57,8 +57,7 @@
 
 (defn nav-item-style [padding?]
   (let [c "#69BFFF"]
-    ^{:pseudo {:hover {:color c}}
-      :key padding?}
+    ^{:pseudo {:hover {:color c}}}
     {:color "white"
      :padding-left (if padding? (rem 1) 0)}))
 

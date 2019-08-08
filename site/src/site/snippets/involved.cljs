@@ -12,10 +12,8 @@
   [dir [c1 p1] [c2 p2]])
 
 ;; Define a style that uses a color pair and creates a gradient from them.
-;; Note the meta data ^{:key (str c1 "-" c2)}
 (defn style
   [[c1 c2]]
-  ^{:key (str c1 "-" c2)}
   {:width (px 56)
    :height (px 32)
    :background (linear-gradient "to right" c1 (percent 0) c2 (percent 100))})

@@ -65,8 +65,7 @@
        (variants variant)
        (aligns align)
        (colors color))
-      {:key k
-       :group true})))
+      {:hint k})))
 
 (defn replace-code-ticks
   [child]

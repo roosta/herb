@@ -19,4 +19,4 @@
   []
   (vary-meta
    {:color "blue"}
-   assoc :key "blue"))
+   assoc :hint "blue"))

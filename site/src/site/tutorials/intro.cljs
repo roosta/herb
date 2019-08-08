@@ -9,12 +9,6 @@
             [reagent.debug :as d])
   (:require-macros [site.macros :as macros]))
 
-(defn intro-style
-  [component]
-  (let [styles {:body {}
-                :p {}}]
-    (with-meta (component styles) {:key component})))
-
 (defn main
   []
   (let [intro-cljs (macros/example-src "intro.cljs")
