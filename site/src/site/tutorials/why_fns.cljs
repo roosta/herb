@@ -45,4 +45,11 @@
       new styles are appended to the DOM:"]
      [code {:lang :html}
       e3]
-     ]))
+     [text
+      "If you think these classnames are super verbose, don't
+     worry. Herb "
+      [:a {:href "https://clojurescript.org/reference/advanced-compilation#access-from-javascript"} "munges"]
+      " function names in line with the closure compiler so on a
+     production build the classnames are much shorter. More on that "
+      [:a {:href "#advanced-compile"} "here"]
+      "."]]))
