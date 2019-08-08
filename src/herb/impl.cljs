@@ -133,7 +133,7 @@
   [n hsh kind hint]
   (str (if (= kind :id) "#" ".")
        (sanitize n)
-       (when hint (str "_" (sanitize hint)))
+       (when (and hint dev?) (str "_" (sanitize hint)))
        "_" hsh))
 
 (defn- create-data-string
