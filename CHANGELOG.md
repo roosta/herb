@@ -11,7 +11,11 @@
 
 ### Added
 - Add `:hint` meta data. Can be used to extend classname in case you
-  need some more data to attached to classname
+  need some more data to attached to classname. The hint is only used
+  during development builds, by checking the `goog.DEBUG` flag. If
+  you'd like to see the hint during advanced builds set `goog.DEBUG`
+  to true in production compiler config.
+
   ```clojure
   (defn style []
     ^{:hint "my-hint"}
