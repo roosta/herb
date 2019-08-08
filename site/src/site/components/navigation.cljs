@@ -135,11 +135,6 @@
   [state e]
   (reset! state (> (.-y (dom/getDocumentScroll)) 0)))
 
-(defn title-style
-  [scroll?]
-  {:transition (str "transform 200ms " (:ease-out-quad easing/easing))
-   :transform (if scroll? "scale(1)" "scale(1.5)" )})
-
 (defn appbar
   []
   (let [scroll? (r/atom nil)]
@@ -157,10 +152,6 @@
          [:div {:on-click #(swap! sidebar-open? not)
                 :class [(<class icon-column)]}
           [icon/menu {:class (<class icon-style @scroll?)}]]
-         [:div {:class (<class appbar-style :column)}
-          #_[text {:variant :title
-                 :class (<class title-style @scroll?)
-                 :align :center}
-           "Herb"]]
+         [:div {:class (<class appbar-style :column)}]
          [:div {:class (<class appbar-style :column)}]
          [:div {:class (<class divider-style @scroll?)}]])})))
