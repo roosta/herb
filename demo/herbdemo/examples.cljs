@@ -308,6 +308,19 @@
   (let [state (r/atom "green")]
     (fn []
 
+      #_[:div
+       [:div {:class (<class simple-state "green")}]
+       [:div {:class (<class simple-state "green")}]
+       [:div {:class (<class simple-state "red")}]
+       [:div {:class (<class simple-state "red")}]]
+
+      #_[:div
+       [:div {:class (<class simple-state @state)}]
+       [:br]
+       [:button {:on-click #(swap! state toggle-color)}
+        "Change color"]
+       ]
+
       [:div {:class (<class container)}
        (for [d data]
          ^{:key d}
