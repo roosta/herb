@@ -76,6 +76,12 @@
                       runs)
     (println)
 
+    (println "appendChild to DOM")
+    (simple-benchmark [element (dom/createElement "style")]
+                      (dom/appendChild element (dom/createTextNode ".test {color: \"red\"}"))
+                      runs)
+    (println)
+
     (println "Create css string using garden")
     (simple-benchmark [] (css [:.classname {:width (px 100)
                                             :height (px 100)
