@@ -71,7 +71,7 @@
                       :pretty-print? dev?
                       :auto-prefix (seq (:auto-prefix @options))}
                      style)]
-    (dom/append (:element new) (str "\n" css-str))
+    (dom/appendChild (:element new) (dom/createTextNode css-str))
     (swap! injected-styles update-state identifier new css-str)))
 
 
