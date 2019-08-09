@@ -80,11 +80,11 @@
   [attr]
   (let [head (.-head js/document)]
     (assert (some? head) "An head element is required in the dom to inject the style.")
-    (let [element (.createElement js/document "style")]
-      (.setAttribute element "type" "text/css")
+    (let [element (dom/createElement "style")]
+      (gobj/set element "type" "text/css")
       (when attr
         (.setAttribute element "data-herb" attr))
-      (.appendChild head element)
+      (dom/appendChild head element)
       element)))
 
 (defn- create-style!
