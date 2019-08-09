@@ -68,6 +68,7 @@
 
     (println "impl/extract-extended-styles/resolve-style-fns")
     (simple-benchmark [] (#'impl/extract-extended-styles [extended-style]) runs)
+    (println)
 
     (println "append to DOM")
     (simple-benchmark [element (.createElement js/document "style")]
