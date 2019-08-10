@@ -4,7 +4,7 @@
             [site.components.container :refer [container]]
             [site.components.navigation :as nav]
             [goog.events.EventType :as event-type]
-            [site.components.text :refer [text]]
+            [site.components.text :as text]
             [site.observer :refer [create-observer]]
             [goog.events :as events]
             [reagent.core :as r]
@@ -38,11 +38,12 @@
 
 (defgroup title-style
   {:container {:position "sticky"
-               :top (px 3)
-               :flex-basis "100%"}
-   :text {:transition (str "transform 200ms " (:ease-out-quad easing/easing))
+               :flex-basis "100%"
+               :top (px 3)}
+   :text {:transition (str "font-size 200ms " (:ease-out-quad easing/easing))
           :color "#0b486b"
-          :transform (if @sticky? "scale(1)" "scale(1.5)")}})
+          :font-size (if @sticky? (text/px->rem 34) (text/px->rem 52) )
+          }})
 
 
 (defn break-style []
@@ -60,9 +61,9 @@
 
 (defn title []
   [:div {:class (<class title-style :container)}
-   [text {:variant :title
-          :class (<class title-style :text)
-          :align :center}
+   [text/text {:variant :title
+               :class (<class title-style :text)
+               :align :center}
     "Herb"]])
 
 (defn logo
@@ -75,7 +76,7 @@
   {:flex-basis "100%"})
 
 (defn subheading []
-  [text {:align :center
+  [text/text {:align :center
          :class (<class subheading-style)
          :variant :subtitle}
    "Clojurescript styling using functions"]
