@@ -9,6 +9,7 @@
             {:screen :only :min-width (em 52)} {:width (rem 53)}}}
   {:margin-right "auto"
    :display "flex"
+   :justify-content "center"
    :flex-wrap "wrap"
    :margin-left "auto"})
 

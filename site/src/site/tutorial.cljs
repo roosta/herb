@@ -38,8 +38,7 @@
 
 (defgroup title-style
   {:container {:position "sticky"
-               :top (px 3)
-               :flex-basis "100%"}
+               :top (px 3)}
    :text {:transition (str "transform 200ms " (:ease-out-quad easing/easing))
           :color "#0b486b"
           :transform (if @sticky? "scale(1)" "scale(1.5)")}})
