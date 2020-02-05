@@ -18,3 +18,4 @@ out
 resources/public/js
 *.log
 *.min.css
+.lsp
