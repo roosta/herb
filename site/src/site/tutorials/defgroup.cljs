@@ -20,7 +20,7 @@
       "Defgroup macro"]
      [text
       "A common pattern in herb is to group styles together, imagine
-      you are writing a bunch of static css, but you don't wand a DOM
+      you are writing a bunch of static css, but you don't want a DOM
       style element for each class. Theres a macro `defgroup` that is
       sugar around this pattern:"]
      [code {:lang :clojure}
