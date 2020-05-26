@@ -26,10 +26,13 @@
                  [garden "1.3.9"]]
   :profiles {:dev {:dependencies [[com.bhauman/figwheel-main "0.2.1"]
                                   [reagent "0.8.1"]
-                                  [philoskim/debux "0.5.6"]]
+                                  [philoskim/debux "0.5.6"]
+                                  [cider/piggieback "0.5.0"] ]
+                   :repl-options {:init-ns user
+                                  :nrepl-middleware [cider.piggieback/wrap-cljs-repl]}
                    :aliases {"fig" ["trampoline" "run" "-m" "figwheel.main"]
                              "fig:test" ["run" "-m" "figwheel.main" "-co" "test.cljs.edn" "-m" herb.test-runner]
                              "fig:build" ["trampoline" "run" "-m" "figwheel.main" "-b" "dev" "-r"]
                              "fig:min"   ["run" "-m" "figwheel.main" "-O" "advanced" "-bo" "dev"]
                              "fig:benchmark" ["run" "-m" "figwheel.main" "-co" "benchmark.cljs.edn" "-m" herb.benchmark-runner]}
-                   :source-paths ["test" "demo" "benchmark"]}})
+                   :source-paths ["test" "demo" "benchmark" "env"]}})
