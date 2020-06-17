@@ -1,0 +1,5 @@
+{
+  "*.cljs": {
+    "cljsRepl": "(do (require 'figwheel.main.api) ((resolve 'figwheel.main.api/cljs-repl) \"dev\"))"
+  }
+}
