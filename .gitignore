@@ -19,3 +19,4 @@ resources/public/js
 *.log
 *.min.css
 .lsp
+.clj-kondo/cache

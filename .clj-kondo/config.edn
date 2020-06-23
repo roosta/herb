@@ -1,0 +1,1 @@
+{:lint-as {herb.core/defgroup clojure.core/def}}
