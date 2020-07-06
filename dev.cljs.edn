@@ -1,5 +1,4 @@
 ^{:auto-testing true
   :open-url false
-  :watch-dirs ["test" "src" "demo" "benchmark"]
-  :open-file-command "emacs-file-opener"}
+  :watch-dirs ["test" "src" "demo" "benchmark"]}
 {:main herbdemo.core}
