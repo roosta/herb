@@ -127,7 +127,8 @@
   (when input
     (cond
       (keyword? input) (sanitize (name input))
-      :else (str/replace (str input) #"[^A-Za-z0-9-_]" "_"))))
+      :else (-> (str/replace (str input) #"[^A-Za-z0-9-_]" "_")
+                (str/replace #"^(-\d|\d)" "H")))))
 
 (defn- compose-selector
   [n hsh kind hint]
