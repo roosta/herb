@@ -1,5 +1,14 @@
 # Change Log
 ## [v0.10.1-SNAPSHOT]
+### Fixed
+- Issue where somehow an invalid selector would be produced from munged
+  function names, this fix ensures that there cannot be a selector with
+  a hyphen+number, or number at the start of the selector. Will draft a new
+  release when I've gotten to the bottom of this issue, currently unable to
+  reproduce. See [issue #7](https://github.com/roosta/herb/issues/7).
+### Changed
+- Use goog.dom when manipulating DOM
+
 ## [v0.10.0]
 ### Changed
 - The `:key` and `:group` meta data is now completely removed,
