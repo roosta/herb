@@ -1,3 +1,1 @@
-{:lint-as {herb.core/defgroup clojure.core/def
-           herb.core/defglobal clojure.core/def
-           herb.core/defkeyframes clojure.core/def}}
+{}
