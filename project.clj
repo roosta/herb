@@ -22,11 +22,11 @@
   :jar-exclusions [#"(?:^|\/)public\/"]
 
   :dependencies [[org.clojure/clojure "1.10.1" :scope "provided"]
-                 [org.clojure/clojurescript "1.10.520" :scope "provided"]
-                 [garden "1.3.9"]]
-  :profiles {:dev {:dependencies [[com.bhauman/figwheel-main "0.2.1"]
-                                  [reagent "0.8.1"]
-                                  [philoskim/debux "0.5.6"]
+                 [org.clojure/clojurescript "1.10.773" :scope "provided"]
+                 [garden "1.3.10"]]
+  :profiles {:dev {:dependencies [[com.bhauman/figwheel-main "0.2.11"]
+                                  [reagent "0.10.0"]
+                                  [philoskim/debux "0.7.5"]
                                   [cider/piggieback "0.5.0"] ]
                    :repl-options {:init-ns user
                                   :nrepl-middleware [cider.piggieback/wrap-cljs-repl]}

@@ -2,13 +2,13 @@
   (:require [garden.units :refer [px em rem em]]
             [herb.core :refer [<class] :as herb]
             [herbdemo.examples :as examples]
-            [reagent.core :as r]) )
+            [reagent.dom :as dom]) )
 
 (defn appframe []
   [examples/main])
 
 (defn mount-root []
-  (r/render [appframe] (.getElementById js/document "demo")))
+  (dom/render [appframe] (.getElementById js/document "demo")))
 
 (defn init!
   []

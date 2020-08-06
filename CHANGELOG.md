@@ -8,6 +8,13 @@
   reproduce. See [issue #7](https://github.com/roosta/herb/issues/7).
 ### Changed
 - Use goog.dom when manipulating DOM
+- Upgrade dependencies:
+  - garden 1.3.9 &rarr; 1.3.10,
+  - clojurescript 1.10.520 &rarr; 1.10.773
+- Development dependencies:
+  - figwheel-main 0.2.1 &rarr; 0.2.11
+  - reagent 0.8.1 &rarr; 0.10.0
+  - debux 0.5.6 &rarr; 0.7.5
 
 ## [v0.10.0]
 ### Changed
