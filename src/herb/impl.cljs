@@ -159,7 +159,7 @@
   "Entry point for macros.
   Takes an `opt` map as first argument, and currently only supports `:id true`
   which appends an id identifier instead of a class to the DOM"
-  [kind fn-name ns-name style-fn & args]
+  [kind _ ns-name style-fn & args]
   (let [name* (get-name style-fn ns-name)
         resolved-styles (extract-extended-styles (into [style-fn] args))
         style-data (prepare-data resolved-styles)

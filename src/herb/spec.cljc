@@ -12,6 +12,7 @@
 (s/def ::frames (s/+ ::frame))
 ;; (s/def ::styles (s/+ (s/or :s ::style :m ::at-rule)))
 
+#_{:clj-kondo/ignore [:unresolved-symbol]}
 (s/fdef herb.core/defkeyframes
   :args (s/cat :name symbol? :frames ::frames)
   :ret any?)
@@ -20,6 +21,7 @@
 ;;   :args (s/cat :name symbol? :styles ::styles)
 ;;   :ret any?)
 
+#_{:clj-kondo/ignore [:unresolved-symbol]}
 (s/fdef herb.core/<keyframes
   :args (s/cat :keyframes symbol?)
   :ret any?)

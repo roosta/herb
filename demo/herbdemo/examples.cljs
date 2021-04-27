@@ -1,12 +1,11 @@
 (ns herbdemo.examples
   (:require
-   [herb.core :refer [<class defgroup join <id defkeyframes defglobal]]
-   [garden.selectors :as s]
-   [garden.core :refer [css]]
-   [garden.stylesheet :refer [at-media]]
-   [garden.core :refer [css]]
+   [herb.core :refer [<class defgroup join defkeyframes defglobal]]
+   ; [garden.selectors :as s]
+   ; [garden.core :refer [css]]
+   ; [garden.stylesheet :refer [at-media]]
    [garden.units :refer [px em rem]]
-   [reagent.debug :as d]
+   ; [reagent.debug :as d]
    [reagent.core :as r])
   )
 
@@ -132,7 +131,7 @@
    :color "white"})
 
 (defn profile-comp
-  [n]
+  [_]
   {:width (px 100)
    :height (px 100)
    :background-color "magenta"
@@ -240,17 +239,20 @@
     :background "black"}})
 
 (defn transition
-  [c]
+  [_]
   {:transition "all 1s ease-out"})
 
+(declare pulse-animation)
 (defkeyframes pulse-animation
   [:from {:opacity 1}]
   [:to {:opacity 0}])
 
+(declare width-vary)
 (defkeyframes width-vary
   [:from {:width "100%"}]
   [:to {:width "50%"}])
 
+(declare percentages)
 (defkeyframes percentages
   ["0%" {:top 0 :left 0}]
   ["30%" {:top (px 50)}]
@@ -293,7 +295,7 @@
   {:background-color (:color in)})
 
 (defn large
-  [k]
+  [_]
   {:background "magenta"
    :width "100%"
    :height "20px"

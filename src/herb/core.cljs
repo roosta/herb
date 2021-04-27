@@ -14,7 +14,7 @@
   (let [parsed (s/conform :herb.spec/options options)]
     (if (= parsed ::s/invalid)
       (throw (ex-info "Invalid input" (s/explain-data :herb.spec/options options)))
-      (reset! runtime/options {:vendors (-> (mapv (fn [[k v]] v) (:vendors parsed))
+      (reset! runtime/options {:vendors (-> (mapv (fn [[_ v]] v) (:vendors parsed))
                                             (impl/convert-vendors))
                                :auto-prefix (:auto-prefix options)}))))
 
