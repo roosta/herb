@@ -26,6 +26,7 @@
                  [garden "1.3.10"]]
   :profiles {:dev {:dependencies [[com.bhauman/figwheel-main "0.2.11"]
                                   [reagent "0.10.0"]
+                                  [clj-kondo "2020.09.09"]
                                   [philoskim/debux "0.7.5"]
                                   [cider/piggieback "0.5.0"] ]
                    :repl-options {:init-ns user

@@ -1,1 +1,6 @@
-{}
+{:hooks {:analyze-call {herb.core/defglobal hooks.herb/defglobal
+                        herb.core/defgroup hooks.herb/defgroup
+                        herb.core/defkeyframes hooks.herb/defkeyframes}}
+ :linters {:unresolved-var {:exclude [garden.units/em
+                                      garden.units/rem]}}
+ }
