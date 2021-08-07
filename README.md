@@ -153,6 +153,6 @@ to get a nice interface while coding that runs the tests on each save.
 
 ## License
 
-Copyright © 2019 Daniel Berg
+Copyright © 2021 Daniel Berg
 
 Distributed under the Eclipse Public License, the same as Clojure.
