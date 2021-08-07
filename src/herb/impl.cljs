@@ -164,7 +164,7 @@
         resolved-styles (extract-extended-styles (into [style-fn] args))
         style-data (prepare-data resolved-styles)
         hint (:hint (-> resolved-styles last meta))
-        selector (compose-selector name* (hash style-data) kind hint)
+        selector (compose-selector name* (hash (str style-data)) kind hint)
         identifier (sanitize name*)
         data-str (when dev? (create-data-string name*))
         result (runtime/inject-style! identifier [selector style-data] data-str)]
