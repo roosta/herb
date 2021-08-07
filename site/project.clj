@@ -4,25 +4,27 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
-  :dependencies [[org.clojure/clojure "1.10.0"]
+  :dependencies [[org.clojure/clojure "1.10.3"]
                  [ring-server "0.5.0"]
-                 [reagent "0.8.1"]
-                 [reagent-utils "0.3.2"]
-                 [ring "1.7.1"]
+                 [reagent "1.1.0"]
+                 [reagent-utils "0.3.4"]
+                 [ring "1.9.4"]
                  [herb "0.10.0"]
-                 [ring/ring-defaults "0.3.2"]
+                 [cljsjs/react "17.0.2-0"]
+                 [cljsjs/react-dom "17.0.2-0"]
+                 [ring/ring-defaults "0.3.3"]
                  [hiccup "1.0.5"]
-                 [cljsjs/highlight "9.12.0-2"]
-                 [yogthos/config "1.1.1"]
-                 [org.clojure/clojurescript "1.10.520"]
-                 [metosin/reitit "0.2.13"]
+                 [cljsjs/highlight "10.3.1-0"]
+                 [yogthos/config "1.1.8"]
+                 [org.clojure/clojurescript "1.10.879"]
+                 [metosin/reitit "0.5.15"]
                  [pez/clerk "1.0.0"]
-                 [venantius/accountant "0.2.4"
+                 [venantius/accountant "0.2.5"
                   :exclusions [org.clojure/tools.reader]]]
 
-  :plugins [[lein-environ "1.1.0"]
-            [lein-cljsbuild "1.1.7"]
-            [lein-asset-minifier "0.4.5"
+  :plugins [[lein-environ "1.2.0"]
+            [lein-cljsbuild "1.1.8"]
+            [lein-asset-minifier "0.4.6"
              :exclusions [org.clojure/clojure]]]
 
   :ring {:handler site.handler/app
@@ -68,18 +70,18 @@
              :ring-handler site.handler/app}
 
   :profiles {:dev {:repl-options {:init-ns site.repl}
-                   :dependencies [[cider/piggieback "0.4.0"]
-                                  [binaryage/devtools "0.9.10"]
-                                  [prone "1.6.1"]
-                                  [ring/ring-mock "0.3.2"]
-                                  [ring/ring-devel "1.7.1"]
-                                  [pjstadig/humane-test-output "0.9.0"]
-                                  [figwheel-sidecar "0.5.18"]
-                                  [nrepl "0.6.0"]]
+                   :dependencies [[cider/piggieback "0.5.2"]
+                                  [binaryage/devtools "1.0.3"]
+                                  [prone "2021-04-23"]
+                                  [ring/ring-mock "0.4.0"]
+                                  [ring/ring-devel "1.9.4"]
+                                  [pjstadig/humane-test-output "0.11.0"]
+                                  [figwheel-sidecar "0.5.20"]
+                                  [nrepl "0.8.3"]]
                    :source-paths ["env/dev"]
                    :injections [(require 'pjstadig.humane-test-output)
                                 (pjstadig.humane-test-output/activate!)]
-                   :plugins [[lein-figwheel "0.5.18"]]
+                   :plugins [[lein-figwheel "0.5.20"]]
                    :env {:dev true}}
 
              :uberjar {:hooks [minify-assets.plugin/hooks]

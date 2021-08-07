@@ -1,6 +1,7 @@
 (ns site.core
     (:require [reagent.core :as reagent :refer [atom]]
               [reagent.session :as session]
+              [reagent.dom :as dom]
               [herb.core :as herb :refer [defglobal]]
               [garden.units :refer [em]]
               [site.tutorial :as tutorial]
@@ -39,7 +40,7 @@
 ;; Initialize app
 
 (defn mount-root []
-  (reagent/render [appframe] (.getElementById js/document "app")))
+  (dom/render [appframe] (.getElementById js/document "app")))
 
 (defn init! []
   (clerk/initialize!)
