@@ -10,6 +10,7 @@
 (defn head []
   [:head
    [:meta {:charset "utf-8"}]
+   [:title "Herb: ClojureScript styling using functions"]
    [:meta {:name "viewport"
            :content "width=device-width, initial-scale=1"}]
    (include-css (if (env :dev) "/css/atelier-forest-light.css" "/css/atelier-forest-light.min.css"))])
