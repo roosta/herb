@@ -3,8 +3,8 @@
 </p>
 
 <p align="center">
-  <a href="https://travis-ci.org/roosta/herb">
-    <img src="https://travis-ci.org/roosta/herb.svg?branch=master">
+  <a href="https://travis-ci.com/github/roosta/herb">
+    <img src="https://travis-ci.com/roosta/herb.svg?branch=master">
   </a>
   <a href="https://clojars.org/herb">
     <img src="https://img.shields.io/clojars/v/herb.svg">
