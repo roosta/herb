@@ -6,15 +6,9 @@
   a hyphen+number, or number at the start of the selector. Will draft a new
   release when I've gotten to the bottom of this issue, currently unable to
   reproduce. See [issue #7](https://github.com/roosta/herb/issues/7).
-### Changed
-- Use goog.dom when manipulating DOM
-- Upgrade dependencies:
-  - garden 1.3.9 &rarr; 1.3.10,
-  - clojurescript 1.10.520 &rarr; 1.10.773
-- Development dependencies:
-  - figwheel-main 0.2.1 &rarr; 0.2.11
-  - reagent 0.8.1 &rarr; 0.10.0
-  - debux 0.5.6 &rarr; 0.7.5
+- Hashing issue using fractional values [#9](https://github.com/roosta/herb/issues/9). Convert style object to string
+  before calculating hash
+  - `(= (hash 1) (hash 1.4)) => true`
 
 ## [v0.10.0]
 ### Changed
