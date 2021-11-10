@@ -81,7 +81,7 @@ Extend existing functions:
    :padding (px 12)})
 
 (defn red-button-style []
-  ^{:extend [button "white"]}
+  ^{:extend [button-style "white"]}
   {:background-color "red"})
 
 (defn button []
