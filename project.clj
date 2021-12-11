@@ -22,15 +22,15 @@
   :jar-exclusions [#"(?:^|\/)public\/"]
 
   :dependencies [[org.clojure/clojure "1.10.3" :scope "provided"]
-                 [org.clojure/clojurescript "1.10.879" :scope "provided"]
+                 [org.clojure/clojurescript "1.10.896" :scope "provided"]
                  [garden "1.3.10"]]
-  :profiles {:dev {:dependencies [[com.bhauman/figwheel-main "0.2.13"]
+  :profiles {:dev {:dependencies [[com.bhauman/figwheel-main "0.2.15"]
                                   [reagent "1.1.0"]
                                   [cljsjs/react "17.0.2-0"]
                                   [cljsjs/react-dom "17.0.2-0"]
                                   [clj-kondo "2021.08.06"]
-                                  [philoskim/debux "0.7.9"]
-                                  [cider/piggieback "0.5.2"] ]
+                                  [philoskim/debux "0.8.1"]
+                                  [cider/piggieback "0.5.3"] ]
                    :repl-options {:init-ns user
                                   :nrepl-middleware [cider.piggieback/wrap-cljs-repl]}
                    :aliases {"fig" ["trampoline" "run" "-m" "figwheel.main"]
